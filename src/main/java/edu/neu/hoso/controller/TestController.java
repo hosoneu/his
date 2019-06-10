@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 //SpringBoot 测试
 @RestController
+@RequestMapping("/hi")
 public class TestController {
     @Autowired
     private DepartmentMapper departmentMapper;
 
     @RequestMapping("/test")
     public String index(){
+        System.out.println("jeladfas");
         return ("hello");
     }
     @RequestMapping("/insert")

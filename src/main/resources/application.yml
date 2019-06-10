@@ -9,7 +9,7 @@ spring:
     encoding:
       charset: UTF-8
       force: true
-      enabled: true
+    enabled: true
   datasource:
 #    url: jdbc:mysql://120.79.88.98:3306/hosoneu?characterEncoding=utf-8&serverTimezone=GMT%2B8
     #下面的url：@author 29-y 本地数据库地址 @time 2019.06.10
