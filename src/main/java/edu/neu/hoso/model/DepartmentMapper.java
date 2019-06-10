@@ -6,8 +6,6 @@ import edu.neu.hoso.example.DepartmentExample;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
-@Repository
-@Mapper
 public interface DepartmentMapper {
     int countByExample(DepartmentExample example);
 

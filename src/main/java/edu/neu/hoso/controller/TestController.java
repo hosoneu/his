@@ -3,6 +3,7 @@ package edu.neu.hoso.controller;
 import edu.neu.hoso.example.DepartmentExample;
 import edu.neu.hoso.model.Department;
 import edu.neu.hoso.model.DepartmentMapper;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 //SpringBoot 测试
 @RestController
 public class TestController {
+    //不知为何报错，但运行正常
     @Autowired
     private DepartmentMapper departmentMapper;
 
