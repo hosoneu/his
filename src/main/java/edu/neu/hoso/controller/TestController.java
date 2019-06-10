@@ -1,4 +1,4 @@
-package edu.neu.hoso.controller;
+﻿package edu.neu.hoso.controller;
 
 import edu.neu.hoso.example.DepartmentExample;
 import edu.neu.hoso.model.Department;
