@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.DiseaseMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.Disease" >
+    <constructor >
+      <idArg column="Disease_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Disease_Code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Disease_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Disease_ICD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Disease_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Disease_Customize_Name1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Disease_Customize_Name2" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Disease_ID, Disease_Code, Disease_Name, Disease_ICD, Disease_Type_ID, Disease_Customize_Name1, 
+    Disease_Customize_Name2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.DiseaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from disease
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.DiseaseExample" >
+    delete from disease
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.Disease" >
+    <selectKey resultType="java.lang.Integer" keyProperty="diseaseId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into disease
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Disease_ID,
+      <if test="diseaseCode != null" >
+        Disease_Code,
+      </if>
+      <if test="diseaseName != null" >
+        Disease_Name,
+      </if>
+      <if test="diseaseIcd != null" >
+        Disease_ICD,
+      </if>
+      <if test="diseaseTypeId != null" >
+        Disease_Type_ID,
+      </if>
+      <if test="diseaseCustomizeName1 != null" >
+        Disease_Customize_Name1,
+      </if>
+      <if test="diseaseCustomizeName2 != null" >
+        Disease_Customize_Name2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{diseaseId,jdbcType=INTEGER},
+      <if test="diseaseCode != null" >
+        #{diseaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseName != null" >
+        #{diseaseName,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseIcd != null" >
+        #{diseaseIcd,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseTypeId != null" >
+        #{diseaseTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseCustomizeName1 != null" >
+        #{diseaseCustomizeName1,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseCustomizeName2 != null" >
+        #{diseaseCustomizeName2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.DiseaseExample" resultType="java.lang.Integer" >
+    select count(*) from disease
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update disease
+    <set >
+      <if test="record.diseaseId != null" >
+        Disease_ID = #{record.diseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.diseaseCode != null" >
+        Disease_Code = #{record.diseaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diseaseName != null" >
+        Disease_Name = #{record.diseaseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diseaseIcd != null" >
+        Disease_ICD = #{record.diseaseIcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diseaseTypeId != null" >
+        Disease_Type_ID = #{record.diseaseTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.diseaseCustomizeName1 != null" >
+        Disease_Customize_Name1 = #{record.diseaseCustomizeName1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diseaseCustomizeName2 != null" >
+        Disease_Customize_Name2 = #{record.diseaseCustomizeName2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update disease
+    set Disease_ID = #{record.diseaseId,jdbcType=INTEGER},
+      Disease_Code = #{record.diseaseCode,jdbcType=VARCHAR},
+      Disease_Name = #{record.diseaseName,jdbcType=VARCHAR},
+      Disease_ICD = #{record.diseaseIcd,jdbcType=VARCHAR},
+      Disease_Type_ID = #{record.diseaseTypeId,jdbcType=INTEGER},
+      Disease_Customize_Name1 = #{record.diseaseCustomizeName1,jdbcType=VARCHAR},
+      Disease_Customize_Name2 = #{record.diseaseCustomizeName2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.Disease" >
+    update disease
+    <set >
+      <if test="diseaseCode != null" >
+        Disease_Code = #{diseaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseName != null" >
+        Disease_Name = #{diseaseName,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseIcd != null" >
+        Disease_ICD = #{diseaseIcd,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseTypeId != null" >
+        Disease_Type_ID = #{diseaseTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseCustomizeName1 != null" >
+        Disease_Customize_Name1 = #{diseaseCustomizeName1,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseCustomizeName2 != null" >
+        Disease_Customize_Name2 = #{diseaseCustomizeName2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Disease_ID = #{diseaseId,jdbcType=INTEGER}
+  </update>
+</mapper>

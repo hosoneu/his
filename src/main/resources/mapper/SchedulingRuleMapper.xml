@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.SchedulingRuleMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.SchedulingRule" >
+    <constructor >
+      <idArg column="Scheduling_Rule_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Scheduling_Rule_NoonBreak" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Scheduling_Rule_StartTime" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="Scheduling_Rule_EndTime" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="Scheduling_Rule_Weekday" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Scheduling_Rule_LimitCount" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Scheduling_Rule_ID, Doctor_ID, Scheduling_Rule_NoonBreak, Scheduling_Rule_StartTime, 
+    Scheduling_Rule_EndTime, Scheduling_Rule_Weekday, Scheduling_Rule_LimitCount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.SchedulingRuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from scheduling_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.SchedulingRuleExample" >
+    delete from scheduling_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.SchedulingRule" >
+    <selectKey resultType="java.lang.Integer" keyProperty="schedulingRuleId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into scheduling_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Scheduling_Rule_ID,
+      <if test="doctorId != null" >
+        Doctor_ID,
+      </if>
+      <if test="schedulingRuleNoonbreak != null" >
+        Scheduling_Rule_NoonBreak,
+      </if>
+      <if test="schedulingRuleStarttime != null" >
+        Scheduling_Rule_StartTime,
+      </if>
+      <if test="schedulingRuleEndtime != null" >
+        Scheduling_Rule_EndTime,
+      </if>
+      <if test="schedulingRuleWeekday != null" >
+        Scheduling_Rule_Weekday,
+      </if>
+      <if test="schedulingRuleLimitcount != null" >
+        Scheduling_Rule_LimitCount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{schedulingRuleId,jdbcType=INTEGER},
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="schedulingRuleNoonbreak != null" >
+        #{schedulingRuleNoonbreak,jdbcType=VARCHAR},
+      </if>
+      <if test="schedulingRuleStarttime != null" >
+        #{schedulingRuleStarttime,jdbcType=DATE},
+      </if>
+      <if test="schedulingRuleEndtime != null" >
+        #{schedulingRuleEndtime,jdbcType=DATE},
+      </if>
+      <if test="schedulingRuleWeekday != null" >
+        #{schedulingRuleWeekday,jdbcType=VARCHAR},
+      </if>
+      <if test="schedulingRuleLimitcount != null" >
+        #{schedulingRuleLimitcount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.SchedulingRuleExample" resultType="java.lang.Integer" >
+    select count(*) from scheduling_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update scheduling_rule
+    <set >
+      <if test="record.schedulingRuleId != null" >
+        Scheduling_Rule_ID = #{record.schedulingRuleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorId != null" >
+        Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.schedulingRuleNoonbreak != null" >
+        Scheduling_Rule_NoonBreak = #{record.schedulingRuleNoonbreak,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schedulingRuleStarttime != null" >
+        Scheduling_Rule_StartTime = #{record.schedulingRuleStarttime,jdbcType=DATE},
+      </if>
+      <if test="record.schedulingRuleEndtime != null" >
+        Scheduling_Rule_EndTime = #{record.schedulingRuleEndtime,jdbcType=DATE},
+      </if>
+      <if test="record.schedulingRuleWeekday != null" >
+        Scheduling_Rule_Weekday = #{record.schedulingRuleWeekday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schedulingRuleLimitcount != null" >
+        Scheduling_Rule_LimitCount = #{record.schedulingRuleLimitcount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update scheduling_rule
+    set Scheduling_Rule_ID = #{record.schedulingRuleId,jdbcType=INTEGER},
+      Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      Scheduling_Rule_NoonBreak = #{record.schedulingRuleNoonbreak,jdbcType=VARCHAR},
+      Scheduling_Rule_StartTime = #{record.schedulingRuleStarttime,jdbcType=DATE},
+      Scheduling_Rule_EndTime = #{record.schedulingRuleEndtime,jdbcType=DATE},
+      Scheduling_Rule_Weekday = #{record.schedulingRuleWeekday,jdbcType=VARCHAR},
+      Scheduling_Rule_LimitCount = #{record.schedulingRuleLimitcount,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.SchedulingRule" >
+    update scheduling_rule
+    <set >
+      <if test="doctorId != null" >
+        Doctor_ID = #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="schedulingRuleNoonbreak != null" >
+        Scheduling_Rule_NoonBreak = #{schedulingRuleNoonbreak,jdbcType=VARCHAR},
+      </if>
+      <if test="schedulingRuleStarttime != null" >
+        Scheduling_Rule_StartTime = #{schedulingRuleStarttime,jdbcType=DATE},
+      </if>
+      <if test="schedulingRuleEndtime != null" >
+        Scheduling_Rule_EndTime = #{schedulingRuleEndtime,jdbcType=DATE},
+      </if>
+      <if test="schedulingRuleWeekday != null" >
+        Scheduling_Rule_Weekday = #{schedulingRuleWeekday,jdbcType=VARCHAR},
+      </if>
+      <if test="schedulingRuleLimitcount != null" >
+        Scheduling_Rule_LimitCount = #{schedulingRuleLimitcount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Scheduling_Rule_ID = #{schedulingRuleId,jdbcType=INTEGER}
+  </update>
+</mapper>

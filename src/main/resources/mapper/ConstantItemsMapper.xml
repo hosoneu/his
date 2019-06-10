@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.ConstantItemsMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.ConstantItems" >
+    <constructor >
+      <idArg column="Constant_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Constant_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Constant_Items_Code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Constant_Items_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Constant_Items_ID, Constant_Type_ID, Constant_Items_Code, Constant_Items_Name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.ConstantItemsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from constant_items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.ConstantItemsExample" >
+    delete from constant_items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.ConstantItems" >
+    <selectKey resultType="java.lang.Integer" keyProperty="constantItemsId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into constant_items
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Constant_Items_ID,
+      <if test="constantTypeId != null" >
+        Constant_Type_ID,
+      </if>
+      <if test="constantItemsCode != null" >
+        Constant_Items_Code,
+      </if>
+      <if test="constantItemsName != null" >
+        Constant_Items_Name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{constantItemsId,jdbcType=INTEGER},
+      <if test="constantTypeId != null" >
+        #{constantTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="constantItemsCode != null" >
+        #{constantItemsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="constantItemsName != null" >
+        #{constantItemsName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.ConstantItemsExample" resultType="java.lang.Integer" >
+    select count(*) from constant_items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update constant_items
+    <set >
+      <if test="record.constantItemsId != null" >
+        Constant_Items_ID = #{record.constantItemsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.constantTypeId != null" >
+        Constant_Type_ID = #{record.constantTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.constantItemsCode != null" >
+        Constant_Items_Code = #{record.constantItemsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constantItemsName != null" >
+        Constant_Items_Name = #{record.constantItemsName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update constant_items
+    set Constant_Items_ID = #{record.constantItemsId,jdbcType=INTEGER},
+      Constant_Type_ID = #{record.constantTypeId,jdbcType=INTEGER},
+      Constant_Items_Code = #{record.constantItemsCode,jdbcType=VARCHAR},
+      Constant_Items_Name = #{record.constantItemsName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.ConstantItems" >
+    update constant_items
+    <set >
+      <if test="constantTypeId != null" >
+        Constant_Type_ID = #{constantTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="constantItemsCode != null" >
+        Constant_Items_Code = #{constantItemsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="constantItemsName != null" >
+        Constant_Items_Name = #{constantItemsName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Constant_Items_ID = #{constantItemsId,jdbcType=INTEGER}
+  </update>
+</mapper>

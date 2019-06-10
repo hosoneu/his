@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.RegistrationLevelMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.RegistrationLevel" >
+    <constructor >
+      <idArg column="Registration_Level_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Registration_Level_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Is_Default" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Registration_Sequence" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Registration_Cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Registration_Level_ID, Registration_Level_Name, Is_Default, Registration_Sequence, 
+    Registration_Cost
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.RegistrationLevelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from registration_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.RegistrationLevelExample" >
+    delete from registration_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.RegistrationLevel" >
+    <selectKey resultType="java.lang.Integer" keyProperty="registrationLevelId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into registration_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Registration_Level_ID,
+      <if test="registrationLevelName != null" >
+        Registration_Level_Name,
+      </if>
+      <if test="isDefault != null" >
+        Is_Default,
+      </if>
+      <if test="registrationSequence != null" >
+        Registration_Sequence,
+      </if>
+      <if test="registrationCost != null" >
+        Registration_Cost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{registrationLevelId,jdbcType=INTEGER},
+      <if test="registrationLevelName != null" >
+        #{registrationLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null" >
+        #{isDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationSequence != null" >
+        #{registrationSequence,jdbcType=INTEGER},
+      </if>
+      <if test="registrationCost != null" >
+        #{registrationCost,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.RegistrationLevelExample" resultType="java.lang.Integer" >
+    select count(*) from registration_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update registration_level
+    <set >
+      <if test="record.registrationLevelId != null" >
+        Registration_Level_ID = #{record.registrationLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.registrationLevelName != null" >
+        Registration_Level_Name = #{record.registrationLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDefault != null" >
+        Is_Default = #{record.isDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrationSequence != null" >
+        Registration_Sequence = #{record.registrationSequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.registrationCost != null" >
+        Registration_Cost = #{record.registrationCost,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update registration_level
+    set Registration_Level_ID = #{record.registrationLevelId,jdbcType=INTEGER},
+      Registration_Level_Name = #{record.registrationLevelName,jdbcType=VARCHAR},
+      Is_Default = #{record.isDefault,jdbcType=VARCHAR},
+      Registration_Sequence = #{record.registrationSequence,jdbcType=INTEGER},
+      Registration_Cost = #{record.registrationCost,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.RegistrationLevel" >
+    update registration_level
+    <set >
+      <if test="registrationLevelName != null" >
+        Registration_Level_Name = #{registrationLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null" >
+        Is_Default = #{isDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationSequence != null" >
+        Registration_Sequence = #{registrationSequence,jdbcType=INTEGER},
+      </if>
+      <if test="registrationCost != null" >
+        Registration_Cost = #{registrationCost,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where Registration_Level_ID = #{registrationLevelId,jdbcType=INTEGER}
+  </update>
+</mapper>
