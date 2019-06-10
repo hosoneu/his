@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.DiagnosisMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.Diagnosis" >
+    <constructor >
+      <idArg column="Diagnosis_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Disease_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Main_Diagnosis_Mark" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Suspect_Mark" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Onset_Date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="Diagnosis_Mark" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Diagnosis_ID, Disease_ID, Medical_Record_ID, Main_Diagnosis_Mark, Suspect_Mark, Onset_Date, 
+    Diagnosis_Mark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.DiagnosisExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from diagnosis
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.DiagnosisExample" >
+    delete from diagnosis
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.Diagnosis" >
+    <selectKey resultType="java.lang.Integer" keyProperty="diagnosisId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into diagnosis
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Diagnosis_ID,
+      <if test="diseaseId != null" >
+        Disease_ID,
+      </if>
+      <if test="medicalRecordId != null" >
+        Medical_Record_ID,
+      </if>
+      <if test="mainDiagnosisMark != null" >
+        Main_Diagnosis_Mark,
+      </if>
+      <if test="suspectMark != null" >
+        Suspect_Mark,
+      </if>
+      <if test="onsetDate != null" >
+        Onset_Date,
+      </if>
+      <if test="diagnosisMark != null" >
+        Diagnosis_Mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{diagnosisId,jdbcType=INTEGER},
+      <if test="diseaseId != null" >
+        #{diseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="medicalRecordId != null" >
+        #{medicalRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="mainDiagnosisMark != null" >
+        #{mainDiagnosisMark,jdbcType=CHAR},
+      </if>
+      <if test="suspectMark != null" >
+        #{suspectMark,jdbcType=CHAR},
+      </if>
+      <if test="onsetDate != null" >
+        #{onsetDate,jdbcType=DATE},
+      </if>
+      <if test="diagnosisMark != null" >
+        #{diagnosisMark,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.DiagnosisExample" resultType="java.lang.Integer" >
+    select count(*) from diagnosis
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update diagnosis
+    <set >
+      <if test="record.diagnosisId != null" >
+        Diagnosis_ID = #{record.diagnosisId,jdbcType=INTEGER},
+      </if>
+      <if test="record.diseaseId != null" >
+        Disease_ID = #{record.diseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.medicalRecordId != null" >
+        Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mainDiagnosisMark != null" >
+        Main_Diagnosis_Mark = #{record.mainDiagnosisMark,jdbcType=CHAR},
+      </if>
+      <if test="record.suspectMark != null" >
+        Suspect_Mark = #{record.suspectMark,jdbcType=CHAR},
+      </if>
+      <if test="record.onsetDate != null" >
+        Onset_Date = #{record.onsetDate,jdbcType=DATE},
+      </if>
+      <if test="record.diagnosisMark != null" >
+        Diagnosis_Mark = #{record.diagnosisMark,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update diagnosis
+    set Diagnosis_ID = #{record.diagnosisId,jdbcType=INTEGER},
+      Disease_ID = #{record.diseaseId,jdbcType=INTEGER},
+      Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
+      Main_Diagnosis_Mark = #{record.mainDiagnosisMark,jdbcType=CHAR},
+      Suspect_Mark = #{record.suspectMark,jdbcType=CHAR},
+      Onset_Date = #{record.onsetDate,jdbcType=DATE},
+      Diagnosis_Mark = #{record.diagnosisMark,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.Diagnosis" >
+    update diagnosis
+    <set >
+      <if test="diseaseId != null" >
+        Disease_ID = #{diseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="medicalRecordId != null" >
+        Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="mainDiagnosisMark != null" >
+        Main_Diagnosis_Mark = #{mainDiagnosisMark,jdbcType=CHAR},
+      </if>
+      <if test="suspectMark != null" >
+        Suspect_Mark = #{suspectMark,jdbcType=CHAR},
+      </if>
+      <if test="onsetDate != null" >
+        Onset_Date = #{onsetDate,jdbcType=DATE},
+      </if>
+      <if test="diagnosisMark != null" >
+        Diagnosis_Mark = #{diagnosisMark,jdbcType=CHAR},
+      </if>
+    </set>
+    where Diagnosis_ID = #{diagnosisId,jdbcType=INTEGER}
+  </update>
+</mapper>

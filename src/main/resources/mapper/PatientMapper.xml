@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.PatientMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.Patient" >
+    <constructor >
+      <idArg column="Patient_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Patient_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Patient_Gender" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Patient_Birth" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="Patient_Age" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Patient_IDentity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Patient_Address" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Patient_ID, Patient_Name, Patient_Gender, Patient_Birth, Patient_Age, Patient_IDentity, 
+    Patient_Address
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.PatientExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from patient
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.PatientExample" >
+    delete from patient
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.Patient" >
+    <selectKey resultType="java.lang.Integer" keyProperty="patientId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into patient
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Patient_ID,
+      <if test="patientName != null" >
+        Patient_Name,
+      </if>
+      <if test="patientGender != null" >
+        Patient_Gender,
+      </if>
+      <if test="patientBirth != null" >
+        Patient_Birth,
+      </if>
+      <if test="patientAge != null" >
+        Patient_Age,
+      </if>
+      <if test="patientIdentity != null" >
+        Patient_IDentity,
+      </if>
+      <if test="patientAddress != null" >
+        Patient_Address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{patientId,jdbcType=INTEGER},
+      <if test="patientName != null" >
+        #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientGender != null" >
+        #{patientGender,jdbcType=CHAR},
+      </if>
+      <if test="patientBirth != null" >
+        #{patientBirth,jdbcType=DATE},
+      </if>
+      <if test="patientAge != null" >
+        #{patientAge,jdbcType=INTEGER},
+      </if>
+      <if test="patientIdentity != null" >
+        #{patientIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="patientAddress != null" >
+        #{patientAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.PatientExample" resultType="java.lang.Integer" >
+    select count(*) from patient
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update patient
+    <set >
+      <if test="record.patientId != null" >
+        Patient_ID = #{record.patientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientName != null" >
+        Patient_Name = #{record.patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientGender != null" >
+        Patient_Gender = #{record.patientGender,jdbcType=CHAR},
+      </if>
+      <if test="record.patientBirth != null" >
+        Patient_Birth = #{record.patientBirth,jdbcType=DATE},
+      </if>
+      <if test="record.patientAge != null" >
+        Patient_Age = #{record.patientAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientIdentity != null" >
+        Patient_IDentity = #{record.patientIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientAddress != null" >
+        Patient_Address = #{record.patientAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update patient
+    set Patient_ID = #{record.patientId,jdbcType=INTEGER},
+      Patient_Name = #{record.patientName,jdbcType=VARCHAR},
+      Patient_Gender = #{record.patientGender,jdbcType=CHAR},
+      Patient_Birth = #{record.patientBirth,jdbcType=DATE},
+      Patient_Age = #{record.patientAge,jdbcType=INTEGER},
+      Patient_IDentity = #{record.patientIdentity,jdbcType=VARCHAR},
+      Patient_Address = #{record.patientAddress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.Patient" >
+    update patient
+    <set >
+      <if test="patientName != null" >
+        Patient_Name = #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientGender != null" >
+        Patient_Gender = #{patientGender,jdbcType=CHAR},
+      </if>
+      <if test="patientBirth != null" >
+        Patient_Birth = #{patientBirth,jdbcType=DATE},
+      </if>
+      <if test="patientAge != null" >
+        Patient_Age = #{patientAge,jdbcType=INTEGER},
+      </if>
+      <if test="patientIdentity != null" >
+        Patient_IDentity = #{patientIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="patientAddress != null" >
+        Patient_Address = #{patientAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Patient_ID = #{patientId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.GroupPrescriptionItemsMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.GroupPrescriptionItems" >
+    <constructor >
+      <idArg column="Group_Prescription_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Group_Prescription_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Drags_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Usage" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Dosage" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="Times" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Days" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Drugs_Advice" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Group_Prescription_Items_ID, Group_Prescription_ID, Drags_ID, Usage, Dosage, Times, 
+    Days, Quantity, Drugs_Advice
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.GroupPrescriptionItemsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from group_prescription_items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.GroupPrescriptionItemsExample" >
+    delete from group_prescription_items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.GroupPrescriptionItems" >
+    <selectKey resultType="java.lang.Integer" keyProperty="groupPrescriptionItemsId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into group_prescription_items
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Group_Prescription_Items_ID,
+      <if test="groupPrescriptionId != null" >
+        Group_Prescription_ID,
+      </if>
+      <if test="dragsId != null" >
+        Drags_ID,
+      </if>
+      <if test="usage != null" >
+        Usage,
+      </if>
+      <if test="dosage != null" >
+        Dosage,
+      </if>
+      <if test="times != null" >
+        Times,
+      </if>
+      <if test="days != null" >
+        Days,
+      </if>
+      <if test="quantity != null" >
+        Quantity,
+      </if>
+      <if test="drugsAdvice != null" >
+        Drugs_Advice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{groupPrescriptionItemsId,jdbcType=INTEGER},
+      <if test="groupPrescriptionId != null" >
+        #{groupPrescriptionId,jdbcType=INTEGER},
+      </if>
+      <if test="dragsId != null" >
+        #{dragsId,jdbcType=INTEGER},
+      </if>
+      <if test="usage != null" >
+        #{usage,jdbcType=CHAR},
+      </if>
+      <if test="dosage != null" >
+        #{dosage,jdbcType=DECIMAL},
+      </if>
+      <if test="times != null" >
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="days != null" >
+        #{days,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="drugsAdvice != null" >
+        #{drugsAdvice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.GroupPrescriptionItemsExample" resultType="java.lang.Integer" >
+    select count(*) from group_prescription_items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update group_prescription_items
+    <set >
+      <if test="record.groupPrescriptionItemsId != null" >
+        Group_Prescription_Items_ID = #{record.groupPrescriptionItemsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupPrescriptionId != null" >
+        Group_Prescription_ID = #{record.groupPrescriptionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dragsId != null" >
+        Drags_ID = #{record.dragsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.usage != null" >
+        Usage = #{record.usage,jdbcType=CHAR},
+      </if>
+      <if test="record.dosage != null" >
+        Dosage = #{record.dosage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.times != null" >
+        Times = #{record.times,jdbcType=INTEGER},
+      </if>
+      <if test="record.days != null" >
+        Days = #{record.days,jdbcType=INTEGER},
+      </if>
+      <if test="record.quantity != null" >
+        Quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.drugsAdvice != null" >
+        Drugs_Advice = #{record.drugsAdvice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update group_prescription_items
+    set Group_Prescription_Items_ID = #{record.groupPrescriptionItemsId,jdbcType=INTEGER},
+      Group_Prescription_ID = #{record.groupPrescriptionId,jdbcType=INTEGER},
+      Drags_ID = #{record.dragsId,jdbcType=INTEGER},
+      Usage = #{record.usage,jdbcType=CHAR},
+      Dosage = #{record.dosage,jdbcType=DECIMAL},
+      Times = #{record.times,jdbcType=INTEGER},
+      Days = #{record.days,jdbcType=INTEGER},
+      Quantity = #{record.quantity,jdbcType=INTEGER},
+      Drugs_Advice = #{record.drugsAdvice,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.GroupPrescriptionItems" >
+    update group_prescription_items
+    <set >
+      <if test="groupPrescriptionId != null" >
+        Group_Prescription_ID = #{groupPrescriptionId,jdbcType=INTEGER},
+      </if>
+      <if test="dragsId != null" >
+        Drags_ID = #{dragsId,jdbcType=INTEGER},
+      </if>
+      <if test="usage != null" >
+        Usage = #{usage,jdbcType=CHAR},
+      </if>
+      <if test="dosage != null" >
+        Dosage = #{dosage,jdbcType=DECIMAL},
+      </if>
+      <if test="times != null" >
+        Times = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="days != null" >
+        Days = #{days,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        Quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="drugsAdvice != null" >
+        Drugs_Advice = #{drugsAdvice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Group_Prescription_Items_ID = #{groupPrescriptionItemsId,jdbcType=INTEGER}
+  </update>
+</mapper>

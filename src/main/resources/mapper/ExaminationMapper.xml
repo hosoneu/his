@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.ExaminationMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.Examination" >
+    <constructor >
+      <idArg column="Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Examination_Mark" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Doctor_Advice" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Examination_ID, Medical_Record_ID, Doctor_ID, Examination_Mark, Doctor_Advice, Submit_Time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.ExaminationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from examination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.ExaminationExample" >
+    delete from examination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.Examination" >
+    <selectKey resultType="java.lang.Integer" keyProperty="examinationId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into examination
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Examination_ID,
+      <if test="medicalRecordId != null" >
+        Medical_Record_ID,
+      </if>
+      <if test="doctorId != null" >
+        Doctor_ID,
+      </if>
+      <if test="examinationMark != null" >
+        Examination_Mark,
+      </if>
+      <if test="doctorAdvice != null" >
+        Doctor_Advice,
+      </if>
+      <if test="submitTime != null" >
+        Submit_Time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{examinationId,jdbcType=INTEGER},
+      <if test="medicalRecordId != null" >
+        #{medicalRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationMark != null" >
+        #{examinationMark,jdbcType=CHAR},
+      </if>
+      <if test="doctorAdvice != null" >
+        #{doctorAdvice,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.ExaminationExample" resultType="java.lang.Integer" >
+    select count(*) from examination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update examination
+    <set >
+      <if test="record.examinationId != null" >
+        Examination_ID = #{record.examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.medicalRecordId != null" >
+        Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorId != null" >
+        Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationMark != null" >
+        Examination_Mark = #{record.examinationMark,jdbcType=CHAR},
+      </if>
+      <if test="record.doctorAdvice != null" >
+        Doctor_Advice = #{record.doctorAdvice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitTime != null" >
+        Submit_Time = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update examination
+    set Examination_ID = #{record.examinationId,jdbcType=INTEGER},
+      Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
+      Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      Examination_Mark = #{record.examinationMark,jdbcType=CHAR},
+      Doctor_Advice = #{record.doctorAdvice,jdbcType=VARCHAR},
+      Submit_Time = #{record.submitTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.Examination" >
+    update examination
+    <set >
+      <if test="medicalRecordId != null" >
+        Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="doctorId != null" >
+        Doctor_ID = #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationMark != null" >
+        Examination_Mark = #{examinationMark,jdbcType=CHAR},
+      </if>
+      <if test="doctorAdvice != null" >
+        Doctor_Advice = #{doctorAdvice,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        Submit_Time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Examination_ID = #{examinationId,jdbcType=INTEGER}
+  </update>
+</mapper>

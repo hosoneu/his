@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.FmedicalItemsMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.FmedicalItems" >
+    <constructor >
+      <idArg column="Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Fmedical_Items_Code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Fmedical_Items_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Fmedical_Items_Format" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Fmedical_Items_Price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="Expense_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Department_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Fmedical_Items_MnemonicCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Fmedical_Items_Type" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Create_Time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="Reverse1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Reverse2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Reverse3" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Fmedical_Items_ID, Fmedical_Items_Code, Fmedical_Items_Name, Fmedical_Items_Format, 
+    Fmedical_Items_Price, Expense_Type_ID, Department_ID, Fmedical_Items_MnemonicCode, 
+    Fmedical_Items_Type, Create_Time, Reverse1, Reverse2, Reverse3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.FmedicalItemsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fmedical_items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.FmedicalItemsExample" >
+    delete from fmedical_items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.FmedicalItems" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fmedicalItemsId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fmedical_items
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Fmedical_Items_ID,
+      <if test="fmedicalItemsCode != null" >
+        Fmedical_Items_Code,
+      </if>
+      <if test="fmedicalItemsName != null" >
+        Fmedical_Items_Name,
+      </if>
+      <if test="fmedicalItemsFormat != null" >
+        Fmedical_Items_Format,
+      </if>
+      <if test="fmedicalItemsPrice != null" >
+        Fmedical_Items_Price,
+      </if>
+      <if test="expenseTypeId != null" >
+        Expense_Type_ID,
+      </if>
+      <if test="departmentId != null" >
+        Department_ID,
+      </if>
+      <if test="fmedicalItemsMnemoniccode != null" >
+        Fmedical_Items_MnemonicCode,
+      </if>
+      <if test="fmedicalItemsType != null" >
+        Fmedical_Items_Type,
+      </if>
+      <if test="createTime != null" >
+        Create_Time,
+      </if>
+      <if test="reverse1 != null" >
+        Reverse1,
+      </if>
+      <if test="reverse2 != null" >
+        Reverse2,
+      </if>
+      <if test="reverse3 != null" >
+        Reverse3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{fmedicalItemsId,jdbcType=INTEGER},
+      <if test="fmedicalItemsCode != null" >
+        #{fmedicalItemsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fmedicalItemsName != null" >
+        #{fmedicalItemsName,jdbcType=VARCHAR},
+      </if>
+      <if test="fmedicalItemsFormat != null" >
+        #{fmedicalItemsFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="fmedicalItemsPrice != null" >
+        #{fmedicalItemsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="expenseTypeId != null" >
+        #{expenseTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="fmedicalItemsMnemoniccode != null" >
+        #{fmedicalItemsMnemoniccode,jdbcType=VARCHAR},
+      </if>
+      <if test="fmedicalItemsType != null" >
+        #{fmedicalItemsType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="reverse1 != null" >
+        #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null" >
+        #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null" >
+        #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.FmedicalItemsExample" resultType="java.lang.Integer" >
+    select count(*) from fmedical_items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fmedical_items
+    <set >
+      <if test="record.fmedicalItemsId != null" >
+        Fmedical_Items_ID = #{record.fmedicalItemsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmedicalItemsCode != null" >
+        Fmedical_Items_Code = #{record.fmedicalItemsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmedicalItemsName != null" >
+        Fmedical_Items_Name = #{record.fmedicalItemsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmedicalItemsFormat != null" >
+        Fmedical_Items_Format = #{record.fmedicalItemsFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmedicalItemsPrice != null" >
+        Fmedical_Items_Price = #{record.fmedicalItemsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expenseTypeId != null" >
+        Expense_Type_ID = #{record.expenseTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId != null" >
+        Department_ID = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmedicalItemsMnemoniccode != null" >
+        Fmedical_Items_MnemonicCode = #{record.fmedicalItemsMnemoniccode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmedicalItemsType != null" >
+        Fmedical_Items_Type = #{record.fmedicalItemsType,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        Create_Time = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.reverse1 != null" >
+        Reverse1 = #{record.reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reverse2 != null" >
+        Reverse2 = #{record.reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reverse3 != null" >
+        Reverse3 = #{record.reverse3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fmedical_items
+    set Fmedical_Items_ID = #{record.fmedicalItemsId,jdbcType=INTEGER},
+      Fmedical_Items_Code = #{record.fmedicalItemsCode,jdbcType=VARCHAR},
+      Fmedical_Items_Name = #{record.fmedicalItemsName,jdbcType=VARCHAR},
+      Fmedical_Items_Format = #{record.fmedicalItemsFormat,jdbcType=VARCHAR},
+      Fmedical_Items_Price = #{record.fmedicalItemsPrice,jdbcType=DECIMAL},
+      Expense_Type_ID = #{record.expenseTypeId,jdbcType=INTEGER},
+      Department_ID = #{record.departmentId,jdbcType=INTEGER},
+      Fmedical_Items_MnemonicCode = #{record.fmedicalItemsMnemoniccode,jdbcType=VARCHAR},
+      Fmedical_Items_Type = #{record.fmedicalItemsType,jdbcType=CHAR},
+      Create_Time = #{record.createTime,jdbcType=DATE},
+      Reverse1 = #{record.reverse1,jdbcType=VARCHAR},
+      Reverse2 = #{record.reverse2,jdbcType=VARCHAR},
+      Reverse3 = #{record.reverse3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.FmedicalItems" >
+    update fmedical_items
+    <set >
+      <if test="fmedicalItemsCode != null" >
+        Fmedical_Items_Code = #{fmedicalItemsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fmedicalItemsName != null" >
+        Fmedical_Items_Name = #{fmedicalItemsName,jdbcType=VARCHAR},
+      </if>
+      <if test="fmedicalItemsFormat != null" >
+        Fmedical_Items_Format = #{fmedicalItemsFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="fmedicalItemsPrice != null" >
+        Fmedical_Items_Price = #{fmedicalItemsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="expenseTypeId != null" >
+        Expense_Type_ID = #{expenseTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null" >
+        Department_ID = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="fmedicalItemsMnemoniccode != null" >
+        Fmedical_Items_MnemonicCode = #{fmedicalItemsMnemoniccode,jdbcType=VARCHAR},
+      </if>
+      <if test="fmedicalItemsType != null" >
+        Fmedical_Items_Type = #{fmedicalItemsType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        Create_Time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="reverse1 != null" >
+        Reverse1 = #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null" >
+        Reverse2 = #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null" >
+        Reverse3 = #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Fmedical_Items_ID = #{fmedicalItemsId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.ExaminationResultImageMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.ExaminationResultImage" >
+    <constructor >
+      <idArg column="Examination_Result_Image_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Examination_Result_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Image_URL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Image_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Examination_Result_Image_ID, Examination_Result_ID, Image_URL, Image_Name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.ExaminationResultImageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from examination_result_image
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.ExaminationResultImageExample" >
+    delete from examination_result_image
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.ExaminationResultImage" >
+    <selectKey resultType="java.lang.Integer" keyProperty="examinationResultImageId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into examination_result_image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Examination_Result_Image_ID,
+      <if test="examinationResultId != null" >
+        Examination_Result_ID,
+      </if>
+      <if test="imageUrl != null" >
+        Image_URL,
+      </if>
+      <if test="imageName != null" >
+        Image_Name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{examinationResultImageId,jdbcType=INTEGER},
+      <if test="examinationResultId != null" >
+        #{examinationResultId,jdbcType=INTEGER},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageName != null" >
+        #{imageName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.ExaminationResultImageExample" resultType="java.lang.Integer" >
+    select count(*) from examination_result_image
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update examination_result_image
+    <set >
+      <if test="record.examinationResultImageId != null" >
+        Examination_Result_Image_ID = #{record.examinationResultImageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationResultId != null" >
+        Examination_Result_ID = #{record.examinationResultId,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageUrl != null" >
+        Image_URL = #{record.imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageName != null" >
+        Image_Name = #{record.imageName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update examination_result_image
+    set Examination_Result_Image_ID = #{record.examinationResultImageId,jdbcType=INTEGER},
+      Examination_Result_ID = #{record.examinationResultId,jdbcType=INTEGER},
+      Image_URL = #{record.imageUrl,jdbcType=VARCHAR},
+      Image_Name = #{record.imageName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.ExaminationResultImage" >
+    update examination_result_image
+    <set >
+      <if test="examinationResultId != null" >
+        Examination_Result_ID = #{examinationResultId,jdbcType=INTEGER},
+      </if>
+      <if test="imageUrl != null" >
+        Image_URL = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageName != null" >
+        Image_Name = #{imageName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Examination_Result_Image_ID = #{examinationResultImageId,jdbcType=INTEGER}
+  </update>
+</mapper>

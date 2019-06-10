@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.DepartmentMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.Department" >
+    <constructor >
+      <idArg column="Department_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Department_Code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Department_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Department_Category_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Department_Type" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Department_ID, Department_Code, Department_Name, Department_Category_ID, Department_Type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.DepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.DepartmentExample" >
+    delete from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.Department" >
+    <selectKey resultType="java.lang.Integer" keyProperty="departmentId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Department_ID,
+      <if test="departmentCode != null" >
+        Department_Code,
+      </if>
+      <if test="departmentName != null" >
+        Department_Name,
+      </if>
+      <if test="departmentCategoryId != null" >
+        Department_Category_ID,
+      </if>
+      <if test="departmentType != null" >
+        Department_Type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{departmentId,jdbcType=INTEGER},
+      <if test="departmentCode != null" >
+        #{departmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCategoryId != null" >
+        #{departmentCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentType != null" >
+        #{departmentType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.DepartmentExample" resultType="java.lang.Integer" >
+    select count(*) from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update department
+    <set >
+      <if test="record.departmentId != null" >
+        Department_ID = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentCode != null" >
+        Department_Code = #{record.departmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentName != null" >
+        Department_Name = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentCategoryId != null" >
+        Department_Category_ID = #{record.departmentCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentType != null" >
+        Department_Type = #{record.departmentType,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update department
+    set Department_ID = #{record.departmentId,jdbcType=INTEGER},
+      Department_Code = #{record.departmentCode,jdbcType=VARCHAR},
+      Department_Name = #{record.departmentName,jdbcType=VARCHAR},
+      Department_Category_ID = #{record.departmentCategoryId,jdbcType=INTEGER},
+      Department_Type = #{record.departmentType,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.Department" >
+    update department
+    <set >
+      <if test="departmentCode != null" >
+        Department_Code = #{departmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        Department_Name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCategoryId != null" >
+        Department_Category_ID = #{departmentCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentType != null" >
+        Department_Type = #{departmentType,jdbcType=CHAR},
+      </if>
+    </set>
+    where Department_ID = #{departmentId,jdbcType=INTEGER}
+  </update>
+</mapper>

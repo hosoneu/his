@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.DiseaseTypeMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.DiseaseType" >
+    <constructor >
+      <idArg column="Disease_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Disease_Type_Code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Disease_Type_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Disease_Type_Sequence" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Disease_Type_Type" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Disease_Type_ID, Disease_Type_Code, Disease_Type_Name, Disease_Type_Sequence, Disease_Type_Type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.DiseaseTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from disease_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.DiseaseTypeExample" >
+    delete from disease_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.DiseaseType" >
+    <selectKey resultType="java.lang.Integer" keyProperty="diseaseTypeId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into disease_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Disease_Type_ID,
+      <if test="diseaseTypeCode != null" >
+        Disease_Type_Code,
+      </if>
+      <if test="diseaseTypeName != null" >
+        Disease_Type_Name,
+      </if>
+      <if test="diseaseTypeSequence != null" >
+        Disease_Type_Sequence,
+      </if>
+      <if test="diseaseTypeType != null" >
+        Disease_Type_Type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{diseaseTypeId,jdbcType=INTEGER},
+      <if test="diseaseTypeCode != null" >
+        #{diseaseTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseTypeName != null" >
+        #{diseaseTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseTypeSequence != null" >
+        #{diseaseTypeSequence,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseTypeType != null" >
+        #{diseaseTypeType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.DiseaseTypeExample" resultType="java.lang.Integer" >
+    select count(*) from disease_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update disease_type
+    <set >
+      <if test="record.diseaseTypeId != null" >
+        Disease_Type_ID = #{record.diseaseTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.diseaseTypeCode != null" >
+        Disease_Type_Code = #{record.diseaseTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diseaseTypeName != null" >
+        Disease_Type_Name = #{record.diseaseTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diseaseTypeSequence != null" >
+        Disease_Type_Sequence = #{record.diseaseTypeSequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.diseaseTypeType != null" >
+        Disease_Type_Type = #{record.diseaseTypeType,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update disease_type
+    set Disease_Type_ID = #{record.diseaseTypeId,jdbcType=INTEGER},
+      Disease_Type_Code = #{record.diseaseTypeCode,jdbcType=VARCHAR},
+      Disease_Type_Name = #{record.diseaseTypeName,jdbcType=VARCHAR},
+      Disease_Type_Sequence = #{record.diseaseTypeSequence,jdbcType=INTEGER},
+      Disease_Type_Type = #{record.diseaseTypeType,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.DiseaseType" >
+    update disease_type
+    <set >
+      <if test="diseaseTypeCode != null" >
+        Disease_Type_Code = #{diseaseTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseTypeName != null" >
+        Disease_Type_Name = #{diseaseTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseTypeSequence != null" >
+        Disease_Type_Sequence = #{diseaseTypeSequence,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseTypeType != null" >
+        Disease_Type_Type = #{diseaseTypeType,jdbcType=CHAR},
+      </if>
+    </set>
+    where Disease_Type_ID = #{diseaseTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

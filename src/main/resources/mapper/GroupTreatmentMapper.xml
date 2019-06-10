@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.GroupTreatmentMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.GroupTreatment" >
+    <constructor >
+      <idArg column="Group_Treatment_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Group_Treatment_Code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Group_Treatment_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Group_Treatment_Scope" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Create_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Group_Treatment_ID, Doctor_ID, Group_Treatment_Code, Group_Treatment_Name, Group_Treatment_Scope, 
+    Create_Time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.GroupTreatmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from group_treatment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.GroupTreatmentExample" >
+    delete from group_treatment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.GroupTreatment" >
+    <selectKey resultType="java.lang.Integer" keyProperty="groupTreatmentId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into group_treatment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      Group_Treatment_ID,
+      <if test="doctorId != null" >
+        Doctor_ID,
+      </if>
+      <if test="groupTreatmentCode != null" >
+        Group_Treatment_Code,
+      </if>
+      <if test="groupTreatmentName != null" >
+        Group_Treatment_Name,
+      </if>
+      <if test="groupTreatmentScope != null" >
+        Group_Treatment_Scope,
+      </if>
+      <if test="createTime != null" >
+        Create_Time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{groupTreatmentId,jdbcType=INTEGER},
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="groupTreatmentCode != null" >
+        #{groupTreatmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupTreatmentName != null" >
+        #{groupTreatmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupTreatmentScope != null" >
+        #{groupTreatmentScope,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.neu.hoso.example.GroupTreatmentExample" resultType="java.lang.Integer" >
+    select count(*) from group_treatment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update group_treatment
+    <set >
+      <if test="record.groupTreatmentId != null" >
+        Group_Treatment_ID = #{record.groupTreatmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorId != null" >
+        Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupTreatmentCode != null" >
+        Group_Treatment_Code = #{record.groupTreatmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupTreatmentName != null" >
+        Group_Treatment_Name = #{record.groupTreatmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupTreatmentScope != null" >
+        Group_Treatment_Scope = #{record.groupTreatmentScope,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        Create_Time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update group_treatment
+    set Group_Treatment_ID = #{record.groupTreatmentId,jdbcType=INTEGER},
+      Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      Group_Treatment_Code = #{record.groupTreatmentCode,jdbcType=VARCHAR},
+      Group_Treatment_Name = #{record.groupTreatmentName,jdbcType=VARCHAR},
+      Group_Treatment_Scope = #{record.groupTreatmentScope,jdbcType=CHAR},
+      Create_Time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.GroupTreatment" >
+    update group_treatment
+    <set >
+      <if test="doctorId != null" >
+        Doctor_ID = #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="groupTreatmentCode != null" >
+        Group_Treatment_Code = #{groupTreatmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupTreatmentName != null" >
+        Group_Treatment_Name = #{groupTreatmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupTreatmentScope != null" >
+        Group_Treatment_Scope = #{groupTreatmentScope,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        Create_Time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Group_Treatment_ID = #{groupTreatmentId,jdbcType=INTEGER}
+  </update>
+</mapper>
