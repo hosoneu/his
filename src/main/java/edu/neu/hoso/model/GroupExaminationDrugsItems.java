@@ -7,16 +7,25 @@ public class GroupExaminationDrugsItems {
 
     private Integer drugsId;
 
-    private String usage;
+    private String drugsUsage;
 
     private Integer quantity;
 
-    public GroupExaminationDrugsItems(Integer groupExaminationDrugsItemsId, Integer groupExaminationFmedicalItemsId, Integer drugsId, String usage, Integer quantity) {
+    private Integer times;
+
+    private Integer days;
+
+    private Double dosage;
+
+    public GroupExaminationDrugsItems(Integer groupExaminationDrugsItemsId, Integer groupExaminationFmedicalItemsId, Integer drugsId, String drugsUsage, Integer quantity, Integer times, Integer days, Double dosage) {
         this.groupExaminationDrugsItemsId = groupExaminationDrugsItemsId;
         this.groupExaminationFmedicalItemsId = groupExaminationFmedicalItemsId;
         this.drugsId = drugsId;
-        this.usage = usage;
+        this.drugsUsage = drugsUsage;
         this.quantity = quantity;
+        this.times = times;
+        this.days = days;
+        this.dosage = dosage;
     }
 
     public GroupExaminationDrugsItems() {
@@ -47,12 +56,12 @@ public class GroupExaminationDrugsItems {
         this.drugsId = drugsId;
     }
 
-    public String getUsage() {
-        return usage;
+    public String getDrugsUsage() {
+        return drugsUsage;
     }
 
-    public void setUsage(String usage) {
-        this.usage = usage == null ? null : usage.trim();
+    public void setDrugsUsage(String drugsUsage) {
+        this.drugsUsage = drugsUsage == null ? null : drugsUsage.trim();
     }
 
     public Integer getQuantity() {
@@ -61,5 +70,29 @@ public class GroupExaminationDrugsItems {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Integer getTimes() {
+        return times;
+    }
+
+    public void setTimes(Integer times) {
+        this.times = times;
+    }
+
+    public Integer getDays() {
+        return days;
+    }
+
+    public void setDays(Integer days) {
+        this.days = days;
+    }
+
+    public Double getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(Double dosage) {
+        this.dosage = dosage;
     }
 }

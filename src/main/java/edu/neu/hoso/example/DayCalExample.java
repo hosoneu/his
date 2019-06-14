@@ -1,6 +1,5 @@
 package edu.neu.hoso.example;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -356,52 +355,52 @@ public class DayCalExample {
             return (Criteria) this;
         }
 
-        public Criteria andDayCalTotalEqualTo(BigDecimal value) {
+        public Criteria andDayCalTotalEqualTo(Double value) {
             addCriterion("Day_Cal_Total =", value, "dayCalTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalTotalNotEqualTo(BigDecimal value) {
+        public Criteria andDayCalTotalNotEqualTo(Double value) {
             addCriterion("Day_Cal_Total <>", value, "dayCalTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalTotalGreaterThan(BigDecimal value) {
+        public Criteria andDayCalTotalGreaterThan(Double value) {
             addCriterion("Day_Cal_Total >", value, "dayCalTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalTotalGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andDayCalTotalGreaterThanOrEqualTo(Double value) {
             addCriterion("Day_Cal_Total >=", value, "dayCalTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalTotalLessThan(BigDecimal value) {
+        public Criteria andDayCalTotalLessThan(Double value) {
             addCriterion("Day_Cal_Total <", value, "dayCalTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalTotalLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andDayCalTotalLessThanOrEqualTo(Double value) {
             addCriterion("Day_Cal_Total <=", value, "dayCalTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalTotalIn(List<BigDecimal> values) {
+        public Criteria andDayCalTotalIn(List<Double> values) {
             addCriterion("Day_Cal_Total in", values, "dayCalTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalTotalNotIn(List<BigDecimal> values) {
+        public Criteria andDayCalTotalNotIn(List<Double> values) {
             addCriterion("Day_Cal_Total not in", values, "dayCalTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalTotalBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andDayCalTotalBetween(Double value1, Double value2) {
             addCriterion("Day_Cal_Total between", value1, value2, "dayCalTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalTotalNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andDayCalTotalNotBetween(Double value1, Double value2) {
             addCriterion("Day_Cal_Total not between", value1, value2, "dayCalTotal");
             return (Criteria) this;
         }

@@ -22,20 +22,18 @@ public interface PrescriptionItemsMapper {
     int deleteByPrimaryKey(Integer prescriptionItemsId);
 
     @Insert({
-        "insert into prescription_items (Prescription_Items_ID, Prescription_ID, ",
-        "Drags_ID, Expense_Items_ID, ",
-        "Usage, Dosage, Times, ",
-        "Days, Quantity, ",
-        "Drugs_Advice, Drugs_Dispensing_Status, ",
-        "Actual_Quantity)",
-        "values (#{prescriptionItemsId,jdbcType=INTEGER}, #{prescriptionId,jdbcType=INTEGER}, ",
-        "#{dragsId,jdbcType=INTEGER}, #{expenseItemsId,jdbcType=INTEGER}, ",
-        "#{usage,jdbcType=CHAR}, #{dosage,jdbcType=DECIMAL}, #{times,jdbcType=INTEGER}, ",
-        "#{days,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, ",
-        "#{drugsAdvice,jdbcType=VARCHAR}, #{drugsDispensingStatus,jdbcType=CHAR}, ",
-        "#{actualQuantity,jdbcType=INTEGER})"
+        "insert into prescription_items (Prescription_ID, Drags_ID, ",
+        "Expense_Items_ID, Drugs_Usage, ",
+        "Dosage, Times, Days, ",
+        "Quantity, Drugs_Advice, ",
+        "Drugs_Dispensing_Status, Actual_Quantity)",
+        "values (#{prescriptionId,jdbcType=INTEGER}, #{dragsId,jdbcType=INTEGER}, ",
+        "#{expenseItemsId,jdbcType=INTEGER}, #{drugsUsage,jdbcType=CHAR}, ",
+        "#{dosage,jdbcType=DOUBLE}, #{times,jdbcType=INTEGER}, #{days,jdbcType=INTEGER}, ",
+        "#{quantity,jdbcType=INTEGER}, #{drugsAdvice,jdbcType=VARCHAR}, ",
+        "#{drugsDispensingStatus,jdbcType=CHAR}, #{actualQuantity,jdbcType=INTEGER})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="prescriptionItemsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="prescriptionItemsId", before=false, resultType=Integer.class)
     int insert(PrescriptionItems record);
 
     int insertSelective(PrescriptionItems record);
@@ -44,8 +42,8 @@ public interface PrescriptionItemsMapper {
 
     @Select({
         "select",
-        "Prescription_Items_ID, Prescription_ID, Drags_ID, Expense_Items_ID, Usage, Dosage, ",
-        "Times, Days, Quantity, Drugs_Advice, Drugs_Dispensing_Status, Actual_Quantity",
+        "Prescription_Items_ID, Prescription_ID, Drags_ID, Expense_Items_ID, Drugs_Usage, ",
+        "Dosage, Times, Days, Quantity, Drugs_Advice, Drugs_Dispensing_Status, Actual_Quantity",
         "from prescription_items",
         "where Prescription_Items_ID = #{prescriptionItemsId,jdbcType=INTEGER}"
     })
@@ -63,8 +61,8 @@ public interface PrescriptionItemsMapper {
         "set Prescription_ID = #{prescriptionId,jdbcType=INTEGER},",
           "Drags_ID = #{dragsId,jdbcType=INTEGER},",
           "Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER},",
-          "Usage = #{usage,jdbcType=CHAR},",
-          "Dosage = #{dosage,jdbcType=DECIMAL},",
+          "Drugs_Usage = #{drugsUsage,jdbcType=CHAR},",
+          "Dosage = #{dosage,jdbcType=DOUBLE},",
           "Times = #{times,jdbcType=INTEGER},",
           "Days = #{days,jdbcType=INTEGER},",
           "Quantity = #{quantity,jdbcType=INTEGER},",

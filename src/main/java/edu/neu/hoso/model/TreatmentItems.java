@@ -13,13 +13,16 @@ public class TreatmentItems {
 
     private Integer expenseItemsId;
 
-    public TreatmentItems(Integer treatmentItemsId, Integer treatmentId, Integer fmedicalItemsId, Integer quantity, Integer actualQuantity, Integer expenseItemsId) {
+    private String validStatus;
+
+    public TreatmentItems(Integer treatmentItemsId, Integer treatmentId, Integer fmedicalItemsId, Integer quantity, Integer actualQuantity, Integer expenseItemsId, String validStatus) {
         this.treatmentItemsId = treatmentItemsId;
         this.treatmentId = treatmentId;
         this.fmedicalItemsId = fmedicalItemsId;
         this.quantity = quantity;
         this.actualQuantity = actualQuantity;
         this.expenseItemsId = expenseItemsId;
+        this.validStatus = validStatus;
     }
 
     public TreatmentItems() {
@@ -72,5 +75,13 @@ public class TreatmentItems {
 
     public void setExpenseItemsId(Integer expenseItemsId) {
         this.expenseItemsId = expenseItemsId;
+    }
+
+    public String getValidStatus() {
+        return validStatus;
+    }
+
+    public void setValidStatus(String validStatus) {
+        this.validStatus = validStatus == null ? null : validStatus.trim();
     }
 }

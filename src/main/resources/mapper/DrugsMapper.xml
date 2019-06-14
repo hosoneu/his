@@ -11,7 +11,7 @@
       <arg column="Drugs_Manufacturer" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="Drugs_Dosage_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Drugs_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Drugs_Price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="Drugs_Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
       <arg column="Drugs_MnemonicCode" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="Create_Time" jdbcType="DATE" javaType="java.util.Date" />
       <arg column="Reverse1" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -103,12 +103,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.Drugs" >
-    <selectKey resultType="java.lang.Integer" keyProperty="drugsId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="drugsId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into drugs
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Drugs_ID,
       <if test="drugsCode != null" >
         Drugs_Code,
       </if>
@@ -150,7 +149,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{drugsId,jdbcType=INTEGER},
       <if test="drugsCode != null" >
         #{drugsCode,jdbcType=VARCHAR},
       </if>
@@ -173,7 +171,7 @@
         #{drugsTypeId,jdbcType=INTEGER},
       </if>
       <if test="drugsPrice != null" >
-        #{drugsPrice,jdbcType=DECIMAL},
+        #{drugsPrice,jdbcType=DOUBLE},
       </if>
       <if test="drugsMnemoniccode != null" >
         #{drugsMnemoniccode,jdbcType=VARCHAR},
@@ -226,7 +224,7 @@
         Drugs_Type_ID = #{record.drugsTypeId,jdbcType=INTEGER},
       </if>
       <if test="record.drugsPrice != null" >
-        Drugs_Price = #{record.drugsPrice,jdbcType=DECIMAL},
+        Drugs_Price = #{record.drugsPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.drugsMnemoniccode != null" >
         Drugs_MnemonicCode = #{record.drugsMnemoniccode,jdbcType=VARCHAR},
@@ -258,7 +256,7 @@
       Drugs_Manufacturer = #{record.drugsManufacturer,jdbcType=VARCHAR},
       Drugs_Dosage_ID = #{record.drugsDosageId,jdbcType=INTEGER},
       Drugs_Type_ID = #{record.drugsTypeId,jdbcType=INTEGER},
-      Drugs_Price = #{record.drugsPrice,jdbcType=DECIMAL},
+      Drugs_Price = #{record.drugsPrice,jdbcType=DOUBLE},
       Drugs_MnemonicCode = #{record.drugsMnemoniccode,jdbcType=VARCHAR},
       Create_Time = #{record.createTime,jdbcType=DATE},
       Reverse1 = #{record.reverse1,jdbcType=VARCHAR},
@@ -293,7 +291,7 @@
         Drugs_Type_ID = #{drugsTypeId,jdbcType=INTEGER},
       </if>
       <if test="drugsPrice != null" >
-        Drugs_Price = #{drugsPrice,jdbcType=DECIMAL},
+        Drugs_Price = #{drugsPrice,jdbcType=DOUBLE},
       </if>
       <if test="drugsMnemoniccode != null" >
         Drugs_MnemonicCode = #{drugsMnemoniccode,jdbcType=VARCHAR},

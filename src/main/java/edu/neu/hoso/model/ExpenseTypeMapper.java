@@ -22,12 +22,10 @@ public interface ExpenseTypeMapper {
     int deleteByPrimaryKey(Integer expenseTypeId);
 
     @Insert({
-        "insert into expense_type (Expense_Type_ID, Expense_Type_Code, ",
-        "Expense_Type_Name)",
-        "values (#{expenseTypeId,jdbcType=INTEGER}, #{expenseTypeCode,jdbcType=VARCHAR}, ",
-        "#{expenseTypeName,jdbcType=VARCHAR})"
+        "insert into expense_type (Expense_Type_Code, Expense_Type_Name)",
+        "values (#{expenseTypeCode,jdbcType=VARCHAR}, #{expenseTypeName,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="expenseTypeId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="expenseTypeId", before=false, resultType=Integer.class)
     int insert(ExpenseType record);
 
     int insertSelective(ExpenseType record);

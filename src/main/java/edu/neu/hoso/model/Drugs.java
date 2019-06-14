@@ -1,6 +1,5 @@
 package edu.neu.hoso.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Drugs {
@@ -20,7 +19,7 @@ public class Drugs {
 
     private Integer drugsTypeId;
 
-    private BigDecimal drugsPrice;
+    private Double drugsPrice;
 
     private String drugsMnemoniccode;
 
@@ -32,7 +31,7 @@ public class Drugs {
 
     private String reverse3;
 
-    public Drugs(Integer drugsId, String drugsCode, String drugsName, String drugsFormat, String drugsUnit, String drugsManufacturer, Integer drugsDosageId, Integer drugsTypeId, BigDecimal drugsPrice, String drugsMnemoniccode, Date createTime, String reverse1, String reverse2, String reverse3) {
+    public Drugs(Integer drugsId, String drugsCode, String drugsName, String drugsFormat, String drugsUnit, String drugsManufacturer, Integer drugsDosageId, Integer drugsTypeId, Double drugsPrice, String drugsMnemoniccode, Date createTime, String reverse1, String reverse2, String reverse3) {
         this.drugsId = drugsId;
         this.drugsCode = drugsCode;
         this.drugsName = drugsName;
@@ -117,11 +116,11 @@ public class Drugs {
         this.drugsTypeId = drugsTypeId;
     }
 
-    public BigDecimal getDrugsPrice() {
+    public Double getDrugsPrice() {
         return drugsPrice;
     }
 
-    public void setDrugsPrice(BigDecimal drugsPrice) {
+    public void setDrugsPrice(Double drugsPrice) {
         this.drugsPrice = drugsPrice;
     }
 

@@ -90,12 +90,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.ConstantType" >
-    <selectKey resultType="java.lang.Integer" keyProperty="constantTypeId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="constantTypeId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into constant_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Constant_Type_ID,
       <if test="constantTypeCode != null" >
         Constant_Type_Code,
       </if>
@@ -104,7 +103,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{constantTypeId,jdbcType=INTEGER},
       <if test="constantTypeCode != null" >
         #{constantTypeCode,jdbcType=VARCHAR},
       </if>

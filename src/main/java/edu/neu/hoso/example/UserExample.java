@@ -623,6 +623,136 @@ public class UserExample {
             addCriterion("User_Gender not between", value1, value2, "userGender");
             return (Criteria) this;
         }
+
+        public Criteria andUserStatusIsNull() {
+            addCriterion("User_Status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusIsNotNull() {
+            addCriterion("User_Status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusEqualTo(String value) {
+            addCriterion("User_Status =", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusNotEqualTo(String value) {
+            addCriterion("User_Status <>", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusGreaterThan(String value) {
+            addCriterion("User_Status >", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("User_Status >=", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusLessThan(String value) {
+            addCriterion("User_Status <", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusLessThanOrEqualTo(String value) {
+            addCriterion("User_Status <=", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusLike(String value) {
+            addCriterion("User_Status like", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusNotLike(String value) {
+            addCriterion("User_Status not like", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusIn(List<String> values) {
+            addCriterion("User_Status in", values, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusNotIn(List<String> values) {
+            addCriterion("User_Status not in", values, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusBetween(String value1, String value2) {
+            addCriterion("User_Status between", value1, value2, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusNotBetween(String value1, String value2) {
+            addCriterion("User_Status not between", value1, value2, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountIsNull() {
+            addCriterion("User_Scheduling_LimitCount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountIsNotNull() {
+            addCriterion("User_Scheduling_LimitCount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountEqualTo(Integer value) {
+            addCriterion("User_Scheduling_LimitCount =", value, "userSchedulingLimitcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountNotEqualTo(Integer value) {
+            addCriterion("User_Scheduling_LimitCount <>", value, "userSchedulingLimitcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountGreaterThan(Integer value) {
+            addCriterion("User_Scheduling_LimitCount >", value, "userSchedulingLimitcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("User_Scheduling_LimitCount >=", value, "userSchedulingLimitcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountLessThan(Integer value) {
+            addCriterion("User_Scheduling_LimitCount <", value, "userSchedulingLimitcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountLessThanOrEqualTo(Integer value) {
+            addCriterion("User_Scheduling_LimitCount <=", value, "userSchedulingLimitcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountIn(List<Integer> values) {
+            addCriterion("User_Scheduling_LimitCount in", values, "userSchedulingLimitcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountNotIn(List<Integer> values) {
+            addCriterion("User_Scheduling_LimitCount not in", values, "userSchedulingLimitcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountBetween(Integer value1, Integer value2) {
+            addCriterion("User_Scheduling_LimitCount between", value1, value2, "userSchedulingLimitcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserSchedulingLimitcountNotBetween(Integer value1, Integer value2) {
+            addCriterion("User_Scheduling_LimitCount not between", value1, value2, "userSchedulingLimitcount");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

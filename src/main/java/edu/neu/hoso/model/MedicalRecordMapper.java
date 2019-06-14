@@ -22,10 +22,14 @@ public interface MedicalRecordMapper {
     int deleteByPrimaryKey(Integer medicalRecordId);
 
     @Insert({
-        "insert into medical_record (Medical_Record_ID, Is_Treament_Over)",
-        "values (#{medicalRecordId,jdbcType=INTEGER}, #{isTreamentOver,jdbcType=CHAR})"
+        "insert into medical_record (Doctor_ID, Is_Treament_Over, ",
+        "First_Diagnosis_Doctor_ID, Final_Diagnosis_Doctor_ID, ",
+        "First_Diagnosis_Time, Final_Diagnosis_Time)",
+        "values (#{doctorId,jdbcType=INTEGER}, #{isTreamentOver,jdbcType=CHAR}, ",
+        "#{firstDiagnosisDoctorId,jdbcType=INTEGER}, #{finalDiagnosisDoctorId,jdbcType=INTEGER}, ",
+        "#{firstDiagnosisTime,jdbcType=TIMESTAMP}, #{finalDiagnosisTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="medicalRecordId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="medicalRecordId", before=false, resultType=Integer.class)
     int insert(MedicalRecord record);
 
     int insertSelective(MedicalRecord record);
@@ -34,7 +38,8 @@ public interface MedicalRecordMapper {
 
     @Select({
         "select",
-        "Medical_Record_ID, Is_Treament_Over",
+        "Medical_Record_ID, Doctor_ID, Is_Treament_Over, First_Diagnosis_Doctor_ID, Final_Diagnosis_Doctor_ID, ",
+        "First_Diagnosis_Time, Final_Diagnosis_Time",
         "from medical_record",
         "where Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER}"
     })
@@ -49,7 +54,12 @@ public interface MedicalRecordMapper {
 
     @Update({
         "update medical_record",
-        "set Is_Treament_Over = #{isTreamentOver,jdbcType=CHAR}",
+        "set Doctor_ID = #{doctorId,jdbcType=INTEGER},",
+          "Is_Treament_Over = #{isTreamentOver,jdbcType=CHAR},",
+          "First_Diagnosis_Doctor_ID = #{firstDiagnosisDoctorId,jdbcType=INTEGER},",
+          "Final_Diagnosis_Doctor_ID = #{finalDiagnosisDoctorId,jdbcType=INTEGER},",
+          "First_Diagnosis_Time = #{firstDiagnosisTime,jdbcType=TIMESTAMP},",
+          "Final_Diagnosis_Time = #{finalDiagnosisTime,jdbcType=TIMESTAMP}",
         "where Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(MedicalRecord record);

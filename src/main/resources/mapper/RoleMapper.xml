@@ -90,12 +90,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.Role" >
-    <selectKey resultType="java.lang.Integer" keyProperty="roleId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="roleId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into role
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Role_ID,
       <if test="functionId != null" >
         Function_id,
       </if>
@@ -104,7 +103,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{roleId,jdbcType=INTEGER},
       <if test="functionId != null" >
         #{functionId,jdbcType=INTEGER},
       </if>

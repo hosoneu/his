@@ -22,14 +22,12 @@ public interface RegistrationLevelMapper {
     int deleteByPrimaryKey(Integer registrationLevelId);
 
     @Insert({
-        "insert into registration_level (Registration_Level_ID, Registration_Level_Name, ",
-        "Is_Default, Registration_Sequence, ",
-        "Registration_Cost)",
-        "values (#{registrationLevelId,jdbcType=INTEGER}, #{registrationLevelName,jdbcType=VARCHAR}, ",
-        "#{isDefault,jdbcType=VARCHAR}, #{registrationSequence,jdbcType=INTEGER}, ",
-        "#{registrationCost,jdbcType=DECIMAL})"
+        "insert into registration_level (Registration_Level_Name, Is_Default, ",
+        "Registration_Sequence, Registration_Cost)",
+        "values (#{registrationLevelName,jdbcType=VARCHAR}, #{isDefault,jdbcType=VARCHAR}, ",
+        "#{registrationSequence,jdbcType=INTEGER}, #{registrationCost,jdbcType=DOUBLE})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="registrationLevelId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="registrationLevelId", before=false, resultType=Integer.class)
     int insert(RegistrationLevel record);
 
     int insertSelective(RegistrationLevel record);
@@ -57,7 +55,7 @@ public interface RegistrationLevelMapper {
         "set Registration_Level_Name = #{registrationLevelName,jdbcType=VARCHAR},",
           "Is_Default = #{isDefault,jdbcType=VARCHAR},",
           "Registration_Sequence = #{registrationSequence,jdbcType=INTEGER},",
-          "Registration_Cost = #{registrationCost,jdbcType=DECIMAL}",
+          "Registration_Cost = #{registrationCost,jdbcType=DOUBLE}",
         "where Registration_Level_ID = #{registrationLevelId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(RegistrationLevel record);

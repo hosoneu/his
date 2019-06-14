@@ -463,6 +463,76 @@ public class TreatmentItemsExample {
             addCriterion("Expense_Items_ID not between", value1, value2, "expenseItemsId");
             return (Criteria) this;
         }
+
+        public Criteria andValidStatusIsNull() {
+            addCriterion("Valid_Status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusIsNotNull() {
+            addCriterion("Valid_Status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusEqualTo(String value) {
+            addCriterion("Valid_Status =", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusNotEqualTo(String value) {
+            addCriterion("Valid_Status <>", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusGreaterThan(String value) {
+            addCriterion("Valid_Status >", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("Valid_Status >=", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusLessThan(String value) {
+            addCriterion("Valid_Status <", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusLessThanOrEqualTo(String value) {
+            addCriterion("Valid_Status <=", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusLike(String value) {
+            addCriterion("Valid_Status like", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusNotLike(String value) {
+            addCriterion("Valid_Status not like", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusIn(List<String> values) {
+            addCriterion("Valid_Status in", values, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusNotIn(List<String> values) {
+            addCriterion("Valid_Status not in", values, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusBetween(String value1, String value2) {
+            addCriterion("Valid_Status between", value1, value2, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusNotBetween(String value1, String value2) {
+            addCriterion("Valid_Status not between", value1, value2, "validStatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -1,7 +1,5 @@
 package edu.neu.hoso.model;
 
-import java.math.BigDecimal;
-
 public class RegistrationLevel {
     private Integer registrationLevelId;
 
@@ -11,9 +9,9 @@ public class RegistrationLevel {
 
     private Integer registrationSequence;
 
-    private BigDecimal registrationCost;
+    private Double registrationCost;
 
-    public RegistrationLevel(Integer registrationLevelId, String registrationLevelName, String isDefault, Integer registrationSequence, BigDecimal registrationCost) {
+    public RegistrationLevel(Integer registrationLevelId, String registrationLevelName, String isDefault, Integer registrationSequence, Double registrationCost) {
         this.registrationLevelId = registrationLevelId;
         this.registrationLevelName = registrationLevelName;
         this.isDefault = isDefault;
@@ -57,11 +55,11 @@ public class RegistrationLevel {
         this.registrationSequence = registrationSequence;
     }
 
-    public BigDecimal getRegistrationCost() {
+    public Double getRegistrationCost() {
         return registrationCost;
     }
 
-    public void setRegistrationCost(BigDecimal registrationCost) {
+    public void setRegistrationCost(Double registrationCost) {
         this.registrationCost = registrationCost;
     }
 }

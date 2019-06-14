@@ -22,12 +22,12 @@ public interface ExaminationResultImageMapper {
     int deleteByPrimaryKey(Integer examinationResultImageId);
 
     @Insert({
-        "insert into examination_result_image (Examination_Result_Image_ID, Examination_Result_ID, ",
-        "Image_URL, Image_Name)",
-        "values (#{examinationResultImageId,jdbcType=INTEGER}, #{examinationResultId,jdbcType=INTEGER}, ",
-        "#{imageUrl,jdbcType=VARCHAR}, #{imageName,jdbcType=VARCHAR})"
+        "insert into examination_result_image (Examination_Result_ID, Image_URL, ",
+        "Image_Name)",
+        "values (#{examinationResultId,jdbcType=INTEGER}, #{imageUrl,jdbcType=VARCHAR}, ",
+        "#{imageName,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="examinationResultImageId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="examinationResultImageId", before=false, resultType=Integer.class)
     int insert(ExaminationResultImage record);
 
     int insertSelective(ExaminationResultImage record);

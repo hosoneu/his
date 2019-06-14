@@ -6,12 +6,15 @@
       <idArg column="Examination_Drugs_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Drugs_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Usage" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Drugs_Usage" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Drugs_Dispensing_Status" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Times" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Days" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Dosage" jdbcType="DOUBLE" javaType="java.lang.Double" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -73,8 +76,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    Examination_Drugs_Items_ID, Examination_Fmedical_Items_ID, Drugs_ID, Usage, Quantity, 
-    Actual_Quantity, Drugs_Dispensing_Status, Expense_Items_ID, Doctor_ID
+    Examination_Drugs_Items_ID, Examination_Fmedical_Items_ID, Drugs_ID, Doctor_ID, Drugs_Usage, 
+    Quantity, Actual_Quantity, Drugs_Dispensing_Status, Expense_Items_ID, Times, Days, 
+    Dosage
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.ExaminationDrugsItemsExample" >
     select
@@ -97,20 +101,22 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.ExaminationDrugsItems" >
-    <selectKey resultType="java.lang.Integer" keyProperty="examinationDrugsItemsId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="examinationDrugsItemsId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into examination_drugs_items
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Examination_Drugs_Items_ID,
       <if test="examinationFmedicalItemsId != null" >
         Examination_Fmedical_Items_ID,
       </if>
       <if test="drugsId != null" >
         Drugs_ID,
       </if>
-      <if test="usage != null" >
-        Usage,
+      <if test="doctorId != null" >
+        Doctor_ID,
+      </if>
+      <if test="drugsUsage != null" >
+        Drugs_Usage,
       </if>
       <if test="quantity != null" >
         Quantity,
@@ -124,20 +130,28 @@
       <if test="expenseItemsId != null" >
         Expense_Items_ID,
       </if>
-      <if test="doctorId != null" >
-        Doctor_ID,
+      <if test="times != null" >
+        Times,
+      </if>
+      <if test="days != null" >
+        Days,
+      </if>
+      <if test="dosage != null" >
+        Dosage,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{examinationDrugsItemsId,jdbcType=INTEGER},
       <if test="examinationFmedicalItemsId != null" >
         #{examinationFmedicalItemsId,jdbcType=INTEGER},
       </if>
       <if test="drugsId != null" >
         #{drugsId,jdbcType=INTEGER},
       </if>
-      <if test="usage != null" >
-        #{usage,jdbcType=CHAR},
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="drugsUsage != null" >
+        #{drugsUsage,jdbcType=CHAR},
       </if>
       <if test="quantity != null" >
         #{quantity,jdbcType=INTEGER},
@@ -151,8 +165,14 @@
       <if test="expenseItemsId != null" >
         #{expenseItemsId,jdbcType=INTEGER},
       </if>
-      <if test="doctorId != null" >
-        #{doctorId,jdbcType=INTEGER},
+      <if test="times != null" >
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="days != null" >
+        #{days,jdbcType=INTEGER},
+      </if>
+      <if test="dosage != null" >
+        #{dosage,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -174,8 +194,11 @@
       <if test="record.drugsId != null" >
         Drugs_ID = #{record.drugsId,jdbcType=INTEGER},
       </if>
-      <if test="record.usage != null" >
-        Usage = #{record.usage,jdbcType=CHAR},
+      <if test="record.doctorId != null" >
+        Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.drugsUsage != null" >
+        Drugs_Usage = #{record.drugsUsage,jdbcType=CHAR},
       </if>
       <if test="record.quantity != null" >
         Quantity = #{record.quantity,jdbcType=INTEGER},
@@ -189,8 +212,14 @@
       <if test="record.expenseItemsId != null" >
         Expense_Items_ID = #{record.expenseItemsId,jdbcType=INTEGER},
       </if>
-      <if test="record.doctorId != null" >
-        Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      <if test="record.times != null" >
+        Times = #{record.times,jdbcType=INTEGER},
+      </if>
+      <if test="record.days != null" >
+        Days = #{record.days,jdbcType=INTEGER},
+      </if>
+      <if test="record.dosage != null" >
+        Dosage = #{record.dosage,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -202,12 +231,15 @@
     set Examination_Drugs_Items_ID = #{record.examinationDrugsItemsId,jdbcType=INTEGER},
       Examination_Fmedical_Items_ID = #{record.examinationFmedicalItemsId,jdbcType=INTEGER},
       Drugs_ID = #{record.drugsId,jdbcType=INTEGER},
-      Usage = #{record.usage,jdbcType=CHAR},
+      Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      Drugs_Usage = #{record.drugsUsage,jdbcType=CHAR},
       Quantity = #{record.quantity,jdbcType=INTEGER},
       Actual_Quantity = #{record.actualQuantity,jdbcType=INTEGER},
       Drugs_Dispensing_Status = #{record.drugsDispensingStatus,jdbcType=CHAR},
       Expense_Items_ID = #{record.expenseItemsId,jdbcType=INTEGER},
-      Doctor_ID = #{record.doctorId,jdbcType=INTEGER}
+      Times = #{record.times,jdbcType=INTEGER},
+      Days = #{record.days,jdbcType=INTEGER},
+      Dosage = #{record.dosage,jdbcType=DOUBLE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -221,8 +253,11 @@
       <if test="drugsId != null" >
         Drugs_ID = #{drugsId,jdbcType=INTEGER},
       </if>
-      <if test="usage != null" >
-        Usage = #{usage,jdbcType=CHAR},
+      <if test="doctorId != null" >
+        Doctor_ID = #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="drugsUsage != null" >
+        Drugs_Usage = #{drugsUsage,jdbcType=CHAR},
       </if>
       <if test="quantity != null" >
         Quantity = #{quantity,jdbcType=INTEGER},
@@ -236,8 +271,14 @@
       <if test="expenseItemsId != null" >
         Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER},
       </if>
-      <if test="doctorId != null" >
-        Doctor_ID = #{doctorId,jdbcType=INTEGER},
+      <if test="times != null" >
+        Times = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="days != null" >
+        Days = #{days,jdbcType=INTEGER},
+      </if>
+      <if test="dosage != null" >
+        Dosage = #{dosage,jdbcType=DOUBLE},
       </if>
     </set>
     where Examination_Drugs_Items_ID = #{examinationDrugsItemsId,jdbcType=INTEGER}

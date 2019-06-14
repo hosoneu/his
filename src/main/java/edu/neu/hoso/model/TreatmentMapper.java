@@ -22,12 +22,12 @@ public interface TreatmentMapper {
     int deleteByPrimaryKey(Integer treatmentId);
 
     @Insert({
-        "insert into treatment (Treatment_ID, Medical_Record_ID, ",
-        "Doctor_ID, Submit_Time)",
-        "values (#{treatmentId,jdbcType=INTEGER}, #{medicalRecordId,jdbcType=INTEGER}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{submitTime,jdbcType=TIMESTAMP})"
+        "insert into treatment (Medical_Record_ID, Doctor_ID, ",
+        "Submit_Time)",
+        "values (#{medicalRecordId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{submitTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="treatmentId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="treatmentId", before=false, resultType=Integer.class)
     int insert(Treatment record);
 
     int insertSelective(Treatment record);

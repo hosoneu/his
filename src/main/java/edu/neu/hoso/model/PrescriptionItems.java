@@ -1,7 +1,5 @@
 package edu.neu.hoso.model;
 
-import java.math.BigDecimal;
-
 public class PrescriptionItems {
     private Integer prescriptionItemsId;
 
@@ -11,9 +9,9 @@ public class PrescriptionItems {
 
     private Integer expenseItemsId;
 
-    private String usage;
+    private String drugsUsage;
 
-    private BigDecimal dosage;
+    private Double dosage;
 
     private Integer times;
 
@@ -27,12 +25,12 @@ public class PrescriptionItems {
 
     private Integer actualQuantity;
 
-    public PrescriptionItems(Integer prescriptionItemsId, Integer prescriptionId, Integer dragsId, Integer expenseItemsId, String usage, BigDecimal dosage, Integer times, Integer days, Integer quantity, String drugsAdvice, String drugsDispensingStatus, Integer actualQuantity) {
+    public PrescriptionItems(Integer prescriptionItemsId, Integer prescriptionId, Integer dragsId, Integer expenseItemsId, String drugsUsage, Double dosage, Integer times, Integer days, Integer quantity, String drugsAdvice, String drugsDispensingStatus, Integer actualQuantity) {
         this.prescriptionItemsId = prescriptionItemsId;
         this.prescriptionId = prescriptionId;
         this.dragsId = dragsId;
         this.expenseItemsId = expenseItemsId;
-        this.usage = usage;
+        this.drugsUsage = drugsUsage;
         this.dosage = dosage;
         this.times = times;
         this.days = days;
@@ -78,19 +76,19 @@ public class PrescriptionItems {
         this.expenseItemsId = expenseItemsId;
     }
 
-    public String getUsage() {
-        return usage;
+    public String getDrugsUsage() {
+        return drugsUsage;
     }
 
-    public void setUsage(String usage) {
-        this.usage = usage == null ? null : usage.trim();
+    public void setDrugsUsage(String drugsUsage) {
+        this.drugsUsage = drugsUsage == null ? null : drugsUsage.trim();
     }
 
-    public BigDecimal getDosage() {
+    public Double getDosage() {
         return dosage;
     }
 
-    public void setDosage(BigDecimal dosage) {
+    public void setDosage(Double dosage) {
         this.dosage = dosage;
     }
 

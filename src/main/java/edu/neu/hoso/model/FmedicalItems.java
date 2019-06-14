@@ -1,6 +1,5 @@
 package edu.neu.hoso.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class FmedicalItems {
@@ -12,7 +11,7 @@ public class FmedicalItems {
 
     private String fmedicalItemsFormat;
 
-    private BigDecimal fmedicalItemsPrice;
+    private Double fmedicalItemsPrice;
 
     private Integer expenseTypeId;
 
@@ -30,7 +29,7 @@ public class FmedicalItems {
 
     private String reverse3;
 
-    public FmedicalItems(Integer fmedicalItemsId, String fmedicalItemsCode, String fmedicalItemsName, String fmedicalItemsFormat, BigDecimal fmedicalItemsPrice, Integer expenseTypeId, Integer departmentId, String fmedicalItemsMnemoniccode, String fmedicalItemsType, Date createTime, String reverse1, String reverse2, String reverse3) {
+    public FmedicalItems(Integer fmedicalItemsId, String fmedicalItemsCode, String fmedicalItemsName, String fmedicalItemsFormat, Double fmedicalItemsPrice, Integer expenseTypeId, Integer departmentId, String fmedicalItemsMnemoniccode, String fmedicalItemsType, Date createTime, String reverse1, String reverse2, String reverse3) {
         this.fmedicalItemsId = fmedicalItemsId;
         this.fmedicalItemsCode = fmedicalItemsCode;
         this.fmedicalItemsName = fmedicalItemsName;
@@ -82,11 +81,11 @@ public class FmedicalItems {
         this.fmedicalItemsFormat = fmedicalItemsFormat == null ? null : fmedicalItemsFormat.trim();
     }
 
-    public BigDecimal getFmedicalItemsPrice() {
+    public Double getFmedicalItemsPrice() {
         return fmedicalItemsPrice;
     }
 
-    public void setFmedicalItemsPrice(BigDecimal fmedicalItemsPrice) {
+    public void setFmedicalItemsPrice(Double fmedicalItemsPrice) {
         this.fmedicalItemsPrice = fmedicalItemsPrice;
     }
 

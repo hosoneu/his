@@ -22,12 +22,10 @@ public interface RoleMapper {
     int deleteByPrimaryKey(Integer roleId);
 
     @Insert({
-        "insert into role (Role_ID, Function_id, ",
-        "Role_Name)",
-        "values (#{roleId,jdbcType=INTEGER}, #{functionId,jdbcType=INTEGER}, ",
-        "#{roleName,jdbcType=VARCHAR})"
+        "insert into role (Function_id, Role_Name)",
+        "values (#{functionId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="roleId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="roleId", before=false, resultType=Integer.class)
     int insert(Role record);
 
     int insertSelective(Role record);

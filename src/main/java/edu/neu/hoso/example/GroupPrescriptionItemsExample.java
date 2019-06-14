@@ -1,6 +1,5 @@
 package edu.neu.hoso.example;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -225,133 +224,133 @@ public class GroupPrescriptionItemsExample {
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdIsNull() {
-            addCriterion("Drags_ID is null");
+        public Criteria andDrugsIdIsNull() {
+            addCriterion("Drugs_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdIsNotNull() {
-            addCriterion("Drags_ID is not null");
+        public Criteria andDrugsIdIsNotNull() {
+            addCriterion("Drugs_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdEqualTo(Integer value) {
-            addCriterion("Drags_ID =", value, "dragsId");
+        public Criteria andDrugsIdEqualTo(Integer value) {
+            addCriterion("Drugs_ID =", value, "drugsId");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdNotEqualTo(Integer value) {
-            addCriterion("Drags_ID <>", value, "dragsId");
+        public Criteria andDrugsIdNotEqualTo(Integer value) {
+            addCriterion("Drugs_ID <>", value, "drugsId");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdGreaterThan(Integer value) {
-            addCriterion("Drags_ID >", value, "dragsId");
+        public Criteria andDrugsIdGreaterThan(Integer value) {
+            addCriterion("Drugs_ID >", value, "drugsId");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("Drags_ID >=", value, "dragsId");
+        public Criteria andDrugsIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("Drugs_ID >=", value, "drugsId");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdLessThan(Integer value) {
-            addCriterion("Drags_ID <", value, "dragsId");
+        public Criteria andDrugsIdLessThan(Integer value) {
+            addCriterion("Drugs_ID <", value, "drugsId");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdLessThanOrEqualTo(Integer value) {
-            addCriterion("Drags_ID <=", value, "dragsId");
+        public Criteria andDrugsIdLessThanOrEqualTo(Integer value) {
+            addCriterion("Drugs_ID <=", value, "drugsId");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdIn(List<Integer> values) {
-            addCriterion("Drags_ID in", values, "dragsId");
+        public Criteria andDrugsIdIn(List<Integer> values) {
+            addCriterion("Drugs_ID in", values, "drugsId");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdNotIn(List<Integer> values) {
-            addCriterion("Drags_ID not in", values, "dragsId");
+        public Criteria andDrugsIdNotIn(List<Integer> values) {
+            addCriterion("Drugs_ID not in", values, "drugsId");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdBetween(Integer value1, Integer value2) {
-            addCriterion("Drags_ID between", value1, value2, "dragsId");
+        public Criteria andDrugsIdBetween(Integer value1, Integer value2) {
+            addCriterion("Drugs_ID between", value1, value2, "drugsId");
             return (Criteria) this;
         }
 
-        public Criteria andDragsIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("Drags_ID not between", value1, value2, "dragsId");
+        public Criteria andDrugsIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("Drugs_ID not between", value1, value2, "drugsId");
             return (Criteria) this;
         }
 
-        public Criteria andUsageIsNull() {
-            addCriterion("Usage is null");
+        public Criteria andDrugsUsageIsNull() {
+            addCriterion("Drugs_Usage is null");
             return (Criteria) this;
         }
 
-        public Criteria andUsageIsNotNull() {
-            addCriterion("Usage is not null");
+        public Criteria andDrugsUsageIsNotNull() {
+            addCriterion("Drugs_Usage is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUsageEqualTo(String value) {
-            addCriterion("Usage =", value, "usage");
+        public Criteria andDrugsUsageEqualTo(String value) {
+            addCriterion("Drugs_Usage =", value, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageNotEqualTo(String value) {
-            addCriterion("Usage <>", value, "usage");
+        public Criteria andDrugsUsageNotEqualTo(String value) {
+            addCriterion("Drugs_Usage <>", value, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageGreaterThan(String value) {
-            addCriterion("Usage >", value, "usage");
+        public Criteria andDrugsUsageGreaterThan(String value) {
+            addCriterion("Drugs_Usage >", value, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageGreaterThanOrEqualTo(String value) {
-            addCriterion("Usage >=", value, "usage");
+        public Criteria andDrugsUsageGreaterThanOrEqualTo(String value) {
+            addCriterion("Drugs_Usage >=", value, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageLessThan(String value) {
-            addCriterion("Usage <", value, "usage");
+        public Criteria andDrugsUsageLessThan(String value) {
+            addCriterion("Drugs_Usage <", value, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageLessThanOrEqualTo(String value) {
-            addCriterion("Usage <=", value, "usage");
+        public Criteria andDrugsUsageLessThanOrEqualTo(String value) {
+            addCriterion("Drugs_Usage <=", value, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageLike(String value) {
-            addCriterion("Usage like", value, "usage");
+        public Criteria andDrugsUsageLike(String value) {
+            addCriterion("Drugs_Usage like", value, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageNotLike(String value) {
-            addCriterion("Usage not like", value, "usage");
+        public Criteria andDrugsUsageNotLike(String value) {
+            addCriterion("Drugs_Usage not like", value, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageIn(List<String> values) {
-            addCriterion("Usage in", values, "usage");
+        public Criteria andDrugsUsageIn(List<String> values) {
+            addCriterion("Drugs_Usage in", values, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageNotIn(List<String> values) {
-            addCriterion("Usage not in", values, "usage");
+        public Criteria andDrugsUsageNotIn(List<String> values) {
+            addCriterion("Drugs_Usage not in", values, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageBetween(String value1, String value2) {
-            addCriterion("Usage between", value1, value2, "usage");
+        public Criteria andDrugsUsageBetween(String value1, String value2) {
+            addCriterion("Drugs_Usage between", value1, value2, "drugsUsage");
             return (Criteria) this;
         }
 
-        public Criteria andUsageNotBetween(String value1, String value2) {
-            addCriterion("Usage not between", value1, value2, "usage");
+        public Criteria andDrugsUsageNotBetween(String value1, String value2) {
+            addCriterion("Drugs_Usage not between", value1, value2, "drugsUsage");
             return (Criteria) this;
         }
 
@@ -365,52 +364,52 @@ public class GroupPrescriptionItemsExample {
             return (Criteria) this;
         }
 
-        public Criteria andDosageEqualTo(BigDecimal value) {
+        public Criteria andDosageEqualTo(Double value) {
             addCriterion("Dosage =", value, "dosage");
             return (Criteria) this;
         }
 
-        public Criteria andDosageNotEqualTo(BigDecimal value) {
+        public Criteria andDosageNotEqualTo(Double value) {
             addCriterion("Dosage <>", value, "dosage");
             return (Criteria) this;
         }
 
-        public Criteria andDosageGreaterThan(BigDecimal value) {
+        public Criteria andDosageGreaterThan(Double value) {
             addCriterion("Dosage >", value, "dosage");
             return (Criteria) this;
         }
 
-        public Criteria andDosageGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andDosageGreaterThanOrEqualTo(Double value) {
             addCriterion("Dosage >=", value, "dosage");
             return (Criteria) this;
         }
 
-        public Criteria andDosageLessThan(BigDecimal value) {
+        public Criteria andDosageLessThan(Double value) {
             addCriterion("Dosage <", value, "dosage");
             return (Criteria) this;
         }
 
-        public Criteria andDosageLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andDosageLessThanOrEqualTo(Double value) {
             addCriterion("Dosage <=", value, "dosage");
             return (Criteria) this;
         }
 
-        public Criteria andDosageIn(List<BigDecimal> values) {
+        public Criteria andDosageIn(List<Double> values) {
             addCriterion("Dosage in", values, "dosage");
             return (Criteria) this;
         }
 
-        public Criteria andDosageNotIn(List<BigDecimal> values) {
+        public Criteria andDosageNotIn(List<Double> values) {
             addCriterion("Dosage not in", values, "dosage");
             return (Criteria) this;
         }
 
-        public Criteria andDosageBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andDosageBetween(Double value1, Double value2) {
             addCriterion("Dosage between", value1, value2, "dosage");
             return (Criteria) this;
         }
 
-        public Criteria andDosageNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andDosageNotBetween(Double value1, Double value2) {
             addCriterion("Dosage not between", value1, value2, "dosage");
             return (Criteria) this;
         }

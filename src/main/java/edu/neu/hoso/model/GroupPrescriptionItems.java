@@ -1,17 +1,15 @@
 package edu.neu.hoso.model;
 
-import java.math.BigDecimal;
-
 public class GroupPrescriptionItems {
     private Integer groupPrescriptionItemsId;
 
     private Integer groupPrescriptionId;
 
-    private Integer dragsId;
+    private Integer drugsId;
 
-    private String usage;
+    private String drugsUsage;
 
-    private BigDecimal dosage;
+    private Double dosage;
 
     private Integer times;
 
@@ -21,11 +19,11 @@ public class GroupPrescriptionItems {
 
     private String drugsAdvice;
 
-    public GroupPrescriptionItems(Integer groupPrescriptionItemsId, Integer groupPrescriptionId, Integer dragsId, String usage, BigDecimal dosage, Integer times, Integer days, Integer quantity, String drugsAdvice) {
+    public GroupPrescriptionItems(Integer groupPrescriptionItemsId, Integer groupPrescriptionId, Integer drugsId, String drugsUsage, Double dosage, Integer times, Integer days, Integer quantity, String drugsAdvice) {
         this.groupPrescriptionItemsId = groupPrescriptionItemsId;
         this.groupPrescriptionId = groupPrescriptionId;
-        this.dragsId = dragsId;
-        this.usage = usage;
+        this.drugsId = drugsId;
+        this.drugsUsage = drugsUsage;
         this.dosage = dosage;
         this.times = times;
         this.days = days;
@@ -53,27 +51,27 @@ public class GroupPrescriptionItems {
         this.groupPrescriptionId = groupPrescriptionId;
     }
 
-    public Integer getDragsId() {
-        return dragsId;
+    public Integer getDrugsId() {
+        return drugsId;
     }
 
-    public void setDragsId(Integer dragsId) {
-        this.dragsId = dragsId;
+    public void setDrugsId(Integer drugsId) {
+        this.drugsId = drugsId;
     }
 
-    public String getUsage() {
-        return usage;
+    public String getDrugsUsage() {
+        return drugsUsage;
     }
 
-    public void setUsage(String usage) {
-        this.usage = usage == null ? null : usage.trim();
+    public void setDrugsUsage(String drugsUsage) {
+        this.drugsUsage = drugsUsage == null ? null : drugsUsage.trim();
     }
 
-    public BigDecimal getDosage() {
+    public Double getDosage() {
         return dosage;
     }
 
-    public void setDosage(BigDecimal dosage) {
+    public void setDosage(Double dosage) {
         this.dosage = dosage;
     }
 

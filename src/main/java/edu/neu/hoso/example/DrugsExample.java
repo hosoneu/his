@@ -1,6 +1,5 @@
 package edu.neu.hoso.example;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -673,52 +672,52 @@ public class DrugsExample {
             return (Criteria) this;
         }
 
-        public Criteria andDrugsPriceEqualTo(BigDecimal value) {
+        public Criteria andDrugsPriceEqualTo(Double value) {
             addCriterion("Drugs_Price =", value, "drugsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDrugsPriceNotEqualTo(BigDecimal value) {
+        public Criteria andDrugsPriceNotEqualTo(Double value) {
             addCriterion("Drugs_Price <>", value, "drugsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDrugsPriceGreaterThan(BigDecimal value) {
+        public Criteria andDrugsPriceGreaterThan(Double value) {
             addCriterion("Drugs_Price >", value, "drugsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDrugsPriceGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andDrugsPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("Drugs_Price >=", value, "drugsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDrugsPriceLessThan(BigDecimal value) {
+        public Criteria andDrugsPriceLessThan(Double value) {
             addCriterion("Drugs_Price <", value, "drugsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDrugsPriceLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andDrugsPriceLessThanOrEqualTo(Double value) {
             addCriterion("Drugs_Price <=", value, "drugsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDrugsPriceIn(List<BigDecimal> values) {
+        public Criteria andDrugsPriceIn(List<Double> values) {
             addCriterion("Drugs_Price in", values, "drugsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDrugsPriceNotIn(List<BigDecimal> values) {
+        public Criteria andDrugsPriceNotIn(List<Double> values) {
             addCriterion("Drugs_Price not in", values, "drugsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDrugsPriceBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andDrugsPriceBetween(Double value1, Double value2) {
             addCriterion("Drugs_Price between", value1, value2, "drugsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDrugsPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andDrugsPriceNotBetween(Double value1, Double value2) {
             addCriterion("Drugs_Price not between", value1, value2, "drugsPrice");
             return (Criteria) this;
         }

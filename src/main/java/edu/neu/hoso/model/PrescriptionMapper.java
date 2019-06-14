@@ -22,14 +22,14 @@ public interface PrescriptionMapper {
     int deleteByPrimaryKey(Integer prescriptionId);
 
     @Insert({
-        "insert into prescription (Prescription_ID, Medical_Record_ID, ",
-        "Doctor_ID, Submit_Time, ",
-        "Prescription_Type)",
-        "values (#{prescriptionId,jdbcType=INTEGER}, #{medicalRecordId,jdbcType=INTEGER}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{submitTime,jdbcType=TIMESTAMP}, ",
-        "#{prescriptionType,jdbcType=CHAR})"
+        "insert into prescription (Medical_Record_ID, Doctor_ID, ",
+        "Submit_Time, Prescription_Type, ",
+        "Valid_Status)",
+        "values (#{medicalRecordId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{submitTime,jdbcType=TIMESTAMP}, #{prescriptionType,jdbcType=CHAR}, ",
+        "#{validStatus,jdbcType=CHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="prescriptionId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="prescriptionId", before=false, resultType=Integer.class)
     int insert(Prescription record);
 
     int insertSelective(Prescription record);
@@ -38,7 +38,8 @@ public interface PrescriptionMapper {
 
     @Select({
         "select",
-        "Prescription_ID, Medical_Record_ID, Doctor_ID, Submit_Time, Prescription_Type",
+        "Prescription_ID, Medical_Record_ID, Doctor_ID, Submit_Time, Prescription_Type, ",
+        "Valid_Status",
         "from prescription",
         "where Prescription_ID = #{prescriptionId,jdbcType=INTEGER}"
     })
@@ -56,7 +57,8 @@ public interface PrescriptionMapper {
         "set Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER},",
           "Doctor_ID = #{doctorId,jdbcType=INTEGER},",
           "Submit_Time = #{submitTime,jdbcType=TIMESTAMP},",
-          "Prescription_Type = #{prescriptionType,jdbcType=CHAR}",
+          "Prescription_Type = #{prescriptionType,jdbcType=CHAR},",
+          "Valid_Status = #{validStatus,jdbcType=CHAR}",
         "where Prescription_ID = #{prescriptionId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Prescription record);

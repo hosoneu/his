@@ -22,16 +22,14 @@ public interface DiseaseMapper {
     int deleteByPrimaryKey(Integer diseaseId);
 
     @Insert({
-        "insert into disease (Disease_ID, Disease_Code, ",
-        "Disease_Name, Disease_ICD, ",
-        "Disease_Type_ID, Disease_Customize_Name1, ",
-        "Disease_Customize_Name2)",
-        "values (#{diseaseId,jdbcType=INTEGER}, #{diseaseCode,jdbcType=VARCHAR}, ",
-        "#{diseaseName,jdbcType=VARCHAR}, #{diseaseIcd,jdbcType=VARCHAR}, ",
-        "#{diseaseTypeId,jdbcType=INTEGER}, #{diseaseCustomizeName1,jdbcType=VARCHAR}, ",
-        "#{diseaseCustomizeName2,jdbcType=VARCHAR})"
+        "insert into disease (Disease_Code, Disease_Name, ",
+        "Disease_ICD, Disease_Type_ID, ",
+        "Disease_Customize_Name1, Disease_Customize_Name2)",
+        "values (#{diseaseCode,jdbcType=VARCHAR}, #{diseaseName,jdbcType=VARCHAR}, ",
+        "#{diseaseIcd,jdbcType=VARCHAR}, #{diseaseTypeId,jdbcType=INTEGER}, ",
+        "#{diseaseCustomizeName1,jdbcType=VARCHAR}, #{diseaseCustomizeName2,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diseaseId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diseaseId", before=false, resultType=Integer.class)
     int insert(Disease record);
 
     int insertSelective(Disease record);

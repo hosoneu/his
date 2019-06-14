@@ -1,10 +1,14 @@
 package edu.neu.hoso.model;
 
-import java.util.List;
-
 import edu.neu.hoso.example.DepartmentExample;
-import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 public interface DepartmentMapper {
     int countByExample(DepartmentExample example);
@@ -18,14 +22,12 @@ public interface DepartmentMapper {
     int deleteByPrimaryKey(Integer departmentId);
 
     @Insert({
-        "insert into department (Department_ID, Department_Code, ",
-        "Department_Name, Department_Category_ID, ",
-        "Department_Type)",
-        "values (#{departmentId,jdbcType=INTEGER}, #{departmentCode,jdbcType=VARCHAR}, ",
-        "#{departmentName,jdbcType=VARCHAR}, #{departmentCategoryId,jdbcType=INTEGER}, ",
-        "#{departmentType,jdbcType=CHAR})"
+        "insert into department (Department_Code, Department_Name, ",
+        "Department_Category_ID, Department_Type)",
+        "values (#{departmentCode,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, ",
+        "#{departmentCategoryId,jdbcType=INTEGER}, #{departmentType,jdbcType=CHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="departmentId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="departmentId", before=false, resultType=Integer.class)
     int insert(Department record);
 
     int insertSelective(Department record);

@@ -6,12 +6,14 @@
       <idArg column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Registration_Status" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="Purpose_Requirements" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Examination_Result_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -73,8 +75,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    Examination_Fmedical_Items_ID, Examination_ID, Fmedical_Items_ID, Registration_Status, 
-    Purpose_Requirements, Quantity, Actual_Quantity, Examination_Result_ID, Expense_Items_ID
+    Examination_Fmedical_Items_ID, Examination_ID, Fmedical_Items_ID, Doctor_ID, Registration_Status, 
+    Purpose_Requirements, Quantity, Actual_Quantity, Examination_Result_ID, Expense_Items_ID, 
+    Valid_Status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.ExaminationFmedicalItemsExample" >
     select
@@ -97,17 +100,19 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.ExaminationFmedicalItems" >
-    <selectKey resultType="java.lang.Integer" keyProperty="examinationFmedicalItemsId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="examinationFmedicalItemsId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into examination_fmedical_items
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Examination_Fmedical_Items_ID,
       <if test="examinationId != null" >
         Examination_ID,
       </if>
       <if test="fmedicalItemsId != null" >
         Fmedical_Items_ID,
+      </if>
+      <if test="doctorId != null" >
+        Doctor_ID,
       </if>
       <if test="registrationStatus != null" >
         Registration_Status,
@@ -127,14 +132,19 @@
       <if test="expenseItemsId != null" >
         Expense_Items_ID,
       </if>
+      <if test="validStatus != null" >
+        Valid_Status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{examinationFmedicalItemsId,jdbcType=INTEGER},
       <if test="examinationId != null" >
         #{examinationId,jdbcType=INTEGER},
       </if>
       <if test="fmedicalItemsId != null" >
         #{fmedicalItemsId,jdbcType=INTEGER},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=INTEGER},
       </if>
       <if test="registrationStatus != null" >
         #{registrationStatus,jdbcType=CHAR},
@@ -153,6 +163,9 @@
       </if>
       <if test="expenseItemsId != null" >
         #{expenseItemsId,jdbcType=INTEGER},
+      </if>
+      <if test="validStatus != null" >
+        #{validStatus,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -174,6 +187,9 @@
       <if test="record.fmedicalItemsId != null" >
         Fmedical_Items_ID = #{record.fmedicalItemsId,jdbcType=INTEGER},
       </if>
+      <if test="record.doctorId != null" >
+        Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      </if>
       <if test="record.registrationStatus != null" >
         Registration_Status = #{record.registrationStatus,jdbcType=CHAR},
       </if>
@@ -192,6 +208,9 @@
       <if test="record.expenseItemsId != null" >
         Expense_Items_ID = #{record.expenseItemsId,jdbcType=INTEGER},
       </if>
+      <if test="record.validStatus != null" >
+        Valid_Status = #{record.validStatus,jdbcType=CHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -202,12 +221,14 @@
     set Examination_Fmedical_Items_ID = #{record.examinationFmedicalItemsId,jdbcType=INTEGER},
       Examination_ID = #{record.examinationId,jdbcType=INTEGER},
       Fmedical_Items_ID = #{record.fmedicalItemsId,jdbcType=INTEGER},
+      Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
       Registration_Status = #{record.registrationStatus,jdbcType=CHAR},
       Purpose_Requirements = #{record.purposeRequirements,jdbcType=VARCHAR},
       Quantity = #{record.quantity,jdbcType=INTEGER},
       Actual_Quantity = #{record.actualQuantity,jdbcType=INTEGER},
       Examination_Result_ID = #{record.examinationResultId,jdbcType=INTEGER},
-      Expense_Items_ID = #{record.expenseItemsId,jdbcType=INTEGER}
+      Expense_Items_ID = #{record.expenseItemsId,jdbcType=INTEGER},
+      Valid_Status = #{record.validStatus,jdbcType=CHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -220,6 +241,9 @@
       </if>
       <if test="fmedicalItemsId != null" >
         Fmedical_Items_ID = #{fmedicalItemsId,jdbcType=INTEGER},
+      </if>
+      <if test="doctorId != null" >
+        Doctor_ID = #{doctorId,jdbcType=INTEGER},
       </if>
       <if test="registrationStatus != null" >
         Registration_Status = #{registrationStatus,jdbcType=CHAR},
@@ -238,6 +262,9 @@
       </if>
       <if test="expenseItemsId != null" >
         Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER},
+      </if>
+      <if test="validStatus != null" >
+        Valid_Status = #{validStatus,jdbcType=CHAR},
       </if>
     </set>
     where Examination_Fmedical_Items_ID = #{examinationFmedicalItemsId,jdbcType=INTEGER}

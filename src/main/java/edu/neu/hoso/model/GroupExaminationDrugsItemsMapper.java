@@ -22,14 +22,16 @@ public interface GroupExaminationDrugsItemsMapper {
     int deleteByPrimaryKey(Integer groupExaminationDrugsItemsId);
 
     @Insert({
-        "insert into group_examination_drugs_items (Group_Examination_Drugs_Items_ID, ",
-        "Group_Examination_Fmedical_Items_ID, Drugs_ID, ",
-        "Usage, Quantity)",
-        "values (#{groupExaminationDrugsItemsId,jdbcType=INTEGER}, ",
-        "#{groupExaminationFmedicalItemsId,jdbcType=INTEGER}, #{drugsId,jdbcType=INTEGER}, ",
-        "#{usage,jdbcType=CHAR}, #{quantity,jdbcType=INTEGER})"
+        "insert into group_examination_drugs_items (Group_Examination_Fmedical_Items_ID, ",
+        "Drugs_ID, Drugs_Usage, ",
+        "Quantity, Times, ",
+        "Days, Dosage)",
+        "values (#{groupExaminationFmedicalItemsId,jdbcType=INTEGER}, ",
+        "#{drugsId,jdbcType=INTEGER}, #{drugsUsage,jdbcType=CHAR}, ",
+        "#{quantity,jdbcType=INTEGER}, #{times,jdbcType=INTEGER}, ",
+        "#{days,jdbcType=INTEGER}, #{dosage,jdbcType=DOUBLE})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupExaminationDrugsItemsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupExaminationDrugsItemsId", before=false, resultType=Integer.class)
     int insert(GroupExaminationDrugsItems record);
 
     int insertSelective(GroupExaminationDrugsItems record);
@@ -39,7 +41,7 @@ public interface GroupExaminationDrugsItemsMapper {
     @Select({
         "select",
         "Group_Examination_Drugs_Items_ID, Group_Examination_Fmedical_Items_ID, Drugs_ID, ",
-        "Usage, Quantity",
+        "Drugs_Usage, Quantity, Times, Days, Dosage",
         "from group_examination_drugs_items",
         "where Group_Examination_Drugs_Items_ID = #{groupExaminationDrugsItemsId,jdbcType=INTEGER}"
     })
@@ -56,8 +58,11 @@ public interface GroupExaminationDrugsItemsMapper {
         "update group_examination_drugs_items",
         "set Group_Examination_Fmedical_Items_ID = #{groupExaminationFmedicalItemsId,jdbcType=INTEGER},",
           "Drugs_ID = #{drugsId,jdbcType=INTEGER},",
-          "Usage = #{usage,jdbcType=CHAR},",
-          "Quantity = #{quantity,jdbcType=INTEGER}",
+          "Drugs_Usage = #{drugsUsage,jdbcType=CHAR},",
+          "Quantity = #{quantity,jdbcType=INTEGER},",
+          "Times = #{times,jdbcType=INTEGER},",
+          "Days = #{days,jdbcType=INTEGER},",
+          "Dosage = #{dosage,jdbcType=DOUBLE}",
         "where Group_Examination_Drugs_Items_ID = #{groupExaminationDrugsItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(GroupExaminationDrugsItems record);

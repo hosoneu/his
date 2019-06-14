@@ -7,6 +7,8 @@ public class ExaminationFmedicalItems {
 
     private Integer fmedicalItemsId;
 
+    private Integer doctorId;
+
     private String registrationStatus;
 
     private String purposeRequirements;
@@ -19,16 +21,20 @@ public class ExaminationFmedicalItems {
 
     private Integer expenseItemsId;
 
-    public ExaminationFmedicalItems(Integer examinationFmedicalItemsId, Integer examinationId, Integer fmedicalItemsId, String registrationStatus, String purposeRequirements, Integer quantity, Integer actualQuantity, Integer examinationResultId, Integer expenseItemsId) {
+    private String validStatus;
+
+    public ExaminationFmedicalItems(Integer examinationFmedicalItemsId, Integer examinationId, Integer fmedicalItemsId, Integer doctorId, String registrationStatus, String purposeRequirements, Integer quantity, Integer actualQuantity, Integer examinationResultId, Integer expenseItemsId, String validStatus) {
         this.examinationFmedicalItemsId = examinationFmedicalItemsId;
         this.examinationId = examinationId;
         this.fmedicalItemsId = fmedicalItemsId;
+        this.doctorId = doctorId;
         this.registrationStatus = registrationStatus;
         this.purposeRequirements = purposeRequirements;
         this.quantity = quantity;
         this.actualQuantity = actualQuantity;
         this.examinationResultId = examinationResultId;
         this.expenseItemsId = expenseItemsId;
+        this.validStatus = validStatus;
     }
 
     public ExaminationFmedicalItems() {
@@ -57,6 +63,14 @@ public class ExaminationFmedicalItems {
 
     public void setFmedicalItemsId(Integer fmedicalItemsId) {
         this.fmedicalItemsId = fmedicalItemsId;
+    }
+
+    public Integer getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Integer doctorId) {
+        this.doctorId = doctorId;
     }
 
     public String getRegistrationStatus() {
@@ -105,5 +119,13 @@ public class ExaminationFmedicalItems {
 
     public void setExpenseItemsId(Integer expenseItemsId) {
         this.expenseItemsId = expenseItemsId;
+    }
+
+    public String getValidStatus() {
+        return validStatus;
+    }
+
+    public void setValidStatus(String validStatus) {
+        this.validStatus = validStatus == null ? null : validStatus.trim();
     }
 }

@@ -284,6 +284,66 @@ public class ExaminationFmedicalItemsExample {
             return (Criteria) this;
         }
 
+        public Criteria andDoctorIdIsNull() {
+            addCriterion("Doctor_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdIsNotNull() {
+            addCriterion("Doctor_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdEqualTo(Integer value) {
+            addCriterion("Doctor_ID =", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdNotEqualTo(Integer value) {
+            addCriterion("Doctor_ID <>", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdGreaterThan(Integer value) {
+            addCriterion("Doctor_ID >", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("Doctor_ID >=", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdLessThan(Integer value) {
+            addCriterion("Doctor_ID <", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("Doctor_ID <=", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdIn(List<Integer> values) {
+            addCriterion("Doctor_ID in", values, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdNotIn(List<Integer> values) {
+            addCriterion("Doctor_ID not in", values, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdBetween(Integer value1, Integer value2) {
+            addCriterion("Doctor_ID between", value1, value2, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("Doctor_ID not between", value1, value2, "doctorId");
+            return (Criteria) this;
+        }
+
         public Criteria andRegistrationStatusIsNull() {
             addCriterion("Registration_Status is null");
             return (Criteria) this;
@@ -661,6 +721,76 @@ public class ExaminationFmedicalItemsExample {
 
         public Criteria andExpenseItemsIdNotBetween(Integer value1, Integer value2) {
             addCriterion("Expense_Items_ID not between", value1, value2, "expenseItemsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusIsNull() {
+            addCriterion("Valid_Status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusIsNotNull() {
+            addCriterion("Valid_Status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusEqualTo(String value) {
+            addCriterion("Valid_Status =", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusNotEqualTo(String value) {
+            addCriterion("Valid_Status <>", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusGreaterThan(String value) {
+            addCriterion("Valid_Status >", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("Valid_Status >=", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusLessThan(String value) {
+            addCriterion("Valid_Status <", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusLessThanOrEqualTo(String value) {
+            addCriterion("Valid_Status <=", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusLike(String value) {
+            addCriterion("Valid_Status like", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusNotLike(String value) {
+            addCriterion("Valid_Status not like", value, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusIn(List<String> values) {
+            addCriterion("Valid_Status in", values, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusNotIn(List<String> values) {
+            addCriterion("Valid_Status not in", values, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusBetween(String value1, String value2) {
+            addCriterion("Valid_Status between", value1, value2, "validStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidStatusNotBetween(String value1, String value2) {
+            addCriterion("Valid_Status not between", value1, value2, "validStatus");
             return (Criteria) this;
         }
     }

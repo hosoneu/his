@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="edu.neu.hoso.model.MedicalRecordHomePage" >
     <constructor >
       <idArg column="Medical_Record_Home_Page_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Medical_Redical_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Chief_Complaint" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="Present_History" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -12,6 +12,7 @@
       <arg column="Past_History" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="Allergic_History" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="Physical_Examination" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Assistant_Examination" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    Medical_Record_Home_Page_ID, Medical_Redical_ID, Doctor_ID, Chief_Complaint, Present_History, 
-    Present_Treatment, Past_History, Allergic_History, Physical_Examination
+    Medical_Record_Home_Page_ID, Medical_Record_ID, Doctor_ID, Chief_Complaint, Present_History, 
+    Present_Treatment, Past_History, Allergic_History, Physical_Examination, Assistant_Examination
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.MedicalRecordHomePageExample" >
     select
@@ -97,14 +98,13 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.MedicalRecordHomePage" >
-    <selectKey resultType="java.lang.Integer" keyProperty="medicalRecordHomePageId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="medicalRecordHomePageId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into medical_record_home_page
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Medical_Record_Home_Page_ID,
-      <if test="medicalRedicalId != null" >
-        Medical_Redical_ID,
+      <if test="medicalRecordId != null" >
+        Medical_Record_ID,
       </if>
       <if test="doctorId != null" >
         Doctor_ID,
@@ -127,11 +127,13 @@
       <if test="physicalExamination != null" >
         Physical_Examination,
       </if>
+      <if test="assistantExamination != null" >
+        Assistant_Examination,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{medicalRecordHomePageId,jdbcType=INTEGER},
-      <if test="medicalRedicalId != null" >
-        #{medicalRedicalId,jdbcType=INTEGER},
+      <if test="medicalRecordId != null" >
+        #{medicalRecordId,jdbcType=INTEGER},
       </if>
       <if test="doctorId != null" >
         #{doctorId,jdbcType=INTEGER},
@@ -154,6 +156,9 @@
       <if test="physicalExamination != null" >
         #{physicalExamination,jdbcType=VARCHAR},
       </if>
+      <if test="assistantExamination != null" >
+        #{assistantExamination,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="edu.neu.hoso.example.MedicalRecordHomePageExample" resultType="java.lang.Integer" >
@@ -168,8 +173,8 @@
       <if test="record.medicalRecordHomePageId != null" >
         Medical_Record_Home_Page_ID = #{record.medicalRecordHomePageId,jdbcType=INTEGER},
       </if>
-      <if test="record.medicalRedicalId != null" >
-        Medical_Redical_ID = #{record.medicalRedicalId,jdbcType=INTEGER},
+      <if test="record.medicalRecordId != null" >
+        Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
       </if>
       <if test="record.doctorId != null" >
         Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
@@ -192,6 +197,9 @@
       <if test="record.physicalExamination != null" >
         Physical_Examination = #{record.physicalExamination,jdbcType=VARCHAR},
       </if>
+      <if test="record.assistantExamination != null" >
+        Assistant_Examination = #{record.assistantExamination,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -200,14 +208,15 @@
   <update id="updateByExample" parameterType="map" >
     update medical_record_home_page
     set Medical_Record_Home_Page_ID = #{record.medicalRecordHomePageId,jdbcType=INTEGER},
-      Medical_Redical_ID = #{record.medicalRedicalId,jdbcType=INTEGER},
+      Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
       Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
       Chief_Complaint = #{record.chiefComplaint,jdbcType=VARCHAR},
       Present_History = #{record.presentHistory,jdbcType=VARCHAR},
       Present_Treatment = #{record.presentTreatment,jdbcType=VARCHAR},
       Past_History = #{record.pastHistory,jdbcType=VARCHAR},
       Allergic_History = #{record.allergicHistory,jdbcType=VARCHAR},
-      Physical_Examination = #{record.physicalExamination,jdbcType=VARCHAR}
+      Physical_Examination = #{record.physicalExamination,jdbcType=VARCHAR},
+      Assistant_Examination = #{record.assistantExamination,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -215,8 +224,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.MedicalRecordHomePage" >
     update medical_record_home_page
     <set >
-      <if test="medicalRedicalId != null" >
-        Medical_Redical_ID = #{medicalRedicalId,jdbcType=INTEGER},
+      <if test="medicalRecordId != null" >
+        Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER},
       </if>
       <if test="doctorId != null" >
         Doctor_ID = #{doctorId,jdbcType=INTEGER},
@@ -238,6 +247,9 @@
       </if>
       <if test="physicalExamination != null" >
         Physical_Examination = #{physicalExamination,jdbcType=VARCHAR},
+      </if>
+      <if test="assistantExamination != null" >
+        Assistant_Examination = #{assistantExamination,jdbcType=VARCHAR},
       </if>
     </set>
     where Medical_Record_Home_Page_ID = #{medicalRecordHomePageId,jdbcType=INTEGER}

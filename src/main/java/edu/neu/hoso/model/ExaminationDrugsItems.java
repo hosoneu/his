@@ -7,7 +7,9 @@ public class ExaminationDrugsItems {
 
     private Integer drugsId;
 
-    private String usage;
+    private Integer doctorId;
+
+    private String drugsUsage;
 
     private Integer quantity;
 
@@ -17,18 +19,25 @@ public class ExaminationDrugsItems {
 
     private Integer expenseItemsId;
 
-    private Integer doctorId;
+    private Integer times;
 
-    public ExaminationDrugsItems(Integer examinationDrugsItemsId, Integer examinationFmedicalItemsId, Integer drugsId, String usage, Integer quantity, Integer actualQuantity, String drugsDispensingStatus, Integer expenseItemsId, Integer doctorId) {
+    private Integer days;
+
+    private Double dosage;
+
+    public ExaminationDrugsItems(Integer examinationDrugsItemsId, Integer examinationFmedicalItemsId, Integer drugsId, Integer doctorId, String drugsUsage, Integer quantity, Integer actualQuantity, String drugsDispensingStatus, Integer expenseItemsId, Integer times, Integer days, Double dosage) {
         this.examinationDrugsItemsId = examinationDrugsItemsId;
         this.examinationFmedicalItemsId = examinationFmedicalItemsId;
         this.drugsId = drugsId;
-        this.usage = usage;
+        this.doctorId = doctorId;
+        this.drugsUsage = drugsUsage;
         this.quantity = quantity;
         this.actualQuantity = actualQuantity;
         this.drugsDispensingStatus = drugsDispensingStatus;
         this.expenseItemsId = expenseItemsId;
-        this.doctorId = doctorId;
+        this.times = times;
+        this.days = days;
+        this.dosage = dosage;
     }
 
     public ExaminationDrugsItems() {
@@ -59,12 +68,20 @@ public class ExaminationDrugsItems {
         this.drugsId = drugsId;
     }
 
-    public String getUsage() {
-        return usage;
+    public Integer getDoctorId() {
+        return doctorId;
     }
 
-    public void setUsage(String usage) {
-        this.usage = usage == null ? null : usage.trim();
+    public void setDoctorId(Integer doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getDrugsUsage() {
+        return drugsUsage;
+    }
+
+    public void setDrugsUsage(String drugsUsage) {
+        this.drugsUsage = drugsUsage == null ? null : drugsUsage.trim();
     }
 
     public Integer getQuantity() {
@@ -99,11 +116,27 @@ public class ExaminationDrugsItems {
         this.expenseItemsId = expenseItemsId;
     }
 
-    public Integer getDoctorId() {
-        return doctorId;
+    public Integer getTimes() {
+        return times;
     }
 
-    public void setDoctorId(Integer doctorId) {
-        this.doctorId = doctorId;
+    public void setTimes(Integer times) {
+        this.times = times;
+    }
+
+    public Integer getDays() {
+        return days;
+    }
+
+    public void setDays(Integer days) {
+        this.days = days;
+    }
+
+    public Double getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(Double dosage) {
+        this.dosage = dosage;
     }
 }

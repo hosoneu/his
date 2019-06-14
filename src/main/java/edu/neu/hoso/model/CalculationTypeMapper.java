@@ -1,8 +1,7 @@
 package edu.neu.hoso.model;
 
-import java.util.List;
-
 import edu.neu.hoso.example.CalculationTypeExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -23,10 +22,10 @@ public interface CalculationTypeMapper {
     int deleteByPrimaryKey(Integer calculationTypeId);
 
     @Insert({
-        "insert into calculation_type (Calculation_Type_ID, Calculation_Type_Name)",
-        "values (#{calculationTypeId,jdbcType=INTEGER}, #{calculationTypeName,jdbcType=VARCHAR})"
+        "insert into calculation_type (Calculation_Type_Name)",
+        "values (#{calculationTypeName,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="calculationTypeId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="calculationTypeId", before=false, resultType=Integer.class)
     int insert(CalculationType record);
 
     int insertSelective(CalculationType record);

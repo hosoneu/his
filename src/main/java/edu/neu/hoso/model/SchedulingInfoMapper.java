@@ -22,16 +22,16 @@ public interface SchedulingInfoMapper {
     int deleteByPrimaryKey(Integer schedulingInfoId);
 
     @Insert({
-        "insert into scheduling_info (Scheduling_Info_ID, Doctor_ID, ",
-        "Scheduling_NoonBreak, Scheduling_StartTime, ",
-        "Scheduling_EndTime, Scheduling_Weekday, ",
-        "Scheduling_LimitCount, Scheduling_RestCount)",
-        "values (#{schedulingInfoId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{schedulingNoonbreak,jdbcType=CHAR}, #{schedulingStarttime,jdbcType=DATE}, ",
-        "#{schedulingEndtime,jdbcType=DATE}, #{schedulingWeekday,jdbcType=VARCHAR}, ",
-        "#{schedulingLimitcount,jdbcType=INTEGER}, #{schedulingRestcount,jdbcType=INTEGER})"
+        "insert into scheduling_info (Doctor_ID, Scheduling_NoonBreak, ",
+        "Scheduling_StartTime, Scheduling_EndTime, ",
+        "Scheduling_Weekday, Scheduling_LimitCount, ",
+        "Scheduling_RestCount)",
+        "values (#{doctorId,jdbcType=INTEGER}, #{schedulingNoonbreak,jdbcType=CHAR}, ",
+        "#{schedulingStarttime,jdbcType=DATE}, #{schedulingEndtime,jdbcType=DATE}, ",
+        "#{schedulingWeekday,jdbcType=VARCHAR}, #{schedulingLimitcount,jdbcType=INTEGER}, ",
+        "#{schedulingRestcount,jdbcType=INTEGER})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="schedulingInfoId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="schedulingInfoId", before=false, resultType=Integer.class)
     int insert(SchedulingInfo record);
 
     int insertSelective(SchedulingInfo record);

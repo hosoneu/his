@@ -22,22 +22,20 @@ public interface FmedicalItemsMapper {
     int deleteByPrimaryKey(Integer fmedicalItemsId);
 
     @Insert({
-        "insert into fmedical_items (Fmedical_Items_ID, Fmedical_Items_Code, ",
-        "Fmedical_Items_Name, Fmedical_Items_Format, ",
-        "Fmedical_Items_Price, Expense_Type_ID, ",
-        "Department_ID, Fmedical_Items_MnemonicCode, ",
-        "Fmedical_Items_Type, Create_Time, ",
-        "Reverse1, Reverse2, ",
-        "Reverse3)",
-        "values (#{fmedicalItemsId,jdbcType=INTEGER}, #{fmedicalItemsCode,jdbcType=VARCHAR}, ",
-        "#{fmedicalItemsName,jdbcType=VARCHAR}, #{fmedicalItemsFormat,jdbcType=VARCHAR}, ",
-        "#{fmedicalItemsPrice,jdbcType=DECIMAL}, #{expenseTypeId,jdbcType=INTEGER}, ",
-        "#{departmentId,jdbcType=INTEGER}, #{fmedicalItemsMnemoniccode,jdbcType=VARCHAR}, ",
-        "#{fmedicalItemsType,jdbcType=CHAR}, #{createTime,jdbcType=DATE}, ",
-        "#{reverse1,jdbcType=VARCHAR}, #{reverse2,jdbcType=VARCHAR}, ",
-        "#{reverse3,jdbcType=VARCHAR})"
+        "insert into fmedical_items (Fmedical_Items_Code, Fmedical_Items_Name, ",
+        "Fmedical_Items_Format, Fmedical_Items_Price, ",
+        "Expense_Type_ID, Department_ID, ",
+        "Fmedical_Items_MnemonicCode, Fmedical_Items_Type, ",
+        "Create_Time, Reverse1, ",
+        "Reverse2, Reverse3)",
+        "values (#{fmedicalItemsCode,jdbcType=VARCHAR}, #{fmedicalItemsName,jdbcType=VARCHAR}, ",
+        "#{fmedicalItemsFormat,jdbcType=VARCHAR}, #{fmedicalItemsPrice,jdbcType=DOUBLE}, ",
+        "#{expenseTypeId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, ",
+        "#{fmedicalItemsMnemoniccode,jdbcType=VARCHAR}, #{fmedicalItemsType,jdbcType=CHAR}, ",
+        "#{createTime,jdbcType=DATE}, #{reverse1,jdbcType=VARCHAR}, ",
+        "#{reverse2,jdbcType=VARCHAR}, #{reverse3,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="fmedicalItemsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="fmedicalItemsId", before=false, resultType=Integer.class)
     int insert(FmedicalItems record);
 
     int insertSelective(FmedicalItems record);
@@ -66,7 +64,7 @@ public interface FmedicalItemsMapper {
         "set Fmedical_Items_Code = #{fmedicalItemsCode,jdbcType=VARCHAR},",
           "Fmedical_Items_Name = #{fmedicalItemsName,jdbcType=VARCHAR},",
           "Fmedical_Items_Format = #{fmedicalItemsFormat,jdbcType=VARCHAR},",
-          "Fmedical_Items_Price = #{fmedicalItemsPrice,jdbcType=DECIMAL},",
+          "Fmedical_Items_Price = #{fmedicalItemsPrice,jdbcType=DOUBLE},",
           "Expense_Type_ID = #{expenseTypeId,jdbcType=INTEGER},",
           "Department_ID = #{departmentId,jdbcType=INTEGER},",
           "Fmedical_Items_MnemonicCode = #{fmedicalItemsMnemoniccode,jdbcType=VARCHAR},",

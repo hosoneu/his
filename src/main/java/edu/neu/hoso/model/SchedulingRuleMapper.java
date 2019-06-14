@@ -22,16 +22,14 @@ public interface SchedulingRuleMapper {
     int deleteByPrimaryKey(Integer schedulingRuleId);
 
     @Insert({
-        "insert into scheduling_rule (Scheduling_Rule_ID, Doctor_ID, ",
-        "Scheduling_Rule_NoonBreak, Scheduling_Rule_StartTime, ",
-        "Scheduling_Rule_EndTime, Scheduling_Rule_Weekday, ",
-        "Scheduling_Rule_LimitCount)",
-        "values (#{schedulingRuleId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{schedulingRuleNoonbreak,jdbcType=VARCHAR}, #{schedulingRuleStarttime,jdbcType=DATE}, ",
-        "#{schedulingRuleEndtime,jdbcType=DATE}, #{schedulingRuleWeekday,jdbcType=VARCHAR}, ",
-        "#{schedulingRuleLimitcount,jdbcType=INTEGER})"
+        "insert into scheduling_rule (Doctor_ID, Scheduling_Rule_NoonBreak, ",
+        "Scheduling_Rule_StartTime, Scheduling_Rule_EndTime, ",
+        "Scheduling_Rule_Weekday, Scheduling_Rule_LimitCount)",
+        "values (#{doctorId,jdbcType=INTEGER}, #{schedulingRuleNoonbreak,jdbcType=VARCHAR}, ",
+        "#{schedulingRuleStarttime,jdbcType=DATE}, #{schedulingRuleEndtime,jdbcType=DATE}, ",
+        "#{schedulingRuleWeekday,jdbcType=VARCHAR}, #{schedulingRuleLimitcount,jdbcType=INTEGER})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="schedulingRuleId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="schedulingRuleId", before=false, resultType=Integer.class)
     int insert(SchedulingRule record);
 
     int insertSelective(SchedulingRule record);

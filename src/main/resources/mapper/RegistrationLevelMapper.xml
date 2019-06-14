@@ -7,7 +7,7 @@
       <arg column="Registration_Level_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="Is_Default" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="Registration_Sequence" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Registration_Cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="Registration_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -93,12 +93,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.RegistrationLevel" >
-    <selectKey resultType="java.lang.Integer" keyProperty="registrationLevelId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="registrationLevelId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into registration_level
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Registration_Level_ID,
       <if test="registrationLevelName != null" >
         Registration_Level_Name,
       </if>
@@ -113,7 +112,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{registrationLevelId,jdbcType=INTEGER},
       <if test="registrationLevelName != null" >
         #{registrationLevelName,jdbcType=VARCHAR},
       </if>
@@ -124,7 +122,7 @@
         #{registrationSequence,jdbcType=INTEGER},
       </if>
       <if test="registrationCost != null" >
-        #{registrationCost,jdbcType=DECIMAL},
+        #{registrationCost,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -150,7 +148,7 @@
         Registration_Sequence = #{record.registrationSequence,jdbcType=INTEGER},
       </if>
       <if test="record.registrationCost != null" >
-        Registration_Cost = #{record.registrationCost,jdbcType=DECIMAL},
+        Registration_Cost = #{record.registrationCost,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -163,7 +161,7 @@
       Registration_Level_Name = #{record.registrationLevelName,jdbcType=VARCHAR},
       Is_Default = #{record.isDefault,jdbcType=VARCHAR},
       Registration_Sequence = #{record.registrationSequence,jdbcType=INTEGER},
-      Registration_Cost = #{record.registrationCost,jdbcType=DECIMAL}
+      Registration_Cost = #{record.registrationCost,jdbcType=DOUBLE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -181,7 +179,7 @@
         Registration_Sequence = #{registrationSequence,jdbcType=INTEGER},
       </if>
       <if test="registrationCost != null" >
-        Registration_Cost = #{registrationCost,jdbcType=DECIMAL},
+        Registration_Cost = #{registrationCost,jdbcType=DOUBLE},
       </if>
     </set>
     where Registration_Level_ID = #{registrationLevelId,jdbcType=INTEGER}

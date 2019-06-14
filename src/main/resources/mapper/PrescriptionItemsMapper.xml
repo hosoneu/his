@@ -7,8 +7,8 @@
       <arg column="Prescription_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Drags_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Usage" jdbcType="CHAR" javaType="java.lang.String" />
-      <arg column="Dosage" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="Drugs_Usage" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Dosage" jdbcType="DOUBLE" javaType="java.lang.Double" />
       <arg column="Times" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Days" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -76,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    Prescription_Items_ID, Prescription_ID, Drags_ID, Expense_Items_ID, Usage, Dosage, 
-    Times, Days, Quantity, Drugs_Advice, Drugs_Dispensing_Status, Actual_Quantity
+    Prescription_Items_ID, Prescription_ID, Drags_ID, Expense_Items_ID, Drugs_Usage, 
+    Dosage, Times, Days, Quantity, Drugs_Advice, Drugs_Dispensing_Status, Actual_Quantity
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.PrescriptionItemsExample" >
     select
@@ -100,12 +100,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.PrescriptionItems" >
-    <selectKey resultType="java.lang.Integer" keyProperty="prescriptionItemsId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="prescriptionItemsId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into prescription_items
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Prescription_Items_ID,
       <if test="prescriptionId != null" >
         Prescription_ID,
       </if>
@@ -115,8 +114,8 @@
       <if test="expenseItemsId != null" >
         Expense_Items_ID,
       </if>
-      <if test="usage != null" >
-        Usage,
+      <if test="drugsUsage != null" >
+        Drugs_Usage,
       </if>
       <if test="dosage != null" >
         Dosage,
@@ -141,7 +140,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{prescriptionItemsId,jdbcType=INTEGER},
       <if test="prescriptionId != null" >
         #{prescriptionId,jdbcType=INTEGER},
       </if>
@@ -151,11 +149,11 @@
       <if test="expenseItemsId != null" >
         #{expenseItemsId,jdbcType=INTEGER},
       </if>
-      <if test="usage != null" >
-        #{usage,jdbcType=CHAR},
+      <if test="drugsUsage != null" >
+        #{drugsUsage,jdbcType=CHAR},
       </if>
       <if test="dosage != null" >
-        #{dosage,jdbcType=DECIMAL},
+        #{dosage,jdbcType=DOUBLE},
       </if>
       <if test="times != null" >
         #{times,jdbcType=INTEGER},
@@ -198,11 +196,11 @@
       <if test="record.expenseItemsId != null" >
         Expense_Items_ID = #{record.expenseItemsId,jdbcType=INTEGER},
       </if>
-      <if test="record.usage != null" >
-        Usage = #{record.usage,jdbcType=CHAR},
+      <if test="record.drugsUsage != null" >
+        Drugs_Usage = #{record.drugsUsage,jdbcType=CHAR},
       </if>
       <if test="record.dosage != null" >
-        Dosage = #{record.dosage,jdbcType=DECIMAL},
+        Dosage = #{record.dosage,jdbcType=DOUBLE},
       </if>
       <if test="record.times != null" >
         Times = #{record.times,jdbcType=INTEGER},
@@ -233,8 +231,8 @@
       Prescription_ID = #{record.prescriptionId,jdbcType=INTEGER},
       Drags_ID = #{record.dragsId,jdbcType=INTEGER},
       Expense_Items_ID = #{record.expenseItemsId,jdbcType=INTEGER},
-      Usage = #{record.usage,jdbcType=CHAR},
-      Dosage = #{record.dosage,jdbcType=DECIMAL},
+      Drugs_Usage = #{record.drugsUsage,jdbcType=CHAR},
+      Dosage = #{record.dosage,jdbcType=DOUBLE},
       Times = #{record.times,jdbcType=INTEGER},
       Days = #{record.days,jdbcType=INTEGER},
       Quantity = #{record.quantity,jdbcType=INTEGER},
@@ -257,11 +255,11 @@
       <if test="expenseItemsId != null" >
         Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER},
       </if>
-      <if test="usage != null" >
-        Usage = #{usage,jdbcType=CHAR},
+      <if test="drugsUsage != null" >
+        Drugs_Usage = #{drugsUsage,jdbcType=CHAR},
       </if>
       <if test="dosage != null" >
-        Dosage = #{dosage,jdbcType=DECIMAL},
+        Dosage = #{dosage,jdbcType=DOUBLE},
       </if>
       <if test="times != null" >
         Times = #{times,jdbcType=INTEGER},

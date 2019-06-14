@@ -12,7 +12,7 @@
       <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Registration_Date" jdbcType="DATE" javaType="java.util.Date" />
       <arg column="Buy_Medical_Record" jdbcType="CHAR" javaType="java.lang.String" />
-      <arg column="Registration_Total_Cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="Registration_Total_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" />
       <arg column="Expense_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Registration_Status" jdbcType="CHAR" javaType="java.lang.String" />
@@ -102,12 +102,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.Registration" >
-    <selectKey resultType="java.lang.Integer" keyProperty="registrationId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="registrationId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into registration
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Registration_ID,
       <if test="medicalRecordId != null" >
         Medical_Record_ID,
       </if>
@@ -146,7 +145,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{registrationId,jdbcType=INTEGER},
       <if test="medicalRecordId != null" >
         #{medicalRecordId,jdbcType=INTEGER},
       </if>
@@ -172,7 +170,7 @@
         #{buyMedicalRecord,jdbcType=CHAR},
       </if>
       <if test="registrationTotalCost != null" >
-        #{registrationTotalCost,jdbcType=DECIMAL},
+        #{registrationTotalCost,jdbcType=DOUBLE},
       </if>
       <if test="expenseTypeId != null" >
         #{expenseTypeId,jdbcType=INTEGER},
@@ -222,7 +220,7 @@
         Buy_Medical_Record = #{record.buyMedicalRecord,jdbcType=CHAR},
       </if>
       <if test="record.registrationTotalCost != null" >
-        Registration_Total_Cost = #{record.registrationTotalCost,jdbcType=DECIMAL},
+        Registration_Total_Cost = #{record.registrationTotalCost,jdbcType=DOUBLE},
       </if>
       <if test="record.expenseTypeId != null" >
         Expense_Type_ID = #{record.expenseTypeId,jdbcType=INTEGER},
@@ -249,7 +247,7 @@
       Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
       Registration_Date = #{record.registrationDate,jdbcType=DATE},
       Buy_Medical_Record = #{record.buyMedicalRecord,jdbcType=CHAR},
-      Registration_Total_Cost = #{record.registrationTotalCost,jdbcType=DECIMAL},
+      Registration_Total_Cost = #{record.registrationTotalCost,jdbcType=DOUBLE},
       Expense_Type_ID = #{record.expenseTypeId,jdbcType=INTEGER},
       Expense_Items_ID = #{record.expenseItemsId,jdbcType=INTEGER},
       Registration_Status = #{record.registrationStatus,jdbcType=CHAR}
@@ -285,7 +283,7 @@
         Buy_Medical_Record = #{buyMedicalRecord,jdbcType=CHAR},
       </if>
       <if test="registrationTotalCost != null" >
-        Registration_Total_Cost = #{registrationTotalCost,jdbcType=DECIMAL},
+        Registration_Total_Cost = #{registrationTotalCost,jdbcType=DOUBLE},
       </if>
       <if test="expenseTypeId != null" >
         Expense_Type_ID = #{expenseTypeId,jdbcType=INTEGER},

@@ -3,7 +3,7 @@ package edu.neu.hoso.model;
 public class MedicalRecordHomePage {
     private Integer medicalRecordHomePageId;
 
-    private Integer medicalRedicalId;
+    private Integer medicalRecordId;
 
     private Integer doctorId;
 
@@ -19,9 +19,11 @@ public class MedicalRecordHomePage {
 
     private String physicalExamination;
 
-    public MedicalRecordHomePage(Integer medicalRecordHomePageId, Integer medicalRedicalId, Integer doctorId, String chiefComplaint, String presentHistory, String presentTreatment, String pastHistory, String allergicHistory, String physicalExamination) {
+    private String assistantExamination;
+
+    public MedicalRecordHomePage(Integer medicalRecordHomePageId, Integer medicalRecordId, Integer doctorId, String chiefComplaint, String presentHistory, String presentTreatment, String pastHistory, String allergicHistory, String physicalExamination, String assistantExamination) {
         this.medicalRecordHomePageId = medicalRecordHomePageId;
-        this.medicalRedicalId = medicalRedicalId;
+        this.medicalRecordId = medicalRecordId;
         this.doctorId = doctorId;
         this.chiefComplaint = chiefComplaint;
         this.presentHistory = presentHistory;
@@ -29,6 +31,7 @@ public class MedicalRecordHomePage {
         this.pastHistory = pastHistory;
         this.allergicHistory = allergicHistory;
         this.physicalExamination = physicalExamination;
+        this.assistantExamination = assistantExamination;
     }
 
     public MedicalRecordHomePage() {
@@ -43,12 +46,12 @@ public class MedicalRecordHomePage {
         this.medicalRecordHomePageId = medicalRecordHomePageId;
     }
 
-    public Integer getMedicalRedicalId() {
-        return medicalRedicalId;
+    public Integer getMedicalRecordId() {
+        return medicalRecordId;
     }
 
-    public void setMedicalRedicalId(Integer medicalRedicalId) {
-        this.medicalRedicalId = medicalRedicalId;
+    public void setMedicalRecordId(Integer medicalRecordId) {
+        this.medicalRecordId = medicalRecordId;
     }
 
     public Integer getDoctorId() {
@@ -105,5 +108,13 @@ public class MedicalRecordHomePage {
 
     public void setPhysicalExamination(String physicalExamination) {
         this.physicalExamination = physicalExamination == null ? null : physicalExamination.trim();
+    }
+
+    public String getAssistantExamination() {
+        return assistantExamination;
+    }
+
+    public void setAssistantExamination(String assistantExamination) {
+        this.assistantExamination = assistantExamination == null ? null : assistantExamination.trim();
     }
 }

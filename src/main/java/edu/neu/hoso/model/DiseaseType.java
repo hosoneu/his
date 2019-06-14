@@ -11,12 +11,15 @@ public class DiseaseType {
 
     private String diseaseTypeType;
 
-    public DiseaseType(Integer diseaseTypeId, String diseaseTypeCode, String diseaseTypeName, Integer diseaseTypeSequence, String diseaseTypeType) {
+    private Integer diseaseFolderId;
+
+    public DiseaseType(Integer diseaseTypeId, String diseaseTypeCode, String diseaseTypeName, Integer diseaseTypeSequence, String diseaseTypeType, Integer diseaseFolderId) {
         this.diseaseTypeId = diseaseTypeId;
         this.diseaseTypeCode = diseaseTypeCode;
         this.diseaseTypeName = diseaseTypeName;
         this.diseaseTypeSequence = diseaseTypeSequence;
         this.diseaseTypeType = diseaseTypeType;
+        this.diseaseFolderId = diseaseFolderId;
     }
 
     public DiseaseType() {
@@ -61,5 +64,13 @@ public class DiseaseType {
 
     public void setDiseaseTypeType(String diseaseTypeType) {
         this.diseaseTypeType = diseaseTypeType == null ? null : diseaseTypeType.trim();
+    }
+
+    public Integer getDiseaseFolderId() {
+        return diseaseFolderId;
+    }
+
+    public void setDiseaseFolderId(Integer diseaseFolderId) {
+        this.diseaseFolderId = diseaseFolderId;
     }
 }

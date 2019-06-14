@@ -22,14 +22,12 @@ public interface GroupExaminationFmedicalItemsMapper {
     int deleteByPrimaryKey(Integer groupExaminationFmedicalItemsId);
 
     @Insert({
-        "insert into group_examination_fmedical_items (Group_Examination_Fmedical_Items_ID, ",
-        "Group_Examination_ID, Fmedical_Items_ID, ",
+        "insert into group_examination_fmedical_items (Group_Examination_ID, Fmedical_Items_ID, ",
         "Purpose_Requirements, Quantity)",
-        "values (#{groupExaminationFmedicalItemsId,jdbcType=INTEGER}, ",
-        "#{groupExaminationId,jdbcType=INTEGER}, #{fmedicalItemsId,jdbcType=INTEGER}, ",
+        "values (#{groupExaminationId,jdbcType=INTEGER}, #{fmedicalItemsId,jdbcType=INTEGER}, ",
         "#{purposeRequirements,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupExaminationFmedicalItemsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupExaminationFmedicalItemsId", before=false, resultType=Integer.class)
     int insert(GroupExaminationFmedicalItems record);
 
     int insertSelective(GroupExaminationFmedicalItems record);

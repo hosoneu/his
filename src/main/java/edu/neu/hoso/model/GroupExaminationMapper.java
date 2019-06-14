@@ -22,14 +22,14 @@ public interface GroupExaminationMapper {
     int deleteByPrimaryKey(Integer groupExaminationId);
 
     @Insert({
-        "insert into group_examination (Group_Examination_ID, Doctor_ID, ",
-        "Group_Examination_Code, Group_Examination_Name, ",
-        "Group_Examination_Scope, Create_Time)",
-        "values (#{groupExaminationId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{groupExaminationCode,jdbcType=VARCHAR}, #{groupExaminationName,jdbcType=VARCHAR}, ",
-        "#{groupExaminationScope,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP})"
+        "insert into group_examination (Doctor_ID, Group_Examination_Code, ",
+        "Group_Examination_Name, Group_Examination_Scope, ",
+        "Create_Time)",
+        "values (#{doctorId,jdbcType=INTEGER}, #{groupExaminationCode,jdbcType=VARCHAR}, ",
+        "#{groupExaminationName,jdbcType=VARCHAR}, #{groupExaminationScope,jdbcType=CHAR}, ",
+        "#{createTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupExaminationId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupExaminationId", before=false, resultType=Integer.class)
     int insert(GroupExamination record);
 
     int insertSelective(GroupExamination record);
