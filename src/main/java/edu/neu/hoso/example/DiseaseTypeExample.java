@@ -433,6 +433,66 @@ public class DiseaseTypeExample {
             addCriterion("Disease_Type_Type not between", value1, value2, "diseaseTypeType");
             return (Criteria) this;
         }
+
+        public Criteria andDiseaseFolderIdIsNull() {
+            addCriterion("Disease_Folder_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdIsNotNull() {
+            addCriterion("Disease_Folder_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdEqualTo(Integer value) {
+            addCriterion("Disease_Folder_ID =", value, "diseaseFolderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdNotEqualTo(Integer value) {
+            addCriterion("Disease_Folder_ID <>", value, "diseaseFolderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdGreaterThan(Integer value) {
+            addCriterion("Disease_Folder_ID >", value, "diseaseFolderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("Disease_Folder_ID >=", value, "diseaseFolderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdLessThan(Integer value) {
+            addCriterion("Disease_Folder_ID <", value, "diseaseFolderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdLessThanOrEqualTo(Integer value) {
+            addCriterion("Disease_Folder_ID <=", value, "diseaseFolderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdIn(List<Integer> values) {
+            addCriterion("Disease_Folder_ID in", values, "diseaseFolderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdNotIn(List<Integer> values) {
+            addCriterion("Disease_Folder_ID not in", values, "diseaseFolderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdBetween(Integer value1, Integer value2) {
+            addCriterion("Disease_Folder_ID between", value1, value2, "diseaseFolderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseFolderIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("Disease_Folder_ID not between", value1, value2, "diseaseFolderId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -22,18 +22,18 @@ public interface ExaminationFmedicalItemsMapper {
     int deleteByPrimaryKey(Integer examinationFmedicalItemsId);
 
     @Insert({
-        "insert into examination_fmedical_items (Examination_Fmedical_Items_ID, ",
-        "Examination_ID, Fmedical_Items_ID, ",
-        "Registration_Status, Purpose_Requirements, ",
-        "Quantity, Actual_Quantity, ",
-        "Examination_Result_ID, Expense_Items_ID)",
-        "values (#{examinationFmedicalItemsId,jdbcType=INTEGER}, ",
-        "#{examinationId,jdbcType=INTEGER}, #{fmedicalItemsId,jdbcType=INTEGER}, ",
-        "#{registrationStatus,jdbcType=CHAR}, #{purposeRequirements,jdbcType=VARCHAR}, ",
-        "#{quantity,jdbcType=INTEGER}, #{actualQuantity,jdbcType=INTEGER}, ",
-        "#{examinationResultId,jdbcType=INTEGER}, #{expenseItemsId,jdbcType=INTEGER})"
+        "insert into examination_fmedical_items (Examination_ID, Fmedical_Items_ID, ",
+        "Doctor_ID, Registration_Status, ",
+        "Purpose_Requirements, Quantity, ",
+        "Actual_Quantity, Examination_Result_ID, ",
+        "Expense_Items_ID, Valid_Status)",
+        "values (#{examinationId,jdbcType=INTEGER}, #{fmedicalItemsId,jdbcType=INTEGER}, ",
+        "#{doctorId,jdbcType=INTEGER}, #{registrationStatus,jdbcType=CHAR}, ",
+        "#{purposeRequirements,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, ",
+        "#{actualQuantity,jdbcType=INTEGER}, #{examinationResultId,jdbcType=INTEGER}, ",
+        "#{expenseItemsId,jdbcType=INTEGER}, #{validStatus,jdbcType=CHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="examinationFmedicalItemsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="examinationFmedicalItemsId", before=false, resultType=Integer.class)
     int insert(ExaminationFmedicalItems record);
 
     int insertSelective(ExaminationFmedicalItems record);
@@ -42,8 +42,9 @@ public interface ExaminationFmedicalItemsMapper {
 
     @Select({
         "select",
-        "Examination_Fmedical_Items_ID, Examination_ID, Fmedical_Items_ID, Registration_Status, ",
-        "Purpose_Requirements, Quantity, Actual_Quantity, Examination_Result_ID, Expense_Items_ID",
+        "Examination_Fmedical_Items_ID, Examination_ID, Fmedical_Items_ID, Doctor_ID, ",
+        "Registration_Status, Purpose_Requirements, Quantity, Actual_Quantity, Examination_Result_ID, ",
+        "Expense_Items_ID, Valid_Status",
         "from examination_fmedical_items",
         "where Examination_Fmedical_Items_ID = #{examinationFmedicalItemsId,jdbcType=INTEGER}"
     })
@@ -60,12 +61,14 @@ public interface ExaminationFmedicalItemsMapper {
         "update examination_fmedical_items",
         "set Examination_ID = #{examinationId,jdbcType=INTEGER},",
           "Fmedical_Items_ID = #{fmedicalItemsId,jdbcType=INTEGER},",
+          "Doctor_ID = #{doctorId,jdbcType=INTEGER},",
           "Registration_Status = #{registrationStatus,jdbcType=CHAR},",
           "Purpose_Requirements = #{purposeRequirements,jdbcType=VARCHAR},",
           "Quantity = #{quantity,jdbcType=INTEGER},",
           "Actual_Quantity = #{actualQuantity,jdbcType=INTEGER},",
           "Examination_Result_ID = #{examinationResultId,jdbcType=INTEGER},",
-          "Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER}",
+          "Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER},",
+          "Valid_Status = #{validStatus,jdbcType=CHAR}",
         "where Examination_Fmedical_Items_ID = #{examinationFmedicalItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(ExaminationFmedicalItems record);

@@ -22,18 +22,18 @@ public interface MedicalRecordHomePageMapper {
     int deleteByPrimaryKey(Integer medicalRecordHomePageId);
 
     @Insert({
-        "insert into medical_record_home_page (Medical_Record_Home_Page_ID, Medical_Redical_ID, ",
-        "Doctor_ID, Chief_Complaint, ",
-        "Present_History, Present_Treatment, ",
-        "Past_History, Allergic_History, ",
-        "Physical_Examination)",
-        "values (#{medicalRecordHomePageId,jdbcType=INTEGER}, #{medicalRedicalId,jdbcType=INTEGER}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{chiefComplaint,jdbcType=VARCHAR}, ",
-        "#{presentHistory,jdbcType=VARCHAR}, #{presentTreatment,jdbcType=VARCHAR}, ",
-        "#{pastHistory,jdbcType=VARCHAR}, #{allergicHistory,jdbcType=VARCHAR}, ",
-        "#{physicalExamination,jdbcType=VARCHAR})"
+        "insert into medical_record_home_page (Medical_Record_ID, Doctor_ID, ",
+        "Chief_Complaint, Present_History, ",
+        "Present_Treatment, Past_History, ",
+        "Allergic_History, Physical_Examination, ",
+        "Assistant_Examination)",
+        "values (#{medicalRecordId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{chiefComplaint,jdbcType=VARCHAR}, #{presentHistory,jdbcType=VARCHAR}, ",
+        "#{presentTreatment,jdbcType=VARCHAR}, #{pastHistory,jdbcType=VARCHAR}, ",
+        "#{allergicHistory,jdbcType=VARCHAR}, #{physicalExamination,jdbcType=VARCHAR}, ",
+        "#{assistantExamination,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="medicalRecordHomePageId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="medicalRecordHomePageId", before=false, resultType=Integer.class)
     int insert(MedicalRecordHomePage record);
 
     int insertSelective(MedicalRecordHomePage record);
@@ -42,8 +42,9 @@ public interface MedicalRecordHomePageMapper {
 
     @Select({
         "select",
-        "Medical_Record_Home_Page_ID, Medical_Redical_ID, Doctor_ID, Chief_Complaint, ",
-        "Present_History, Present_Treatment, Past_History, Allergic_History, Physical_Examination",
+        "Medical_Record_Home_Page_ID, Medical_Record_ID, Doctor_ID, Chief_Complaint, ",
+        "Present_History, Present_Treatment, Past_History, Allergic_History, Physical_Examination, ",
+        "Assistant_Examination",
         "from medical_record_home_page",
         "where Medical_Record_Home_Page_ID = #{medicalRecordHomePageId,jdbcType=INTEGER}"
     })
@@ -58,14 +59,15 @@ public interface MedicalRecordHomePageMapper {
 
     @Update({
         "update medical_record_home_page",
-        "set Medical_Redical_ID = #{medicalRedicalId,jdbcType=INTEGER},",
+        "set Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER},",
           "Doctor_ID = #{doctorId,jdbcType=INTEGER},",
           "Chief_Complaint = #{chiefComplaint,jdbcType=VARCHAR},",
           "Present_History = #{presentHistory,jdbcType=VARCHAR},",
           "Present_Treatment = #{presentTreatment,jdbcType=VARCHAR},",
           "Past_History = #{pastHistory,jdbcType=VARCHAR},",
           "Allergic_History = #{allergicHistory,jdbcType=VARCHAR},",
-          "Physical_Examination = #{physicalExamination,jdbcType=VARCHAR}",
+          "Physical_Examination = #{physicalExamination,jdbcType=VARCHAR},",
+          "Assistant_Examination = #{assistantExamination,jdbcType=VARCHAR}",
         "where Medical_Record_Home_Page_ID = #{medicalRecordHomePageId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(MedicalRecordHomePage record);

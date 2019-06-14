@@ -22,16 +22,14 @@ public interface MedicalRecordHomePageTemplateMapper {
     int deleteByPrimaryKey(Integer medicalRecordHomePageTemplateId);
 
     @Insert({
-        "insert into medical_record_home_page_template (Medical_Record_Home_Page_Template_ID, ",
-        "Doctor_ID, Name, ",
+        "insert into medical_record_home_page_template (Doctor_ID, Name, ",
         "Scope, Chief_Complaint, ",
         "Present_History, Physical_Examination)",
-        "values (#{medicalRecordHomePageTemplateId,jdbcType=INTEGER}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
+        "values (#{doctorId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
         "#{scope,jdbcType=CHAR}, #{chiefComplaint,jdbcType=VARCHAR}, ",
         "#{presentHistory,jdbcType=VARCHAR}, #{physicalExamination,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="medicalRecordHomePageTemplateId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="medicalRecordHomePageTemplateId", before=false, resultType=Integer.class)
     int insert(MedicalRecordHomePageTemplate record);
 
     int insertSelective(MedicalRecordHomePageTemplate record);

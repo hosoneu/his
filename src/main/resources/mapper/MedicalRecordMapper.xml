@@ -4,7 +4,12 @@
   <resultMap id="BaseResultMap" type="edu.neu.hoso.model.MedicalRecord" >
     <constructor >
       <idArg column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Is_Treament_Over" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="First_Diagnosis_Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Final_Diagnosis_Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="First_Diagnosis_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Final_Diagnosis_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -66,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    Medical_Record_ID, Is_Treament_Over
+    Medical_Record_ID, Doctor_ID, Is_Treament_Over, First_Diagnosis_Doctor_ID, Final_Diagnosis_Doctor_ID, 
+    First_Diagnosis_Time, Final_Diagnosis_Time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.MedicalRecordExample" >
     select
@@ -89,20 +95,48 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.MedicalRecord" >
-    <selectKey resultType="java.lang.Integer" keyProperty="medicalRecordId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="medicalRecordId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into medical_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Medical_Record_ID,
+      <if test="doctorId != null" >
+        Doctor_ID,
+      </if>
       <if test="isTreamentOver != null" >
         Is_Treament_Over,
       </if>
+      <if test="firstDiagnosisDoctorId != null" >
+        First_Diagnosis_Doctor_ID,
+      </if>
+      <if test="finalDiagnosisDoctorId != null" >
+        Final_Diagnosis_Doctor_ID,
+      </if>
+      <if test="firstDiagnosisTime != null" >
+        First_Diagnosis_Time,
+      </if>
+      <if test="finalDiagnosisTime != null" >
+        Final_Diagnosis_Time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{medicalRecordId,jdbcType=INTEGER},
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=INTEGER},
+      </if>
       <if test="isTreamentOver != null" >
         #{isTreamentOver,jdbcType=CHAR},
+      </if>
+      <if test="firstDiagnosisDoctorId != null" >
+        #{firstDiagnosisDoctorId,jdbcType=INTEGER},
+      </if>
+      <if test="finalDiagnosisDoctorId != null" >
+        #{finalDiagnosisDoctorId,jdbcType=INTEGER},
+      </if>
+      <if test="firstDiagnosisTime != null" >
+        #{firstDiagnosisTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalDiagnosisTime != null" >
+        #{finalDiagnosisTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -118,8 +152,23 @@
       <if test="record.medicalRecordId != null" >
         Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
       </if>
+      <if test="record.doctorId != null" >
+        Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      </if>
       <if test="record.isTreamentOver != null" >
         Is_Treament_Over = #{record.isTreamentOver,jdbcType=CHAR},
+      </if>
+      <if test="record.firstDiagnosisDoctorId != null" >
+        First_Diagnosis_Doctor_ID = #{record.firstDiagnosisDoctorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.finalDiagnosisDoctorId != null" >
+        Final_Diagnosis_Doctor_ID = #{record.finalDiagnosisDoctorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstDiagnosisTime != null" >
+        First_Diagnosis_Time = #{record.firstDiagnosisTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.finalDiagnosisTime != null" >
+        Final_Diagnosis_Time = #{record.finalDiagnosisTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -129,7 +178,12 @@
   <update id="updateByExample" parameterType="map" >
     update medical_record
     set Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
-      Is_Treament_Over = #{record.isTreamentOver,jdbcType=CHAR}
+      Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
+      Is_Treament_Over = #{record.isTreamentOver,jdbcType=CHAR},
+      First_Diagnosis_Doctor_ID = #{record.firstDiagnosisDoctorId,jdbcType=INTEGER},
+      Final_Diagnosis_Doctor_ID = #{record.finalDiagnosisDoctorId,jdbcType=INTEGER},
+      First_Diagnosis_Time = #{record.firstDiagnosisTime,jdbcType=TIMESTAMP},
+      Final_Diagnosis_Time = #{record.finalDiagnosisTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -137,8 +191,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.MedicalRecord" >
     update medical_record
     <set >
+      <if test="doctorId != null" >
+        Doctor_ID = #{doctorId,jdbcType=INTEGER},
+      </if>
       <if test="isTreamentOver != null" >
         Is_Treament_Over = #{isTreamentOver,jdbcType=CHAR},
+      </if>
+      <if test="firstDiagnosisDoctorId != null" >
+        First_Diagnosis_Doctor_ID = #{firstDiagnosisDoctorId,jdbcType=INTEGER},
+      </if>
+      <if test="finalDiagnosisDoctorId != null" >
+        Final_Diagnosis_Doctor_ID = #{finalDiagnosisDoctorId,jdbcType=INTEGER},
+      </if>
+      <if test="firstDiagnosisTime != null" >
+        First_Diagnosis_Time = #{firstDiagnosisTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalDiagnosisTime != null" >
+        Final_Diagnosis_Time = #{finalDiagnosisTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER}

@@ -1,6 +1,7 @@
 package edu.neu.hoso.example;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MedicalRecordExample {
@@ -164,6 +165,66 @@ public class MedicalRecordExample {
             return (Criteria) this;
         }
 
+        public Criteria andDoctorIdIsNull() {
+            addCriterion("Doctor_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdIsNotNull() {
+            addCriterion("Doctor_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdEqualTo(Integer value) {
+            addCriterion("Doctor_ID =", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdNotEqualTo(Integer value) {
+            addCriterion("Doctor_ID <>", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdGreaterThan(Integer value) {
+            addCriterion("Doctor_ID >", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("Doctor_ID >=", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdLessThan(Integer value) {
+            addCriterion("Doctor_ID <", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("Doctor_ID <=", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdIn(List<Integer> values) {
+            addCriterion("Doctor_ID in", values, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdNotIn(List<Integer> values) {
+            addCriterion("Doctor_ID not in", values, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdBetween(Integer value1, Integer value2) {
+            addCriterion("Doctor_ID between", value1, value2, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("Doctor_ID not between", value1, value2, "doctorId");
+            return (Criteria) this;
+        }
+
         public Criteria andIsTreamentOverIsNull() {
             addCriterion("Is_Treament_Over is null");
             return (Criteria) this;
@@ -231,6 +292,246 @@ public class MedicalRecordExample {
 
         public Criteria andIsTreamentOverNotBetween(String value1, String value2) {
             addCriterion("Is_Treament_Over not between", value1, value2, "isTreamentOver");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdIsNull() {
+            addCriterion("First_Diagnosis_Doctor_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdIsNotNull() {
+            addCriterion("First_Diagnosis_Doctor_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdEqualTo(Integer value) {
+            addCriterion("First_Diagnosis_Doctor_ID =", value, "firstDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdNotEqualTo(Integer value) {
+            addCriterion("First_Diagnosis_Doctor_ID <>", value, "firstDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdGreaterThan(Integer value) {
+            addCriterion("First_Diagnosis_Doctor_ID >", value, "firstDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("First_Diagnosis_Doctor_ID >=", value, "firstDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdLessThan(Integer value) {
+            addCriterion("First_Diagnosis_Doctor_ID <", value, "firstDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("First_Diagnosis_Doctor_ID <=", value, "firstDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdIn(List<Integer> values) {
+            addCriterion("First_Diagnosis_Doctor_ID in", values, "firstDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdNotIn(List<Integer> values) {
+            addCriterion("First_Diagnosis_Doctor_ID not in", values, "firstDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdBetween(Integer value1, Integer value2) {
+            addCriterion("First_Diagnosis_Doctor_ID between", value1, value2, "firstDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisDoctorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("First_Diagnosis_Doctor_ID not between", value1, value2, "firstDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdIsNull() {
+            addCriterion("Final_Diagnosis_Doctor_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdIsNotNull() {
+            addCriterion("Final_Diagnosis_Doctor_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdEqualTo(Integer value) {
+            addCriterion("Final_Diagnosis_Doctor_ID =", value, "finalDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdNotEqualTo(Integer value) {
+            addCriterion("Final_Diagnosis_Doctor_ID <>", value, "finalDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdGreaterThan(Integer value) {
+            addCriterion("Final_Diagnosis_Doctor_ID >", value, "finalDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("Final_Diagnosis_Doctor_ID >=", value, "finalDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdLessThan(Integer value) {
+            addCriterion("Final_Diagnosis_Doctor_ID <", value, "finalDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("Final_Diagnosis_Doctor_ID <=", value, "finalDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdIn(List<Integer> values) {
+            addCriterion("Final_Diagnosis_Doctor_ID in", values, "finalDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdNotIn(List<Integer> values) {
+            addCriterion("Final_Diagnosis_Doctor_ID not in", values, "finalDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdBetween(Integer value1, Integer value2) {
+            addCriterion("Final_Diagnosis_Doctor_ID between", value1, value2, "finalDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisDoctorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("Final_Diagnosis_Doctor_ID not between", value1, value2, "finalDiagnosisDoctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeIsNull() {
+            addCriterion("First_Diagnosis_Time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeIsNotNull() {
+            addCriterion("First_Diagnosis_Time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeEqualTo(Date value) {
+            addCriterion("First_Diagnosis_Time =", value, "firstDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeNotEqualTo(Date value) {
+            addCriterion("First_Diagnosis_Time <>", value, "firstDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeGreaterThan(Date value) {
+            addCriterion("First_Diagnosis_Time >", value, "firstDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("First_Diagnosis_Time >=", value, "firstDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeLessThan(Date value) {
+            addCriterion("First_Diagnosis_Time <", value, "firstDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeLessThanOrEqualTo(Date value) {
+            addCriterion("First_Diagnosis_Time <=", value, "firstDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeIn(List<Date> values) {
+            addCriterion("First_Diagnosis_Time in", values, "firstDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeNotIn(List<Date> values) {
+            addCriterion("First_Diagnosis_Time not in", values, "firstDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeBetween(Date value1, Date value2) {
+            addCriterion("First_Diagnosis_Time between", value1, value2, "firstDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstDiagnosisTimeNotBetween(Date value1, Date value2) {
+            addCriterion("First_Diagnosis_Time not between", value1, value2, "firstDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeIsNull() {
+            addCriterion("Final_Diagnosis_Time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeIsNotNull() {
+            addCriterion("Final_Diagnosis_Time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeEqualTo(Date value) {
+            addCriterion("Final_Diagnosis_Time =", value, "finalDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeNotEqualTo(Date value) {
+            addCriterion("Final_Diagnosis_Time <>", value, "finalDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeGreaterThan(Date value) {
+            addCriterion("Final_Diagnosis_Time >", value, "finalDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("Final_Diagnosis_Time >=", value, "finalDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeLessThan(Date value) {
+            addCriterion("Final_Diagnosis_Time <", value, "finalDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeLessThanOrEqualTo(Date value) {
+            addCriterion("Final_Diagnosis_Time <=", value, "finalDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeIn(List<Date> values) {
+            addCriterion("Final_Diagnosis_Time in", values, "finalDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeNotIn(List<Date> values) {
+            addCriterion("Final_Diagnosis_Time not in", values, "finalDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeBetween(Date value1, Date value2) {
+            addCriterion("Final_Diagnosis_Time between", value1, value2, "finalDiagnosisTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinalDiagnosisTimeNotBetween(Date value1, Date value2) {
+            addCriterion("Final_Diagnosis_Time not between", value1, value2, "finalDiagnosisTime");
             return (Criteria) this;
         }
     }

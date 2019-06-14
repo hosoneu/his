@@ -22,14 +22,14 @@ public interface DiseaseTypeMapper {
     int deleteByPrimaryKey(Integer diseaseTypeId);
 
     @Insert({
-        "insert into disease_type (Disease_Type_ID, Disease_Type_Code, ",
-        "Disease_Type_Name, Disease_Type_Sequence, ",
-        "Disease_Type_Type)",
-        "values (#{diseaseTypeId,jdbcType=INTEGER}, #{diseaseTypeCode,jdbcType=VARCHAR}, ",
-        "#{diseaseTypeName,jdbcType=VARCHAR}, #{diseaseTypeSequence,jdbcType=INTEGER}, ",
-        "#{diseaseTypeType,jdbcType=CHAR})"
+        "insert into disease_type (Disease_Type_Code, Disease_Type_Name, ",
+        "Disease_Type_Sequence, Disease_Type_Type, ",
+        "Disease_Folder_ID)",
+        "values (#{diseaseTypeCode,jdbcType=VARCHAR}, #{diseaseTypeName,jdbcType=VARCHAR}, ",
+        "#{diseaseTypeSequence,jdbcType=INTEGER}, #{diseaseTypeType,jdbcType=CHAR}, ",
+        "#{diseaseFolderId,jdbcType=INTEGER})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diseaseTypeId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diseaseTypeId", before=false, resultType=Integer.class)
     int insert(DiseaseType record);
 
     int insertSelective(DiseaseType record);
@@ -39,7 +39,7 @@ public interface DiseaseTypeMapper {
     @Select({
         "select",
         "Disease_Type_ID, Disease_Type_Code, Disease_Type_Name, Disease_Type_Sequence, ",
-        "Disease_Type_Type",
+        "Disease_Type_Type, Disease_Folder_ID",
         "from disease_type",
         "where Disease_Type_ID = #{diseaseTypeId,jdbcType=INTEGER}"
     })
@@ -57,7 +57,8 @@ public interface DiseaseTypeMapper {
         "set Disease_Type_Code = #{diseaseTypeCode,jdbcType=VARCHAR},",
           "Disease_Type_Name = #{diseaseTypeName,jdbcType=VARCHAR},",
           "Disease_Type_Sequence = #{diseaseTypeSequence,jdbcType=INTEGER},",
-          "Disease_Type_Type = #{diseaseTypeType,jdbcType=CHAR}",
+          "Disease_Type_Type = #{diseaseTypeType,jdbcType=CHAR},",
+          "Disease_Folder_ID = #{diseaseFolderId,jdbcType=INTEGER}",
         "where Disease_Type_ID = #{diseaseTypeId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(DiseaseType record);

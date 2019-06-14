@@ -22,22 +22,22 @@ public interface DrugsMapper {
     int deleteByPrimaryKey(Integer drugsId);
 
     @Insert({
-        "insert into drugs (Drugs_ID, Drugs_Code, ",
-        "Drugs_Name, Drugs_Format, ",
-        "Drugs_Unit, Drugs_Manufacturer, ",
-        "Drugs_Dosage_ID, Drugs_Type_ID, ",
-        "Drugs_Price, Drugs_MnemonicCode, ",
-        "Create_Time, Reverse1, ",
-        "Reverse2, Reverse3)",
-        "values (#{drugsId,jdbcType=INTEGER}, #{drugsCode,jdbcType=VARCHAR}, ",
-        "#{drugsName,jdbcType=VARCHAR}, #{drugsFormat,jdbcType=VARCHAR}, ",
-        "#{drugsUnit,jdbcType=VARCHAR}, #{drugsManufacturer,jdbcType=VARCHAR}, ",
-        "#{drugsDosageId,jdbcType=INTEGER}, #{drugsTypeId,jdbcType=INTEGER}, ",
-        "#{drugsPrice,jdbcType=DECIMAL}, #{drugsMnemoniccode,jdbcType=VARCHAR}, ",
-        "#{createTime,jdbcType=DATE}, #{reverse1,jdbcType=VARCHAR}, ",
-        "#{reverse2,jdbcType=VARCHAR}, #{reverse3,jdbcType=VARCHAR})"
+        "insert into drugs (Drugs_Code, Drugs_Name, ",
+        "Drugs_Format, Drugs_Unit, ",
+        "Drugs_Manufacturer, Drugs_Dosage_ID, ",
+        "Drugs_Type_ID, Drugs_Price, ",
+        "Drugs_MnemonicCode, Create_Time, ",
+        "Reverse1, Reverse2, ",
+        "Reverse3)",
+        "values (#{drugsCode,jdbcType=VARCHAR}, #{drugsName,jdbcType=VARCHAR}, ",
+        "#{drugsFormat,jdbcType=VARCHAR}, #{drugsUnit,jdbcType=VARCHAR}, ",
+        "#{drugsManufacturer,jdbcType=VARCHAR}, #{drugsDosageId,jdbcType=INTEGER}, ",
+        "#{drugsTypeId,jdbcType=INTEGER}, #{drugsPrice,jdbcType=DOUBLE}, ",
+        "#{drugsMnemoniccode,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, ",
+        "#{reverse1,jdbcType=VARCHAR}, #{reverse2,jdbcType=VARCHAR}, ",
+        "#{reverse3,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="drugsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="drugsId", before=false, resultType=Integer.class)
     int insert(Drugs record);
 
     int insertSelective(Drugs record);
@@ -70,7 +70,7 @@ public interface DrugsMapper {
           "Drugs_Manufacturer = #{drugsManufacturer,jdbcType=VARCHAR},",
           "Drugs_Dosage_ID = #{drugsDosageId,jdbcType=INTEGER},",
           "Drugs_Type_ID = #{drugsTypeId,jdbcType=INTEGER},",
-          "Drugs_Price = #{drugsPrice,jdbcType=DECIMAL},",
+          "Drugs_Price = #{drugsPrice,jdbcType=DOUBLE},",
           "Drugs_MnemonicCode = #{drugsMnemoniccode,jdbcType=VARCHAR},",
           "Create_Time = #{createTime,jdbcType=DATE},",
           "Reverse1 = #{reverse1,jdbcType=VARCHAR},",

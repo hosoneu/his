@@ -22,18 +22,14 @@ public interface ExpenseItemsMapper {
     int deleteByPrimaryKey(Integer expenseItemsId);
 
     @Insert({
-        "insert into expense_items (Expense_Items_ID, Medical_Record_ID, ",
-        "Total_Cost, Pay_Status, ",
-        "Is_Day_Cal, Pay_Time, ",
-        "Invoice_NO, Pay_Mode_ID, ",
-        "User_ID)",
-        "values (#{expenseItemsId,jdbcType=INTEGER}, #{medicalRecordId,jdbcType=INTEGER}, ",
-        "#{totalCost,jdbcType=DECIMAL}, #{payStatus,jdbcType=CHAR}, ",
-        "#{isDayCal,jdbcType=CHAR}, #{payTime,jdbcType=TIMESTAMP}, ",
-        "#{invoiceNo,jdbcType=INTEGER}, #{payModeId,jdbcType=INTEGER}, ",
-        "#{userId,jdbcType=INTEGER})"
+        "insert into expense_items (Medical_Record_ID, Total_Cost, ",
+        "Pay_Status, Invoice_ID, ",
+        "Expense_Type_ID)",
+        "values (#{medicalRecordId,jdbcType=INTEGER}, #{totalCost,jdbcType=DOUBLE}, ",
+        "#{payStatus,jdbcType=CHAR}, #{invoiceId,jdbcType=INTEGER}, ",
+        "#{expenseTypeId,jdbcType=INTEGER})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="expenseItemsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="expenseItemsId", before=false, resultType=Integer.class)
     int insert(ExpenseItems record);
 
     int insertSelective(ExpenseItems record);
@@ -42,8 +38,7 @@ public interface ExpenseItemsMapper {
 
     @Select({
         "select",
-        "Expense_Items_ID, Medical_Record_ID, Total_Cost, Pay_Status, Is_Day_Cal, Pay_Time, ",
-        "Invoice_NO, Pay_Mode_ID, User_ID",
+        "Expense_Items_ID, Medical_Record_ID, Total_Cost, Pay_Status, Invoice_ID, Expense_Type_ID",
         "from expense_items",
         "where Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER}"
     })
@@ -59,13 +54,10 @@ public interface ExpenseItemsMapper {
     @Update({
         "update expense_items",
         "set Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER},",
-          "Total_Cost = #{totalCost,jdbcType=DECIMAL},",
+          "Total_Cost = #{totalCost,jdbcType=DOUBLE},",
           "Pay_Status = #{payStatus,jdbcType=CHAR},",
-          "Is_Day_Cal = #{isDayCal,jdbcType=CHAR},",
-          "Pay_Time = #{payTime,jdbcType=TIMESTAMP},",
-          "Invoice_NO = #{invoiceNo,jdbcType=INTEGER},",
-          "Pay_Mode_ID = #{payModeId,jdbcType=INTEGER},",
-          "User_ID = #{userId,jdbcType=INTEGER}",
+          "Invoice_ID = #{invoiceId,jdbcType=INTEGER},",
+          "Expense_Type_ID = #{expenseTypeId,jdbcType=INTEGER}",
         "where Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(ExpenseItems record);

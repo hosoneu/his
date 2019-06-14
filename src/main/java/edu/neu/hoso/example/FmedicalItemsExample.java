@@ -1,6 +1,5 @@
 package edu.neu.hoso.example;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -413,52 +412,52 @@ public class FmedicalItemsExample {
             return (Criteria) this;
         }
 
-        public Criteria andFmedicalItemsPriceEqualTo(BigDecimal value) {
+        public Criteria andFmedicalItemsPriceEqualTo(Double value) {
             addCriterion("Fmedical_Items_Price =", value, "fmedicalItemsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andFmedicalItemsPriceNotEqualTo(BigDecimal value) {
+        public Criteria andFmedicalItemsPriceNotEqualTo(Double value) {
             addCriterion("Fmedical_Items_Price <>", value, "fmedicalItemsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andFmedicalItemsPriceGreaterThan(BigDecimal value) {
+        public Criteria andFmedicalItemsPriceGreaterThan(Double value) {
             addCriterion("Fmedical_Items_Price >", value, "fmedicalItemsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andFmedicalItemsPriceGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andFmedicalItemsPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("Fmedical_Items_Price >=", value, "fmedicalItemsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andFmedicalItemsPriceLessThan(BigDecimal value) {
+        public Criteria andFmedicalItemsPriceLessThan(Double value) {
             addCriterion("Fmedical_Items_Price <", value, "fmedicalItemsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andFmedicalItemsPriceLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andFmedicalItemsPriceLessThanOrEqualTo(Double value) {
             addCriterion("Fmedical_Items_Price <=", value, "fmedicalItemsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andFmedicalItemsPriceIn(List<BigDecimal> values) {
+        public Criteria andFmedicalItemsPriceIn(List<Double> values) {
             addCriterion("Fmedical_Items_Price in", values, "fmedicalItemsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andFmedicalItemsPriceNotIn(List<BigDecimal> values) {
+        public Criteria andFmedicalItemsPriceNotIn(List<Double> values) {
             addCriterion("Fmedical_Items_Price not in", values, "fmedicalItemsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andFmedicalItemsPriceBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andFmedicalItemsPriceBetween(Double value1, Double value2) {
             addCriterion("Fmedical_Items_Price between", value1, value2, "fmedicalItemsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andFmedicalItemsPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andFmedicalItemsPriceNotBetween(Double value1, Double value2) {
             addCriterion("Fmedical_Items_Price not between", value1, value2, "fmedicalItemsPrice");
             return (Criteria) this;
         }

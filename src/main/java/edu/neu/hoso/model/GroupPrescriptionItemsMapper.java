@@ -22,16 +22,16 @@ public interface GroupPrescriptionItemsMapper {
     int deleteByPrimaryKey(Integer groupPrescriptionItemsId);
 
     @Insert({
-        "insert into group_prescription_items (Group_Prescription_Items_ID, Group_Prescription_ID, ",
-        "Drags_ID, Usage, Dosage, ",
+        "insert into group_prescription_items (Group_Prescription_ID, Drugs_ID, ",
+        "Drugs_Usage, Dosage, ",
         "Times, Days, Quantity, ",
         "Drugs_Advice)",
-        "values (#{groupPrescriptionItemsId,jdbcType=INTEGER}, #{groupPrescriptionId,jdbcType=INTEGER}, ",
-        "#{dragsId,jdbcType=INTEGER}, #{usage,jdbcType=CHAR}, #{dosage,jdbcType=DECIMAL}, ",
+        "values (#{groupPrescriptionId,jdbcType=INTEGER}, #{drugsId,jdbcType=INTEGER}, ",
+        "#{drugsUsage,jdbcType=CHAR}, #{dosage,jdbcType=DOUBLE}, ",
         "#{times,jdbcType=INTEGER}, #{days,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, ",
         "#{drugsAdvice,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupPrescriptionItemsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupPrescriptionItemsId", before=false, resultType=Integer.class)
     int insert(GroupPrescriptionItems record);
 
     int insertSelective(GroupPrescriptionItems record);
@@ -40,7 +40,7 @@ public interface GroupPrescriptionItemsMapper {
 
     @Select({
         "select",
-        "Group_Prescription_Items_ID, Group_Prescription_ID, Drags_ID, Usage, Dosage, ",
+        "Group_Prescription_Items_ID, Group_Prescription_ID, Drugs_ID, Drugs_Usage, Dosage, ",
         "Times, Days, Quantity, Drugs_Advice",
         "from group_prescription_items",
         "where Group_Prescription_Items_ID = #{groupPrescriptionItemsId,jdbcType=INTEGER}"
@@ -57,9 +57,9 @@ public interface GroupPrescriptionItemsMapper {
     @Update({
         "update group_prescription_items",
         "set Group_Prescription_ID = #{groupPrescriptionId,jdbcType=INTEGER},",
-          "Drags_ID = #{dragsId,jdbcType=INTEGER},",
-          "Usage = #{usage,jdbcType=CHAR},",
-          "Dosage = #{dosage,jdbcType=DECIMAL},",
+          "Drugs_ID = #{drugsId,jdbcType=INTEGER},",
+          "Drugs_Usage = #{drugsUsage,jdbcType=CHAR},",
+          "Dosage = #{dosage,jdbcType=DOUBLE},",
           "Times = #{times,jdbcType=INTEGER},",
           "Days = #{days,jdbcType=INTEGER},",
           "Quantity = #{quantity,jdbcType=INTEGER},",

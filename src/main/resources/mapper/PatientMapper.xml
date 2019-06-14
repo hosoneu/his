@@ -95,12 +95,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.Patient" >
-    <selectKey resultType="java.lang.Integer" keyProperty="patientId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="patientId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into patient
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Patient_ID,
       <if test="patientName != null" >
         Patient_Name,
       </if>
@@ -121,7 +120,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{patientId,jdbcType=INTEGER},
       <if test="patientName != null" >
         #{patientName,jdbcType=VARCHAR},
       </if>

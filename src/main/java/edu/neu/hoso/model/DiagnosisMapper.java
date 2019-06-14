@@ -22,16 +22,14 @@ public interface DiagnosisMapper {
     int deleteByPrimaryKey(Integer diagnosisId);
 
     @Insert({
-        "insert into diagnosis (Diagnosis_ID, Disease_ID, ",
-        "Medical_Record_ID, Main_Diagnosis_Mark, ",
-        "Suspect_Mark, Onset_Date, ",
-        "Diagnosis_Mark)",
-        "values (#{diagnosisId,jdbcType=INTEGER}, #{diseaseId,jdbcType=INTEGER}, ",
-        "#{medicalRecordId,jdbcType=INTEGER}, #{mainDiagnosisMark,jdbcType=CHAR}, ",
-        "#{suspectMark,jdbcType=CHAR}, #{onsetDate,jdbcType=DATE}, ",
-        "#{diagnosisMark,jdbcType=CHAR})"
+        "insert into diagnosis (Disease_ID, Medical_Record_ID, ",
+        "Main_Diagnosis_Mark, Suspect_Mark, ",
+        "Onset_Date, Diagnosis_Mark)",
+        "values (#{diseaseId,jdbcType=INTEGER}, #{medicalRecordId,jdbcType=INTEGER}, ",
+        "#{mainDiagnosisMark,jdbcType=CHAR}, #{suspectMark,jdbcType=CHAR}, ",
+        "#{onsetDate,jdbcType=DATE}, #{diagnosisMark,jdbcType=CHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diagnosisId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diagnosisId", before=false, resultType=Integer.class)
     int insert(Diagnosis record);
 
     int insertSelective(Diagnosis record);

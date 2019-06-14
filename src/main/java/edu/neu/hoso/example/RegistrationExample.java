@@ -1,6 +1,5 @@
 package edu.neu.hoso.example;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -693,52 +692,52 @@ public class RegistrationExample {
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationTotalCostEqualTo(BigDecimal value) {
+        public Criteria andRegistrationTotalCostEqualTo(Double value) {
             addCriterion("Registration_Total_Cost =", value, "registrationTotalCost");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationTotalCostNotEqualTo(BigDecimal value) {
+        public Criteria andRegistrationTotalCostNotEqualTo(Double value) {
             addCriterion("Registration_Total_Cost <>", value, "registrationTotalCost");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationTotalCostGreaterThan(BigDecimal value) {
+        public Criteria andRegistrationTotalCostGreaterThan(Double value) {
             addCriterion("Registration_Total_Cost >", value, "registrationTotalCost");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationTotalCostGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andRegistrationTotalCostGreaterThanOrEqualTo(Double value) {
             addCriterion("Registration_Total_Cost >=", value, "registrationTotalCost");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationTotalCostLessThan(BigDecimal value) {
+        public Criteria andRegistrationTotalCostLessThan(Double value) {
             addCriterion("Registration_Total_Cost <", value, "registrationTotalCost");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationTotalCostLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andRegistrationTotalCostLessThanOrEqualTo(Double value) {
             addCriterion("Registration_Total_Cost <=", value, "registrationTotalCost");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationTotalCostIn(List<BigDecimal> values) {
+        public Criteria andRegistrationTotalCostIn(List<Double> values) {
             addCriterion("Registration_Total_Cost in", values, "registrationTotalCost");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationTotalCostNotIn(List<BigDecimal> values) {
+        public Criteria andRegistrationTotalCostNotIn(List<Double> values) {
             addCriterion("Registration_Total_Cost not in", values, "registrationTotalCost");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationTotalCostBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andRegistrationTotalCostBetween(Double value1, Double value2) {
             addCriterion("Registration_Total_Cost between", value1, value2, "registrationTotalCost");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationTotalCostNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andRegistrationTotalCostNotBetween(Double value1, Double value2) {
             addCriterion("Registration_Total_Cost not between", value1, value2, "registrationTotalCost");
             return (Criteria) this;
         }

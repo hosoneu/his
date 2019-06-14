@@ -1,8 +1,7 @@
 package edu.neu.hoso.model;
 
-import java.util.List;
-
 import edu.neu.hoso.example.ConstantItemsExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -23,12 +22,12 @@ public interface ConstantItemsMapper {
     int deleteByPrimaryKey(Integer constantItemsId);
 
     @Insert({
-        "insert into constant_items (Constant_Items_ID, Constant_Type_ID, ",
-        "Constant_Items_Code, Constant_Items_Name)",
-        "values (#{constantItemsId,jdbcType=INTEGER}, #{constantTypeId,jdbcType=INTEGER}, ",
-        "#{constantItemsCode,jdbcType=VARCHAR}, #{constantItemsName,jdbcType=VARCHAR})"
+        "insert into constant_items (Constant_Type_ID, Constant_Items_Code, ",
+        "Constant_Items_Name)",
+        "values (#{constantTypeId,jdbcType=INTEGER}, #{constantItemsCode,jdbcType=VARCHAR}, ",
+        "#{constantItemsName,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="constantItemsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="constantItemsId", before=false, resultType=Integer.class)
     int insert(ConstantItems record);
 
     int insertSelective(ConstantItems record);

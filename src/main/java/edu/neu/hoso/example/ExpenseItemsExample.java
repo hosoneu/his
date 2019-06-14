@@ -1,8 +1,6 @@
 package edu.neu.hoso.example;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ExpenseItemsExample {
@@ -236,52 +234,52 @@ public class ExpenseItemsExample {
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostEqualTo(BigDecimal value) {
+        public Criteria andTotalCostEqualTo(Double value) {
             addCriterion("Total_Cost =", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostNotEqualTo(BigDecimal value) {
+        public Criteria andTotalCostNotEqualTo(Double value) {
             addCriterion("Total_Cost <>", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostGreaterThan(BigDecimal value) {
+        public Criteria andTotalCostGreaterThan(Double value) {
             addCriterion("Total_Cost >", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andTotalCostGreaterThanOrEqualTo(Double value) {
             addCriterion("Total_Cost >=", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostLessThan(BigDecimal value) {
+        public Criteria andTotalCostLessThan(Double value) {
             addCriterion("Total_Cost <", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andTotalCostLessThanOrEqualTo(Double value) {
             addCriterion("Total_Cost <=", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostIn(List<BigDecimal> values) {
+        public Criteria andTotalCostIn(List<Double> values) {
             addCriterion("Total_Cost in", values, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostNotIn(List<BigDecimal> values) {
+        public Criteria andTotalCostNotIn(List<Double> values) {
             addCriterion("Total_Cost not in", values, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andTotalCostBetween(Double value1, Double value2) {
             addCriterion("Total_Cost between", value1, value2, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andTotalCostNotBetween(Double value1, Double value2) {
             addCriterion("Total_Cost not between", value1, value2, "totalCost");
             return (Criteria) this;
         }
@@ -356,313 +354,123 @@ public class ExpenseItemsExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalIsNull() {
-            addCriterion("Is_Day_Cal is null");
+        public Criteria andInvoiceIdIsNull() {
+            addCriterion("Invoice_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalIsNotNull() {
-            addCriterion("Is_Day_Cal is not null");
+        public Criteria andInvoiceIdIsNotNull() {
+            addCriterion("Invoice_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalEqualTo(String value) {
-            addCriterion("Is_Day_Cal =", value, "isDayCal");
+        public Criteria andInvoiceIdEqualTo(Integer value) {
+            addCriterion("Invoice_ID =", value, "invoiceId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalNotEqualTo(String value) {
-            addCriterion("Is_Day_Cal <>", value, "isDayCal");
+        public Criteria andInvoiceIdNotEqualTo(Integer value) {
+            addCriterion("Invoice_ID <>", value, "invoiceId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalGreaterThan(String value) {
-            addCriterion("Is_Day_Cal >", value, "isDayCal");
+        public Criteria andInvoiceIdGreaterThan(Integer value) {
+            addCriterion("Invoice_ID >", value, "invoiceId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalGreaterThanOrEqualTo(String value) {
-            addCriterion("Is_Day_Cal >=", value, "isDayCal");
+        public Criteria andInvoiceIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("Invoice_ID >=", value, "invoiceId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalLessThan(String value) {
-            addCriterion("Is_Day_Cal <", value, "isDayCal");
+        public Criteria andInvoiceIdLessThan(Integer value) {
+            addCriterion("Invoice_ID <", value, "invoiceId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalLessThanOrEqualTo(String value) {
-            addCriterion("Is_Day_Cal <=", value, "isDayCal");
+        public Criteria andInvoiceIdLessThanOrEqualTo(Integer value) {
+            addCriterion("Invoice_ID <=", value, "invoiceId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalLike(String value) {
-            addCriterion("Is_Day_Cal like", value, "isDayCal");
+        public Criteria andInvoiceIdIn(List<Integer> values) {
+            addCriterion("Invoice_ID in", values, "invoiceId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalNotLike(String value) {
-            addCriterion("Is_Day_Cal not like", value, "isDayCal");
+        public Criteria andInvoiceIdNotIn(List<Integer> values) {
+            addCriterion("Invoice_ID not in", values, "invoiceId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalIn(List<String> values) {
-            addCriterion("Is_Day_Cal in", values, "isDayCal");
+        public Criteria andInvoiceIdBetween(Integer value1, Integer value2) {
+            addCriterion("Invoice_ID between", value1, value2, "invoiceId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalNotIn(List<String> values) {
-            addCriterion("Is_Day_Cal not in", values, "isDayCal");
+        public Criteria andInvoiceIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("Invoice_ID not between", value1, value2, "invoiceId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalBetween(String value1, String value2) {
-            addCriterion("Is_Day_Cal between", value1, value2, "isDayCal");
+        public Criteria andExpenseTypeIdIsNull() {
+            addCriterion("Expense_Type_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDayCalNotBetween(String value1, String value2) {
-            addCriterion("Is_Day_Cal not between", value1, value2, "isDayCal");
+        public Criteria andExpenseTypeIdIsNotNull() {
+            addCriterion("Expense_Type_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeIsNull() {
-            addCriterion("Pay_Time is null");
+        public Criteria andExpenseTypeIdEqualTo(Integer value) {
+            addCriterion("Expense_Type_ID =", value, "expenseTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeIsNotNull() {
-            addCriterion("Pay_Time is not null");
+        public Criteria andExpenseTypeIdNotEqualTo(Integer value) {
+            addCriterion("Expense_Type_ID <>", value, "expenseTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeEqualTo(Date value) {
-            addCriterion("Pay_Time =", value, "payTime");
+        public Criteria andExpenseTypeIdGreaterThan(Integer value) {
+            addCriterion("Expense_Type_ID >", value, "expenseTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeNotEqualTo(Date value) {
-            addCriterion("Pay_Time <>", value, "payTime");
+        public Criteria andExpenseTypeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("Expense_Type_ID >=", value, "expenseTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeGreaterThan(Date value) {
-            addCriterion("Pay_Time >", value, "payTime");
+        public Criteria andExpenseTypeIdLessThan(Integer value) {
+            addCriterion("Expense_Type_ID <", value, "expenseTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("Pay_Time >=", value, "payTime");
+        public Criteria andExpenseTypeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("Expense_Type_ID <=", value, "expenseTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeLessThan(Date value) {
-            addCriterion("Pay_Time <", value, "payTime");
+        public Criteria andExpenseTypeIdIn(List<Integer> values) {
+            addCriterion("Expense_Type_ID in", values, "expenseTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeLessThanOrEqualTo(Date value) {
-            addCriterion("Pay_Time <=", value, "payTime");
+        public Criteria andExpenseTypeIdNotIn(List<Integer> values) {
+            addCriterion("Expense_Type_ID not in", values, "expenseTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeIn(List<Date> values) {
-            addCriterion("Pay_Time in", values, "payTime");
+        public Criteria andExpenseTypeIdBetween(Integer value1, Integer value2) {
+            addCriterion("Expense_Type_ID between", value1, value2, "expenseTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeNotIn(List<Date> values) {
-            addCriterion("Pay_Time not in", values, "payTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayTimeBetween(Date value1, Date value2) {
-            addCriterion("Pay_Time between", value1, value2, "payTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayTimeNotBetween(Date value1, Date value2) {
-            addCriterion("Pay_Time not between", value1, value2, "payTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoIsNull() {
-            addCriterion("Invoice_NO is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoIsNotNull() {
-            addCriterion("Invoice_NO is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoEqualTo(Integer value) {
-            addCriterion("Invoice_NO =", value, "invoiceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoNotEqualTo(Integer value) {
-            addCriterion("Invoice_NO <>", value, "invoiceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoGreaterThan(Integer value) {
-            addCriterion("Invoice_NO >", value, "invoiceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoGreaterThanOrEqualTo(Integer value) {
-            addCriterion("Invoice_NO >=", value, "invoiceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoLessThan(Integer value) {
-            addCriterion("Invoice_NO <", value, "invoiceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoLessThanOrEqualTo(Integer value) {
-            addCriterion("Invoice_NO <=", value, "invoiceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoIn(List<Integer> values) {
-            addCriterion("Invoice_NO in", values, "invoiceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoNotIn(List<Integer> values) {
-            addCriterion("Invoice_NO not in", values, "invoiceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoBetween(Integer value1, Integer value2) {
-            addCriterion("Invoice_NO between", value1, value2, "invoiceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andInvoiceNoNotBetween(Integer value1, Integer value2) {
-            addCriterion("Invoice_NO not between", value1, value2, "invoiceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdIsNull() {
-            addCriterion("Pay_Mode_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdIsNotNull() {
-            addCriterion("Pay_Mode_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdEqualTo(Integer value) {
-            addCriterion("Pay_Mode_ID =", value, "payModeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdNotEqualTo(Integer value) {
-            addCriterion("Pay_Mode_ID <>", value, "payModeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdGreaterThan(Integer value) {
-            addCriterion("Pay_Mode_ID >", value, "payModeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("Pay_Mode_ID >=", value, "payModeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdLessThan(Integer value) {
-            addCriterion("Pay_Mode_ID <", value, "payModeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("Pay_Mode_ID <=", value, "payModeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdIn(List<Integer> values) {
-            addCriterion("Pay_Mode_ID in", values, "payModeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdNotIn(List<Integer> values) {
-            addCriterion("Pay_Mode_ID not in", values, "payModeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdBetween(Integer value1, Integer value2) {
-            addCriterion("Pay_Mode_ID between", value1, value2, "payModeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayModeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("Pay_Mode_ID not between", value1, value2, "payModeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdIsNull() {
-            addCriterion("User_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdIsNotNull() {
-            addCriterion("User_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdEqualTo(Integer value) {
-            addCriterion("User_ID =", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdNotEqualTo(Integer value) {
-            addCriterion("User_ID <>", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdGreaterThan(Integer value) {
-            addCriterion("User_ID >", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("User_ID >=", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdLessThan(Integer value) {
-            addCriterion("User_ID <", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
-            addCriterion("User_ID <=", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdIn(List<Integer> values) {
-            addCriterion("User_ID in", values, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdNotIn(List<Integer> values) {
-            addCriterion("User_ID not in", values, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdBetween(Integer value1, Integer value2) {
-            addCriterion("User_ID between", value1, value2, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("User_ID not between", value1, value2, "userId");
+        public Criteria andExpenseTypeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("Expense_Type_ID not between", value1, value2, "expenseTypeId");
             return (Criteria) this;
         }
     }

@@ -22,14 +22,12 @@ public interface DayCalMapper {
     int deleteByPrimaryKey(Integer dayCalId);
 
     @Insert({
-        "insert into day_cal (Day_Cal_ID, User_ID, ",
-        "Day_Cal_StartDate, Day_Cal_EndDate, ",
-        "Day_Cal_Total)",
-        "values (#{dayCalId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, ",
-        "#{dayCalStartdate,jdbcType=TIMESTAMP}, #{dayCalEnddate,jdbcType=TIMESTAMP}, ",
-        "#{dayCalTotal,jdbcType=DECIMAL})"
+        "insert into day_cal (User_ID, Day_Cal_StartDate, ",
+        "Day_Cal_EndDate, Day_Cal_Total)",
+        "values (#{userId,jdbcType=INTEGER}, #{dayCalStartdate,jdbcType=TIMESTAMP}, ",
+        "#{dayCalEnddate,jdbcType=TIMESTAMP}, #{dayCalTotal,jdbcType=DOUBLE})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="dayCalId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="dayCalId", before=false, resultType=Integer.class)
     int insert(DayCal record);
 
     int insertSelective(DayCal record);
@@ -56,7 +54,7 @@ public interface DayCalMapper {
         "set User_ID = #{userId,jdbcType=INTEGER},",
           "Day_Cal_StartDate = #{dayCalStartdate,jdbcType=TIMESTAMP},",
           "Day_Cal_EndDate = #{dayCalEnddate,jdbcType=TIMESTAMP},",
-          "Day_Cal_Total = #{dayCalTotal,jdbcType=DECIMAL}",
+          "Day_Cal_Total = #{dayCalTotal,jdbcType=DOUBLE}",
         "where Day_Cal_ID = #{dayCalId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(DayCal record);

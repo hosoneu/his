@@ -22,14 +22,14 @@ public interface TreatmentItemsMapper {
     int deleteByPrimaryKey(Integer treatmentItemsId);
 
     @Insert({
-        "insert into treatment_items (Treatment_Items_ID, Treatment_ID, ",
-        "Fmedical_Items_ID, Quantity, ",
-        "Actual_Quantity, Expense_Items_ID)",
-        "values (#{treatmentItemsId,jdbcType=INTEGER}, #{treatmentId,jdbcType=INTEGER}, ",
-        "#{fmedicalItemsId,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, ",
-        "#{actualQuantity,jdbcType=INTEGER}, #{expenseItemsId,jdbcType=INTEGER})"
+        "insert into treatment_items (Treatment_ID, Fmedical_Items_ID, ",
+        "Quantity, Actual_Quantity, ",
+        "Expense_Items_ID, Valid_Status)",
+        "values (#{treatmentId,jdbcType=INTEGER}, #{fmedicalItemsId,jdbcType=INTEGER}, ",
+        "#{quantity,jdbcType=INTEGER}, #{actualQuantity,jdbcType=INTEGER}, ",
+        "#{expenseItemsId,jdbcType=INTEGER}, #{validStatus,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="treatmentItemsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="treatmentItemsId", before=false, resultType=Integer.class)
     int insert(TreatmentItems record);
 
     int insertSelective(TreatmentItems record);
@@ -39,7 +39,7 @@ public interface TreatmentItemsMapper {
     @Select({
         "select",
         "Treatment_Items_ID, Treatment_ID, Fmedical_Items_ID, Quantity, Actual_Quantity, ",
-        "Expense_Items_ID",
+        "Expense_Items_ID, Valid_Status",
         "from treatment_items",
         "where Treatment_Items_ID = #{treatmentItemsId,jdbcType=INTEGER}"
     })
@@ -58,7 +58,8 @@ public interface TreatmentItemsMapper {
           "Fmedical_Items_ID = #{fmedicalItemsId,jdbcType=INTEGER},",
           "Quantity = #{quantity,jdbcType=INTEGER},",
           "Actual_Quantity = #{actualQuantity,jdbcType=INTEGER},",
-          "Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER}",
+          "Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER},",
+          "Valid_Status = #{validStatus,jdbcType=VARCHAR}",
         "where Treatment_Items_ID = #{treatmentItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(TreatmentItems record);

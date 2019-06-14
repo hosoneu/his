@@ -95,12 +95,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.GroupPrescription" >
-    <selectKey resultType="java.lang.Integer" keyProperty="groupPrescriptionId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="groupPrescriptionId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into group_prescription
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Group_Prescription_ID,
       <if test="doctorId != null" >
         Doctor_ID,
       </if>
@@ -121,7 +120,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{groupPrescriptionId,jdbcType=INTEGER},
       <if test="doctorId != null" >
         #{doctorId,jdbcType=INTEGER},
       </if>

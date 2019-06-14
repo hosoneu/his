@@ -22,16 +22,14 @@ public interface GroupPrescriptionMapper {
     int deleteByPrimaryKey(Integer groupPrescriptionId);
 
     @Insert({
-        "insert into group_prescription (Group_Prescription_ID, Doctor_ID, ",
-        "Group_Prescription_Code, Group_Prescription_Name, ",
-        "Group_Prescription_Scope, Create_Time, ",
-        "Prescription_Type)",
-        "values (#{groupPrescriptionId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{groupPrescriptionCode,jdbcType=VARCHAR}, #{groupPrescriptionName,jdbcType=VARCHAR}, ",
-        "#{groupPrescriptionScope,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{prescriptionType,jdbcType=CHAR})"
+        "insert into group_prescription (Doctor_ID, Group_Prescription_Code, ",
+        "Group_Prescription_Name, Group_Prescription_Scope, ",
+        "Create_Time, Prescription_Type)",
+        "values (#{doctorId,jdbcType=INTEGER}, #{groupPrescriptionCode,jdbcType=VARCHAR}, ",
+        "#{groupPrescriptionName,jdbcType=VARCHAR}, #{groupPrescriptionScope,jdbcType=CHAR}, ",
+        "#{createTime,jdbcType=TIMESTAMP}, #{prescriptionType,jdbcType=CHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupPrescriptionId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupPrescriptionId", before=false, resultType=Integer.class)
     int insert(GroupPrescription record);
 
     int insertSelective(GroupPrescription record);

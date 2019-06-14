@@ -164,63 +164,63 @@ public class MedicalRecordHomePageExample {
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdIsNull() {
-            addCriterion("Medical_Redical_ID is null");
+        public Criteria andMedicalRecordIdIsNull() {
+            addCriterion("Medical_Record_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdIsNotNull() {
-            addCriterion("Medical_Redical_ID is not null");
+        public Criteria andMedicalRecordIdIsNotNull() {
+            addCriterion("Medical_Record_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdEqualTo(Integer value) {
-            addCriterion("Medical_Redical_ID =", value, "medicalRedicalId");
+        public Criteria andMedicalRecordIdEqualTo(Integer value) {
+            addCriterion("Medical_Record_ID =", value, "medicalRecordId");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdNotEqualTo(Integer value) {
-            addCriterion("Medical_Redical_ID <>", value, "medicalRedicalId");
+        public Criteria andMedicalRecordIdNotEqualTo(Integer value) {
+            addCriterion("Medical_Record_ID <>", value, "medicalRecordId");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdGreaterThan(Integer value) {
-            addCriterion("Medical_Redical_ID >", value, "medicalRedicalId");
+        public Criteria andMedicalRecordIdGreaterThan(Integer value) {
+            addCriterion("Medical_Record_ID >", value, "medicalRecordId");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("Medical_Redical_ID >=", value, "medicalRedicalId");
+        public Criteria andMedicalRecordIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("Medical_Record_ID >=", value, "medicalRecordId");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdLessThan(Integer value) {
-            addCriterion("Medical_Redical_ID <", value, "medicalRedicalId");
+        public Criteria andMedicalRecordIdLessThan(Integer value) {
+            addCriterion("Medical_Record_ID <", value, "medicalRecordId");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdLessThanOrEqualTo(Integer value) {
-            addCriterion("Medical_Redical_ID <=", value, "medicalRedicalId");
+        public Criteria andMedicalRecordIdLessThanOrEqualTo(Integer value) {
+            addCriterion("Medical_Record_ID <=", value, "medicalRecordId");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdIn(List<Integer> values) {
-            addCriterion("Medical_Redical_ID in", values, "medicalRedicalId");
+        public Criteria andMedicalRecordIdIn(List<Integer> values) {
+            addCriterion("Medical_Record_ID in", values, "medicalRecordId");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdNotIn(List<Integer> values) {
-            addCriterion("Medical_Redical_ID not in", values, "medicalRedicalId");
+        public Criteria andMedicalRecordIdNotIn(List<Integer> values) {
+            addCriterion("Medical_Record_ID not in", values, "medicalRecordId");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdBetween(Integer value1, Integer value2) {
-            addCriterion("Medical_Redical_ID between", value1, value2, "medicalRedicalId");
+        public Criteria andMedicalRecordIdBetween(Integer value1, Integer value2) {
+            addCriterion("Medical_Record_ID between", value1, value2, "medicalRecordId");
             return (Criteria) this;
         }
 
-        public Criteria andMedicalRedicalIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("Medical_Redical_ID not between", value1, value2, "medicalRedicalId");
+        public Criteria andMedicalRecordIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("Medical_Record_ID not between", value1, value2, "medicalRecordId");
             return (Criteria) this;
         }
 
@@ -701,6 +701,76 @@ public class MedicalRecordHomePageExample {
 
         public Criteria andPhysicalExaminationNotBetween(String value1, String value2) {
             addCriterion("Physical_Examination not between", value1, value2, "physicalExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationIsNull() {
+            addCriterion("Assistant_Examination is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationIsNotNull() {
+            addCriterion("Assistant_Examination is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationEqualTo(String value) {
+            addCriterion("Assistant_Examination =", value, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationNotEqualTo(String value) {
+            addCriterion("Assistant_Examination <>", value, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationGreaterThan(String value) {
+            addCriterion("Assistant_Examination >", value, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationGreaterThanOrEqualTo(String value) {
+            addCriterion("Assistant_Examination >=", value, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationLessThan(String value) {
+            addCriterion("Assistant_Examination <", value, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationLessThanOrEqualTo(String value) {
+            addCriterion("Assistant_Examination <=", value, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationLike(String value) {
+            addCriterion("Assistant_Examination like", value, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationNotLike(String value) {
+            addCriterion("Assistant_Examination not like", value, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationIn(List<String> values) {
+            addCriterion("Assistant_Examination in", values, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationNotIn(List<String> values) {
+            addCriterion("Assistant_Examination not in", values, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationBetween(String value1, String value2) {
+            addCriterion("Assistant_Examination between", value1, value2, "assistantExamination");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssistantExaminationNotBetween(String value1, String value2) {
+            addCriterion("Assistant_Examination not between", value1, value2, "assistantExamination");
             return (Criteria) this;
         }
     }

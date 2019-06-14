@@ -8,6 +8,7 @@
       <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="Prescription_Type" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    Prescription_ID, Medical_Record_ID, Doctor_ID, Submit_Time, Prescription_Type
+    Prescription_ID, Medical_Record_ID, Doctor_ID, Submit_Time, Prescription_Type, Valid_Status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.PrescriptionExample" >
     select
@@ -92,12 +93,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.Prescription" >
-    <selectKey resultType="java.lang.Integer" keyProperty="prescriptionId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="prescriptionId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into prescription
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Prescription_ID,
       <if test="medicalRecordId != null" >
         Medical_Record_ID,
       </if>
@@ -110,9 +110,11 @@
       <if test="prescriptionType != null" >
         Prescription_Type,
       </if>
+      <if test="validStatus != null" >
+        Valid_Status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{prescriptionId,jdbcType=INTEGER},
       <if test="medicalRecordId != null" >
         #{medicalRecordId,jdbcType=INTEGER},
       </if>
@@ -124,6 +126,9 @@
       </if>
       <if test="prescriptionType != null" >
         #{prescriptionType,jdbcType=CHAR},
+      </if>
+      <if test="validStatus != null" >
+        #{validStatus,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -151,6 +156,9 @@
       <if test="record.prescriptionType != null" >
         Prescription_Type = #{record.prescriptionType,jdbcType=CHAR},
       </if>
+      <if test="record.validStatus != null" >
+        Valid_Status = #{record.validStatus,jdbcType=CHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -162,7 +170,8 @@
       Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
       Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
       Submit_Time = #{record.submitTime,jdbcType=TIMESTAMP},
-      Prescription_Type = #{record.prescriptionType,jdbcType=CHAR}
+      Prescription_Type = #{record.prescriptionType,jdbcType=CHAR},
+      Valid_Status = #{record.validStatus,jdbcType=CHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -181,6 +190,9 @@
       </if>
       <if test="prescriptionType != null" >
         Prescription_Type = #{prescriptionType,jdbcType=CHAR},
+      </if>
+      <if test="validStatus != null" >
+        Valid_Status = #{validStatus,jdbcType=CHAR},
       </if>
     </set>
     where Prescription_ID = #{prescriptionId,jdbcType=INTEGER}

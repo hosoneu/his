@@ -89,18 +89,16 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.CalculationType" >
-    <selectKey resultType="java.lang.Integer" keyProperty="calculationTypeId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="calculationTypeId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into calculation_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Calculation_Type_ID,
       <if test="calculationTypeName != null" >
         Calculation_Type_Name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{calculationTypeId,jdbcType=INTEGER},
       <if test="calculationTypeName != null" >
         #{calculationTypeName,jdbcType=VARCHAR},
       </if>

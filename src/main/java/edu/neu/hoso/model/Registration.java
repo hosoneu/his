@@ -1,6 +1,5 @@
 package edu.neu.hoso.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Registration {
@@ -22,7 +21,7 @@ public class Registration {
 
     private String buyMedicalRecord;
 
-    private BigDecimal registrationTotalCost;
+    private Double registrationTotalCost;
 
     private Integer expenseTypeId;
 
@@ -30,7 +29,7 @@ public class Registration {
 
     private String registrationStatus;
 
-    public Registration(Integer registrationId, Integer medicalRecordId, Integer registrationLevelId, Integer patientId, Integer departmentId, Integer calculationTypeId, Integer doctorId, Date registrationDate, String buyMedicalRecord, BigDecimal registrationTotalCost, Integer expenseTypeId, Integer expenseItemsId, String registrationStatus) {
+    public Registration(Integer registrationId, Integer medicalRecordId, Integer registrationLevelId, Integer patientId, Integer departmentId, Integer calculationTypeId, Integer doctorId, Date registrationDate, String buyMedicalRecord, Double registrationTotalCost, Integer expenseTypeId, Integer expenseItemsId, String registrationStatus) {
         this.registrationId = registrationId;
         this.medicalRecordId = medicalRecordId;
         this.registrationLevelId = registrationLevelId;
@@ -122,11 +121,11 @@ public class Registration {
         this.buyMedicalRecord = buyMedicalRecord == null ? null : buyMedicalRecord.trim();
     }
 
-    public BigDecimal getRegistrationTotalCost() {
+    public Double getRegistrationTotalCost() {
         return registrationTotalCost;
     }
 
-    public void setRegistrationTotalCost(BigDecimal registrationTotalCost) {
+    public void setRegistrationTotalCost(Double registrationTotalCost) {
         this.registrationTotalCost = registrationTotalCost;
     }
 

@@ -22,14 +22,14 @@ public interface GroupTreatmentMapper {
     int deleteByPrimaryKey(Integer groupTreatmentId);
 
     @Insert({
-        "insert into group_treatment (Group_Treatment_ID, Doctor_ID, ",
-        "Group_Treatment_Code, Group_Treatment_Name, ",
-        "Group_Treatment_Scope, Create_Time)",
-        "values (#{groupTreatmentId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{groupTreatmentCode,jdbcType=VARCHAR}, #{groupTreatmentName,jdbcType=VARCHAR}, ",
-        "#{groupTreatmentScope,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP})"
+        "insert into group_treatment (Doctor_ID, Group_Treatment_Code, ",
+        "Group_Treatment_Name, Group_Treatment_Scope, ",
+        "Create_Time)",
+        "values (#{doctorId,jdbcType=INTEGER}, #{groupTreatmentCode,jdbcType=VARCHAR}, ",
+        "#{groupTreatmentName,jdbcType=VARCHAR}, #{groupTreatmentScope,jdbcType=CHAR}, ",
+        "#{createTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupTreatmentId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="groupTreatmentId", before=false, resultType=Integer.class)
     int insert(GroupTreatment record);
 
     int insertSelective(GroupTreatment record);

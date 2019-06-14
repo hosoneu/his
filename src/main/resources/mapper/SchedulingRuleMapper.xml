@@ -95,12 +95,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.SchedulingRule" >
-    <selectKey resultType="java.lang.Integer" keyProperty="schedulingRuleId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="schedulingRuleId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into scheduling_rule
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Scheduling_Rule_ID,
       <if test="doctorId != null" >
         Doctor_ID,
       </if>
@@ -121,7 +120,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{schedulingRuleId,jdbcType=INTEGER},
       <if test="doctorId != null" >
         #{doctorId,jdbcType=INTEGER},
       </if>

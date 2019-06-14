@@ -1,37 +1,25 @@
 package edu.neu.hoso.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 public class ExpenseItems {
     private Integer expenseItemsId;
 
     private Integer medicalRecordId;
 
-    private BigDecimal totalCost;
+    private Double totalCost;
 
     private String payStatus;
 
-    private String isDayCal;
+    private Integer invoiceId;
 
-    private Date payTime;
+    private Integer expenseTypeId;
 
-    private Integer invoiceNo;
-
-    private Integer payModeId;
-
-    private Integer userId;
-
-    public ExpenseItems(Integer expenseItemsId, Integer medicalRecordId, BigDecimal totalCost, String payStatus, String isDayCal, Date payTime, Integer invoiceNo, Integer payModeId, Integer userId) {
+    public ExpenseItems(Integer expenseItemsId, Integer medicalRecordId, Double totalCost, String payStatus, Integer invoiceId, Integer expenseTypeId) {
         this.expenseItemsId = expenseItemsId;
         this.medicalRecordId = medicalRecordId;
         this.totalCost = totalCost;
         this.payStatus = payStatus;
-        this.isDayCal = isDayCal;
-        this.payTime = payTime;
-        this.invoiceNo = invoiceNo;
-        this.payModeId = payModeId;
-        this.userId = userId;
+        this.invoiceId = invoiceId;
+        this.expenseTypeId = expenseTypeId;
     }
 
     public ExpenseItems() {
@@ -54,11 +42,11 @@ public class ExpenseItems {
         this.medicalRecordId = medicalRecordId;
     }
 
-    public BigDecimal getTotalCost() {
+    public Double getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(BigDecimal totalCost) {
+    public void setTotalCost(Double totalCost) {
         this.totalCost = totalCost;
     }
 
@@ -70,43 +58,19 @@ public class ExpenseItems {
         this.payStatus = payStatus == null ? null : payStatus.trim();
     }
 
-    public String getIsDayCal() {
-        return isDayCal;
+    public Integer getInvoiceId() {
+        return invoiceId;
     }
 
-    public void setIsDayCal(String isDayCal) {
-        this.isDayCal = isDayCal == null ? null : isDayCal.trim();
+    public void setInvoiceId(Integer invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
-    public Date getPayTime() {
-        return payTime;
+    public Integer getExpenseTypeId() {
+        return expenseTypeId;
     }
 
-    public void setPayTime(Date payTime) {
-        this.payTime = payTime;
-    }
-
-    public Integer getInvoiceNo() {
-        return invoiceNo;
-    }
-
-    public void setInvoiceNo(Integer invoiceNo) {
-        this.invoiceNo = invoiceNo;
-    }
-
-    public Integer getPayModeId() {
-        return payModeId;
-    }
-
-    public void setPayModeId(Integer payModeId) {
-        this.payModeId = payModeId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setExpenseTypeId(Integer expenseTypeId) {
+        this.expenseTypeId = expenseTypeId;
     }
 }

@@ -22,22 +22,20 @@ public interface RegistrationMapper {
     int deleteByPrimaryKey(Integer registrationId);
 
     @Insert({
-        "insert into registration (Registration_ID, Medical_Record_ID, ",
-        "Registration_Level_ID, Patient_ID, ",
-        "Department_ID, Calculation_Type_ID, ",
-        "Doctor_ID, Registration_Date, ",
-        "Buy_Medical_Record, Registration_Total_Cost, ",
-        "Expense_Type_ID, Expense_Items_ID, ",
-        "Registration_Status)",
-        "values (#{registrationId,jdbcType=INTEGER}, #{medicalRecordId,jdbcType=INTEGER}, ",
-        "#{registrationLevelId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, ",
-        "#{departmentId,jdbcType=INTEGER}, #{calculationTypeId,jdbcType=INTEGER}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{registrationDate,jdbcType=DATE}, ",
-        "#{buyMedicalRecord,jdbcType=CHAR}, #{registrationTotalCost,jdbcType=DECIMAL}, ",
-        "#{expenseTypeId,jdbcType=INTEGER}, #{expenseItemsId,jdbcType=INTEGER}, ",
-        "#{registrationStatus,jdbcType=CHAR})"
+        "insert into registration (Medical_Record_ID, Registration_Level_ID, ",
+        "Patient_ID, Department_ID, ",
+        "Calculation_Type_ID, Doctor_ID, ",
+        "Registration_Date, Buy_Medical_Record, ",
+        "Registration_Total_Cost, Expense_Type_ID, ",
+        "Expense_Items_ID, Registration_Status)",
+        "values (#{medicalRecordId,jdbcType=INTEGER}, #{registrationLevelId,jdbcType=INTEGER}, ",
+        "#{patientId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, ",
+        "#{calculationTypeId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{registrationDate,jdbcType=DATE}, #{buyMedicalRecord,jdbcType=CHAR}, ",
+        "#{registrationTotalCost,jdbcType=DOUBLE}, #{expenseTypeId,jdbcType=INTEGER}, ",
+        "#{expenseItemsId,jdbcType=INTEGER}, #{registrationStatus,jdbcType=CHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="registrationId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="registrationId", before=false, resultType=Integer.class)
     int insert(Registration record);
 
     int insertSelective(Registration record);
@@ -71,7 +69,7 @@ public interface RegistrationMapper {
           "Doctor_ID = #{doctorId,jdbcType=INTEGER},",
           "Registration_Date = #{registrationDate,jdbcType=DATE},",
           "Buy_Medical_Record = #{buyMedicalRecord,jdbcType=CHAR},",
-          "Registration_Total_Cost = #{registrationTotalCost,jdbcType=DECIMAL},",
+          "Registration_Total_Cost = #{registrationTotalCost,jdbcType=DOUBLE},",
           "Expense_Type_ID = #{expenseTypeId,jdbcType=INTEGER},",
           "Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER},",
           "Registration_Status = #{registrationStatus,jdbcType=CHAR}",

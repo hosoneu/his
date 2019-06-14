@@ -7,7 +7,7 @@
       <arg column="User_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Day_Cal_StartDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="Day_Cal_EndDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="Day_Cal_Total" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="Day_Cal_Total" jdbcType="DOUBLE" javaType="java.lang.Double" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -92,12 +92,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.DayCal" >
-    <selectKey resultType="java.lang.Integer" keyProperty="dayCalId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="dayCalId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into day_cal
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Day_Cal_ID,
       <if test="userId != null" >
         User_ID,
       </if>
@@ -112,7 +111,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{dayCalId,jdbcType=INTEGER},
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
@@ -123,7 +121,7 @@
         #{dayCalEnddate,jdbcType=TIMESTAMP},
       </if>
       <if test="dayCalTotal != null" >
-        #{dayCalTotal,jdbcType=DECIMAL},
+        #{dayCalTotal,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -149,7 +147,7 @@
         Day_Cal_EndDate = #{record.dayCalEnddate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.dayCalTotal != null" >
-        Day_Cal_Total = #{record.dayCalTotal,jdbcType=DECIMAL},
+        Day_Cal_Total = #{record.dayCalTotal,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -162,7 +160,7 @@
       User_ID = #{record.userId,jdbcType=INTEGER},
       Day_Cal_StartDate = #{record.dayCalStartdate,jdbcType=TIMESTAMP},
       Day_Cal_EndDate = #{record.dayCalEnddate,jdbcType=TIMESTAMP},
-      Day_Cal_Total = #{record.dayCalTotal,jdbcType=DECIMAL}
+      Day_Cal_Total = #{record.dayCalTotal,jdbcType=DOUBLE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -180,7 +178,7 @@
         Day_Cal_EndDate = #{dayCalEnddate,jdbcType=TIMESTAMP},
       </if>
       <if test="dayCalTotal != null" >
-        Day_Cal_Total = #{dayCalTotal,jdbcType=DECIMAL},
+        Day_Cal_Total = #{dayCalTotal,jdbcType=DOUBLE},
       </if>
     </set>
     where Day_Cal_ID = #{dayCalId,jdbcType=INTEGER}

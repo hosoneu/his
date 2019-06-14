@@ -1,37 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="edu.neu.hoso.model.UserMapper">
-  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.User">
-    <constructor>
-      <arg column="User_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="User_loginName" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="User_password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="Role_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="User_Name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="Department_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="User_Title_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="User_Gender" javaType="java.lang.String" jdbcType="CHAR" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.UserMapper" >
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.User" >
+    <constructor >
+      <idArg column="User_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="User_loginName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="User_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Role_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="User_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Department_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="User_Title_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="User_Gender" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="User_Status" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="User_Scheduling_LimitCount" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -42,25 +44,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -71,123 +73,139 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     User_ID, User_loginName, User_password, Role_ID, User_Name, Department_ID, User_Title_ID, 
-    User_Gender
+    User_Gender, User_Status, User_Scheduling_LimitCount
   </sql>
-  <select id="selectByExample" parameterType="edu.neu.hoso.example.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.UserExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from user
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.UserExample">
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.UserExample" >
     delete from user
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insertSelective" parameterType="edu.neu.hoso.model.User">
-    <selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.Integer">
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.User" >
+    <selectKey resultType="java.lang.Integer" keyProperty="userId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      User_ID,
-      <if test="userLoginname != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userLoginname != null" >
         User_loginName,
       </if>
-      <if test="userPassword != null">
+      <if test="userPassword != null" >
         User_password,
       </if>
-      <if test="roleId != null">
+      <if test="roleId != null" >
         Role_ID,
       </if>
-      <if test="userName != null">
+      <if test="userName != null" >
         User_Name,
       </if>
-      <if test="departmentId != null">
+      <if test="departmentId != null" >
         Department_ID,
       </if>
-      <if test="userTitleId != null">
+      <if test="userTitleId != null" >
         User_Title_ID,
       </if>
-      <if test="userGender != null">
+      <if test="userGender != null" >
         User_Gender,
       </if>
+      <if test="userStatus != null" >
+        User_Status,
+      </if>
+      <if test="userSchedulingLimitcount != null" >
+        User_Scheduling_LimitCount,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{userId,jdbcType=INTEGER},
-      <if test="userLoginname != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userLoginname != null" >
         #{userLoginname,jdbcType=VARCHAR},
       </if>
-      <if test="userPassword != null">
+      <if test="userPassword != null" >
         #{userPassword,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null">
+      <if test="roleId != null" >
         #{roleId,jdbcType=INTEGER},
       </if>
-      <if test="userName != null">
+      <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="departmentId != null">
+      <if test="departmentId != null" >
         #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="userTitleId != null">
+      <if test="userTitleId != null" >
         #{userTitleId,jdbcType=INTEGER},
       </if>
-      <if test="userGender != null">
+      <if test="userGender != null" >
         #{userGender,jdbcType=CHAR},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=CHAR},
+      </if>
+      <if test="userSchedulingLimitcount != null" >
+        #{userSchedulingLimitcount,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="edu.neu.hoso.example.UserExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="edu.neu.hoso.example.UserExample" resultType="java.lang.Integer" >
     select count(*) from user
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update user
-    <set>
-      <if test="record.userId != null">
+    <set >
+      <if test="record.userId != null" >
         User_ID = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.userLoginname != null">
+      <if test="record.userLoginname != null" >
         User_loginName = #{record.userLoginname,jdbcType=VARCHAR},
       </if>
-      <if test="record.userPassword != null">
+      <if test="record.userPassword != null" >
         User_password = #{record.userPassword,jdbcType=VARCHAR},
       </if>
-      <if test="record.roleId != null">
+      <if test="record.roleId != null" >
         Role_ID = #{record.roleId,jdbcType=INTEGER},
       </if>
-      <if test="record.userName != null">
+      <if test="record.userName != null" >
         User_Name = #{record.userName,jdbcType=VARCHAR},
       </if>
-      <if test="record.departmentId != null">
+      <if test="record.departmentId != null" >
         Department_ID = #{record.departmentId,jdbcType=INTEGER},
       </if>
-      <if test="record.userTitleId != null">
+      <if test="record.userTitleId != null" >
         User_Title_ID = #{record.userTitleId,jdbcType=INTEGER},
       </if>
-      <if test="record.userGender != null">
+      <if test="record.userGender != null" >
         User_Gender = #{record.userGender,jdbcType=CHAR},
       </if>
+      <if test="record.userStatus != null" >
+        User_Status = #{record.userStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.userSchedulingLimitcount != null" >
+        User_Scheduling_LimitCount = #{record.userSchedulingLimitcount,jdbcType=INTEGER},
+      </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update user
     set User_ID = #{record.userId,jdbcType=INTEGER},
       User_loginName = #{record.userLoginname,jdbcType=VARCHAR},
@@ -196,94 +214,44 @@
       User_Name = #{record.userName,jdbcType=VARCHAR},
       Department_ID = #{record.departmentId,jdbcType=INTEGER},
       User_Title_ID = #{record.userTitleId,jdbcType=INTEGER},
-      User_Gender = #{record.userGender,jdbcType=CHAR}
-    <if test="_parameter != null">
+      User_Gender = #{record.userGender,jdbcType=CHAR},
+      User_Status = #{record.userStatus,jdbcType=CHAR},
+      User_Scheduling_LimitCount = #{record.userSchedulingLimitcount,jdbcType=INTEGER}
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-<!--  <sql id="Example_Where_Clause">-->
-<!--    <where>-->
-<!--      <foreach collection="oredCriteria" item="criteria" separator="or">-->
-<!--        <if test="criteria.valid">-->
-<!--          <trim prefix="(" prefixOverrides="and" suffix=")">-->
-<!--            <foreach collection="criteria.criteria" item="criterion">-->
-<!--              <choose>-->
-<!--                <when test="criterion.noValue">-->
-<!--                  and ${criterion.condition}-->
-<!--                </when>-->
-<!--                <when test="criterion.singleValue">-->
-<!--                  and ${criterion.condition} #{criterion.value}-->
-<!--                </when>-->
-<!--                <when test="criterion.betweenValue">-->
-<!--                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
-<!--                </when>-->
-<!--                <when test="criterion.listValue">-->
-<!--                  and ${criterion.condition}-->
-<!--                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">-->
-<!--                    #{listItem}-->
-<!--                  </foreach>-->
-<!--                </when>-->
-<!--              </choose>-->
-<!--            </foreach>-->
-<!--          </trim>-->
-<!--        </if>-->
-<!--      </foreach>-->
-<!--    </where>-->
-<!--  </sql>-->
-<!--  <sql id="Update_By_Example_Where_Clause">-->
-<!--    <where>-->
-<!--      <foreach collection="example.oredCriteria" item="criteria" separator="or">-->
-<!--        <if test="criteria.valid">-->
-<!--          <trim prefix="(" prefixOverrides="and" suffix=")">-->
-<!--            <foreach collection="criteria.criteria" item="criterion">-->
-<!--              <choose>-->
-<!--                <when test="criterion.noValue">-->
-<!--                  and ${criterion.condition}-->
-<!--                </when>-->
-<!--                <when test="criterion.singleValue">-->
-<!--                  and ${criterion.condition} #{criterion.value}-->
-<!--                </when>-->
-<!--                <when test="criterion.betweenValue">-->
-<!--                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
-<!--                </when>-->
-<!--                <when test="criterion.listValue">-->
-<!--                  and ${criterion.condition}-->
-<!--                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">-->
-<!--                    #{listItem}-->
-<!--                  </foreach>-->
-<!--                </when>-->
-<!--              </choose>-->
-<!--            </foreach>-->
-<!--          </trim>-->
-<!--        </if>-->
-<!--      </foreach>-->
-<!--    </where>-->
-<!--  </sql>-->
-<!--  <select id="selectByExample" parameterType="edu.neu.hoso.example.UserExample" resultMap="BaseResultMap">-->
-<!--    select-->
-<!--    <if test="distinct">-->
-<!--      distinct-->
-<!--    </if>-->
-<!--    <include refid="Base_Column_List" />-->
-<!--    from user-->
-<!--    <if test="_parameter != null">-->
-<!--      <include refid="Example_Where_Clause" />-->
-<!--    </if>-->
-<!--    <if test="orderByClause != null">-->
-<!--      order by ${orderByClause}-->
-<!--    </if>-->
-<!--  </select>-->
-<!--  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.UserExample">-->
-<!--    delete from user-->
-<!--    <if test="_parameter != null">-->
-<!--      <include refid="Example_Where_Clause" />-->
-<!--    </if>-->
-<!--  </delete>-->
-<!--  -->
-<!--  <select id="countByExample" parameterType="edu.neu.hoso.example.UserExample" resultType="java.lang.Integer">-->
-<!--    select count(*) from user-->
-<!--    <if test="_parameter != null">-->
-<!--      <include refid="Example_Where_Clause" />-->
-<!--    </if>-->
-<!--  </select>-->
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.User" >
+    update user
+    <set >
+      <if test="userLoginname != null" >
+        User_loginName = #{userLoginname,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        User_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        Role_ID = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        User_Name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        Department_ID = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="userTitleId != null" >
+        User_Title_ID = #{userTitleId,jdbcType=INTEGER},
+      </if>
+      <if test="userGender != null" >
+        User_Gender = #{userGender,jdbcType=CHAR},
+      </if>
+      <if test="userStatus != null" >
+        User_Status = #{userStatus,jdbcType=CHAR},
+      </if>
+      <if test="userSchedulingLimitcount != null" >
+        User_Scheduling_LimitCount = #{userSchedulingLimitcount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where User_ID = #{userId,jdbcType=INTEGER}
+  </update>
 </mapper>

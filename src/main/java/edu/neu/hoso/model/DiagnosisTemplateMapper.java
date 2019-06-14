@@ -22,14 +22,14 @@ public interface DiagnosisTemplateMapper {
     int deleteByPrimaryKey(Integer diagnosisTemplateId);
 
     @Insert({
-        "insert into diagnosis_template (Diagnosis_Template_ID, Medical_Record_Home_Page_Template_ID, ",
+        "insert into diagnosis_template (Medical_Record_Home_Page_Template_ID, ",
         "Disease_ID, Main_Diagnosis_Mark, ",
         "Suspect_Mark)",
-        "values (#{diagnosisTemplateId,jdbcType=INTEGER}, #{medicalRecordHomePageTemplateId,jdbcType=INTEGER}, ",
+        "values (#{medicalRecordHomePageTemplateId,jdbcType=INTEGER}, ",
         "#{diseaseId,jdbcType=INTEGER}, #{mainDiagnosisMark,jdbcType=CHAR}, ",
         "#{suspectMark,jdbcType=CHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diagnosisTemplateId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diagnosisTemplateId", before=false, resultType=Integer.class)
     int insert(DiagnosisTemplate record);
 
     int insertSelective(DiagnosisTemplate record);

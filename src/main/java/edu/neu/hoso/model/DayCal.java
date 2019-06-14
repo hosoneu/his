@@ -1,6 +1,5 @@
 package edu.neu.hoso.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class DayCal {
@@ -12,9 +11,9 @@ public class DayCal {
 
     private Date dayCalEnddate;
 
-    private BigDecimal dayCalTotal;
+    private Double dayCalTotal;
 
-    public DayCal(Integer dayCalId, Integer userId, Date dayCalStartdate, Date dayCalEnddate, BigDecimal dayCalTotal) {
+    public DayCal(Integer dayCalId, Integer userId, Date dayCalStartdate, Date dayCalEnddate, Double dayCalTotal) {
         this.dayCalId = dayCalId;
         this.userId = userId;
         this.dayCalStartdate = dayCalStartdate;
@@ -58,11 +57,11 @@ public class DayCal {
         this.dayCalEnddate = dayCalEnddate;
     }
 
-    public BigDecimal getDayCalTotal() {
+    public Double getDayCalTotal() {
         return dayCalTotal;
     }
 
-    public void setDayCalTotal(BigDecimal dayCalTotal) {
+    public void setDayCalTotal(Double dayCalTotal) {
         this.dayCalTotal = dayCalTotal;
     }
 }

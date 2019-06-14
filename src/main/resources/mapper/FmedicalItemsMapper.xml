@@ -7,7 +7,7 @@
       <arg column="Fmedical_Items_Code" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="Fmedical_Items_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="Fmedical_Items_Format" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="Fmedical_Items_Price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="Fmedical_Items_Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
       <arg column="Expense_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Department_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="Fmedical_Items_MnemonicCode" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -102,12 +102,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.FmedicalItems" >
-    <selectKey resultType="java.lang.Integer" keyProperty="fmedicalItemsId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fmedicalItemsId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into fmedical_items
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Fmedical_Items_ID,
       <if test="fmedicalItemsCode != null" >
         Fmedical_Items_Code,
       </if>
@@ -146,7 +145,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{fmedicalItemsId,jdbcType=INTEGER},
       <if test="fmedicalItemsCode != null" >
         #{fmedicalItemsCode,jdbcType=VARCHAR},
       </if>
@@ -157,7 +155,7 @@
         #{fmedicalItemsFormat,jdbcType=VARCHAR},
       </if>
       <if test="fmedicalItemsPrice != null" >
-        #{fmedicalItemsPrice,jdbcType=DECIMAL},
+        #{fmedicalItemsPrice,jdbcType=DOUBLE},
       </if>
       <if test="expenseTypeId != null" >
         #{expenseTypeId,jdbcType=INTEGER},
@@ -207,7 +205,7 @@
         Fmedical_Items_Format = #{record.fmedicalItemsFormat,jdbcType=VARCHAR},
       </if>
       <if test="record.fmedicalItemsPrice != null" >
-        Fmedical_Items_Price = #{record.fmedicalItemsPrice,jdbcType=DECIMAL},
+        Fmedical_Items_Price = #{record.fmedicalItemsPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.expenseTypeId != null" >
         Expense_Type_ID = #{record.expenseTypeId,jdbcType=INTEGER},
@@ -244,7 +242,7 @@
       Fmedical_Items_Code = #{record.fmedicalItemsCode,jdbcType=VARCHAR},
       Fmedical_Items_Name = #{record.fmedicalItemsName,jdbcType=VARCHAR},
       Fmedical_Items_Format = #{record.fmedicalItemsFormat,jdbcType=VARCHAR},
-      Fmedical_Items_Price = #{record.fmedicalItemsPrice,jdbcType=DECIMAL},
+      Fmedical_Items_Price = #{record.fmedicalItemsPrice,jdbcType=DOUBLE},
       Expense_Type_ID = #{record.expenseTypeId,jdbcType=INTEGER},
       Department_ID = #{record.departmentId,jdbcType=INTEGER},
       Fmedical_Items_MnemonicCode = #{record.fmedicalItemsMnemoniccode,jdbcType=VARCHAR},
@@ -270,7 +268,7 @@
         Fmedical_Items_Format = #{fmedicalItemsFormat,jdbcType=VARCHAR},
       </if>
       <if test="fmedicalItemsPrice != null" >
-        Fmedical_Items_Price = #{fmedicalItemsPrice,jdbcType=DECIMAL},
+        Fmedical_Items_Price = #{fmedicalItemsPrice,jdbcType=DOUBLE},
       </if>
       <if test="expenseTypeId != null" >
         Expense_Type_ID = #{expenseTypeId,jdbcType=INTEGER},

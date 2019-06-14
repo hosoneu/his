@@ -22,14 +22,12 @@ public interface FunctionMapper {
     int deleteByPrimaryKey(Integer functionId);
 
     @Insert({
-        "insert into function (Function_ID, Role_ID, ",
-        "Function_URL, Function_Name, ",
-        "Reverse1)",
-        "values (#{functionId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, ",
-        "#{functionUrl,jdbcType=VARCHAR}, #{functionName,jdbcType=VARCHAR}, ",
-        "#{reverse1,jdbcType=INTEGER})"
+        "insert into function (Role_ID, Function_URL, ",
+        "Function_Name, Reverse1)",
+        "values (#{roleId,jdbcType=INTEGER}, #{functionUrl,jdbcType=VARCHAR}, ",
+        "#{functionName,jdbcType=VARCHAR}, #{reverse1,jdbcType=INTEGER})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="functionId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="functionId", before=false, resultType=Integer.class)
     int insert(Function record);
 
     int insertSelective(Function record);

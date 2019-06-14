@@ -22,16 +22,20 @@ public interface ExaminationDrugsItemsMapper {
     int deleteByPrimaryKey(Integer examinationDrugsItemsId);
 
     @Insert({
-        "insert into examination_drugs_items (Examination_Drugs_Items_ID, Examination_Fmedical_Items_ID, ",
-        "Drugs_ID, Usage, Quantity, ",
+        "insert into examination_drugs_items (Examination_Fmedical_Items_ID, ",
+        "Drugs_ID, Doctor_ID, ",
+        "Drugs_Usage, Quantity, ",
         "Actual_Quantity, Drugs_Dispensing_Status, ",
-        "Expense_Items_ID, Doctor_ID)",
-        "values (#{examinationDrugsItemsId,jdbcType=INTEGER}, #{examinationFmedicalItemsId,jdbcType=INTEGER}, ",
-        "#{drugsId,jdbcType=INTEGER}, #{usage,jdbcType=CHAR}, #{quantity,jdbcType=INTEGER}, ",
+        "Expense_Items_ID, Times, ",
+        "Days, Dosage)",
+        "values (#{examinationFmedicalItemsId,jdbcType=INTEGER}, ",
+        "#{drugsId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{drugsUsage,jdbcType=CHAR}, #{quantity,jdbcType=INTEGER}, ",
         "#{actualQuantity,jdbcType=INTEGER}, #{drugsDispensingStatus,jdbcType=CHAR}, ",
-        "#{expenseItemsId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER})"
+        "#{expenseItemsId,jdbcType=INTEGER}, #{times,jdbcType=INTEGER}, ",
+        "#{days,jdbcType=INTEGER}, #{dosage,jdbcType=DOUBLE})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="examinationDrugsItemsId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="examinationDrugsItemsId", before=false, resultType=Integer.class)
     int insert(ExaminationDrugsItems record);
 
     int insertSelective(ExaminationDrugsItems record);
@@ -40,8 +44,9 @@ public interface ExaminationDrugsItemsMapper {
 
     @Select({
         "select",
-        "Examination_Drugs_Items_ID, Examination_Fmedical_Items_ID, Drugs_ID, Usage, ",
-        "Quantity, Actual_Quantity, Drugs_Dispensing_Status, Expense_Items_ID, Doctor_ID",
+        "Examination_Drugs_Items_ID, Examination_Fmedical_Items_ID, Drugs_ID, Doctor_ID, ",
+        "Drugs_Usage, Quantity, Actual_Quantity, Drugs_Dispensing_Status, Expense_Items_ID, ",
+        "Times, Days, Dosage",
         "from examination_drugs_items",
         "where Examination_Drugs_Items_ID = #{examinationDrugsItemsId,jdbcType=INTEGER}"
     })
@@ -58,12 +63,15 @@ public interface ExaminationDrugsItemsMapper {
         "update examination_drugs_items",
         "set Examination_Fmedical_Items_ID = #{examinationFmedicalItemsId,jdbcType=INTEGER},",
           "Drugs_ID = #{drugsId,jdbcType=INTEGER},",
-          "Usage = #{usage,jdbcType=CHAR},",
+          "Doctor_ID = #{doctorId,jdbcType=INTEGER},",
+          "Drugs_Usage = #{drugsUsage,jdbcType=CHAR},",
           "Quantity = #{quantity,jdbcType=INTEGER},",
           "Actual_Quantity = #{actualQuantity,jdbcType=INTEGER},",
           "Drugs_Dispensing_Status = #{drugsDispensingStatus,jdbcType=CHAR},",
           "Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER},",
-          "Doctor_ID = #{doctorId,jdbcType=INTEGER}",
+          "Times = #{times,jdbcType=INTEGER},",
+          "Days = #{days,jdbcType=INTEGER},",
+          "Dosage = #{dosage,jdbcType=DOUBLE}",
         "where Examination_Drugs_Items_ID = #{examinationDrugsItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(ExaminationDrugsItems record);

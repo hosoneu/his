@@ -92,12 +92,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.GroupTreatmentItems" >
-    <selectKey resultType="java.lang.Integer" keyProperty="groupTreatmentItemsId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="groupTreatmentItemsId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into group_treatment_items
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Group_Treatment_Items_ID,
       <if test="groupTreatmentId != null" >
         Group_Treatment_ID,
       </if>
@@ -112,7 +111,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{groupTreatmentItemsId,jdbcType=INTEGER},
       <if test="groupTreatmentId != null" >
         #{groupTreatmentId,jdbcType=INTEGER},
       </if>

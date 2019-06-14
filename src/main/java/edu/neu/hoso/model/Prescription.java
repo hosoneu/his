@@ -13,12 +13,15 @@ public class Prescription {
 
     private String prescriptionType;
 
-    public Prescription(Integer prescriptionId, Integer medicalRecordId, Integer doctorId, Date submitTime, String prescriptionType) {
+    private String validStatus;
+
+    public Prescription(Integer prescriptionId, Integer medicalRecordId, Integer doctorId, Date submitTime, String prescriptionType, String validStatus) {
         this.prescriptionId = prescriptionId;
         this.medicalRecordId = medicalRecordId;
         this.doctorId = doctorId;
         this.submitTime = submitTime;
         this.prescriptionType = prescriptionType;
+        this.validStatus = validStatus;
     }
 
     public Prescription() {
@@ -63,5 +66,13 @@ public class Prescription {
 
     public void setPrescriptionType(String prescriptionType) {
         this.prescriptionType = prescriptionType == null ? null : prescriptionType.trim();
+    }
+
+    public String getValidStatus() {
+        return validStatus;
+    }
+
+    public void setValidStatus(String validStatus) {
+        this.validStatus = validStatus == null ? null : validStatus.trim();
     }
 }

@@ -1,8 +1,7 @@
 package edu.neu.hoso.model;
 
-import java.util.List;
-
 import edu.neu.hoso.example.ConstantTypeExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -23,12 +22,10 @@ public interface ConstantTypeMapper {
     int deleteByPrimaryKey(Integer constantTypeId);
 
     @Insert({
-        "insert into constant_type (Constant_Type_ID, Constant_Type_Code, ",
-        "Constant_Type_Name)",
-        "values (#{constantTypeId,jdbcType=INTEGER}, #{constantTypeCode,jdbcType=VARCHAR}, ",
-        "#{constantTypeName,jdbcType=VARCHAR})"
+        "insert into constant_type (Constant_Type_Code, Constant_Type_Name)",
+        "values (#{constantTypeCode,jdbcType=VARCHAR}, #{constantTypeName,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="constantTypeId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="constantTypeId", before=false, resultType=Integer.class)
     int insert(ConstantType record);
 
     int insertSelective(ConstantType record);

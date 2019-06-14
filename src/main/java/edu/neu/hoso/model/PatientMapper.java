@@ -22,16 +22,14 @@ public interface PatientMapper {
     int deleteByPrimaryKey(Integer patientId);
 
     @Insert({
-        "insert into patient (Patient_ID, Patient_Name, ",
-        "Patient_Gender, Patient_Birth, ",
-        "Patient_Age, Patient_IDentity, ",
-        "Patient_Address)",
-        "values (#{patientId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, ",
-        "#{patientGender,jdbcType=CHAR}, #{patientBirth,jdbcType=DATE}, ",
-        "#{patientAge,jdbcType=INTEGER}, #{patientIdentity,jdbcType=VARCHAR}, ",
-        "#{patientAddress,jdbcType=VARCHAR})"
+        "insert into patient (Patient_Name, Patient_Gender, ",
+        "Patient_Birth, Patient_Age, ",
+        "Patient_IDentity, Patient_Address)",
+        "values (#{patientName,jdbcType=VARCHAR}, #{patientGender,jdbcType=CHAR}, ",
+        "#{patientBirth,jdbcType=DATE}, #{patientAge,jdbcType=INTEGER}, ",
+        "#{patientIdentity,jdbcType=VARCHAR}, #{patientAddress,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="patientId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="patientId", before=false, resultType=Integer.class)
     int insert(Patient record);
 
     int insertSelective(Patient record);

@@ -1,8 +1,7 @@
 package edu.neu.hoso.model;
 
-import java.util.List;
-
 import edu.neu.hoso.example.CommonlyUsedFmedicalExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -23,12 +22,10 @@ public interface CommonlyUsedFmedicalMapper {
     int deleteByPrimaryKey(Integer commonlyUsedFmedicalId);
 
     @Insert({
-        "insert into commonly_used_fmedical (Commonly_Used_Fmedical_ID, Doctor_ID, ",
-        "Fmedical_Items_ID)",
-        "values (#{commonlyUsedFmedicalId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{fmedicalItemsId,jdbcType=INTEGER})"
+        "insert into commonly_used_fmedical (Doctor_ID, Fmedical_Items_ID)",
+        "values (#{doctorId,jdbcType=INTEGER}, #{fmedicalItemsId,jdbcType=INTEGER})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="commonlyUsedFmedicalId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="commonlyUsedFmedicalId", before=false, resultType=Integer.class)
     int insert(CommonlyUsedFmedical record);
 
     int insertSelective(CommonlyUsedFmedical record);

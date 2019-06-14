@@ -90,12 +90,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="edu.neu.hoso.model.ExpenseType" >
-    <selectKey resultType="java.lang.Integer" keyProperty="expenseTypeId" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="expenseTypeId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into expense_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      Expense_Type_ID,
       <if test="expenseTypeCode != null" >
         Expense_Type_Code,
       </if>
@@ -104,7 +103,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{expenseTypeId,jdbcType=INTEGER},
       <if test="expenseTypeCode != null" >
         #{expenseTypeCode,jdbcType=VARCHAR},
       </if>

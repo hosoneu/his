@@ -17,7 +17,11 @@ public class User {
 
     private String userGender;
 
-    public User(Integer userId, String userLoginname, String userPassword, Integer roleId, String userName, Integer departmentId, Integer userTitleId, String userGender) {
+    private String userStatus;
+
+    private Integer userSchedulingLimitcount;
+
+    public User(Integer userId, String userLoginname, String userPassword, Integer roleId, String userName, Integer departmentId, Integer userTitleId, String userGender, String userStatus, Integer userSchedulingLimitcount) {
         this.userId = userId;
         this.userLoginname = userLoginname;
         this.userPassword = userPassword;
@@ -26,6 +30,8 @@ public class User {
         this.departmentId = departmentId;
         this.userTitleId = userTitleId;
         this.userGender = userGender;
+        this.userStatus = userStatus;
+        this.userSchedulingLimitcount = userSchedulingLimitcount;
     }
 
     public User() {
@@ -94,5 +100,21 @@ public class User {
 
     public void setUserGender(String userGender) {
         this.userGender = userGender == null ? null : userGender.trim();
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus == null ? null : userStatus.trim();
+    }
+
+    public Integer getUserSchedulingLimitcount() {
+        return userSchedulingLimitcount;
+    }
+
+    public void setUserSchedulingLimitcount(Integer userSchedulingLimitcount) {
+        this.userSchedulingLimitcount = userSchedulingLimitcount;
     }
 }

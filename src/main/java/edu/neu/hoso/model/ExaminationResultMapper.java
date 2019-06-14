@@ -22,14 +22,12 @@ public interface ExaminationResultMapper {
     int deleteByPrimaryKey(Integer examinationResultId);
 
     @Insert({
-        "insert into examination_result (Examination_Result_ID, Doctor_ID, ",
-        "Findings, Diagnostic_Suggestion, ",
-        "Submit_Time)",
-        "values (#{examinationResultId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{findings,jdbcType=VARCHAR}, #{diagnosticSuggestion,jdbcType=VARCHAR}, ",
-        "#{submitTime,jdbcType=TIMESTAMP})"
+        "insert into examination_result (Doctor_ID, Findings, ",
+        "Diagnostic_Suggestion, Submit_Time)",
+        "values (#{doctorId,jdbcType=INTEGER}, #{findings,jdbcType=VARCHAR}, ",
+        "#{diagnosticSuggestion,jdbcType=VARCHAR}, #{submitTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="examinationResultId", before=true, resultType=Integer.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="examinationResultId", before=false, resultType=Integer.class)
     int insert(ExaminationResult record);
 
     int insertSelective(ExaminationResult record);
