@@ -72,4 +72,10 @@ public interface ExaminationFmedicalItemsMapper {
         "where Examination_Fmedical_Items_ID = #{examinationFmedicalItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(ExaminationFmedicalItems record);
+
+    //更新登记
+    void updateRegistrationStatus(@Param("Medical_record_ID")int Medical_record_ID, @Param("Department_ID")int Department_ID);
+
+    //输出该患者在该科室的全部项目
+    List<ExaminationFmedicalItems> getAllFmedical(@Param("Medical_record_ID")int Medical_record_ID, @Param("Department_ID")int Department_ID);
 }
