@@ -1,5 +1,8 @@
 package edu.neu.hoso.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class ExpenseItems {
     private Integer expenseItemsId;
 
@@ -12,6 +15,14 @@ public class ExpenseItems {
     private Integer invoiceId;
 
     private Integer expenseTypeId;
+
+    @Getter
+    @Setter
+    private ExpenseType expenseType;
+
+    @Getter
+    @Setter
+    private Invoice invoice;
 
     public ExpenseItems(Integer expenseItemsId, Integer medicalRecordId, Double totalCost, String payStatus, Integer invoiceId, Integer expenseTypeId) {
         this.expenseItemsId = expenseItemsId;

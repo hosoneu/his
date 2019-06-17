@@ -1,7 +1,11 @@
 package edu.neu.hoso.model;
 
 import edu.neu.hoso.example.ExpenseItemsExample;
+
+import java.util.Date;
 import java.util.List;
+
+import jdk.nashorn.internal.objects.annotations.Setter;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -61,4 +65,10 @@ public interface ExpenseItemsMapper {
         "where Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(ExpenseItems record);
+
+    List<ExpenseItems> getUnWithdrawExpenseItems(String invoiceNO);
+
+    List<ExpenseItems> getPatientUnPayExpenseItems(Integer medicalRecordId);
+
+    List<ExpenseItems> getPatientPayExpenseItems(@Param("medicalRecordId")Integer medicalRecordId, @Param("startDate")Date startDate, @Param("endDate")Date endDate);
 }
