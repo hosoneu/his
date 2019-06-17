@@ -29,6 +29,9 @@ public class Registration {
 
     private String registrationStatus;
 
+    /* 对应的患者对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.16*/
+    private Patient patient;
+
     public Registration(Integer registrationId, Integer medicalRecordId, Integer registrationLevelId, Integer patientId, Integer departmentId, Integer calculationTypeId, Integer doctorId, Date registrationDate, String buyMedicalRecord, Double registrationTotalCost, Integer expenseTypeId, Integer expenseItemsId, String registrationStatus) {
         this.registrationId = registrationId;
         this.medicalRecordId = medicalRecordId;
@@ -43,6 +46,31 @@ public class Registration {
         this.expenseTypeId = expenseTypeId;
         this.expenseItemsId = expenseItemsId;
         this.registrationStatus = registrationStatus;
+    }
+
+    public Registration(Integer registrationId, Integer medicalRecordId, Integer registrationLevelId, Integer patientId, Integer departmentId, Integer calculationTypeId, Integer doctorId, Date registrationDate, String buyMedicalRecord, Double registrationTotalCost, Integer expenseTypeId, Integer expenseItemsId, String registrationStatus, Patient patient) {
+        this.registrationId = registrationId;
+        this.medicalRecordId = medicalRecordId;
+        this.registrationLevelId = registrationLevelId;
+        this.patientId = patientId;
+        this.departmentId = departmentId;
+        this.calculationTypeId = calculationTypeId;
+        this.doctorId = doctorId;
+        this.registrationDate = registrationDate;
+        this.buyMedicalRecord = buyMedicalRecord;
+        this.registrationTotalCost = registrationTotalCost;
+        this.expenseTypeId = expenseTypeId;
+        this.expenseItemsId = expenseItemsId;
+        this.registrationStatus = registrationStatus;
+        this.patient = patient;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public Registration() {

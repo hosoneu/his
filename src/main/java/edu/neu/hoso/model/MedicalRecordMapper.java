@@ -63,4 +63,22 @@ public interface MedicalRecordMapper {
         "where Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(MedicalRecord record);
+
+    /**
+     * @title: listMedicalRecordHistoryByPatientId
+     * @description: 展示历史病历
+     * @author: 29-y
+     * @date: 2019-06-16 21:35
+     * @param: [patientId]
+     * @return: java.util.List<edu.neu.hoso.model.MedicalRecord>
+     * @throws:
+     */
+    @Select({
+            "select m.*,p.*,dia.*,dis.* " ,
+            "from registration r join medical_record m on r.Medical_Record_ID = m.Medical_Record_ID join medical_record_home_page p on p.Medical_Record_ID = m.Medical_Record_ID join diagnosis dia on dia.Medical_Record_ID = m.Medical_Record_ID join disease " ,
+            "dis on dia.Disease_ID = dis.Disease_ID " ,
+            "where r.Registration_Status=\"1\" and m.Is_Treament_Over = \"2\" and r.Patient_ID = #{patientId,jdbcType=INTEGER}"
+    })
+    @ResultMap("SecondResultMap")
+    List<MedicalRecord> listMedicalRecordHistoryByPatientId(Integer patientId);
 }

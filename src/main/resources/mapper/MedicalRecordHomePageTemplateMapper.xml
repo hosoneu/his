@@ -12,6 +12,19 @@
       <arg column="Physical_Examination" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
+
+  <!--  添加诊断列表的ResultMap by 29-y 2019.06.16 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.MedicalRecordHomePageTemplate">
+    <id property="medicalRecordHomePageTemplateId" column="Medical_Record_Home_Page_Template_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="name" column="Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="scope" column="Scope" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="chiefComplaint" column="Chief_Complaint" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="presentHistory" column="Present_History" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="physicalExamination" column="Physical_Examination" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <collection property="diagnosisTemplateList" ofType="edu.neu.hoso.model.DiagnosisTemplate" resultMap="edu.neu.hoso.model.DiagnosisTemplateMapper.SecondResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

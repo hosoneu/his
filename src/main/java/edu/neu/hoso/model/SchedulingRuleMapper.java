@@ -1,7 +1,8 @@
 package edu.neu.hoso.model;
 
-import edu.neu.hoso.example.SchedulingRuleExample;
 import java.util.List;
+
+import edu.neu.hoso.example.SchedulingRuleExample;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;

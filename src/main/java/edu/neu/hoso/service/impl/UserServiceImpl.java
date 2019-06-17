@@ -4,6 +4,7 @@ import edu.neu.hoso.example.UserExample;
 import edu.neu.hoso.model.User;
 import edu.neu.hoso.model.UserMapper;
 import edu.neu.hoso.service.UserService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @date: 2019-06-11 11:07
  * @version: V1.0
 */
+@Service
 public class UserServiceImpl implements UserService {
     @Resource
     UserMapper userMapper;
