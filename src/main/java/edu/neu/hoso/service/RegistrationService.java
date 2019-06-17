@@ -1,10 +1,8 @@
 package edu.neu.hoso.service;
 
-import edu.neu.hoso.model.ExpenseItems;
-import edu.neu.hoso.model.MedicalRecord;
-import edu.neu.hoso.model.Patient;
-import edu.neu.hoso.model.Registration;
+import edu.neu.hoso.model.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +20,12 @@ public interface RegistrationService {
     void update(Registration registration);
     Registration getRegistrationById(Integer id);
     List<Registration> getAllRegistration();
+    List<Registration> getRegistrationByMedicalRecordId(Integer medicalRecordId);
     Registration register(Registration registration, Patient patient, MedicalRecord medicalRecord, ExpenseItems expenseItems);
     void withdraw(Integer expenseItemsId, Integer userId);
+    void charge(List<Integer> expenseItemsIds, Integer userId, Integer payModeId);
+    void refund(List<Integer> expenseItemsIds, Integer userId);
+    Invoice offsetInvoice(Invoice oldInvoice, Integer userId);
+    List<ExpenseItems> getPatientPayExpenseItems(Integer medicalRecordId, Date startDate, Date endDate);
+    List<ExpenseItems> getPatientUnPayExpenseItems(Integer medicalRecordId);
 }
