@@ -9,6 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * @title: DoctorFinalDiagnosisController
+ * @package edu.neu.hoso.controller
+ * @description: 门诊医生用户确诊的控制类
+ * @author: 29-y
+ * @date: 2019-06-17 17:38
+ * @version: V1.0
+*/
 @RequestMapping("doctor/diagnosis")
 @RestController
 public class DoctorFinalDiagnosisController {

@@ -62,4 +62,43 @@ public interface GroupTreatmentMapper {
         "where Group_Treatment_ID = #{groupTreatmentId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(GroupTreatment record);
+
+    @Select({
+            "select group_t.*,items.*,fmedical.* " ,
+            "from group_treatment group_t join group_treatment_items items on group_t.Group_Treatment_ID = items.Group_Treatment_ID join fmedical_items fmedical on fmedical.Fmedical_Items_ID = items.Fmedical_Items_ID " ,
+            "where group_t.Doctor_ID = #{userId,jdbcType=INTEGER} and group_t.Group_Treatment_Scope = \"1\" "
+    })
+    @ResultMap("SecondResultMap")
+    List<GroupTreatment> listGroupTreatmentFromUser(Integer userId);
+
+    @Select({
+            "select group_t.*,items.*,fmedical.* " ,
+            "from group_treatment group_t join `user` create_doctor on create_doctor.User_ID = group_t.Doctor_ID join group_treatment_items items on group_t.Group_Treatment_ID = items.Group_Treatment_ID join fmedical_items fmedical on fmedical.Fmedical_Items_ID = items.Fmedical_Items_ID " ,
+            "where group_t.Group_Treatment_Scope=\"2\" and exists ( " ,
+            "select * " ,
+            "from `user` doctor " ,
+            "where doctor.Department_ID = create_doctor.Department_ID and doctor.User_ID = #{userId,jdbcType=INTEGER} " ,
+            ")"
+    })
+    @ResultMap("SecondResultMap")
+    List<GroupTreatment> listGroupTreatmentFromDepartment(Integer userId);
+
+    @Select({
+            "select group_t.*,items.*,fmedical.* " ,
+            "from group_treatment group_t join group_treatment_items items on group_t.Group_Treatment_ID = items.Group_Treatment_ID join fmedical_items fmedical on fmedical.Fmedical_Items_ID = items.Fmedical_Items_ID " ,
+            "where group_t.Group_Treatment_Scope=\"3\" "
+    })
+    @ResultMap("SecondResultMap")
+    List<GroupTreatment> listGroupTreatmentFromHospital();
+
+    @Select({
+            "select group_t.*,items.*,fmedical.* " ,
+            "from group_treatment group_t join group_treatment_items items on group_t.Group_Treatment_ID = items.Group_Treatment_ID join fmedical_items fmedical on fmedical.Fmedical_Items_ID = items.Fmedical_Items_ID " ,
+            "where group_t.Group_Treatment_ID = #{groupTreatmentId,jdbcType=INTEGER}"
+    })
+    @ResultMap("SecondResultMap")
+    GroupTreatment selectGroupTreatmentById(Integer groupTreatmentId);
+
+
+
 }
