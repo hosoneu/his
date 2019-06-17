@@ -76,4 +76,9 @@ public interface FmedicalItemsMapper {
         "where Fmedical_Items_ID = #{fmedicalItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(FmedicalItems record);
+
+    List<FmedicalItems> getAllFmedicalByMedicalID(@Param("Medical_record_ID")int Medical_record_ID, @Param("Department_ID")int Department_ID);
+
+    //输出该患者在该科室的全部已缴费且未做非药品项目
+    List<FmedicalItems> getFmedical(@Param("Medical_record_ID")int Medical_record_ID, @Param("Department_ID")int Department_ID);
 }

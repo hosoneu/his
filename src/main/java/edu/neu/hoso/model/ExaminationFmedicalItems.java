@@ -1,5 +1,7 @@
 package edu.neu.hoso.model;
 
+import java.util.List;
+
 public class ExaminationFmedicalItems {
     private Integer examinationFmedicalItemsId;
 
@@ -22,6 +24,12 @@ public class ExaminationFmedicalItems {
     private Integer expenseItemsId;
 
     private String validStatus;
+
+    private List<FmedicalItems> fmedicalItems;
+
+    public List<FmedicalItems> getFmedicalItems() {
+        return fmedicalItems;
+    }
 
     public ExaminationFmedicalItems(Integer examinationFmedicalItemsId, Integer examinationId, Integer fmedicalItemsId, Integer doctorId, String registrationStatus, String purposeRequirements, Integer quantity, Integer actualQuantity, Integer examinationResultId, Integer expenseItemsId, String validStatus) {
         this.examinationFmedicalItemsId = examinationFmedicalItemsId;

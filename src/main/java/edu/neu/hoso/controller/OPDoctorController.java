@@ -13,5 +13,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/OPDoctor")
 public class OPDoctorController {
 
-
 }

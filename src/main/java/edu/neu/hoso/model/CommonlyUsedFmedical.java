@@ -13,6 +13,11 @@ public class CommonlyUsedFmedical {
         this.fmedicalItemsId = fmedicalItemsId;
     }
 
+    public CommonlyUsedFmedical(Integer doctorId, Integer fmedicalItemsId) {
+        this.doctorId = doctorId;
+        this.fmedicalItemsId = fmedicalItemsId;
+    }
+
     public CommonlyUsedFmedical() {
         super();
     }

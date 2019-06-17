@@ -297,4 +297,15 @@
     </set>
     where Fmedical_Items_ID = #{fmedicalItemsId,jdbcType=INTEGER}
   </update>
+  <select id="getAllFmedicalByMedicalID" resultMap="BaseResultMap">
+      select fmedical_items.*
+      from examination NATURAL JOIN examination_fmedical_items NATURAL JOIN fmedical_items
+      where examination.Medical_Record_ID=#{Medical_record_ID} and fmedical_items.Department_ID=#{Department_ID}
+  </select>
+
+  <select id="getFmedical" resultMap="BaseResultMap">
+    select fmedical_items.*
+    from examination NATURAL JOIN examination_fmedical_items NATURAL JOIN fmedical_items
+    where examination.Medical_Record_ID=#{Medical_record_ID} and fmedical_items.Department_ID=#{Department_ID} and examination_fmedical_items.Expense_Items_ID=1 and examination_fmedical_items.Examination_Result_ID is null;
+  </select>
 </mapper>
