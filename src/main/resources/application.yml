@@ -23,7 +23,7 @@ spring:
 
     url: jdbc:mysql://localhost:3306/hoso?characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: root
-    password: qq980829
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     host: 120.79.88.98
