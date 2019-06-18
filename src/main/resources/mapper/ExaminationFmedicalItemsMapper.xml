@@ -277,7 +277,7 @@
       </set>
     where examination.Medical_Record_ID=#{Medical_record_ID} and fmedical_items.Department_ID=#{Department_ID} and examination_fmedical_items.Registration_Status=1
   </update>
-    
+
     <select id="getAllFmedical" resultMap="ExaminationAndFmedical">
        select *
 from examination JOIN examination_fmedical_items ON examination.Examination_ID=examination_fmedical_items.Examination_ID

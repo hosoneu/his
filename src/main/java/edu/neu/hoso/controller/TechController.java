@@ -188,6 +188,7 @@ public class TechController {
             resultDTO.setStatus("ERROR");
             resultDTO.setMsg("获取失败！");
         }
+        System.out.println(resultDTO.getMsg());
         return resultDTO;
     }
 
