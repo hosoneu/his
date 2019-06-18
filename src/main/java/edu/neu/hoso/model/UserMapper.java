@@ -1,9 +1,14 @@
 package edu.neu.hoso.model;
 
 import edu.neu.hoso.example.UserExample;
-import org.apache.ibatis.annotations.*;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 public interface UserMapper {
     int countByExample(UserExample example);
@@ -65,8 +70,4 @@ public interface UserMapper {
         "where User_ID = #{userId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(User record);
-    @Select({"SELECT department.Department_Type " ,
-            "FROM `user`,department " ,
-            "WHERE `user`.Department_ID=department.Department_ID AND `user`.User_ID =#{userID};"})
-    String FindDepartmentTypeByUserID(int userID);
 }

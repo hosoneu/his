@@ -1,12 +1,16 @@
 package edu.neu.hoso.model;
 
 import edu.neu.hoso.example.ExpenseItemsExample;
-import org.apache.ibatis.annotations.*;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 public interface ExpenseItemsMapper {
-
     int countByExample(ExpenseItemsExample example);
 
     int deleteByExample(ExpenseItemsExample example);
