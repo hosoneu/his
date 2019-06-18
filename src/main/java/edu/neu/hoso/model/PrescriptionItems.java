@@ -25,6 +25,9 @@ public class PrescriptionItems {
 
     private Integer actualQuantity;
 
+    /* 对应的药品对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
+    private Drugs drugs;
+
     public PrescriptionItems(Integer prescriptionItemsId, Integer prescriptionId, Integer dragsId, Integer expenseItemsId, String drugsUsage, Double dosage, Integer times, Integer days, Integer quantity, String drugsAdvice, String drugsDispensingStatus, Integer actualQuantity) {
         this.prescriptionItemsId = prescriptionItemsId;
         this.prescriptionId = prescriptionId;
@@ -38,6 +41,30 @@ public class PrescriptionItems {
         this.drugsAdvice = drugsAdvice;
         this.drugsDispensingStatus = drugsDispensingStatus;
         this.actualQuantity = actualQuantity;
+    }
+
+    public PrescriptionItems(Integer prescriptionItemsId, Integer prescriptionId, Integer dragsId, Integer expenseItemsId, String drugsUsage, Double dosage, Integer times, Integer days, Integer quantity, String drugsAdvice, String drugsDispensingStatus, Integer actualQuantity, Drugs drugs) {
+        this.prescriptionItemsId = prescriptionItemsId;
+        this.prescriptionId = prescriptionId;
+        this.dragsId = dragsId;
+        this.expenseItemsId = expenseItemsId;
+        this.drugsUsage = drugsUsage;
+        this.dosage = dosage;
+        this.times = times;
+        this.days = days;
+        this.quantity = quantity;
+        this.drugsAdvice = drugsAdvice;
+        this.drugsDispensingStatus = drugsDispensingStatus;
+        this.actualQuantity = actualQuantity;
+        this.drugs = drugs;
+    }
+
+    public Drugs getDrugs() {
+        return drugs;
+    }
+
+    public void setDrugs(Drugs drugs) {
+        this.drugs = drugs;
     }
 
     public PrescriptionItems() {

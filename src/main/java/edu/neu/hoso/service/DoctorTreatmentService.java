@@ -24,6 +24,8 @@ public interface DoctorTreatmentService {
     Integer insertGroupTreatment(GroupTreatment groupTreatment);
     // 作废处置条目
     void cancelTreatmentItemsById(Integer treatmentItemsId);
+    //判断处置条目是否可废除 1可废除 2不可废除 3已废除
+    Integer ifTreatmentItemsCanCancel(Integer treatmentItemsId);
     // 展示处置组套列表 （scope 1个人、2科室、3全院）
     List<GroupTreatment> listGroupTreatment(Integer userId, String scope);
     // 查找处置组套的详细信息

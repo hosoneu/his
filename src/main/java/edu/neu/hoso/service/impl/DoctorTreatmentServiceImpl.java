@@ -5,6 +5,7 @@ import edu.neu.hoso.service.DoctorTreatmentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,7 +58,8 @@ public class DoctorTreatmentServiceImpl implements DoctorTreatmentService {
     public Integer insertTreatment(Treatment treatment) {
         List<TreatmentItems> treatmentItemsList= treatment.getTreatmentItemsList();
         //逐个插入treatmentItems中 并生成对应的收费条目
-        treatmentMapper.insert(treatment);
+        treatment.setSubmitTime(new Date());//设置创建时间
+        treatmentMapper.insert(treatment);//插入
         Integer medicalRecordId = treatment.getMedicalRecordId();//得到病历ID
         Integer treatmentId = treatment.getTreatmentId();//得到处置单ID
         for(TreatmentItems treatmentItems : treatmentItemsList){//遍历处置单条目列表
@@ -66,7 +68,7 @@ public class DoctorTreatmentServiceImpl implements DoctorTreatmentService {
 
             //插入expenseItems
             ExpenseItems expenseItems = new ExpenseItems();//新建一个收费条目
-            expenseItems.setMedicalRecordId(medicalRecordId);
+            expenseItems.setMedicalRecordId(medicalRecordId);//设置病历号
             expenseItems.setExpenseTypeId(fmedicalItems.getExpenseTypeId());//得到收费类型
             expenseItems.setPayStatus("1");//默认为支付状态为未收费
             expenseItems.setTotalCost(treatmentItems.getQuantity()*fmedicalItems.getFmedicalItemsPrice());//计算总额
@@ -152,14 +154,40 @@ public class DoctorTreatmentServiceImpl implements DoctorTreatmentService {
      */
     @Override
     public void cancelTreatmentItemsById(Integer treatmentItemsId) {
-        TreatmentItems treatmentItems = treatmentItemsMapper.selectByPrimaryKey(treatmentItemsId);
-        Integer expenseItemsId = treatmentItems.getExpenseItemsId();
-        ExpenseItems expenseItems = expenseItemsMapper.selectByPrimaryKey(expenseItemsId);
-        String payStatus = expenseItems.getPayStatus();//获取支付状态
-        if(payStatus.equals("1")) {//如果是未缴费状态
+        if(ifTreatmentItemsCanCancel(treatmentItemsId)==1){
+            TreatmentItems treatmentItems = treatmentItemsMapper.selectByPrimaryKey(treatmentItemsId);//得到要退费的条目
             treatmentItems.setValidStatus("2");//将有效设置为2 即无效
+            treatmentItemsMapper.updateByPrimaryKey(treatmentItems);
+            Integer expenseItemsId = treatmentItems.getExpenseItemsId();//得到收费条目的ID
+            ExpenseItems expenseItems = expenseItemsMapper.selectByPrimaryKey(expenseItemsId);//得到收费条目
             expenseItems.setPayStatus("4");//收费状态设置为无效
             expenseItemsMapper.updateByPrimaryKey(expenseItems);//更新该状态
+        }else{
+            return ;
+        }
+    }
+
+    /**
+     * @title: ifTreatmentItemsCanCancel
+     * @description: 判断处置条目是否可废除 1可废除 2不可废除 3已废除
+     * @author: 29-y
+     * @date: 2019-06-18 15:45
+     * @param: [treatmentItemsId]
+     * @return: java.lang.Integer
+     * @throws:
+     */
+    @Override
+    public Integer ifTreatmentItemsCanCancel(Integer treatmentItemsId) {
+        TreatmentItems treatmentItems = treatmentItemsMapper.selectByPrimaryKey(treatmentItemsId);
+        if(treatmentItems.getValidStatus().equals("1")){
+            Integer expenseItemsId = treatmentItems.getExpenseItemsId();
+            if(expenseItemsMapper.selectByPrimaryKey(expenseItemsId).getPayStatus().equals("1")) {//如果是未缴费状态
+                return 1;
+            }else{
+                return 2;
+            }
+        }else {
+            return 3;
         }
     }
 
@@ -176,5 +204,4 @@ public class DoctorTreatmentServiceImpl implements DoctorTreatmentService {
     public List<Treatment> listTreatmentByMedicalRecordId(Integer medicalRecordId) {
         return treatmentMapper.listTreatmentByMedicalRecordId(medicalRecordId);
     }
-
 }
