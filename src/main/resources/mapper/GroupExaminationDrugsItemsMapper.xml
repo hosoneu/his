@@ -15,7 +15,7 @@
   </resultMap>
 
   <!--  添加药品对象的ResultMap by @29-y 2019.06.18 -->
-  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.GroupExaminationDrugsItems">
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.GroupExaminationDrugsItems">
     <id property="groupExaminationDrugsItemsId" column="Group_Examination_Drugs_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
     <result property="groupExaminationFmedicalItemsId" column="Group_Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
     <result property="drugsId" column="Drugs_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
