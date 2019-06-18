@@ -1,4 +1,4 @@
-package edu.neu.hoso.service;
+﻿package edu.neu.hoso.service;
 
 import edu.neu.hoso.model.*;
 
@@ -21,6 +21,7 @@ public interface RegistrationService {
     Registration getRegistrationById(Integer id);
     List<Registration> getAllRegistration();
     List<Registration> getRegistrationByMedicalRecordId(Integer medicalRecordId);
+    List<Registration> getRegistration();
     Registration register(Registration registration, Patient patient, MedicalRecord medicalRecord, ExpenseItems expenseItems);
     void withdraw(Integer expenseItemsId, Integer userId);
     void charge(List<Integer> expenseItemsIds, Integer userId, Integer payModeId);
