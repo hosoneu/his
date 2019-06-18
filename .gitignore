@@ -27,7 +27,9 @@ HELP.md
 
 ### VS Code ###
 .vscode/
-application.yml
-db.properties
-generatorConfig.xml
-ValidationMessages.properties
+
+
+.properties
+
+### local ###
+application-dev.yml

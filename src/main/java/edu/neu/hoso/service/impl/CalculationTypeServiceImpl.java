@@ -4,6 +4,7 @@ import edu.neu.hoso.example.CalculationTypeExample;
 import edu.neu.hoso.model.CalculationType;
 import edu.neu.hoso.model.CalculationTypeMapper;
 import edu.neu.hoso.service.CalculationTypeService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @date: 2019-06-11 15:09
  * @version: V1.0
 */
+@Service
 public class CalculationTypeServiceImpl implements CalculationTypeService {
     @Resource
     CalculationTypeMapper calculationTypeMapper;

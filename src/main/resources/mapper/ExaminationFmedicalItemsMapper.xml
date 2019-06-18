@@ -269,4 +269,65 @@
     </set>
     where Examination_Fmedical_Items_ID = #{examinationFmedicalItemsId,jdbcType=INTEGER}
   </update>
+
+  <update id="updateRegistrationStatus">
+      update examination natural join examination_fmedical_items natural join fmedical_items
+      <set>
+        examination_fmedical_items.Registration_Status = 2
+      </set>
+    where examination.Medical_Record_ID=#{Medical_record_ID} and fmedical_items.Department_ID=#{Department_ID} and examination_fmedical_items.Registration_Status=1
+  </update>
+    
+    <select id="getAllFmedical" resultMap="ExaminationAndFmedical">
+       select *
+from examination JOIN examination_fmedical_items ON examination.Examination_ID=examination_fmedical_items.Examination_ID
+								 JOIN fmedical_items ON examination_fmedical_items.Fmedical_Items_ID=fmedical_items.Fmedical_Items_ID
+								 join examination_drugs_items ON examination_fmedical_items.Examination_Fmedical_Items_ID=Examination_Drugs_Items.Examination_Fmedical_Items_ID
+								 JOIN drugs ON examination_drugs_items.Drugs_ID=drugs.Drugs_ID
+where examination.Medical_Record_ID=#{Medical_record_ID} and fmedical_items.Department_ID=#{Department_ID}
+    </select>
+
+    <resultMap id="ExaminationAndFmedical" type="edu.neu.hoso.model.ExaminationFmedicalItems" >
+        <id column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationFmedicalItemsId"/>
+        <result column="Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationId"/>
+        <result column="Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="fmedicalItemsId"/>
+        <result column="Registration_Status" jdbcType="CHAR" javaType="java.lang.String" property="registrationStatus"/>
+        <result column="Purpose_Requirements" jdbcType="VARCHAR" javaType="java.lang.String" property="purposeRequirements"/>
+        <result column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="quantity"/>
+        <result column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="actualQuantity"/>
+        <result column="Examination_Result_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationResultId"/>
+        <result column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="expenseItemsId"/>
+        <result column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" property="validStatus"/>
+        <collection property="fmedicalItems" ofType="edu.neu.hoso.model.FmedicalItems">
+            <id column="Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="fmedicalItemsId"/>
+            <result column="Fmedical_Items_Code" jdbcType="VARCHAR" javaType="java.lang.String" property="fmedicalItemsCode"/>
+            <result column="Fmedical_Items_Name" jdbcType="VARCHAR" javaType="java.lang.String" property="fmedicalItemsName"/>
+            <result column="Fmedical_Items_Format" jdbcType="VARCHAR" javaType="java.lang.String" property="fmedicalItemsFormat"/>
+            <result column="Fmedical_Items_Price" jdbcType="DOUBLE" javaType="java.lang.Double" property="fmedicalItemsPrice"/>
+            <result column="Expense_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="expenseTypeId"/>
+            <result column="Department_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="departmentId"/>
+            <result column="Fmedical_Items_MnemonicCode" jdbcType="VARCHAR" javaType="java.lang.String" property="fmedicalItemsMnemoniccode"/>
+            <result column="Fmedical_Items_Type" jdbcType="CHAR" javaType="java.lang.String" property="fmedicalItemsType"/>
+            <result column="Create_Time" jdbcType="DATE" javaType="java.util.Date" property="createTime"/>
+            <result column="Reverse1" jdbcType="VARCHAR" javaType="java.lang.String" property="reverse1"/>
+            <result column="Reverse2" jdbcType="VARCHAR" javaType="java.lang.String" property="reverse2"/>
+            <result column="Reverse3" jdbcType="VARCHAR" javaType="java.lang.String" property="reverse3"/>
+            <collection property="drugsList" ofType="edu.neu.hoso.model.Drugs" resultMap="edu.neu.hoso.model.DrugsMapper.BaseResultMap" >
+              <!--<id column="Drugs_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property=""/>-->
+              <!--<result column="Drugs_Code" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+              <!--<result column="Drugs_Name" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+              <!--<result column="Drugs_Format" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+              <!--<result column="Drugs_Unit" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+              <!--<result column="Drugs_Manufacturer" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+              <!--<result column="Drugs_Dosage_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />-->
+              <!--<result column="Drugs_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />-->
+              <!--<result column="Drugs_Price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />-->
+              <!--<result column="Drugs_MnemonicCode" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+              <!--<result column="Create_Time" jdbcType="DATE" javaType="java.util.Date" />-->
+              <!--<result column="Reverse1" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+              <!--<result column="Reverse2" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+              <!--<result column="Reverse3" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+            </collection>
+        </collection>
+    </resultMap>
 </mapper>

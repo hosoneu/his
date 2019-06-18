@@ -1,6 +1,7 @@
 package edu.neu.hoso.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class FmedicalItems {
     private Integer fmedicalItemsId;
@@ -28,6 +29,12 @@ public class FmedicalItems {
     private String reverse2;
 
     private String reverse3;
+
+    private List<Drugs> drugsList;
+
+    public List<Drugs> getDrugsList() {
+        return this.drugsList;
+    }
 
     public FmedicalItems(Integer fmedicalItemsId, String fmedicalItemsCode, String fmedicalItemsName, String fmedicalItemsFormat, Double fmedicalItemsPrice, Integer expenseTypeId, Integer departmentId, String fmedicalItemsMnemoniccode, String fmedicalItemsType, Date createTime, String reverse1, String reverse2, String reverse3) {
         this.fmedicalItemsId = fmedicalItemsId;
@@ -151,5 +158,25 @@ public class FmedicalItems {
 
     public void setReverse3(String reverse3) {
         this.reverse3 = reverse3 == null ? null : reverse3.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "FmedicalItems{" +
+                "fmedicalItemsId=" + fmedicalItemsId +
+                ", fmedicalItemsCode='" + fmedicalItemsCode + '\'' +
+                ", fmedicalItemsName='" + fmedicalItemsName + '\'' +
+                ", fmedicalItemsFormat='" + fmedicalItemsFormat + '\'' +
+                ", fmedicalItemsPrice=" + fmedicalItemsPrice +
+                ", expenseTypeId=" + expenseTypeId +
+                ", departmentId=" + departmentId +
+                ", fmedicalItemsMnemoniccode='" + fmedicalItemsMnemoniccode + '\'' +
+                ", fmedicalItemsType='" + fmedicalItemsType + '\'' +
+                ", createTime=" + createTime +
+                ", reverse1='" + reverse1 + '\'' +
+                ", reverse2='" + reverse2 + '\'' +
+                ", reverse3='" + reverse3 + '\'' +
+                ", drugsList=" + drugsList +
+                '}';
     }
 }
