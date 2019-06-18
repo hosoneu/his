@@ -197,4 +197,10 @@
     </set>
     where Examination_ID = #{examinationId,jdbcType=INTEGER}
   </update>
+
+  <select id="getPatientIdByExaminationDrugsId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      select examination.Medical_Record_ID
+      from examination NATURAL JOIN examination_fmedical_items natural join examination_drugs_items
+      where examination_drugs_items.Expense_Items_ID=#{ExaminationDrugsItemsId}
+  </select>
 </mapper>

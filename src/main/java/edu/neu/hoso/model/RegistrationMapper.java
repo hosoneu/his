@@ -31,7 +31,7 @@ public interface RegistrationMapper {
         "values (#{medicalRecordId,jdbcType=INTEGER}, #{registrationLevelId,jdbcType=INTEGER}, ",
         "#{patientId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, ",
         "#{calculationTypeId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{registrationDate,jdbcType=DATE}, #{buyMedicalRecord,jdbcType=CHAR}, ",
+        "#{registrationDate,jdbcType=TIMESTAMP}, #{buyMedicalRecord,jdbcType=CHAR}, ",
         "#{registrationTotalCost,jdbcType=DOUBLE}, #{expenseTypeId,jdbcType=INTEGER}, ",
         "#{expenseItemsId,jdbcType=INTEGER}, #{registrationStatus,jdbcType=CHAR})"
     })
@@ -67,7 +67,7 @@ public interface RegistrationMapper {
           "Department_ID = #{departmentId,jdbcType=INTEGER},",
           "Calculation_Type_ID = #{calculationTypeId,jdbcType=INTEGER},",
           "Doctor_ID = #{doctorId,jdbcType=INTEGER},",
-          "Registration_Date = #{registrationDate,jdbcType=DATE},",
+          "Registration_Date = #{registrationDate,jdbcType=TIMESTAMP},",
           "Buy_Medical_Record = #{buyMedicalRecord,jdbcType=CHAR},",
           "Registration_Total_Cost = #{registrationTotalCost,jdbcType=DOUBLE},",
           "Expense_Type_ID = #{expenseTypeId,jdbcType=INTEGER},",
@@ -126,4 +126,7 @@ public interface RegistrationMapper {
     })
     @ResultMap("SecondResultMap")
     List<Registration> listRegistrationFromDepartmentByUserId(Integer userId);
+
+    List<Registration> getRegistrationByMedicalRecordId(Integer medicalRecordId);
 }
+    

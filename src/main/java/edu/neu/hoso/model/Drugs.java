@@ -163,4 +163,24 @@ public class Drugs {
     public void setReverse3(String reverse3) {
         this.reverse3 = reverse3 == null ? null : reverse3.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Drugs{" +
+                "drugsId=" + drugsId +
+                ", drugsCode='" + drugsCode + '\'' +
+                ", drugsName='" + drugsName + '\'' +
+                ", drugsFormat='" + drugsFormat + '\'' +
+                ", drugsUnit='" + drugsUnit + '\'' +
+                ", drugsManufacturer='" + drugsManufacturer + '\'' +
+                ", drugsDosageId=" + drugsDosageId +
+                ", drugsTypeId=" + drugsTypeId +
+                ", drugsPrice=" + drugsPrice +
+                ", drugsMnemoniccode='" + drugsMnemoniccode + '\'' +
+                ", createTime=" + createTime +
+                ", reverse1='" + reverse1 + '\'' +
+                ", reverse2='" + reverse2 + '\'' +
+                ", reverse3='" + reverse3 + '\'' +
+                '}';
+    }
 }

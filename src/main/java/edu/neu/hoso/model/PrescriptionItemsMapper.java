@@ -72,4 +72,8 @@ public interface PrescriptionItemsMapper {
         "where Prescription_Items_ID = #{prescriptionItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(PrescriptionItems record);
+
+    //在处方中更改发药状态
+    List<PrescriptionItems> selectDispensingInPrescription(@Param("Medical_record_ID")int Medical_record_ID, @Param("DrugsId")int DrugsId);
+
 }
