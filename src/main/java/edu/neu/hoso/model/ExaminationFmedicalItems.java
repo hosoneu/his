@@ -25,9 +25,15 @@ public class ExaminationFmedicalItems {
 
     private String validStatus;
 
-    private List<FmedicalItems> fmedicalItems;
+    private FmedicalItems fmedicalItems;
 
-    public List<FmedicalItems> getFmedicalItems() {
+    private List<Drugs> drugsList;
+
+    public List<Drugs> getDrugsList() {
+        return drugsList;
+    }
+
+    public FmedicalItems getFmedicalItems() {
         return fmedicalItems;
     }
 
