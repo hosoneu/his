@@ -1,6 +1,7 @@
-package edu.neu.hoso.service.impl;
+﻿package edu.neu.hoso.service.impl;
 
 import edu.neu.hoso.example.RegistrationExample;
+import edu.neu.hoso.example.SchedulingInfoExample;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.RegistrationService;
 import edu.neu.hoso.service.SerialNumberService;
@@ -8,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @title: RegistrationServiceImpl
@@ -39,6 +42,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Resource
     SerialNumberService serialNumberService;
+
+    @Resource
+    SchedulingInfoMapper schedulingInfoMapper;
 
     @Override
     public Integer insert(Registration registration) {
@@ -142,6 +148,20 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
+    public List<Registration> getRegistration() {
+        /**
+         *@title: getRegistration
+         *@description: 查询挂号信息
+         *@author: Mike
+         *@date: 2019-06-18 10:32
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.Registration>
+         *@throws:
+         */
+        return registrationMapper.getRegistration();
+    }
+
+    @Override
     public Registration register(Registration registration, Patient patient, MedicalRecord medicalRecord, ExpenseItems expenseItems) {
         /**
          *@title: register
@@ -158,8 +178,43 @@ public class RegistrationServiceImpl implements RegistrationService {
         expenseItemsMapper.insertSelective(expenseItems);
         registration.setMedicalRecordId(medicalRecord.getMedicalRecordId());
         registration.setExpenseItemsId(expenseItems.getExpenseItemsId());
+        Date date = new Date();
+        registration.setRegistrationDate(date);
         registrationMapper.insertSelective(registration);
         //排班表 限额-1
+        SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
+        SchedulingInfoExample.Criteria criteria = schedulingInfoExample.createCriteria();
+        criteria.andDoctorIdEqualTo(registration.getDoctorId());
+        //匹配星期
+        // Mon Tue Wed Thu Fri Sat Sun
+        SimpleDateFormat wf = new SimpleDateFormat("EEE", Locale.ENGLISH);
+        criteria.andSchedulingWeekdayEqualTo(wf.format(date));
+        //匹配午别
+        SimpleDateFormat nf = new SimpleDateFormat("HH");
+        String noonbreak = nf.format(date);
+        int a = Integer.parseInt(noonbreak);
+        if (a >= 0 && a <= 6) {
+            //Daybreak
+            criteria.andSchedulingNoonbreakEqualTo("Daybreak");
+        }else if (a > 6 && a <= 12) {
+            //Morning
+            criteria.andSchedulingNoonbreakEqualTo("Morning");
+        }else if (a > 12 && a <= 13) {
+            //Noon
+            criteria.andSchedulingNoonbreakEqualTo("Noon");
+        }else if (a > 13 && a <= 18) {
+            //Afternoon
+            criteria.andSchedulingNoonbreakEqualTo("Afternoon");
+        } else if (a > 18 && a <= 24) {
+            //Night
+            criteria.andSchedulingNoonbreakEqualTo("Night");
+        }
+        List<SchedulingInfo> schedulingInfos= schedulingInfoMapper.selectByExample(schedulingInfoExample);
+        SchedulingInfo schedulingInfo = schedulingInfos.get(0);
+        if (schedulingInfo != null){
+            schedulingInfo.setSchedulingRestcount(schedulingInfo.getSchedulingRestcount() - 1);
+        }
+        schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfo);
         return registration;
     }
 
