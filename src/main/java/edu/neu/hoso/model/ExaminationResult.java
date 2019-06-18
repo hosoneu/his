@@ -1,6 +1,7 @@
 package edu.neu.hoso.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class ExaminationResult {
     private Integer examinationResultId;
@@ -12,6 +13,9 @@ public class ExaminationResult {
     private String diagnosticSuggestion;
 
     private Date submitTime;
+
+
+    private List<ExaminationResultImage> examinationResultImageList;
 
     public ExaminationResult(Integer examinationResultId, Integer doctorId, String findings, String diagnosticSuggestion, Date submitTime) {
         this.examinationResultId = examinationResultId;
