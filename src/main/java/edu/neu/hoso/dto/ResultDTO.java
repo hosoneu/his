@@ -34,6 +34,7 @@ public class ResultDTO<T> {
         return "ResultDTO{" +
                 "status='" + status + '\'' +
                 ", msg='" + msg + '\'' +
+                ", data=" + data +
                 '}';
     }
 }
