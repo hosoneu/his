@@ -18,6 +18,26 @@
       <arg column="Registration_Status" jdbcType="CHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
+
+  <!--  添加患者对象的ResultMap by 29-y 2019.06.16 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.Registration">
+    <id property="registrationId" column="Registration_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="medicalRecordId" column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="registrationLevelId" column="Registration_Level_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="patientId" column="Patient_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="departmentId" column="Department_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="calculationTypeId" column="Calculation_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="registrationDate" column="Registration_Date" jdbcType="DATE" javaType="java.util.Date" />
+    <result property="buyMedicalRecord" column="Buy_Medical_Record" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="registrationTotalCost" column="Registration_Total_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    <result property="registrationTotalCost" column="Registration_Total_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    <result property="expenseTypeId" column="Expense_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="expenseItemsId" column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="registrationStatus" column="Registration_Status" jdbcType="CHAR" javaType="java.lang.String" />
+    <association property="patient" javaType="edu.neu.hoso.model.Patient" resultMap="edu.neu.hoso.model.PatientMapper.BaseResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

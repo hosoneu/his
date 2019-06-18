@@ -8,6 +8,16 @@
       <arg column="Drugs_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
+
+  <!--  添加药品对象的ResultMap by 29-y 2019.06.16 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.CommonlyUsedDrugs" >
+    <id property="commonlyUsedDrugs" column="Commonly_Used_Drugs" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="drugsId" column="Drugs_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <association property="drugs" javaType="edu.neu.hoso.model.Drugs" resultMap="edu.neu.hoso.model.DrugsMapper.BaseResultMap">
+    </association>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
