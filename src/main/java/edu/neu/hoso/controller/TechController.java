@@ -159,8 +159,11 @@ public class TechController {
      *@return: java.util.List<edu.neu.hoso.model.ExaminationFmedicalItems>
      *@throws:
      */
-    @RequestMapping("getAllFmedical")
-    public ResultDTO getAllFmedical(int Medical_record_ID, int Department_ID){
+    @RequestMapping("/getAllFmedical")
+    public ResultDTO getAllFmedical(){//(int Medical_record_ID, int Department_ID){
+        int Medical_record_ID=1111;
+        int Department_ID =133;
+        System.out.println("okok");
         ResultDTO resultDTO = new ResultDTO();
         try {
             List<ExaminationFmedicalItems> examinationFmedicalItems = techService.getAllFmedical(Medical_record_ID, Department_ID);
@@ -170,7 +173,10 @@ public class TechController {
             }
             else {
                 for (ExaminationFmedicalItems examinationFmedicalItems1:examinationFmedicalItems){
-                    System.out.println(examinationFmedicalItems1.getFmedicalItems());
+                    System.out.println(examinationFmedicalItems1.getFmedicalItems().toString());
+                    for (Drugs drugs:examinationFmedicalItems1.getDrugsList()){
+                        System.out.println(drugs.toString());
+                    }
                 }
                 resultDTO.setStatus("OK");
                 resultDTO.setMsg("获取成功！");
@@ -181,6 +187,7 @@ public class TechController {
             resultDTO.setStatus("ERROR");
             resultDTO.setMsg("获取失败！");
         }
+        System.out.println(resultDTO.getMsg());
         return resultDTO;
     }
 
