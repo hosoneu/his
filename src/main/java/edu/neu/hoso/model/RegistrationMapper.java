@@ -1,4 +1,4 @@
-﻿package edu.neu.hoso.model;
+package edu.neu.hoso.model;
 
 import edu.neu.hoso.example.RegistrationExample;
 import java.util.List;
