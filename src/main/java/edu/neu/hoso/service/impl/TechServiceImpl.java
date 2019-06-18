@@ -165,11 +165,11 @@ public class TechServiceImpl implements TechService {
      *@description: 将数据插入Examination_Drugs_Items表中并加入Expense_Items中，并将其生成的expenseid加入Examination_Drugs_Items表中
      *@author: alan
      *@date: 2019/6/13 11:53
-     *@param: [examinationDrugsItems, patientId]
+     *@param: [examinationDrugsItems, Medical_record_ID]
      *@return: void
      *@throws:
      */
-    public void insertExaminationDrugsAndExpense(List<ExaminationDrugsItems> examinationDrugsItems, int patientId){
+    public void insertExaminationDrugsAndExpense(List<ExaminationDrugsItems> examinationDrugsItems, int Medical_record_ID){
         for (ExaminationDrugsItems examinationDrugsItem : examinationDrugsItems){
             ExpenseItems expenseItems = new ExpenseItems();
             //插入Examination_Drugs_Items表
@@ -178,7 +178,7 @@ public class TechServiceImpl implements TechService {
 
             //加入Expense_Items表中
             //病历id，总费用不为空,pay_Status:1
-            expenseItems.setMedicalRecordId(patientId);//id
+            expenseItems.setMedicalRecordId(Medical_record_ID);//id
             Double drugsPrice = drugsMapper.selectByPrimaryKey(examinationDrugsItem.getDrugsId()).getDrugsPrice();
             expenseItems.setTotalCost(drugsPrice * examinationDrugsItem.getQuantity());//total_cost
             expenseItems.setPayStatus("1");//pay_status
