@@ -1,4 +1,4 @@
-package edu.neu.hoso.model;
+﻿package edu.neu.hoso.model;
 
 import edu.neu.hoso.example.RegistrationExample;
 import java.util.List;
@@ -128,5 +128,7 @@ public interface RegistrationMapper {
     List<Registration> listRegistrationFromDepartmentByUserId(Integer userId);
 
     List<Registration> getRegistrationByMedicalRecordId(Integer medicalRecordId);
+
+    List<Registration> getRegistration();
 }
     
