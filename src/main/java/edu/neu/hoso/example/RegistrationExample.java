@@ -2,7 +2,6 @@ package edu.neu.hoso.example;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class RegistrationExample {
@@ -104,32 +103,6 @@ public class RegistrationExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andRegistrationIdIsNull() {
@@ -563,52 +536,52 @@ public class RegistrationExample {
         }
 
         public Criteria andRegistrationDateEqualTo(Date value) {
-            addCriterionForJDBCDate("Registration_Date =", value, "registrationDate");
+            addCriterion("Registration_Date =", value, "registrationDate");
             return (Criteria) this;
         }
 
         public Criteria andRegistrationDateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("Registration_Date <>", value, "registrationDate");
+            addCriterion("Registration_Date <>", value, "registrationDate");
             return (Criteria) this;
         }
 
         public Criteria andRegistrationDateGreaterThan(Date value) {
-            addCriterionForJDBCDate("Registration_Date >", value, "registrationDate");
+            addCriterion("Registration_Date >", value, "registrationDate");
             return (Criteria) this;
         }
 
         public Criteria andRegistrationDateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("Registration_Date >=", value, "registrationDate");
+            addCriterion("Registration_Date >=", value, "registrationDate");
             return (Criteria) this;
         }
 
         public Criteria andRegistrationDateLessThan(Date value) {
-            addCriterionForJDBCDate("Registration_Date <", value, "registrationDate");
+            addCriterion("Registration_Date <", value, "registrationDate");
             return (Criteria) this;
         }
 
         public Criteria andRegistrationDateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("Registration_Date <=", value, "registrationDate");
+            addCriterion("Registration_Date <=", value, "registrationDate");
             return (Criteria) this;
         }
 
         public Criteria andRegistrationDateIn(List<Date> values) {
-            addCriterionForJDBCDate("Registration_Date in", values, "registrationDate");
+            addCriterion("Registration_Date in", values, "registrationDate");
             return (Criteria) this;
         }
 
         public Criteria andRegistrationDateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("Registration_Date not in", values, "registrationDate");
+            addCriterion("Registration_Date not in", values, "registrationDate");
             return (Criteria) this;
         }
 
         public Criteria andRegistrationDateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("Registration_Date between", value1, value2, "registrationDate");
+            addCriterion("Registration_Date between", value1, value2, "registrationDate");
             return (Criteria) this;
         }
 
         public Criteria andRegistrationDateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("Registration_Date not between", value1, value2, "registrationDate");
+            addCriterion("Registration_Date not between", value1, value2, "registrationDate");
             return (Criteria) this;
         }
 

@@ -75,4 +75,7 @@ public interface ExaminationDrugsItemsMapper {
         "where Examination_Drugs_Items_ID = #{examinationDrugsItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(ExaminationDrugsItems record);
+
+    //在检查检验药品中更改发药状态中更改发药状态
+    List<ExaminationDrugsItems> selectDispensingInExamination(@Param("Medical_record_ID")int Medical_record_ID, @Param("DrugsId")int DrugsId);
 }

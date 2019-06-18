@@ -5,7 +5,7 @@ import java.util.Date;
 public class Invoice {
     private Integer invoiceId;
 
-    private Integer invoiceNo;
+    private String invoiceNo;
 
     private Double totalCost;
 
@@ -17,7 +17,7 @@ public class Invoice {
 
     private Integer payModeId;
 
-    public Invoice(Integer invoiceId, Integer invoiceNo, Double totalCost, String isDayCal, Date payTime, Integer userId, Integer payModeId) {
+    public Invoice(Integer invoiceId, String invoiceNo, Double totalCost, String isDayCal, Date payTime, Integer userId, Integer payModeId) {
         this.invoiceId = invoiceId;
         this.invoiceNo = invoiceNo;
         this.totalCost = totalCost;
@@ -39,12 +39,12 @@ public class Invoice {
         this.invoiceId = invoiceId;
     }
 
-    public Integer getInvoiceNo() {
+    public String getInvoiceNo() {
         return invoiceNo;
     }
 
-    public void setInvoiceNo(Integer invoiceNo) {
-        this.invoiceNo = invoiceNo;
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo == null ? null : invoiceNo.trim();
     }
 
     public Double getTotalCost() {

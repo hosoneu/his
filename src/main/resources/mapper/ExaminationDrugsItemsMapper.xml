@@ -283,4 +283,11 @@
     </set>
     where Examination_Drugs_Items_ID = #{examinationDrugsItemsId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectDispensingInExamination" resultMap="BaseResultMap">
+    select Examination_Drugs_Items.*
+    from examination join examination_fmedical_items on examination.Examination_ID=examination_fmedical_items.Examination_ID
+    join examination_drugs_items on examination_fmedical_items.Examination_Fmedical_Items_ID=examination_drugs_items.Examination_Fmedical_Items_ID
+    where examination.Medical_Record_ID=#{Medical_record_ID} and examination_drugs_items.Drugs_ID=#{DrugsId} and examination_drugs_items.Drugs_Dispensing_Status=1 and examination_drugs_items.Expense_Items_ID is not null
+  </select>
 </mapper>
