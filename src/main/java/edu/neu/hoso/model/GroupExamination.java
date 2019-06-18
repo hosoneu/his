@@ -1,6 +1,7 @@
 package edu.neu.hoso.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class GroupExamination {
     private Integer groupExaminationId;
@@ -15,6 +16,9 @@ public class GroupExamination {
 
     private Date createTime;
 
+    /* 对应的检查检验组套非药品项目列表对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
+    private List<GroupExaminationFmedicalItems> groupExaminationFmedicalItemsList;
+
     public GroupExamination(Integer groupExaminationId, Integer doctorId, String groupExaminationCode, String groupExaminationName, String groupExaminationScope, Date createTime) {
         this.groupExaminationId = groupExaminationId;
         this.doctorId = doctorId;
@@ -22,6 +26,24 @@ public class GroupExamination {
         this.groupExaminationName = groupExaminationName;
         this.groupExaminationScope = groupExaminationScope;
         this.createTime = createTime;
+    }
+
+    public GroupExamination(Integer groupExaminationId, Integer doctorId, String groupExaminationCode, String groupExaminationName, String groupExaminationScope, Date createTime, List<GroupExaminationFmedicalItems> groupExaminationFmedicalItemsList) {
+        this.groupExaminationId = groupExaminationId;
+        this.doctorId = doctorId;
+        this.groupExaminationCode = groupExaminationCode;
+        this.groupExaminationName = groupExaminationName;
+        this.groupExaminationScope = groupExaminationScope;
+        this.createTime = createTime;
+        this.groupExaminationFmedicalItemsList = groupExaminationFmedicalItemsList;
+    }
+
+    public List<GroupExaminationFmedicalItems> getGroupExaminationFmedicalItemsList() {
+        return groupExaminationFmedicalItemsList;
+    }
+
+    public void setGroupExaminationFmedicalItemsList(List<GroupExaminationFmedicalItems> groupExaminationFmedicalItemsList) {
+        this.groupExaminationFmedicalItemsList = groupExaminationFmedicalItemsList;
     }
 
     public GroupExamination() {

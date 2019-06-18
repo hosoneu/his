@@ -11,6 +11,18 @@
       <arg column="Create_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
+
+  <!--  添加检查检验组套非药品条目列表对象的ResultMap by @29-y 2019.06.18 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.GroupExamination">
+    <id property="groupExaminationId" column="Group_Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="groupExaminationCode" column="Group_Examination_Code" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="groupExaminationName" column="Group_Examination_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="groupExaminationScope" column="Group_Examination_Scope" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="createTime" column="Create_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    <collection property="groupExaminationFmedicalItemsList" ofType="edu.neu.hoso.model.GroupExaminationFmedicalItems" resultMap="edu.neu.hoso.model.GroupExaminationFmedicalItemsMapper.SecondResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

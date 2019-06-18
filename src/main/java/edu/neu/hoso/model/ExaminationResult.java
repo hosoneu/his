@@ -14,7 +14,7 @@ public class ExaminationResult {
 
     private Date submitTime;
 
-
+    /* 对应的检查检验结果图片列表对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
     private List<ExaminationResultImage> examinationResultImageList;
 
     public ExaminationResult(Integer examinationResultId, Integer doctorId, String findings, String diagnosticSuggestion, Date submitTime) {
@@ -23,6 +23,23 @@ public class ExaminationResult {
         this.findings = findings;
         this.diagnosticSuggestion = diagnosticSuggestion;
         this.submitTime = submitTime;
+    }
+
+    public ExaminationResult(Integer examinationResultId, Integer doctorId, String findings, String diagnosticSuggestion, Date submitTime, List<ExaminationResultImage> examinationResultImageList) {
+        this.examinationResultId = examinationResultId;
+        this.doctorId = doctorId;
+        this.findings = findings;
+        this.diagnosticSuggestion = diagnosticSuggestion;
+        this.submitTime = submitTime;
+        this.examinationResultImageList = examinationResultImageList;
+    }
+
+    public List<ExaminationResultImage> getExaminationResultImageList() {
+        return examinationResultImageList;
+    }
+
+    public void setExaminationResultImageList(List<ExaminationResultImage> examinationResultImageList) {
+        this.examinationResultImageList = examinationResultImageList;
     }
 
     public ExaminationResult() {
