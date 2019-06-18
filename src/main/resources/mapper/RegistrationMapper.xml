@@ -317,4 +317,116 @@
     </set>
     where Registration_ID = #{registrationId,jdbcType=INTEGER}
   </update>
+
+  <!--挂号结果集 @Mike 2019.6.18-->
+  <resultMap id="RegistrationResultMap" type="edu.neu.hoso.model.Registration">
+    <id column="Registration_ID" property="registrationId" />
+    <result column="Registration_Date" property="registrationDate" />
+    <result column="Buy_Medical_Record" property="buyMedicalRecord" />
+    <result column="Registration_Total_Cost" property="registrationTotalCost" />
+    <result column="Registration_Status" property="registrationStatus" />
+    <association javaType="MedicalRecord" property="medicalRecord">
+      <id column="Medical_Record_ID" property="medicalRecordId" />
+      <result column="Is_Treament_Over" property="isTreamentOver" />
+    </association>
+    <association javaType="RegistrationLevel" property="registrationLevel">
+      <id column="Registration_Level_ID" property="registrationLevelId" />
+      <result column="Registration_Level_Name" property="registrationLevelName" />
+    </association>
+    <association javaType="Patient" property="patient">
+      <id column="Patient_ID" property="patientId" />
+      <result column="Patient_Name" property="patientName" />
+      <result column="Patient_Gender" property="patientGender" />
+      <result column="Patient_Age" property="patientAge" />
+      <result column="Patient_IDentity" property="patientIdentity" />
+    </association>
+    <association javaType="Department" property="department">
+      <id column="Department_ID" property="departmentId" />
+      <result column="Department_Code" property="departmentCode" />
+      <result column="Department_Name" property="departmentName" />
+    </association>
+    <association javaType="CalculationType" property="calculationType">
+      <id column="Calculation_Type_ID" property="calculationTypeId" />
+      <result column="Calculation_Type_Name" property="calculationTypeName" />
+    </association>
+    <association javaType="User" property="doctor">
+      <id column="Doctor_ID" property="userId" />
+      <result column="Doctor_Name" property="userName" />
+      <association javaType="ConstantItems" property="constantItems">
+        <id column="Doctor_Title_Id" property="constantItemsId" />
+        <result column="Doctor_Title_Name" property="constantItemsName" />
+      </association>
+    </association>
+    <association javaType="ExpenseType" property="expenseType">
+      <id column="Expense_Type_ID" property="expenseTypeId" />
+      <result column="Expense_Type_Name" property="expenseTypeName" />
+    </association>
+    <association javaType="ExpenseItems" property="expenseItems">
+      <id column="Expense_Items_ID" property="expenseItemsId" />
+      <result column="Total_Cost" property="totalCost" />
+    </association>
+  </resultMap>
+
+  <!--查询挂号信息 @Mike 2019.6.18-->
+  <select id="getRegistrationByMedicalRecordId" parameterType="java.lang.Integer" resultMap="RegistrationResultMap">
+    SELECT
+        Patient_Name,
+        Patient_Gender,
+        Patient_IDentity,
+        Patient_Age,
+        Registration_Status,
+        Registration_Level_Name,
+        Department_Name,
+        Calculation_Type_Name,
+        User_Name as Doctor_Name,
+        Constant_Items_Name as Doctor_Title_Name,
+        Registration_Date,
+        Buy_Medical_Record,
+        Total_Cost
+    FROM
+        registration
+        JOIN medical_record ON registration.Medical_Record_ID = medical_record.Medical_Record_ID
+        NATURAL JOIN patient
+        NATURAL JOIN registration_level
+        NATURAL JOIN department
+        NATURAL JOIN calculation_type
+        JOIN `user` ON registration.Doctor_ID = `user`.User_ID
+        JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
+        JOIN expense_items ON registration.Medical_Record_ID = expense_items.Medical_Record_ID
+    WHERE
+        registration.Medical_Record_ID = #{medicalRecordId}
+        AND Registration_Status = 1
+        AND medical_record.Is_Treament_Over = 1
+  </select>
+
+  <!--展示挂号列表 @Mike 2019.6.18-->
+  <select id="getRegistration" parameterType="java.lang.Integer" resultMap="RegistrationResultMap">
+    SELECT
+        Patient_Name,
+        Patient_Gender,
+        Patient_IDentity,
+        Patient_Age,
+        Registration_Status,
+        Registration_Level_Name,
+        Department_Name,
+        Calculation_Type_Name,
+        User_Name as Doctor_Name,
+        Constant_Items_Name as Doctor_Title_Name,
+        Registration_Date,
+        Buy_Medical_Record,
+        Total_Cost
+    FROM
+        registration
+        JOIN medical_record ON registration.Medical_Record_ID = medical_record.Medical_Record_ID
+        NATURAL JOIN patient
+        NATURAL JOIN registration_level
+        NATURAL JOIN department
+        NATURAL JOIN calculation_type
+        JOIN `user` ON registration.Doctor_ID = `user`.User_ID
+        JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
+        JOIN expense_items ON registration.Medical_Record_ID = expense_items.Medical_Record_ID
+    WHERE
+        Registration_Status = 1
+        AND medical_record.Is_Treament_Over = 1
+  </select>
 </mapper>
