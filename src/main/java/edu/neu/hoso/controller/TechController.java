@@ -159,8 +159,11 @@ public class TechController {
      *@return: java.util.List<edu.neu.hoso.model.ExaminationFmedicalItems>
      *@throws:
      */
-    @RequestMapping("getAllFmedical")
-    public ResultDTO getAllFmedical(int Medical_record_ID, int Department_ID){
+    @RequestMapping("/getAllFmedical")
+    public ResultDTO getAllFmedical(){//(int Medical_record_ID, int Department_ID){
+        int Medical_record_ID=1111;
+        int Department_ID =133;
+        System.out.println("okok");
         ResultDTO resultDTO = new ResultDTO();
         try {
             List<ExaminationFmedicalItems> examinationFmedicalItems = techService.getAllFmedical(Medical_record_ID, Department_ID);
@@ -170,7 +173,11 @@ public class TechController {
             }
             else {
                 for (ExaminationFmedicalItems examinationFmedicalItems1:examinationFmedicalItems){
-                    System.out.println(examinationFmedicalItems1.getFmedicalItems());
+                    System.out.println(examinationFmedicalItems1.getFmedicalItems().toString());
+                    for (ExaminationDrugsItems examinationDrugsItems:examinationFmedicalItems1.getExaminationDrugsItemsList()){
+                        System.out.println(examinationDrugsItems.toString());
+                        System.out.println(examinationDrugsItems.getDrugs().toString());
+                    }
                 }
                 resultDTO.setStatus("OK");
                 resultDTO.setMsg("获取成功！");
@@ -190,7 +197,7 @@ public class TechController {
      *@author: alan
      *@date: 2019/6/13 11:53
      *@param: [examinationDrugsItems, Medical_record_ID]
-     *@return: void 
+     *@return: void
      *@throws:
      */
     @RequestMapping("insertExaminationDrugsAndExpense")

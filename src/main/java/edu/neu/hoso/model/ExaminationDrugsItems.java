@@ -25,6 +25,16 @@ public class ExaminationDrugsItems {
 
     private Double dosage;
 
+    private Drugs drugs;
+
+    public Drugs getDrugs() {
+        return drugs;
+    }
+
+    public void setDrugs(Drugs drugs) {
+        this.drugs = drugs;
+    }
+
     public ExaminationDrugsItems(Integer examinationDrugsItemsId, Integer examinationFmedicalItemsId, Integer drugsId, Integer doctorId, String drugsUsage, Integer quantity, Integer actualQuantity, String drugsDispensingStatus, Integer expenseItemsId, Integer times, Integer days, Double dosage) {
         this.examinationDrugsItemsId = examinationDrugsItemsId;
         this.examinationFmedicalItemsId = examinationFmedicalItemsId;
@@ -138,5 +148,24 @@ public class ExaminationDrugsItems {
 
     public void setDosage(Double dosage) {
         this.dosage = dosage;
+    }
+
+    @Override
+    public String toString() {
+        return "ExaminationDrugsItems{" +
+                "examinationDrugsItemsId=" + examinationDrugsItemsId +
+                ", examinationFmedicalItemsId=" + examinationFmedicalItemsId +
+                ", drugsId=" + drugsId +
+                ", doctorId=" + doctorId +
+                ", drugsUsage='" + drugsUsage + '\'' +
+                ", quantity=" + quantity +
+                ", actualQuantity=" + actualQuantity +
+                ", drugsDispensingStatus='" + drugsDispensingStatus + '\'' +
+                ", expenseItemsId=" + expenseItemsId +
+                ", times=" + times +
+                ", days=" + days +
+                ", dosage=" + dosage +
+                ", drugs=" + drugs +
+                '}';
     }
 }

@@ -25,9 +25,19 @@ public class ExaminationFmedicalItems {
 
     private String validStatus;
 
-    private List<FmedicalItems> fmedicalItems;
+    private FmedicalItems fmedicalItems;
 
-    public List<FmedicalItems> getFmedicalItems() {
+    private List<ExaminationDrugsItems> examinationDrugsItemsList;
+
+    public List<ExaminationDrugsItems> getExaminationDrugsItemsList() {
+        return examinationDrugsItemsList;
+    }
+
+    public void setExaminationDrugsItemsList(List<ExaminationDrugsItems> examinationDrugsItemsList) {
+        this.examinationDrugsItemsList = examinationDrugsItemsList;
+    }
+
+    public FmedicalItems getFmedicalItems() {
         return fmedicalItems;
     }
 
@@ -43,6 +53,26 @@ public class ExaminationFmedicalItems {
         this.examinationResultId = examinationResultId;
         this.expenseItemsId = expenseItemsId;
         this.validStatus = validStatus;
+    }
+
+    public ExaminationFmedicalItems(Integer examinationFmedicalItemsId, Integer examinationId, Integer fmedicalItemsId, Integer doctorId, String registrationStatus, String purposeRequirements, Integer quantity, Integer actualQuantity, Integer examinationResultId, Integer expenseItemsId, String validStatus, FmedicalItems fmedicalItems, List<ExaminationDrugsItems> examinationDrugsItemsList) {
+        this.examinationFmedicalItemsId = examinationFmedicalItemsId;
+        this.examinationId = examinationId;
+        this.fmedicalItemsId = fmedicalItemsId;
+        this.doctorId = doctorId;
+        this.registrationStatus = registrationStatus;
+        this.purposeRequirements = purposeRequirements;
+        this.quantity = quantity;
+        this.actualQuantity = actualQuantity;
+        this.examinationResultId = examinationResultId;
+        this.expenseItemsId = expenseItemsId;
+        this.validStatus = validStatus;
+        this.fmedicalItems = fmedicalItems;
+        this.examinationDrugsItemsList = examinationDrugsItemsList;
+    }
+
+    public void setFmedicalItems(FmedicalItems fmedicalItems) {
+        this.fmedicalItems = fmedicalItems;
     }
 
     public ExaminationFmedicalItems() {

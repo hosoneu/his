@@ -1,4 +1,4 @@
-﻿package edu.neu.hoso.model;
+package edu.neu.hoso.model;
 
 public class CommonlyUsedFmedical {
     private Integer commonlyUsedFmedicalId;
@@ -30,7 +30,7 @@ public class CommonlyUsedFmedical {
 
     public void setFmedicalItems(FmedicalItems fmedicalItems) {
         this.fmedicalItems = fmedicalItems;
-
+    }
     public CommonlyUsedFmedical(Integer doctorId, Integer fmedicalItemsId) {
         this.doctorId = doctorId;
         this.fmedicalItemsId = fmedicalItemsId;

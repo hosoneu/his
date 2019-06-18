@@ -128,5 +128,7 @@ public interface RegistrationMapper {
     List<Registration> listRegistrationFromDepartmentByUserId(Integer userId);
 
     List<Registration> getRegistrationByMedicalRecordId(Integer medicalRecordId);
+
+    List<Registration> getRegistration();
 }
     
