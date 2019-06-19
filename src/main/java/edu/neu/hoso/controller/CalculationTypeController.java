@@ -23,7 +23,7 @@ public class CalculationTypeController {
     CalculationTypeService calculationTypeService;
 
     @RequestMapping("/insert")
-    public ResultDTO<CalculationType> insert(CalculationType calculationType){
+    public ResultDTO<CalculationType> insert(@RequestBody CalculationType calculationType){
         /**
          *@title: insert
          *@description: 插入结算类别
@@ -38,11 +38,11 @@ public class CalculationTypeController {
             calculationTypeService.insert(calculationType);
             resultDTO.setData(calculationType);
             resultDTO.setStatus("OK");
-            resultDTO.setMsg("插入成功！");
+            resultDTO.setMsg("插入结算类别成功！");
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
-            resultDTO.setMsg("插入失败！");
+            resultDTO.setMsg("插入结算类别失败！");
         }
         return resultDTO;
     }
@@ -62,11 +62,11 @@ public class CalculationTypeController {
         try {
             calculationTypeService.deleteById(id);
             resultDTO.setStatus("OK");
-            resultDTO.setMsg("删除成功！");
+            resultDTO.setMsg("删除结算类别成功！");
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
-            resultDTO.setMsg("删除失败！");
+            resultDTO.setMsg("删除结算类别失败！");
         }
         return resultDTO;
     }
@@ -86,11 +86,11 @@ public class CalculationTypeController {
         try {
             calculationTypeService.update(calculationType);
             resultDTO.setStatus("OK");
-            resultDTO.setMsg("查询成功！");
+            resultDTO.setMsg("更新结算类别成功！");
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
-            resultDTO.setMsg("查询失败！");
+            resultDTO.setMsg("更新结算类别失败！");
         }
         return resultDTO;
     }
@@ -110,11 +110,11 @@ public class CalculationTypeController {
         try {
             resultDTO.setData(calculationTypeService.getCalculationTypeById(id));
             resultDTO.setStatus("OK");
-            resultDTO.setMsg("查询成功！");
+            resultDTO.setMsg("查询结算类别成功！");
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
-            resultDTO.setMsg("查询失败！");
+            resultDTO.setMsg("查询结算类别失败！");
         }
         return resultDTO;
     }
@@ -134,11 +134,11 @@ public class CalculationTypeController {
         try {
             resultDTO.setData(calculationTypeService.getAllCalculationType());
             resultDTO.setStatus("OK");
-            resultDTO.setMsg("查询成功！");
+            resultDTO.setMsg("展示结算类别成功！");
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
-            resultDTO.setMsg("查询失败！");
+            resultDTO.setMsg("展示结算类别失败！");
         }
         return resultDTO;
     }
