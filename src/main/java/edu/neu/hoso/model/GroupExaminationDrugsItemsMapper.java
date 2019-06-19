@@ -66,4 +66,21 @@ public interface GroupExaminationDrugsItemsMapper {
         "where Group_Examination_Drugs_Items_ID = #{groupExaminationDrugsItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(GroupExaminationDrugsItems record);
+
+    /**
+     * @title: listGroupExaminationDrugsItemsByGroupExaminationFmedicalItemsId
+     * @description: 用于填充检查检验非药品条目中的检查检验药品列表
+     * @author: 29-y
+     * @date: 2019-06-19 13:53
+     * @param: [groupExaminationFmedicalItemsId]
+     * @return: java.util.List<edu.neu.hoso.model.GroupExaminationDrugsItems>
+     * @throws:
+     */
+    @Select({
+            "select drugs_items.*,d.* " ,
+            "from group_examination_drugs_items drugs_items join drugs d on drugs_items.Drugs_ID = d.Drugs_ID " ,
+            "where drugs_items.Group_Examination_Fmedical_Items_ID = #{groupExaminationFmedicalItemsId,jdbcType=INTEGER} "
+    })
+    @ResultMap("SecondResult")
+    List<GroupExaminationDrugsItems> listGroupExaminationDrugsItemsByGroupExaminationFmedicalItemsId(Integer groupExaminationFmedicalItemsId);
 }

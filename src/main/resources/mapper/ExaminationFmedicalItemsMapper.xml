@@ -17,7 +17,8 @@
     </constructor>
   </resultMap>
 
-  <!--  添加检查检验非药品条目列表以及非药品对象的ResultMap by @29-y 2019.06.18 -->
+  <!--  添加非药品对象的ResultMap by @29-y 2019.06.18 -->
+  <!--  检查检验药品条目列表因没有结果映射需要注释掉 -->
   <resultMap id="SecondResultMap" type="edu.neu.hoso.model.ExaminationFmedicalItems">
     <id property="examinationFmedicalItemsId" column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
     <result property="examinationId" column="Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -31,7 +32,7 @@
     <result property="expenseItemsId" column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
     <result property="validStatus" column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" />
     <association property="fmedicalItems" javaType="edu.neu.hoso.model.FmedicalItems" resultMap="edu.neu.hoso.model.FmedicalItemsMapper.BaseResultMap"/>
-    <collection property="examinationDrugsItemsList" ofType="edu.neu.hoso.model.ExaminationDrugsItems" resultMap="edu.neu.hoso.model.ExaminationDrugsItemsMapper.SecondResultMap"/>
+<!--    <collection property="examinationDrugsItemsList" ofType="edu.neu.hoso.model.ExaminationDrugsItems" resultMap="edu.neu.hoso.model.ExaminationDrugsItemsMapper.SecondResultMap"/>-->
   </resultMap>
 
   <sql id="Example_Where_Clause" >

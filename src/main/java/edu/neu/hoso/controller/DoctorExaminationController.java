@@ -3,7 +3,9 @@ package edu.neu.hoso.controller;
 import edu.neu.hoso.model.Examination;
 import edu.neu.hoso.model.ExaminationResult;
 import edu.neu.hoso.model.GroupExamination;
+import edu.neu.hoso.service.DoctorExaminationService;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,24 +23,27 @@ import java.util.List;
 @RequestMapping("doctor/examination")
 @RestController
 public class DoctorExaminationController {
+    @Autowired
+    DoctorExaminationService doctorExaminationService;
+
     // 获取当前已开立的检查检验单列表 根据 病历ID 获取当前病历的检查/检验申请表（检查检验申请表*（检查检验非药品表*（非药品条目表*常数项表）））
     @RequestMapping("/listExaminationByMedicalRecordId")
-    public List<Examination> listExaminationByMedicalRecordId(Integer medicalRecordId,String mark){
-        return null;
+    public List<Examination> listExaminationByMedicalRecordId(Integer medicalRecordId,String type){
+        return doctorExaminationService.listExaminationByMedicalRecordId(medicalRecordId,type);
     }
 
-    // 根据ID查询具体的检查检验条目 mark表示检查检验的标识1检查 2检验
+    // 根据ID查询具体的检查检验条目 type表示检查检验的标识1检查 2检验
     @RequestMapping("/selectExaminationById")
-    public List<Examination> selectExaminationById(Integer examinationId,String mark){
-        return null;
+    public Examination selectExaminationById(Integer examinationId,String type){
+        return doctorExaminationService.selectExaminationById(examinationId, type);
     }
 
-    // 列出检查检验组套 （ mark: 1 检查 2 检验 ）（ scope: 1个人、2科室、3全院 ）
-    public List<GroupExamination> listGroupExamination(Integer userId, String mark, String scope){
-        return null;
+    // 列出检查检验组套 （ type: 1 检查 2 检验 ）（ scope: 1个人、2科室、3全院 ）
+    public List<GroupExamination> listGroupExamination(Integer userId, String type, String scope){
+        return doctorExaminationService.listGroupExamination(userId, type, scope);
     }
-    // 根据ID查找检查检验组套（ mark: 1 检查 2 检验 ）
-    public List<GroupExamination> selectGroupExaminationById(Integer userId, String mark){
+    // 根据ID查找检查检验组套（ type: 1 检查 2 检验 ）
+    public GroupExamination selectGroupExaminationById(Integer groupExaminationId, String type){
         return null;
     }
 

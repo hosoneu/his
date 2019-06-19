@@ -494,6 +494,76 @@ public class GroupExaminationExample {
             addCriterion("Create_Time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
+
+        public Criteria andGroupExaminationTypeIsNull() {
+            addCriterion("Group_Examination_Type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeIsNotNull() {
+            addCriterion("Group_Examination_Type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeEqualTo(String value) {
+            addCriterion("Group_Examination_Type =", value, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeNotEqualTo(String value) {
+            addCriterion("Group_Examination_Type <>", value, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeGreaterThan(String value) {
+            addCriterion("Group_Examination_Type >", value, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("Group_Examination_Type >=", value, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeLessThan(String value) {
+            addCriterion("Group_Examination_Type <", value, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeLessThanOrEqualTo(String value) {
+            addCriterion("Group_Examination_Type <=", value, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeLike(String value) {
+            addCriterion("Group_Examination_Type like", value, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeNotLike(String value) {
+            addCriterion("Group_Examination_Type not like", value, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeIn(List<String> values) {
+            addCriterion("Group_Examination_Type in", values, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeNotIn(List<String> values) {
+            addCriterion("Group_Examination_Type not in", values, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeBetween(String value1, String value2) {
+            addCriterion("Group_Examination_Type between", value1, value2, "groupExaminationType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupExaminationTypeNotBetween(String value1, String value2) {
+            addCriterion("Group_Examination_Type not between", value1, value2, "groupExaminationType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

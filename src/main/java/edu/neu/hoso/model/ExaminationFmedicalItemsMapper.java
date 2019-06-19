@@ -78,4 +78,21 @@ public interface ExaminationFmedicalItemsMapper {
 
     //输出该患者在该科室的全部项目
     List<ExaminationFmedicalItems> getAllFmedical(@Param("Medical_record_ID")int Medical_record_ID, @Param("Department_ID")int Department_ID);
+
+    /**
+     * @title: selectExaminationFmedicalItemsById
+     * @description: 根据ID获取检查检验非药品条目
+     * @author: 29-y
+     * @date: 2019-06-19 15:20
+     * @param: [examinationFmedicalItemsId]
+     * @return: edu.neu.hoso.model.ExaminationFmedicalItems
+     * @throws:
+     */
+    @Select({
+            "select e_fmedical_items.*,e_drugs_items.*,d.* " ,
+            "from examination_fmedical_items e_fmedical_items join examination_drugs_items e_drugs_items on e_drugs_items.Examination_Fmedical_Items_ID= e_fmedical_items.Examination_Fmedical_Items_ID join drugs d on e_drugs_items.Drugs_ID = d.Drugs_ID " ,
+            "where e_fmedical_items.Examination_Fmedical_Items_ID = #{examinationFmedicalItemsId,jdbcType=INTEGER}"
+    })
+    @ResultMap("SecondResultMap")
+    ExaminationFmedicalItems selectExaminationFmedicalItemsById(Integer examinationFmedicalItemsId);
 }
