@@ -81,6 +81,6 @@ public interface GroupExaminationDrugsItemsMapper {
             "from group_examination_drugs_items drugs_items join drugs d on drugs_items.Drugs_ID = d.Drugs_ID " ,
             "where drugs_items.Group_Examination_Fmedical_Items_ID = #{groupExaminationFmedicalItemsId,jdbcType=INTEGER} "
     })
-    @ResultMap("SecondResult")
+    @ResultMap("SecondResultMap")
     List<GroupExaminationDrugsItems> listGroupExaminationDrugsItemsByGroupExaminationFmedicalItemsId(Integer groupExaminationFmedicalItemsId);
 }

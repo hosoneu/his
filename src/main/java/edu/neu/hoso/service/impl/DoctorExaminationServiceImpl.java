@@ -1,5 +1,6 @@
 package edu.neu.hoso.service.impl;
 
+import edu.neu.hoso.example.ExaminationDrugsItemsExample;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.DoctorExaminationService;
 import org.apache.ibatis.annotations.ResultMap;
@@ -77,6 +78,9 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
     public Examination selectExaminationById(Integer examinationId, String type) {
         //首先得到该Examination
         Examination examination = examinationMapper.selectExaminationById(examinationId, type);
+        if(examination==null){
+            return null;
+        }
         //得到每个Examination中的非药品项目条目
         List<ExaminationFmedicalItems> examinationFmedicalItemsList = examination.getExaminationFmedicalItemsList();
         //对检查检验药品列表进行赋值
@@ -299,7 +303,8 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
     public void cancelExaminationFmedicalItems(Integer examinationFmedicalItemsId) {
         if(ifExaminationFmedicalItemsCanCancel(examinationFmedicalItemsId)==1){//如果可以废除
             //获取检查检验非药品项目
-            ExaminationFmedicalItems examinationFmedicalItems = examinationFmedicalItemsMapper.selectExaminationFmedicalItemsById(examinationFmedicalItemsId);
+            ExaminationFmedicalItems examinationFmedicalItems = examinationFmedicalItemsMapper.selectByPrimaryKey(examinationFmedicalItemsId);
+
             //获取收费条目
             ExpenseItems expenseItems = expenseItemsMapper.selectByPrimaryKey(examinationFmedicalItems.getExpenseItemsId());
             String payStatus = expenseItems.getPayStatus();//得到收费状态
@@ -315,20 +320,28 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
             examinationFmedicalItems.setValidStatus("2");
             examinationFmedicalItemsMapper.updateByPrimaryKey(examinationFmedicalItems);
 
-            List<ExaminationDrugsItems> examinationDrugsItemsList = examinationFmedicalItems.getExaminationDrugsItemsList();
-            for(ExaminationDrugsItems examinationDrugsItems : examinationDrugsItemsList){
-                ExpenseItems expenseItemsDrugs = expenseItemsMapper.selectByPrimaryKey(examinationDrugsItems.getExpenseItemsId());
-                String payStatusDrugs = expenseItemsDrugs.getPayStatus();//得到收费状态
-                if(payStatusDrugs.equals("1")){//未缴费
-                    expenseItems.setPayStatus("4");
-                }else if(payStatusDrugs.equals("2")){//已缴费
-                    expenseItems.setPayStatus("5");
-                }else if(payStatusDrugs.equals("3")){//退费 (退费的不管了)
-                    //do nothing
-                }else{
-                    //do nothing
+            //获取该非药品条目对应的药品条目
+            ExaminationDrugsItemsExample examinationDrugsItemsExample = new ExaminationDrugsItemsExample();
+            ExaminationDrugsItemsExample.Criteria criteria = examinationDrugsItemsExample.createCriteria();
+            criteria.andExaminationFmedicalItemsIdEqualTo(examinationFmedicalItemsId);
+            List<ExaminationDrugsItems> examinationDrugsItemsList = examinationDrugsItemsMapper.selectByExample(examinationDrugsItemsExample);
+
+            if(examinationDrugsItemsList!=null) {
+                for (ExaminationDrugsItems examinationDrugsItems : examinationDrugsItemsList) {
+                    ExpenseItems expenseItemsDrugs = expenseItemsMapper.selectByPrimaryKey(examinationDrugsItems.getExpenseItemsId());
+                    String payStatusDrugs = expenseItemsDrugs.getPayStatus();//得到收费状态
+                    if (payStatusDrugs.equals("1")) {//未缴费
+                        expenseItemsDrugs.setPayStatus("4");
+                        expenseItemsMapper.updateByPrimaryKey(expenseItemsDrugs);
+                    } else if (payStatusDrugs.equals("2")) {//已缴费
+                        expenseItemsDrugs.setPayStatus("5");
+                        expenseItemsMapper.updateByPrimaryKey(expenseItemsDrugs);
+                    } else if (payStatusDrugs.equals("3")) {//退费 (退费的不管了)
+                        //do nothing
+                    } else {
+                        //do nothing
+                    }
                 }
-                expenseItemsMapper.updateByPrimaryKey(expenseItemsDrugs);
             }
         }
     }

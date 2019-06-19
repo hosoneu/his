@@ -19,7 +19,7 @@
     <result property="fmedicalItemsId" column="Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
     <result property="purposeRequirements" column="Purpose_Requirements" jdbcType="VARCHAR" javaType="java.lang.String" />
     <result property="quantity" column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    <association property="fmedicalItems" javaType="edu.neu.hoso.model.FmedicalItems" resultMap="edu.neu.hoso.model.FmedicalItemsMapper.BaseResultMapper"/>
+    <association property="fmedicalItems" javaType="edu.neu.hoso.model.FmedicalItems" resultMap="edu.neu.hoso.model.FmedicalItemsMapper.BaseResultMap"/>
 <!--    <collection property="groupExaminationDrugsItemsList" ofType="edu.neu.hoso.model.GroupExaminationFmedicalItems" resultMap="edu.neu.hoso.model.GroupExaminationFmedicalItemsMapper.SecondResultMap"/>-->
   </resultMap>
 

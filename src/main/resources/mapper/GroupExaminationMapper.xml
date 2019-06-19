@@ -87,7 +87,7 @@
     Group_Examination_ID, Doctor_ID, Group_Examination_Code, Group_Examination_Name, 
     Group_Examination_Scope, Create_Time, Group_Examination_Type
   </sql>
-  <select id="selectByExample" parameterType="edu.neu.hoso.model.GroupExaminationExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="edu.neu.hoso.example.GroupExaminationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -101,7 +101,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="edu.neu.hoso.model.GroupExaminationExample">
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.GroupExaminationExample">
     delete from group_examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -153,7 +153,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="edu.neu.hoso.model.GroupExaminationExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="edu.neu.hoso.example.GroupExaminationExample" resultType="java.lang.Integer">
     select count(*) from group_examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
