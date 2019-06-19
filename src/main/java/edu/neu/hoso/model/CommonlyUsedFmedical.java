@@ -1,4 +1,4 @@
-﻿package edu.neu.hoso.model;
+package edu.neu.hoso.model;
 
 public class CommonlyUsedFmedical {
     private Integer commonlyUsedFmedicalId;
@@ -30,37 +30,37 @@ public class CommonlyUsedFmedical {
 
     public void setFmedicalItems(FmedicalItems fmedicalItems) {
         this.fmedicalItems = fmedicalItems;
-
-    public CommonlyUsedFmedical(Integer doctorId, Integer fmedicalItemsId) {
-        this.doctorId = doctorId;
-        this.fmedicalItemsId = fmedicalItemsId;
     }
+    public CommonlyUsedFmedical(Integer doctorId, Integer fmedicalItemsId) {
+            this.doctorId = doctorId;
+            this.fmedicalItemsId = fmedicalItemsId;
+        }
 
     public CommonlyUsedFmedical() {
-        super();
-    }
+            super();
+        }
 
-    public Integer getCommonlyUsedFmedicalId() {
-        return commonlyUsedFmedicalId;
-    }
+        public Integer getCommonlyUsedFmedicalId () {
+            return commonlyUsedFmedicalId;
+        }
 
-    public void setCommonlyUsedFmedicalId(Integer commonlyUsedFmedicalId) {
-        this.commonlyUsedFmedicalId = commonlyUsedFmedicalId;
-    }
+        public void setCommonlyUsedFmedicalId (Integer commonlyUsedFmedicalId){
+            this.commonlyUsedFmedicalId = commonlyUsedFmedicalId;
+        }
 
-    public Integer getDoctorId() {
-        return doctorId;
-    }
+        public Integer getDoctorId () {
+            return doctorId;
+        }
 
-    public void setDoctorId(Integer doctorId) {
-        this.doctorId = doctorId;
-    }
+        public void setDoctorId (Integer doctorId){
+            this.doctorId = doctorId;
+        }
 
-    public Integer getFmedicalItemsId() {
-        return fmedicalItemsId;
-    }
+        public Integer getFmedicalItemsId () {
+            return fmedicalItemsId;
+        }
 
-    public void setFmedicalItemsId(Integer fmedicalItemsId) {
-        this.fmedicalItemsId = fmedicalItemsId;
-    }
+        public void setFmedicalItemsId (Integer fmedicalItemsId){
+            this.fmedicalItemsId = fmedicalItemsId;
+        }
 }
