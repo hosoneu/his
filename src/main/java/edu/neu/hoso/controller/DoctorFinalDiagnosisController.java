@@ -2,7 +2,9 @@ package edu.neu.hoso.controller;
 
 import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.Diagnosis;
+import edu.neu.hoso.model.MedicalRecordMapper;
 import edu.neu.hoso.service.MedicalRecordHomePageService;
+import edu.neu.hoso.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,11 +25,13 @@ public class DoctorFinalDiagnosisController {
     // 确诊  录入终诊信息
     @Autowired
     MedicalRecordHomePageService medicalRecordHomePageService;
+    @Autowired
+    MedicalRecordService medicalRecordService;
     @RequestMapping("/insertFinalDiagnosis")
-    public ResultDTO<Integer> insertFinalDiagnosis(List<Diagnosis> diagnosisList, Integer userId){
+    public ResultDTO<Integer> insertFinalDiagnosis(List<Diagnosis> diagnosisList, Integer userId,Integer medicalRecordId){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
-            resultDTO.setData(medicalRecordHomePageService.insertFinalDiagnosis(diagnosisList,userId));
+            resultDTO.setData(medicalRecordHomePageService.insertFinalDiagnosis(diagnosisList,userId,medicalRecordId));
             resultDTO.setStatus("OK");
             resultDTO.setMsg("终诊信息录入成功！");
         } catch (Exception e) {
@@ -53,4 +57,20 @@ public class DoctorFinalDiagnosisController {
         }
         return resultDTO;
     }
+    // 诊毕
+    @RequestMapping("/treamentOver")
+    public ResultDTO treamentOver(Integer medicalRecordId){
+        ResultDTO resultDTO = new ResultDTO<>();
+        try {
+            medicalRecordService.treamentOver(medicalRecordId);
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("诊毕成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("诊毕失败！");
+        }
+        return resultDTO;
+    }
+
 }
