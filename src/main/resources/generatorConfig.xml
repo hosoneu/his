@@ -157,11 +157,11 @@
 <!--        <table tableName="user" schema="hosoneu">-->
 <!--            <generatedKey column="User_ID" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
-        <table tableName="disease_folder" schema="hosoneu">
-            <generatedKey column="Disease_Folder_ID" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="invoice" schema="hosoneu">
-            <generatedKey column="Invoice_ID" sqlStatement="Mysql" identity="true"/>
-        </table>
+<!--        <table tableName="disease_folder" schema="hosoneu">-->
+<!--            <generatedKey column="Disease_Folder_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="invoice" schema="hosoneu">-->
+<!--            <generatedKey column="Invoice_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
     </context>
 </generatorConfiguration>
