@@ -78,4 +78,22 @@ public interface ExaminationDrugsItemsMapper {
 
     //在检查检验药品中更改发药状态中更改发药状态
     List<ExaminationDrugsItems> selectDispensingInExamination(@Param("Medical_record_ID")int Medical_record_ID, @Param("DrugsId")int DrugsId);
+
+
+    /**
+     * @title: listExaminationDrugsItemsByExaminationFmedicalItemsId
+     * @description: 列出检查检查检验非药品对饮的检查检验药品列表
+     * @author: 29-y
+     * @date: 2019-06-19 9:40
+     * @param: [examinationFmedicalItemsId]
+     * @return: java.util.List<edu.neu.hoso.model.ExaminationDrugsItems>
+     * @throws:
+     */
+    @Select({
+            "select e_drugs_items.*,d.* " ,
+            "from examination_drugs_items e_drugs_items join drugs d on e_drugs_items.Drugs_ID = d.Drugs_ID " ,
+            "where e_drugs_items.Examination_Fmedical_Items_ID = #{examinationFmedicalItemsId,jdbcType=INTEGER} "
+    })
+    @ResultMap("SecondResultMap")
+    List<ExaminationDrugsItems> listExaminationDrugsItemsByExaminationFmedicalItemsId(Integer examinationFmedicalItemsId);
 }

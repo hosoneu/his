@@ -62,49 +62,23 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
      * @throws:
      */
     @Override
-    public Integer insertFirstDiagnosis(List<Diagnosis> diagnosisList,Integer userId) {
+    public Integer insertFirstDiagnosis(List<Diagnosis> diagnosisList,Integer userId,Integer medicalRecordId) {
+        //插入初诊信息 不需要更改排班剩余挂号数
         Date date = new Date();
         Integer diagnosisId = -1;//记录最后一个初步诊断的ID 将他它作为结果返回
         for(Diagnosis diagnosis : diagnosisList){
             diagnosis.setDiagnosisMark("1");//设置初诊标志
+            diagnosis.setMedicalRecordId(medicalRecordId);//设置病历号
+            //todo 需要得到前端的日期 转换成发病日期对应的Date
             diagnosisMapper.insert(diagnosis);
-            diagnosisId = diagnosis.getDiagnosisId();
-        }
-        //得到诊断的病历号
-        Integer medicalRecordId = diagnosisList.get(0).getMedicalRecordId();
-
-        //得到挂号信息
-        RegistrationExample registrationExample = new RegistrationExample();
-        RegistrationExample.Criteria criteria = registrationExample.createCriteria();
-        criteria.andMedicalRecordIdEqualTo(medicalRecordId);//查找挂号列表中病历号和当前相同的
-        Registration registration = registrationMapper.selectByExample(registrationExample).get(0);
-
-        //初诊时确定挂号的医生ID 当挂号医生和当前初诊医生不一致时需将挂号医生变更为初诊医生，同时需要更改剩余挂号数
-        if(registration.getDoctorId()!=userId){
-            // TODO: 2019/6/17 需要改数据库中的date类型为dateTime 首先更改当前医生的`当前`时间午别的剩余挂号数 然后更改挂号医生对应`挂号`时间午别的剩余挂号数 最后更改挂号医生ID为当前初诊医生的ID
-            //更改剩余挂号数   包括当前医生和挂号医生的（根据挂号时间找到当时对应的午别 更改当时的剩余数量）
-            //首先更改当前医生的`当前`时间午别的剩余挂号数
-            SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
-            SchedulingInfoExample.Criteria schedulingInfoExampleCriteria = schedulingInfoExample.createCriteria();
-            criteria.andDoctorIdEqualTo(userId);
-            //找到医生在当前午别的排班限额
-            schedulingInfoExampleCriteria.andSchedulingEndtimeGreaterThanOrEqualTo(date);
-            schedulingInfoExampleCriteria.andSchedulingStarttimeLessThanOrEqualTo(date);
-            SchedulingInfo schedulingInfo = schedulingInfoMapper.selectByExample(schedulingInfoExample).get(0);
-            schedulingInfo.setSchedulingRestcount(schedulingInfo.getSchedulingRestcount()-1);
-            schedulingInfoMapper.updateByPrimaryKey(schedulingInfo);
-            //然后更改挂号医生对应`挂号`时间午别的剩余挂号数
-
-            //最后更改挂号医生ID为当前初诊医生的ID
-            registration.setDoctorId(userId);
-            registrationMapper.updateByPrimaryKey(registration);
+            diagnosisId = diagnosis.getDiagnosisId();//用于返回最后一个插入的索引
         }
         //更新初诊信息
         MedicalRecord medicalRecord = new MedicalRecord();
         medicalRecord.setMedicalRecordId(medicalRecordId);//根据病历号的ID更新条目
         medicalRecord.setFirstDiagnosisDoctorId(userId);//设置初诊医生
         medicalRecord.setFirstDiagnosisTime(date);//设置初诊时间
-        medicalRecordMapper.updateByPrimaryKey(medicalRecord);
+        medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);
         return diagnosisId;
     }
 
@@ -118,22 +92,21 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
      * @throws:
      */
     @Override
-    public Integer insertFinalDiagnosis(List<Diagnosis> diagnosisList,Integer userId) {
+    public Integer insertFinalDiagnosis(List<Diagnosis> diagnosisList,Integer userId,Integer medicalRecordId) {
         Integer diagnosisId = -1;//记录最后一个最终诊断的ID 将他它作为结果返回
         for(Diagnosis diagnosis : diagnosisList){
             diagnosis.setDiagnosisMark("2");//设置终诊标志
+            diagnosis.setMedicalRecordId(medicalRecordId);//设置病历号
+            //todo 需要得到前端的日期 转换成发病日期对应的Date
             diagnosisMapper.insert(diagnosis);
             diagnosisId = diagnosis.getDiagnosisId();
         }
-        //得到诊断的病历号
-        Integer medicalRecordId = diagnosisList.get(0).getMedicalRecordId();
         //更新病历号中的终诊信息
         MedicalRecord medicalRecord = new MedicalRecord();
         medicalRecord.setMedicalRecordId(medicalRecordId);//根据病历号的ID更新条目
         medicalRecord.setFinalDiagnosisDoctorId(userId);//设置终诊医生
         medicalRecord.setFinalDiagnosisTime(new Date());//设置终诊时间
-        medicalRecordMapper.updateByPrimaryKey(medicalRecord);
-
+        medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);
         return diagnosisId;
     }
 
@@ -151,7 +124,7 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
         MedicalRecordHomePage medicalRecordHomePage = new MedicalRecordHomePage();
         medicalRecordHomePage.setMedicalRecordHomePageId(medicalRecordHomePageId);
         medicalRecordHomePage.setAssistantExamination(assistantExamination);
-        medicalRecordHomePageMapper.updateByPrimaryKey(medicalRecordHomePage);//插入assistantExamination
+        medicalRecordHomePageMapper.updateByPrimaryKeySelective(medicalRecordHomePage);//插入assistantExamination
     }
 
     /**

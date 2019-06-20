@@ -63,4 +63,86 @@ public interface GroupPrescriptionMapper {
         "where Group_Prescription_ID = #{groupPrescriptionId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(GroupPrescription record);
+
+//    成药部分
+    @Select({
+            "select group_p.*,items.*,d.* " ,
+            "from group_prescription group_p join group_prescription_items items on group_p.Group_Prescription_ID = items.Group_Prescription_ID join drugs d on items.Drugs_ID = d.Drugs_ID " ,
+            "where group_p.Group_Prescription_ID = #{prescriptionId,jdbcType=INTEGER} and group_p.Prescription_Type = \"1\" "
+    })
+    @ResultMap("SecondResultMap")
+    GroupPrescription selectGroupPatentPrescriptionById(Integer prescriptionId);
+
+    @Select({
+            "select group_p.*,items.*,d.* " ,
+            "from group_prescription group_p join group_prescription_items items on group_p.Group_Prescription_ID = items.Group_Prescription_ID join drugs d on items.Drugs_ID = d.Drugs_ID " ,
+            "where group_p.Doctor_ID = #{userId,jdbcType=INTEGER} and group_p.Group_Prescription_Scope = \"1\" and group_p.Prescription_Type = \"1\" "
+    })
+    @ResultMap("SecondResultMap")
+    List<GroupPrescription> listGroupPatentPrescriptionFromUser(Integer userId);
+
+    @Select({
+            "select group_p.*,items.*,d.* " ,
+            "from group_prescription group_p join `user` create_doctor on create_doctor.User_ID = group_p.Doctor_ID join group_prescription_items items on group_p.Group_Prescription_ID = items.Group_Prescription_ID join drugs d on items.Drugs_ID = d.Drugs_ID " ,
+            "where group_p.Group_Prescription_Scope=\"2\" and group_p.Prescription_Type = \"1\" " ,
+            "and exists( " ,
+            "select * " ,
+            "from `user` doctor " ,
+            "where doctor.Department_ID = create_doctor.Department_ID and doctor.User_ID = #{userId,jdbcType=INTEGER} " ,
+            ")"
+    })
+    @ResultMap("SecondResultMap")
+    List<GroupPrescription> listGroupPatentPrescriptionFromDepartment(Integer userId);
+
+    @Select({
+            "select group_p.*,items.*,d.* " ,
+            "from group_prescription group_p join group_prescription_items items on group_p.Group_Prescription_ID = items.Group_Prescription_ID join drugs d on items.Drugs_ID = d.Drugs_ID " ,
+            "where group_p.Group_Prescription_Scope=\"3\" and group_p.Prescription_Type = \"1\" "
+    })
+    @ResultMap("SecondResultMap")
+    List<GroupPrescription> listGroupPatentPrescriptionFromHospital();
+
+
+
+
+//    草药部分
+    @Select({
+            "select group_p.*,items.*,d.* " ,
+            "from group_prescription group_p join group_prescription_items items on group_p.Group_Prescription_ID = items.Group_Prescription_ID join drugs d on items.Drugs_ID = d.Drugs_ID " ,
+            "where group_p.Group_Prescription_ID = #{prescriptionId,jdbcType=INTEGER} and group_p.Prescription_Type = \"2\" "
+    })
+    @ResultMap("SecondResultMap")
+    GroupPrescription selectGroupHerbalPrescriptionById(Integer prescriptionId);
+
+
+    @Select({
+            "select group_p.*,items.*,d.* " ,
+            "from group_prescription group_p join group_prescription_items items on group_p.Group_Prescription_ID = items.Group_Prescription_ID join drugs d on items.Drugs_ID = d.Drugs_ID " ,
+            "where group_p.Doctor_ID = #{userId,jdbcType=INTEGER} and group_p.Group_Prescription_Scope = \"1\" and group_p.Prescription_Type = \"2\""
+    })
+    @ResultMap("SecondResultMap")
+    List<GroupPrescription> listGroupHerbalPrescriptionFromUser(Integer userId);
+
+    @Select({
+            "select group_p.*,items.*,d.* " ,
+            "from group_prescription group_p join `user` create_doctor on create_doctor.User_ID = group_p.Doctor_ID join group_prescription_items items on group_p.Group_Prescription_ID = items.Group_Prescription_ID join drugs d on items.Drugs_ID = d.Drugs_ID " ,
+            "where group_p.Group_Prescription_Scope=\"2\" and group_p.Prescription_Type = \"2\" " ,
+            "and exists( " ,
+            "select * " ,
+            "from `user` doctor " ,
+            "where doctor.Department_ID = create_doctor.Department_ID and doctor.User_ID = #{userId,jdbcType=INTEGER} " ,
+            ")"
+    })
+    @ResultMap("SecondResultMap")
+    List<GroupPrescription> listGroupHerbalPrescriptionFromDepartment(Integer userId);
+
+    @Select({
+            "select group_p.*,items.*,d.* " ,
+            "from group_prescription group_p join group_prescription_items items on group_p.Group_Prescription_ID = items.Group_Prescription_ID join drugs d on items.Drugs_ID = d.Drugs_ID " ,
+            "where group_p.Group_Prescription_Scope=\"3\" and group_p.Prescription_Type = \"2\" "
+    })
+    @ResultMap("SecondResultMap")
+    List<GroupPrescription> listGroupHerbalPrescriptionFromHospital();
+
+
 }

@@ -34,4 +34,21 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public List<MedicalRecord> listMedicalRecordHistoryByPatientId(Integer patientId) {
         return medicalRecordMapper.listMedicalRecordHistoryByPatientId(patientId);
     }
+
+    /**
+     * @title: treament_Over
+     * @description: 诊毕
+     * @author: 29-y
+     * @date: 2019-06-20 10:44
+     * @param: [medicalRecordId]
+     * @return: void
+     * @throws:
+     */
+    @Override
+    public void treamentOver(Integer medicalRecordId) {
+        MedicalRecord medicalRecord = new MedicalRecord();
+        medicalRecord.setMedicalRecordId(medicalRecordId);
+        medicalRecord.setIsTreamentOver("2");
+        medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);
+    }
 }

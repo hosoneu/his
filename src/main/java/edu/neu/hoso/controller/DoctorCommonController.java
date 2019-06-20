@@ -9,6 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * @title: DoctorCommonController
+ * @package edu.neu.hoso.controller
+ * @description: 门诊医生用户查看基础数据的控制类
+ * @author: 29-y
+ * @date: 2019-06-17 17:40
+ * @version: V1.0
+*/
 @RequestMapping("doctor/common")
 @RestController
 public class DoctorCommonController {

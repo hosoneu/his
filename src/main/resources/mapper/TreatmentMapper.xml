@@ -9,6 +9,16 @@
       <arg column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
+
+  <!--  添加处置条目列表的ResultMap by 29-y 2019.06.17 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.Treatment">
+    <id property="treatmentId" column="Treatment_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="medicalRecordId" column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="submitTime" column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    <collection property="treatmentItemsList" ofType="edu.neu.hoso.model.TreatmentItems" resultMap="edu.neu.hoso.model.TreatmentItemsMapper.SecondResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

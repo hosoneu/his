@@ -16,4 +16,6 @@ import java.util.List;
 public interface MedicalRecordService {
     // 历史病历查询：查找该患者对应的历史挂号信息（包括病历首页和诊断）并返回改挂号对应的病历
     List<MedicalRecord> listMedicalRecordHistoryByPatientId(Integer patientId);
+    // 诊毕
+    void treamentOver(Integer medicalRecordId);
 }

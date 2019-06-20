@@ -11,6 +11,19 @@
       <arg column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
+
+  <!--  添加处方条目列表的ResultMap by @29-y 2019.06.18 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.Prescription">
+    <id property="prescriptionId" column="Prescription_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="medicalRecordId" column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="submitTime" column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    <result property="prescriptionType" column="Prescription_Type" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="validStatus" column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" />
+    <collection property="prescriptionItemsList" ofType="edu.neu.hoso.model.PrescriptionItems" resultMap="edu.neu.hoso.model.PrescriptionItemsMapper.SecondResultMap"/>
+  </resultMap>
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

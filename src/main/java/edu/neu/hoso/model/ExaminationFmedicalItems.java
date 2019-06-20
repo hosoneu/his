@@ -25,17 +25,11 @@ public class ExaminationFmedicalItems {
 
     private String validStatus;
 
+    /* 对应的非药品对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
     private FmedicalItems fmedicalItems;
 
-    private List<Drugs> drugsList;
-
-    public List<Drugs> getDrugsList() {
-        return drugsList;
-    }
-
-    public FmedicalItems getFmedicalItems() {
-        return fmedicalItems;
-    }
+    /* 对应的检查检验药品项目列表对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
+    private List<ExaminationDrugsItems> examinationDrugsItemsList;
 
     public ExaminationFmedicalItems(Integer examinationFmedicalItemsId, Integer examinationId, Integer fmedicalItemsId, Integer doctorId, String registrationStatus, String purposeRequirements, Integer quantity, Integer actualQuantity, Integer examinationResultId, Integer expenseItemsId, String validStatus) {
         this.examinationFmedicalItemsId = examinationFmedicalItemsId;
@@ -49,6 +43,38 @@ public class ExaminationFmedicalItems {
         this.examinationResultId = examinationResultId;
         this.expenseItemsId = expenseItemsId;
         this.validStatus = validStatus;
+    }
+
+    public ExaminationFmedicalItems(Integer examinationFmedicalItemsId, Integer examinationId, Integer fmedicalItemsId, Integer doctorId, String registrationStatus, String purposeRequirements, Integer quantity, Integer actualQuantity, Integer examinationResultId, Integer expenseItemsId, String validStatus, FmedicalItems fmedicalItems, List<ExaminationDrugsItems> examinationDrugsItemsList) {
+        this.examinationFmedicalItemsId = examinationFmedicalItemsId;
+        this.examinationId = examinationId;
+        this.fmedicalItemsId = fmedicalItemsId;
+        this.doctorId = doctorId;
+        this.registrationStatus = registrationStatus;
+        this.purposeRequirements = purposeRequirements;
+        this.quantity = quantity;
+        this.actualQuantity = actualQuantity;
+        this.examinationResultId = examinationResultId;
+        this.expenseItemsId = expenseItemsId;
+        this.validStatus = validStatus;
+        this.fmedicalItems = fmedicalItems;
+        this.examinationDrugsItemsList = examinationDrugsItemsList;
+    }
+
+    public List<ExaminationDrugsItems> getExaminationDrugsItemsList() {
+        return examinationDrugsItemsList;
+    }
+
+    public void setExaminationDrugsItemsList(List<ExaminationDrugsItems> examinationDrugsItemsList) {
+        this.examinationDrugsItemsList = examinationDrugsItemsList;
+    }
+
+    public FmedicalItems getFmedicalItems() {
+        return fmedicalItems;
+    }
+
+    public void setFmedicalItems(FmedicalItems fmedicalItems) {
+        this.fmedicalItems = fmedicalItems;
     }
 
     public ExaminationFmedicalItems() {

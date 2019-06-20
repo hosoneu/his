@@ -19,9 +19,9 @@ public interface MedicalRecordHomePageService {
     // 录入病历首页的文字部分（除初步诊断、辅助检查的部分 该部分由insertFirstDiagnosis实现）
     Integer insertMedicalRecordHomePage(MedicalRecordHomePage medicalRecordHomePage);
     // 录入初诊结果
-    Integer insertFirstDiagnosis(List<Diagnosis> diagnosisList,Integer userId);
+    Integer insertFirstDiagnosis(List<Diagnosis> diagnosisList,Integer userId,Integer medicalRecordId);
     // 录入终诊结果
-    Integer insertFinalDiagnosis(List<Diagnosis> diagnosisList,Integer userId);
+    Integer insertFinalDiagnosis(List<Diagnosis> diagnosisList,Integer userId,Integer medicalRecordId);
     // 录入辅助检查结果
     void insertAssistantExamination(String assistantExamination,Integer medicalRecordHomePageId);
     // 列出病历首页模板（1个人/2科室/3医院）

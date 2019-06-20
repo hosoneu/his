@@ -1,6 +1,7 @@
 package edu.neu.hoso.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Examination {
     private Integer examinationId;
@@ -15,6 +16,9 @@ public class Examination {
 
     private Date submitTime;
 
+    /* 对应的检查检验非药品项目列表对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
+    private List<ExaminationFmedicalItems> examinationFmedicalItemsList;
+
     public Examination(Integer examinationId, Integer medicalRecordId, Integer doctorId, String examinationMark, String doctorAdvice, Date submitTime) {
         this.examinationId = examinationId;
         this.medicalRecordId = medicalRecordId;
@@ -22,6 +26,24 @@ public class Examination {
         this.examinationMark = examinationMark;
         this.doctorAdvice = doctorAdvice;
         this.submitTime = submitTime;
+    }
+
+    public Examination(Integer examinationId, Integer medicalRecordId, Integer doctorId, String examinationMark, String doctorAdvice, Date submitTime, List<ExaminationFmedicalItems> examinationFmedicalItemsList) {
+        this.examinationId = examinationId;
+        this.medicalRecordId = medicalRecordId;
+        this.doctorId = doctorId;
+        this.examinationMark = examinationMark;
+        this.doctorAdvice = doctorAdvice;
+        this.submitTime = submitTime;
+        this.examinationFmedicalItemsList = examinationFmedicalItemsList;
+    }
+
+    public List<ExaminationFmedicalItems> getExaminationFmedicalItemsList() {
+        return examinationFmedicalItemsList;
+    }
+
+    public void setExaminationFmedicalItemsList(List<ExaminationFmedicalItems> examinationFmedicalItemsList) {
+        this.examinationFmedicalItemsList = examinationFmedicalItemsList;
     }
 
     public Examination() {
