@@ -323,12 +323,13 @@ public class DoctorPrescriptionServiceImpl implements DoctorPrescriptionService 
             List<PrescriptionItems> prescriptionItemsList = prescription.getPrescriptionItemsList();//得到处方条目列表
             for(PrescriptionItems prescriptionItems : prescriptionItemsList){
                 //查找到对应的收费条目 并更新收费状态为无效
-                ExpenseItems expenseItems = expenseItemsMapper.selectByPrimaryKey(prescriptionItems.getExpenseItemsId());
+                ExpenseItems expenseItems = new ExpenseItems();
+                expenseItems.setExpenseItemsId(prescriptionItems.getExpenseItemsId());
                 expenseItems.setPayStatus("4");//设置收费条目为无效状态
-                expenseItemsMapper.updateByPrimaryKey(expenseItems);//更新该状态
+                expenseItemsMapper.updateByPrimaryKeySelective(expenseItems);//更新该状态
             }
             prescription.setValidStatus("2");//设置处方单为无效状态
-            prescriptionMapper.updateByPrimaryKey(prescription);
+            prescriptionMapper.updateByPrimaryKeySelective(prescription);
         }
     }
 

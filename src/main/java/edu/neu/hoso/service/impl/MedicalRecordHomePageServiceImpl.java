@@ -78,7 +78,7 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
         medicalRecord.setMedicalRecordId(medicalRecordId);//根据病历号的ID更新条目
         medicalRecord.setFirstDiagnosisDoctorId(userId);//设置初诊医生
         medicalRecord.setFirstDiagnosisTime(date);//设置初诊时间
-        medicalRecordMapper.updateByPrimaryKey(medicalRecord);
+        medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);
         return diagnosisId;
     }
 
@@ -106,7 +106,7 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
         medicalRecord.setMedicalRecordId(medicalRecordId);//根据病历号的ID更新条目
         medicalRecord.setFinalDiagnosisDoctorId(userId);//设置终诊医生
         medicalRecord.setFinalDiagnosisTime(new Date());//设置终诊时间
-        medicalRecordMapper.updateByPrimaryKey(medicalRecord);
+        medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);
         return diagnosisId;
     }
 
@@ -124,7 +124,7 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
         MedicalRecordHomePage medicalRecordHomePage = new MedicalRecordHomePage();
         medicalRecordHomePage.setMedicalRecordHomePageId(medicalRecordHomePageId);
         medicalRecordHomePage.setAssistantExamination(assistantExamination);
-        medicalRecordHomePageMapper.updateByPrimaryKey(medicalRecordHomePage);//插入assistantExamination
+        medicalRecordHomePageMapper.updateByPrimaryKeySelective(medicalRecordHomePage);//插入assistantExamination
     }
 
     /**

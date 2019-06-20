@@ -157,11 +157,12 @@ public class DoctorTreatmentServiceImpl implements DoctorTreatmentService {
         if(ifTreatmentItemsCanCancel(treatmentItemsId)==1){
             TreatmentItems treatmentItems = treatmentItemsMapper.selectByPrimaryKey(treatmentItemsId);//得到要退费的条目
             treatmentItems.setValidStatus("2");//将有效设置为2 即无效
-            treatmentItemsMapper.updateByPrimaryKey(treatmentItems);
+            treatmentItemsMapper.updateByPrimaryKeySelective(treatmentItems);
             Integer expenseItemsId = treatmentItems.getExpenseItemsId();//得到收费条目的ID
-            ExpenseItems expenseItems = expenseItemsMapper.selectByPrimaryKey(expenseItemsId);//得到收费条目
+            ExpenseItems expenseItems = new ExpenseItems();
+            expenseItems.setExpenseItemsId(expenseItemsId);
             expenseItems.setPayStatus("4");//收费状态设置为无效
-            expenseItemsMapper.updateByPrimaryKey(expenseItems);//更新该状态
+            expenseItemsMapper.updateByPrimaryKeySelective(expenseItems);//更新该状态
         }else{
             return ;
         }

@@ -72,7 +72,7 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
         MedicalRecord medicalRecord = medicalRecordMapper.selectByPrimaryKey(medicalRecordId);
         if(medicalRecord.getDoctorId()!=userId){//如果病历操作医生不是当前医生
             medicalRecord.setDoctorId(userId);//将病历操作医生设置为当前医生
-            medicalRecordMapper.updateByPrimaryKey(medicalRecord);//更新病历的操作医生ID字段
+            medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);//更新病历的操作医生ID字段
         }
     }
 
@@ -105,14 +105,14 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
         Integer registrationDoctorId = registrationMapper.selectByPrimaryKey(registrationId).getDoctorId();
         //填充当前病历的操作医生
         medicalRecord.setDoctorId(userId);
-        medicalRecordMapper.updateByPrimaryKey(medicalRecord);
+        medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);
         //下面需要考虑是否更改挂号表中的挂号医生ID和剩余挂号数
         if(registrationDoctorId==null){//如果只挂到科室 未挂到医生
             //减少当前医生的剩余挂号数
             subtractSchedulingRestcount(userId);
             //填充当前挂号的医生
             registration.setDoctorId(userId);
-            registrationMapper.updateByPrimaryKey(registration);
+            registrationMapper.updateByPrimaryKeySelective(registration);
         }else if(registrationDoctorId!=userId){//如果挂到某个医生 即证明该医生已下班
             //当该病历未初诊
             if(medicalRecord.getFirstDiagnosisDoctorId()==null){
@@ -122,7 +122,7 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
                 addSchedulingRestcount(registrationDoctorId,registrationId);
                 //填充当前挂号的医生
                 registration.setDoctorId(userId);
-                registrationMapper.updateByPrimaryKey(registration);
+                registrationMapper.updateByPrimaryKeySelective(registration);
             }else if(medicalRecord.getFinalDiagnosisDoctorId()==null) {//当该病历已初诊但未终诊
                 //do nothing
             }else{//当该病历已终诊(不会出现在科室列表中)
@@ -153,7 +153,7 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
         SchedulingInfo schedulingInfo = schedulingInfoMapper.selectByExample(schedulingInfoExample).get(0);
         schedulingInfo.setSchedulingRestcount(schedulingInfo.getSchedulingRestcount()+1);
         //更新排班信息
-        schedulingInfoMapper.updateByPrimaryKey(schedulingInfo);
+        schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfo);
     }
 
     /**
@@ -178,7 +178,7 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
         SchedulingInfo schedulingInfo = schedulingInfoMapper.selectByExample(schedulingInfoExample).get(0);
         schedulingInfo.setSchedulingRestcount(schedulingInfo.getSchedulingRestcount()-1);
         //更新排班信息
-        schedulingInfoMapper.updateByPrimaryKey(schedulingInfo);
+        schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfo);
     }
 
 }

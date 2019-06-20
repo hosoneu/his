@@ -3,7 +3,6 @@ package edu.neu.hoso.service.impl;
 import edu.neu.hoso.example.ExaminationDrugsItemsExample;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.DoctorExaminationService;
-import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -316,9 +315,9 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
             }else{
                 //do nothing
             }
-            expenseItemsMapper.updateByPrimaryKey(expenseItems);
+            expenseItemsMapper.updateByPrimaryKeySelective(expenseItems);
             examinationFmedicalItems.setValidStatus("2");
-            examinationFmedicalItemsMapper.updateByPrimaryKey(examinationFmedicalItems);
+            examinationFmedicalItemsMapper.updateByPrimaryKeySelective(examinationFmedicalItems);
 
             //获取该非药品条目对应的药品条目
             ExaminationDrugsItemsExample examinationDrugsItemsExample = new ExaminationDrugsItemsExample();
@@ -332,10 +331,10 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
                     String payStatusDrugs = expenseItemsDrugs.getPayStatus();//得到收费状态
                     if (payStatusDrugs.equals("1")) {//未缴费
                         expenseItemsDrugs.setPayStatus("4");
-                        expenseItemsMapper.updateByPrimaryKey(expenseItemsDrugs);
+                        expenseItemsMapper.updateByPrimaryKeySelective(expenseItemsDrugs);
                     } else if (payStatusDrugs.equals("2")) {//已缴费
                         expenseItemsDrugs.setPayStatus("5");
-                        expenseItemsMapper.updateByPrimaryKey(expenseItemsDrugs);
+                        expenseItemsMapper.updateByPrimaryKeySelective(expenseItemsDrugs);
                     } else if (payStatusDrugs.equals("3")) {//退费 (退费的不管了)
                         //do nothing
                     } else {

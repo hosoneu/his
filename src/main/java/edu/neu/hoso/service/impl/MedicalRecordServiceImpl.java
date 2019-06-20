@@ -49,6 +49,6 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
         MedicalRecord medicalRecord = new MedicalRecord();
         medicalRecord.setMedicalRecordId(medicalRecordId);
         medicalRecord.setIsTreamentOver("2");
-        medicalRecordMapper.updateByPrimaryKey(medicalRecord);
+        medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);
     }
 }
