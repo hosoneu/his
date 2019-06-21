@@ -1,4 +1,4 @@
-﻿package edu.neu.hoso.service.impl;
+package edu.neu.hoso.service.impl;
 
 import edu.neu.hoso.example.RegistrationExample;
 import edu.neu.hoso.example.SchedulingInfoExample;

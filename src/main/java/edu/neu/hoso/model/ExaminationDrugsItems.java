@@ -25,6 +25,8 @@ public class ExaminationDrugsItems {
 
     private Double dosage;
 
+    private Drugs drugs;
+
     public ExaminationDrugsItems(Integer examinationDrugsItemsId, Integer examinationFmedicalItemsId, Integer drugsId, Integer doctorId, String drugsUsage, Integer quantity, Integer actualQuantity, String drugsDispensingStatus, Integer expenseItemsId, Integer times, Integer days, Double dosage) {
         this.examinationDrugsItemsId = examinationDrugsItemsId;
         this.examinationFmedicalItemsId = examinationFmedicalItemsId;
@@ -38,6 +40,14 @@ public class ExaminationDrugsItems {
         this.times = times;
         this.days = days;
         this.dosage = dosage;
+    }
+
+    public Drugs getDrugs() {
+        return drugs;
+    }
+
+    public void setDrugs(Drugs drugs) {
+        this.drugs = drugs;
     }
 
     public ExaminationDrugsItems() {

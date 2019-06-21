@@ -174,8 +174,9 @@ public class TechController {
             else {
                 for (ExaminationFmedicalItems examinationFmedicalItems1:examinationFmedicalItems){
                     System.out.println(examinationFmedicalItems1.getFmedicalItems().toString());
-                    for (Drugs drugs:examinationFmedicalItems1.getDrugsList()){
-                        System.out.println(drugs.toString());
+                    for (ExaminationDrugsItems examinationDrugsItems: examinationFmedicalItems1.getExaminationDrugsItemsList()){
+                        System.out.println(examinationDrugsItems.toString());
+                        System.out.println(examinationDrugsItems.getDrugs().toString());
                     }
                 }
                 resultDTO.setStatus("OK");

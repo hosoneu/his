@@ -27,11 +27,7 @@ public class ExaminationFmedicalItems {
 
     private FmedicalItems fmedicalItems;
 
-    private List<Drugs> drugsList;
-
-    public List<Drugs> getDrugsList() {
-        return drugsList;
-    }
+    private List<ExaminationDrugsItems> examinationDrugsItemsList;
 
     public FmedicalItems getFmedicalItems() {
         return fmedicalItems;
@@ -49,6 +45,18 @@ public class ExaminationFmedicalItems {
         this.examinationResultId = examinationResultId;
         this.expenseItemsId = expenseItemsId;
         this.validStatus = validStatus;
+    }
+
+    public void setFmedicalItems(FmedicalItems fmedicalItems) {
+        this.fmedicalItems = fmedicalItems;
+    }
+
+    public List<ExaminationDrugsItems> getExaminationDrugsItemsList() {
+        return examinationDrugsItemsList;
+    }
+
+    public void setExaminationDrugsItemsList(List<ExaminationDrugsItems> examinationDrugsItemsList) {
+        this.examinationDrugsItemsList = examinationDrugsItemsList;
     }
 
     public ExaminationFmedicalItems() {
@@ -141,5 +149,24 @@ public class ExaminationFmedicalItems {
 
     public void setValidStatus(String validStatus) {
         this.validStatus = validStatus == null ? null : validStatus.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "ExaminationFmedicalItems{" +
+                "examinationFmedicalItemsId=" + examinationFmedicalItemsId +
+                ", examinationId=" + examinationId +
+                ", fmedicalItemsId=" + fmedicalItemsId +
+                ", doctorId=" + doctorId +
+                ", registrationStatus='" + registrationStatus + '\'' +
+                ", purposeRequirements='" + purposeRequirements + '\'' +
+                ", quantity=" + quantity +
+                ", actualQuantity=" + actualQuantity +
+                ", examinationResultId=" + examinationResultId +
+                ", expenseItemsId=" + expenseItemsId +
+                ", validStatus='" + validStatus + '\'' +
+                ", fmedicalItems=" + fmedicalItems +
+                ", examinationDrugsItemsList=" + examinationDrugsItemsList +
+                '}';
     }
 }
