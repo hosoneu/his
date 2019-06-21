@@ -154,4 +154,22 @@ public class FmedicalItems {
         this.reverse3 = reverse3 == null ? null : reverse3.trim();
     }
 
+    @Override
+    public String toString() {
+        return "FmedicalItems{" +
+                "fmedicalItemsId=" + fmedicalItemsId +
+                ", fmedicalItemsCode='" + fmedicalItemsCode + '\'' +
+                ", fmedicalItemsName='" + fmedicalItemsName + '\'' +
+                ", fmedicalItemsFormat='" + fmedicalItemsFormat + '\'' +
+                ", fmedicalItemsPrice=" + fmedicalItemsPrice +
+                ", expenseTypeId=" + expenseTypeId +
+                ", departmentId=" + departmentId +
+                ", fmedicalItemsMnemoniccode='" + fmedicalItemsMnemoniccode + '\'' +
+                ", fmedicalItemsType='" + fmedicalItemsType + '\'' +
+                ", createTime=" + createTime +
+                ", reverse1='" + reverse1 + '\'' +
+                ", reverse2='" + reverse2 + '\'' +
+                ", reverse3='" + reverse3 + '\'' +
+                '}';
+    }
 }

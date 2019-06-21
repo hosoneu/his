@@ -28,6 +28,10 @@ public class ExaminationFmedicalItems {
     /* 对应的非药品对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
     private FmedicalItems fmedicalItems;
 
+    private List<ExaminationDrugsItems> examinationDrugsItemsList;
+
+    public FmedicalItems getFmedicalItems() {
+        return fmedicalItems;
     /* 对应的检查检验药品项目列表对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
     private List<ExaminationDrugsItems> examinationDrugsItemsList;
 
@@ -75,6 +79,18 @@ public class ExaminationFmedicalItems {
 
     public void setFmedicalItems(FmedicalItems fmedicalItems) {
         this.fmedicalItems = fmedicalItems;
+    }
+
+    public void setFmedicalItems(FmedicalItems fmedicalItems) {
+        this.fmedicalItems = fmedicalItems;
+    }
+
+    public List<ExaminationDrugsItems> getExaminationDrugsItemsList() {
+        return examinationDrugsItemsList;
+    }
+
+    public void setExaminationDrugsItemsList(List<ExaminationDrugsItems> examinationDrugsItemsList) {
+        this.examinationDrugsItemsList = examinationDrugsItemsList;
     }
 
     public ExaminationFmedicalItems() {
@@ -167,5 +183,24 @@ public class ExaminationFmedicalItems {
 
     public void setValidStatus(String validStatus) {
         this.validStatus = validStatus == null ? null : validStatus.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "ExaminationFmedicalItems{" +
+                "examinationFmedicalItemsId=" + examinationFmedicalItemsId +
+                ", examinationId=" + examinationId +
+                ", fmedicalItemsId=" + fmedicalItemsId +
+                ", doctorId=" + doctorId +
+                ", registrationStatus='" + registrationStatus + '\'' +
+                ", purposeRequirements='" + purposeRequirements + '\'' +
+                ", quantity=" + quantity +
+                ", actualQuantity=" + actualQuantity +
+                ", examinationResultId=" + examinationResultId +
+                ", expenseItemsId=" + expenseItemsId +
+                ", validStatus='" + validStatus + '\'' +
+                ", fmedicalItems=" + fmedicalItems +
+                ", examinationDrugsItemsList=" + examinationDrugsItemsList +
+                '}';
     }
 }

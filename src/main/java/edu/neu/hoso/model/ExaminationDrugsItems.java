@@ -59,7 +59,6 @@ public class ExaminationDrugsItems {
         this.drugs = drugs;
     }
 
-
     public Drugs getDrugs() {
         return drugs;
     }

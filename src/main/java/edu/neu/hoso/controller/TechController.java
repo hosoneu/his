@@ -160,7 +160,7 @@ public class TechController {
      *@throws:
      */
     @RequestMapping("/getAllFmedical")
-    public ResultDTO getAllFmedical(){//(int Medical_record_ID, int Department_ID){
+    public ResultDTO getAllFmedical(int Medical_record_ID, int Department_ID){
         int Medical_record_ID=1111;
         int Department_ID =133;
         System.out.println("okok");
@@ -174,7 +174,7 @@ public class TechController {
             else {
                 for (ExaminationFmedicalItems examinationFmedicalItems1:examinationFmedicalItems){
                     System.out.println(examinationFmedicalItems1.getFmedicalItems().toString());
-                    for (ExaminationDrugsItems examinationDrugsItems:examinationFmedicalItems1.getExaminationDrugsItemsList()){
+                    for (ExaminationDrugsItems examinationDrugsItems: examinationFmedicalItems1.getExaminationDrugsItemsList()){
                         System.out.println(examinationDrugsItems.toString());
                         System.out.println(examinationDrugsItems.getDrugs().toString());
                     }
