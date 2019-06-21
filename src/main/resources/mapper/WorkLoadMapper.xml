@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neu.hoso.model.WorkLoadMapper" >
+    <resultMap id="BaseResultMap" type="edu.neu.hoso.model.Workload" >
+        <constructor >
+            <idArg column="Expense_Type_Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="Costs" jdbcType="DOUBLE" javaType="java.lang.Double" />
+        </constructor>
+    </resultMap>
+</mapper>

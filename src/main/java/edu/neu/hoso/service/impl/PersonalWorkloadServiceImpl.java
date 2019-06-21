@@ -98,6 +98,9 @@ public class PersonalWorkloadServiceImpl implements PersonalWorkloadService {
      逻辑描述 ：找出在时间区间内，某个科室所有医生经手过的病人个数（由于初诊和确诊必为一个科室，逻辑中只涉及初诊医生的判断）
      */
     public int FindPatitentsByDoctorIDs(List<Integer> medicalRecordID, List<Integer> doctorIDs){
+        if (medicalRecordID.size()==0||doctorIDs.size()==0){
+            return 0;
+        }
         MedicalRecordExample medicalRecordExample = new MedicalRecordExample();
         MedicalRecordExample.Criteria medicalRecordExampleCriteria= medicalRecordExample.createCriteria();
         medicalRecordExampleCriteria.andMedicalRecordIdIn(medicalRecordID);
@@ -113,6 +116,9 @@ public class PersonalWorkloadServiceImpl implements PersonalWorkloadService {
      */
     public double FindSumRegistrationCostsByDateAndDoctorsIDs(Date startdate, Date enddate, List<Integer>doctorIDs){
         double result = 0 ;
+        if (doctorIDs.size()==0){
+            return 0;
+        }
         RegistrationExample registrationExample = new RegistrationExample();
         RegistrationExample.Criteria  registrationExampleCriteria= registrationExample.createCriteria();
         registrationExampleCriteria.andRegistrationDateBetween(startdate,enddate);
