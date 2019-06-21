@@ -151,7 +151,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     public List<Registration> getRegistration() {
         /**
          *@title: getRegistration
-         *@description: 查询挂号信息
+         *@description: 展示挂号列表
          *@author: Mike
          *@date: 2019-06-18 10:32
          *@param: []

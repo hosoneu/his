@@ -25,6 +25,7 @@ public class ExaminationDrugsItems {
 
     private Double dosage;
 
+    /* 对应的药品对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
     private Drugs drugs;
 
     public ExaminationDrugsItems(Integer examinationDrugsItemsId, Integer examinationFmedicalItemsId, Integer drugsId, Integer doctorId, String drugsUsage, Integer quantity, Integer actualQuantity, String drugsDispensingStatus, Integer expenseItemsId, Integer times, Integer days, Double dosage) {
@@ -40,6 +41,22 @@ public class ExaminationDrugsItems {
         this.times = times;
         this.days = days;
         this.dosage = dosage;
+    }
+
+    public ExaminationDrugsItems(Integer examinationDrugsItemsId, Integer examinationFmedicalItemsId, Integer drugsId, Integer doctorId, String drugsUsage, Integer quantity, Integer actualQuantity, String drugsDispensingStatus, Integer expenseItemsId, Integer times, Integer days, Double dosage, Drugs drugs) {
+        this.examinationDrugsItemsId = examinationDrugsItemsId;
+        this.examinationFmedicalItemsId = examinationFmedicalItemsId;
+        this.drugsId = drugsId;
+        this.doctorId = doctorId;
+        this.drugsUsage = drugsUsage;
+        this.quantity = quantity;
+        this.actualQuantity = actualQuantity;
+        this.drugsDispensingStatus = drugsDispensingStatus;
+        this.expenseItemsId = expenseItemsId;
+        this.times = times;
+        this.days = days;
+        this.dosage = dosage;
+        this.drugs = drugs;
     }
 
     public Drugs getDrugs() {
@@ -148,5 +165,24 @@ public class ExaminationDrugsItems {
 
     public void setDosage(Double dosage) {
         this.dosage = dosage;
+    }
+
+    @Override
+    public String toString() {
+        return "ExaminationDrugsItems{" +
+                "examinationDrugsItemsId=" + examinationDrugsItemsId +
+                ", examinationFmedicalItemsId=" + examinationFmedicalItemsId +
+                ", drugsId=" + drugsId +
+                ", doctorId=" + doctorId +
+                ", drugsUsage='" + drugsUsage + '\'' +
+                ", quantity=" + quantity +
+                ", actualQuantity=" + actualQuantity +
+                ", drugsDispensingStatus='" + drugsDispensingStatus + '\'' +
+                ", expenseItemsId=" + expenseItemsId +
+                ", times=" + times +
+                ", days=" + days +
+                ", dosage=" + dosage +
+                ", drugs=" + drugs +
+                '}';
     }
 }

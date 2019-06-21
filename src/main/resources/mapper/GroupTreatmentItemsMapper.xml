@@ -10,6 +10,17 @@
       <arg column="Group_Treatment_Scope" jdbcType="CHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
+
+  <!--  添加非药品条目的ResultMap by 29-y 2019.06.17 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.GroupTreatmentItems">
+    <id property="groupTreatmentItemsId" column="Group_Treatment_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="groupTreatmentId" column="Group_Treatment_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="fmedicalItemsId" column="Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="quantity" column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="groupTreatmentScope" column="Group_Treatment_Scope" jdbcType="CHAR" javaType="java.lang.String" />
+    <association property="fmedicalItems" javaType="edu.neu.hoso.model.FmedicalItems" resultMap="edu.neu.hoso.model.FmedicalItemsMapper.BaseResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

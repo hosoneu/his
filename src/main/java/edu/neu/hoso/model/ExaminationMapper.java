@@ -62,4 +62,38 @@ public interface ExaminationMapper {
         "where Examination_ID = #{examinationId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Examination record);
+
+    /**
+     * @title: listExaminationByMedicalRecordId
+     * @description: 列出病历下的所有检查/检验单（mark: 1 检查 2 检验）（不包括药品条目细节 通过example填充）
+     * @author: 29-y
+     * @date: 2019-06-19 9:31
+     * @param: [medicalRecordId, mark]
+     * @return: java.util.List<edu.neu.hoso.model.Examination>
+     * @throws:
+     */
+    @Select({
+            "select e.*,e_fmedical_items.*,fmedical.* " ,
+            "from examination e join examination_fmedical_items e_fmedical_items on e_fmedical_items.Examination_ID = e.Examination_ID join fmedical_items fmedical on fmedical.Fmedical_Items_ID = e_fmedical_items.Fmedical_Items_ID " ,
+            "where e.Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER} and e.Examination_Mark = #{mark,jdbcType=CHAR} "
+    })
+    @ResultMap("SecondResultMap")
+    List<Examination> listExaminationByMedicalRecordId(Integer medicalRecordId, String mark);
+
+    /**
+     * @title: selectExaminationById
+     * @description: 根据ID查找检查/检验单的内容（mark: 1 检查 2 检验）（不包括药品条目细节 通过example填充）
+     * @author: 29-y
+     * @date: 2019-06-19 9:43
+     * @param: [examinationId, mark]
+     * @return: edu.neu.hoso.model.Examination
+     * @throws:
+     */
+    @Select({
+            "select e.*,e_fmedical_items.*,fmedical.* " ,
+            "from examination e join examination_fmedical_items e_fmedical_items on e_fmedical_items.Examination_ID = e.Examination_ID join fmedical_items fmedical on fmedical.Fmedical_Items_ID = e_fmedical_items.Fmedical_Items_ID " ,
+            "where e.Examination_ID = #{examinationId,jdbcType=INTEGER} and e.Examination_Mark = #{mark,jdbcType=CHAR} "
+    })
+    @ResultMap("SecondResultMap")
+    Examination selectExaminationById(Integer examinationId, String mark);
 }

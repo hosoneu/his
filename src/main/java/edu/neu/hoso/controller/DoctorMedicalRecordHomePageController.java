@@ -67,7 +67,7 @@ public class DoctorMedicalRecordHomePageController {
 
     //    录入初诊结果 点击保存即可插入 在病历首页部分进行提交 然后需要在medical中填充终诊的姓名
     @RequestMapping("/insertFirstDiagnosis")
-    public ResultDTO<Integer> insertFirstDiagnosis(List<Diagnosis> diagnosisList,Integer userId){
+    public ResultDTO<Integer> insertFirstDiagnosis(List<Diagnosis> diagnosisList,Integer userId,Integer medicalRecordId){
 //        List<Diagnosis> diagnosisList,Integer userId
 //        Integer userId = 1;
 //        List<Diagnosis> diagnosisList = new ArrayList<Diagnosis>();
@@ -82,7 +82,7 @@ public class DoctorMedicalRecordHomePageController {
 //        diagnosisList.add(diagnosis);
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
-            resultDTO.setData(medicalRecordHomePageService.insertFirstDiagnosis(diagnosisList,userId));
+            resultDTO.setData(medicalRecordHomePageService.insertFirstDiagnosis(diagnosisList,userId,medicalRecordId));
             resultDTO.setStatus("OK");
             resultDTO.setMsg("初诊结果录入成功！");
         } catch (Exception e) {

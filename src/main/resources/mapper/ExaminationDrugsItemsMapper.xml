@@ -17,6 +17,24 @@
       <arg column="Dosage" jdbcType="DOUBLE" javaType="java.lang.Double" />
     </constructor>
   </resultMap>
+
+  <!--  添加药品对象的ResultMap by @29-y 2019.06.18 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.ExaminationDrugsItems">
+    <id property="examinationDrugsItemsId" column="Examination_Drugs_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="examinationFmedicalItemsId" column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="drugsId" column="Drugs_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="drugsUsage" column="Drugs_Usage" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="quantity" column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="actualQuantity" column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="drugsDispensingStatus" column="Drugs_Dispensing_Status" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="expenseItemsId" column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="times" column="Times" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="days" column="Days" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="dosage" column="Dosage" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    <association property="drugs" javaType="edu.neu.hoso.model.Drugs" resultMap="edu.neu.hoso.model.DrugsMapper.BaseResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
