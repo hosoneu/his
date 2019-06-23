@@ -1,4 +1,4 @@
-package edu.neu.hoso.service.Impl;
+package edu.neu.hoso.service.impl;
 
 import edu.neu.hoso.example.ExaminationDrugsItemsExample;
 import edu.neu.hoso.example.PatientExample;
