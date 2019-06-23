@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="db.properties"></properties>
+    <classPathEntry location="${driverLocation}"/>
+    <context id="default" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="${driver}" connectionURL="${url}" userId="${username}" password="${password}">
+            <!--不生成多余UserKey与UserWithBlobs-->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+        <javaModelGenerator targetPackage="edu.neu.hoso.model" targetProject="src/main/java">
+            <property name="constructorBased" value="true"/>
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <javaClientGenerator targetPackage="edu.neu.hoso.model" targetProject="src/main/java"
+                             type="MIXEDMAPPER">
+            <property name="enableSubPackages" value="false"/>
+            <property name="exampleMethodVisibility" value="public"/>
+        </javaClientGenerator>
+        <!--希望生成的表-->
+<!--        <table tableName="department" schema="hosoneu">-->
+<!--            <generatedKey column="Department_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="calculation_type" schema="hosoneu">-->
+<!--            <generatedKey column="Calculation_Type_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="commonly_used_diagnosis" schema="hosoneu">-->
+<!--            <generatedKey column="Commonly_Used_Diagnosis_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="commonly_used_drugs" schema="hosoneu">-->
+<!--            <generatedKey column="Commonly_Used_Drugs_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="commonly_used_fmedical" schema="hosoneu">-->
+<!--            <generatedKey column="Commonly_Used_Fmedical_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="constant_items" schema="hosoneu">-->
+<!--            <generatedKey column="Constant_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="constant_type" schema="hosoneu">-->
+<!--            <generatedKey column="Constant_Type_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="day_cal" schema="hosoneu">-->
+<!--            <generatedKey column="Day_Cal_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="diagnosis" schema="hosoneu">-->
+<!--            <generatedKey column="Diagnosis_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="diagnosis_template" schema="hosoneu">-->
+<!--            <generatedKey column="Diagnosis_Template_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="disease" schema="hosoneu">-->
+<!--            <generatedKey column="Disease_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="disease_type" schema="hosoneu">-->
+<!--            <generatedKey column="Disease_Type_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="drugs" schema="hosoneu">-->
+<!--            <generatedKey column="Drugs_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="examination" schema="hosoneu">-->
+<!--            <generatedKey column="Examination_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="examination_drugs_items" schema="hosoneu">-->
+<!--            <generatedKey column="Examination_Drugs_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="examination_fmedical_items" schema="hosoneu">-->
+<!--            <generatedKey column="Examination_Fmedical_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="examination_result" schema="hosoneu">-->
+<!--            <generatedKey column="Examination_Result_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="examination_result_image" schema="hosoneu">-->
+<!--            <generatedKey column="Examination_Result_Image_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="expense_items" schema="hosoneu">-->
+<!--            <generatedKey column="Expense_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="expense_type" schema="hosoneu">-->
+<!--            <generatedKey column="Expense_Type_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="fmedical_items" schema="hosoneu">-->
+<!--            <generatedKey column="Fmedical_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="function" schema="hosoneu">-->
+<!--            <generatedKey column="Function_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="group_examination" schema="hosoneu">-->
+<!--            <generatedKey column="Group_Examination_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="group_examination_drugs_items" schema="hosoneu">-->
+<!--            <generatedKey column="Group_Examination_Drugs_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="group_examination_fmedical_items" schema="hosoneu">-->
+<!--            <generatedKey column="Group_Examination_Fmedical_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="group_prescription" schema="hosoneu">-->
+<!--            <generatedKey column="Group_Prescription_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="group_prescription_items" schema="hosoneu">-->
+<!--            <generatedKey column="Group_Prescription_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="group_treatment" schema="hosoneu">-->
+<!--            <generatedKey column="Group_Treatment_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="group_treatment_items" schema="hosoneu">-->
+<!--            <generatedKey column="Group_Treatment_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="medical_record" schema="hosoneu">-->
+<!--            <generatedKey column="Medical_Record_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="medical_record_home_page" schema="hosoneu">-->
+<!--            <generatedKey column="Medical_Record_Home_Page_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="medical_record_home_page_template" schema="hosoneu">-->
+<!--            <generatedKey column="Medical_Record_Home_Page_Template_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="patient" schema="hosoneu">-->
+<!--            <generatedKey column="Patient_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="prescription" schema="hosoneu">-->
+<!--            <generatedKey column="Prescription_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="prescription_items" schema="hosoneu">-->
+<!--            <generatedKey column="Prescription_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="registration" schema="hosoneu">-->
+<!--            <generatedKey column="Registration_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="registration_level" schema="hosoneu">-->
+<!--            <generatedKey column="Registration_Level_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="role" schema="hosoneu">-->
+<!--            <generatedKey column="Role_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="scheduling_info" schema="hosoneu">-->
+<!--            <generatedKey column="Scheduling_Info_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="scheduling_rule" schema="hosoneu">-->
+<!--            <generatedKey column="Scheduling_Rule_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="treatment" schema="hosoneu">-->
+<!--            <generatedKey column="Treatment_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="treatment_items" schema="hosoneu">-->
+<!--            <generatedKey column="Treatment_Items_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="user" schema="hosoneu">-->
+<!--            <generatedKey column="User_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="disease_folder" schema="hosoneu">-->
+<!--            <generatedKey column="Disease_Folder_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="invoice" schema="hosoneu">-->
+<!--            <generatedKey column="Invoice_ID" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+    </context>
+</generatorConfiguration>
