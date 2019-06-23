@@ -11,12 +11,32 @@ public class DiagnosisTemplate {
 
     private String suspectMark;
 
+    /* 对应的疾病对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.14*/
+    private Disease disease;
+
     public DiagnosisTemplate(Integer diagnosisTemplateId, Integer medicalRecordHomePageTemplateId, Integer diseaseId, String mainDiagnosisMark, String suspectMark) {
         this.diagnosisTemplateId = diagnosisTemplateId;
         this.medicalRecordHomePageTemplateId = medicalRecordHomePageTemplateId;
         this.diseaseId = diseaseId;
         this.mainDiagnosisMark = mainDiagnosisMark;
         this.suspectMark = suspectMark;
+    }
+
+    public DiagnosisTemplate(Integer diagnosisTemplateId, Integer medicalRecordHomePageTemplateId, Integer diseaseId, String mainDiagnosisMark, String suspectMark, Disease disease) {
+        this.diagnosisTemplateId = diagnosisTemplateId;
+        this.medicalRecordHomePageTemplateId = medicalRecordHomePageTemplateId;
+        this.diseaseId = diseaseId;
+        this.mainDiagnosisMark = mainDiagnosisMark;
+        this.suspectMark = suspectMark;
+        this.disease = disease;
+    }
+
+    public Disease getDisease() {
+        return disease;
+    }
+
+    public void setDisease(Disease disease) {
+        this.disease = disease;
     }
 
     public DiagnosisTemplate() {

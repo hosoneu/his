@@ -1,6 +1,7 @@
 package edu.neu.hoso.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Prescription {
     private Integer prescriptionId;
@@ -15,6 +16,9 @@ public class Prescription {
 
     private String validStatus;
 
+    /* 对应的处方条目列表 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
+    private List<PrescriptionItems> prescriptionItemsList;
+
     public Prescription(Integer prescriptionId, Integer medicalRecordId, Integer doctorId, Date submitTime, String prescriptionType, String validStatus) {
         this.prescriptionId = prescriptionId;
         this.medicalRecordId = medicalRecordId;
@@ -22,6 +26,24 @@ public class Prescription {
         this.submitTime = submitTime;
         this.prescriptionType = prescriptionType;
         this.validStatus = validStatus;
+    }
+
+    public Prescription(Integer prescriptionId, Integer medicalRecordId, Integer doctorId, Date submitTime, String prescriptionType, String validStatus, List<PrescriptionItems> prescriptionItemsList) {
+        this.prescriptionId = prescriptionId;
+        this.medicalRecordId = medicalRecordId;
+        this.doctorId = doctorId;
+        this.submitTime = submitTime;
+        this.prescriptionType = prescriptionType;
+        this.validStatus = validStatus;
+        this.prescriptionItemsList = prescriptionItemsList;
+    }
+
+    public List<PrescriptionItems> getPrescriptionItemsList() {
+        return prescriptionItemsList;
+    }
+
+    public void setPrescriptionItemsList(List<PrescriptionItems> prescriptionItemsList) {
+        this.prescriptionItemsList = prescriptionItemsList;
     }
 
     public Prescription() {

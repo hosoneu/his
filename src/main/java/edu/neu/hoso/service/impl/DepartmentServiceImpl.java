@@ -22,7 +22,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     DepartmentMapper departmentMapper;
 
-
     @Override
     public Integer insert(Department department) {
         /**

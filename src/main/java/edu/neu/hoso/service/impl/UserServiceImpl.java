@@ -4,6 +4,7 @@ import edu.neu.hoso.example.UserExample;
 import edu.neu.hoso.model.User;
 import edu.neu.hoso.model.UserMapper;
 import edu.neu.hoso.service.UserService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @date: 2019-06-11 11:07
  * @version: V1.0
 */
+@Service
 public class UserServiceImpl implements UserService {
     @Resource
     UserMapper userMapper;
@@ -209,6 +211,22 @@ public class UserServiceImpl implements UserService {
          *@throws:
          */
         UserExample userExample = new UserExample();
+        return userMapper.selectByExample(userExample);
+    }
+    @Override
+    public List<User> getUserByDepartmentID(int departmentID) {
+        /**
+         *@title: getAllUser
+         *@description: 查询所有用户
+         *@author: Mike
+         *@date: 2019-06-11 12:00
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.User>
+         *@throws:
+         */
+        UserExample userExample = new UserExample();
+        UserExample.Criteria userExampleCriteria=userExample.createCriteria();
+        userExampleCriteria.andDepartmentIdEqualTo(departmentID);
         return userMapper.selectByExample(userExample);
     }
 }

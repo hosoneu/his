@@ -197,4 +197,79 @@
     </set>
     where Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER}
   </update>
+
+  <select id="getUnWithdrawExpenseItems" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM expense_items
+  NATURAL JOIN invoice
+    WHERE
+  Invoice_NO = #{invoiceNO}
+  AND Pay_Status = "2"
+  </select>
+
+  <!--患者费用项目结果集 @Mike 2019.6.18-->
+  <resultMap id="PatientExpenseItemsResultMap" type="edu.neu.hoso.model.ExpenseItems" >
+      <id column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <result column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <result column="Total_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" property=""/>
+      <result column="Pay_Status" jdbcType="CHAR" javaType="java.lang.String" />
+      <association property="invoice" javaType="Invoice">
+        <id column="Invoice_ID" property="invoiceId" />
+        <result column="Invoice_NO" property="invoiceNo" />
+        <result column="Is_Day_Cal" property="isDayCal" />
+        <result column="Pay_Time" property="payTime" />
+      </association>
+      <association property="expenseType" javaType="ExpenseType">
+        <id column="Expense_Type_ID" property="expenseTypeId" />
+        <result column="Expense_Type_Name" property="expenseTypeName" />
+      </association>
+  </resultMap>
+
+  <!--查询患者未收费项目 @Mike 2019.6.18-->
+  <select id="getPatientUnPayExpenseItems" resultMap="PatientExpenseItemsResultMap" parameterType="java.lang.Integer" >
+    SELECT
+        drugs.Drugs_Name,
+        fmedical_items.Fmedical_Items_Name,
+        expense_items.Total_Cost,
+        Pay_Status,
+        Expense_Type_Name
+    FROM
+        expense_items
+        NATURAL JOIN expense_type
+        JOIN ( prescription_items JOIN drugs ON prescription_items.Drags_ID = drugs.Drugs_ID ) ON prescription_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        JOIN ( treatment_items JOIN fmedical_items ON treatment_items.Fmedical_Items_ID = fmedical_items.Fmedical_Items_ID ) ON treatment_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        JOIN examination_fmedical_items ON examination_fmedical_items.Examination_Fmedical_Items_ID = fmedical_items.Fmedical_Items_ID AND examination_fmedical_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        JOIN examination_drugs_items ON examination_drugs_items.Drugs_ID = drugs.Drugs_ID AND examination_drugs_items.Expense_Items_ID = expense_items.Expense_Items_ID
+    WHERE
+        expense_items.Medical_Record_ID = #{medicalRecordId}
+        AND expense_items.Pay_Status = 1
+  </select>
+  
+  <!--查询患者已收费项目 @Mike 2019.6.18-->
+  <select id="getPatientPayExpenseItems" resultMap="PatientExpenseItemsResultMap">
+    SELECT
+        drugs.Drugs_Name,
+        fmedical_items.Fmedical_Items_Name,
+        expense_items.Total_Cost,
+        Pay_Status,
+        Expense_Type_Name,
+        Invoice_NO
+    FROM
+        expense_items
+        NATURAL JOIN expense_type
+        JOIN invoice ON expense_items.Invoice_ID = invoice.Invoice_ID
+        JOIN ( prescription_items JOIN drugs ON prescription_items.Drags_ID = drugs.Drugs_ID ) ON prescription_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        JOIN ( treatment_items JOIN fmedical_items ON treatment_items.Fmedical_Items_ID = fmedical_items.Fmedical_Items_ID ) ON treatment_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        JOIN examination_fmedical_items ON examination_fmedical_items.Examination_Fmedical_Items_ID = fmedical_items.Fmedical_Items_ID AND examination_fmedical_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        JOIN examination_drugs_items ON examination_drugs_items.Drugs_ID = drugs.Drugs_ID AND examination_drugs_items.Expense_Items_ID = expense_items.Expense_Items_ID
+    WHERE
+        expense_items.Medical_Record_ID = #{medicalRecordId}
+        AND Registration_Status = 1
+        AND medical_record.Is_Treament_Over = 1
+        AND expense_items.Pay_Status = 2
+        AND invoice.Pay_Time BETWEEN startDate AND endDate
+    ORDER BY
+        Pay_Time DESC
+  </select>
 </mapper>

@@ -12,6 +12,20 @@
       <arg column="Final_Diagnosis_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
+
+  <!--  添加诊断列表和病历首页的ResultMap by 29-y 2019.06.16 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.MedicalRecord">
+    <id property="medicalRecordId" column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="isTreamentOver" column="Is_Treament_Over" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="firstDiagnosisDoctorId" column="First_Diagnosis_Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="finalDiagnosisDoctorId" column="Final_Diagnosis_Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="firstDiagnosisTime" column="First_Diagnosis_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    <result property="finalDiagnosisTime" column="Final_Diagnosis_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    <association property="medicalRecordHomePage" javaType="edu.neu.hoso.model.MedicalRecordHomePage" resultMap="edu.neu.hoso.model.MedicalRecordHomePageMapper.BaseResultMap"/>
+    <collection property="diagnosisList" ofType="edu.neu.hoso.model.Diagnosis" resultMap="edu.neu.hoso.model.DiagnosisMapper.SecondResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

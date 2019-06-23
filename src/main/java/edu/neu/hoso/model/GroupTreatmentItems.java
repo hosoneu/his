@@ -11,12 +11,32 @@ public class GroupTreatmentItems {
 
     private String groupTreatmentScope;
 
+    /* 对应的处置非药品对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.17*/
+    private FmedicalItems fmedicalItems;
+
     public GroupTreatmentItems(Integer groupTreatmentItemsId, Integer groupTreatmentId, Integer fmedicalItemsId, Integer quantity, String groupTreatmentScope) {
         this.groupTreatmentItemsId = groupTreatmentItemsId;
         this.groupTreatmentId = groupTreatmentId;
         this.fmedicalItemsId = fmedicalItemsId;
         this.quantity = quantity;
         this.groupTreatmentScope = groupTreatmentScope;
+    }
+
+    public GroupTreatmentItems(Integer groupTreatmentItemsId, Integer groupTreatmentId, Integer fmedicalItemsId, Integer quantity, String groupTreatmentScope, FmedicalItems fmedicalItems) {
+        this.groupTreatmentItemsId = groupTreatmentItemsId;
+        this.groupTreatmentId = groupTreatmentId;
+        this.fmedicalItemsId = fmedicalItemsId;
+        this.quantity = quantity;
+        this.groupTreatmentScope = groupTreatmentScope;
+        this.fmedicalItems = fmedicalItems;
+    }
+
+    public FmedicalItems getFmedicalItems() {
+        return fmedicalItems;
+    }
+
+    public void setFmedicalItems(FmedicalItems fmedicalItems) {
+        this.fmedicalItems = fmedicalItems;
     }
 
     public GroupTreatmentItems() {

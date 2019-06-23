@@ -11,6 +11,18 @@
       <arg column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
+
+  <!--  添加检查检验非药品条目列表对象的ResultMap by @29-y 2019.06.18 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.Examination">
+    <id property="examinationId" column="Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="medicalRecordId" column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="examinationMark" column="Examination_Mark" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="doctorAdvice" column="Doctor_Advice" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="submitTime" column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    <collection property="examinationFmedicalItemsList" ofType="edu.neu.hoso.model.ExaminationFmedicalItems" resultMap="edu.neu.hoso.model.ExaminationFmedicalItemsMapper.SecondResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -197,4 +209,10 @@
     </set>
     where Examination_ID = #{examinationId,jdbcType=INTEGER}
   </update>
+
+  <select id="getPatientIdByExaminationDrugsId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      select examination.Medical_Record_ID
+      from examination NATURAL JOIN examination_fmedical_items natural join examination_drugs_items
+      where examination_drugs_items.Expense_Items_ID=#{ExaminationDrugsItemsId}
+  </select>
 </mapper>

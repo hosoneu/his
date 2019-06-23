@@ -19,6 +19,9 @@ public class GroupPrescriptionItems {
 
     private String drugsAdvice;
 
+    /* 对应的药品对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
+    private Drugs drugs;
+
     public GroupPrescriptionItems(Integer groupPrescriptionItemsId, Integer groupPrescriptionId, Integer drugsId, String drugsUsage, Double dosage, Integer times, Integer days, Integer quantity, String drugsAdvice) {
         this.groupPrescriptionItemsId = groupPrescriptionItemsId;
         this.groupPrescriptionId = groupPrescriptionId;
@@ -29,6 +32,27 @@ public class GroupPrescriptionItems {
         this.days = days;
         this.quantity = quantity;
         this.drugsAdvice = drugsAdvice;
+    }
+
+    public GroupPrescriptionItems(Integer groupPrescriptionItemsId, Integer groupPrescriptionId, Integer drugsId, String drugsUsage, Double dosage, Integer times, Integer days, Integer quantity, String drugsAdvice, Drugs drugs) {
+        this.groupPrescriptionItemsId = groupPrescriptionItemsId;
+        this.groupPrescriptionId = groupPrescriptionId;
+        this.drugsId = drugsId;
+        this.drugsUsage = drugsUsage;
+        this.dosage = dosage;
+        this.times = times;
+        this.days = days;
+        this.quantity = quantity;
+        this.drugsAdvice = drugsAdvice;
+        this.drugs = drugs;
+    }
+
+    public Drugs getDrugs() {
+        return drugs;
+    }
+
+    public void setDrugs(Drugs drugs) {
+        this.drugs = drugs;
     }
 
     public GroupPrescriptionItems() {

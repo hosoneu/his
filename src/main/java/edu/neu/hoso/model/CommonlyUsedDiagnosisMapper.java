@@ -54,4 +54,12 @@ public interface CommonlyUsedDiagnosisMapper {
         "where Commonly_Used_Diagnosis_ID = #{commonlyUsedDiagnosisId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(CommonlyUsedDiagnosis record);
+
+    @Select({
+            "select c.*,d.*",
+            "from commonly_used_diagnosis c join disease d on c.Disease_ID = d.Disease_ID",
+            "where c.Doctor_ID = #{userId,jdbcType=INTEGER}"
+    })
+    @ResultMap("SecondResultMap")
+    List<CommonlyUsedDiagnosis> listCommonlyUsedDiagnosisByUserId(Integer userId);
 }

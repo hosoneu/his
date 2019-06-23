@@ -2,7 +2,6 @@ package edu.neu.hoso.example;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class SchedulingRuleExample {
@@ -104,32 +103,6 @@ public class SchedulingRuleExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andSchedulingRuleIdIsNull() {
@@ -333,52 +306,52 @@ public class SchedulingRuleExample {
         }
 
         public Criteria andSchedulingRuleStarttimeEqualTo(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_StartTime =", value, "schedulingRuleStarttime");
+            addCriterion("Scheduling_Rule_StartTime =", value, "schedulingRuleStarttime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleStarttimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_StartTime <>", value, "schedulingRuleStarttime");
+            addCriterion("Scheduling_Rule_StartTime <>", value, "schedulingRuleStarttime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleStarttimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_StartTime >", value, "schedulingRuleStarttime");
+            addCriterion("Scheduling_Rule_StartTime >", value, "schedulingRuleStarttime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleStarttimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_StartTime >=", value, "schedulingRuleStarttime");
+            addCriterion("Scheduling_Rule_StartTime >=", value, "schedulingRuleStarttime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleStarttimeLessThan(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_StartTime <", value, "schedulingRuleStarttime");
+            addCriterion("Scheduling_Rule_StartTime <", value, "schedulingRuleStarttime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleStarttimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_StartTime <=", value, "schedulingRuleStarttime");
+            addCriterion("Scheduling_Rule_StartTime <=", value, "schedulingRuleStarttime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleStarttimeIn(List<Date> values) {
-            addCriterionForJDBCDate("Scheduling_Rule_StartTime in", values, "schedulingRuleStarttime");
+            addCriterion("Scheduling_Rule_StartTime in", values, "schedulingRuleStarttime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleStarttimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("Scheduling_Rule_StartTime not in", values, "schedulingRuleStarttime");
+            addCriterion("Scheduling_Rule_StartTime not in", values, "schedulingRuleStarttime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleStarttimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("Scheduling_Rule_StartTime between", value1, value2, "schedulingRuleStarttime");
+            addCriterion("Scheduling_Rule_StartTime between", value1, value2, "schedulingRuleStarttime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleStarttimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("Scheduling_Rule_StartTime not between", value1, value2, "schedulingRuleStarttime");
+            addCriterion("Scheduling_Rule_StartTime not between", value1, value2, "schedulingRuleStarttime");
             return (Criteria) this;
         }
 
@@ -393,52 +366,52 @@ public class SchedulingRuleExample {
         }
 
         public Criteria andSchedulingRuleEndtimeEqualTo(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_EndTime =", value, "schedulingRuleEndtime");
+            addCriterion("Scheduling_Rule_EndTime =", value, "schedulingRuleEndtime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleEndtimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_EndTime <>", value, "schedulingRuleEndtime");
+            addCriterion("Scheduling_Rule_EndTime <>", value, "schedulingRuleEndtime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleEndtimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_EndTime >", value, "schedulingRuleEndtime");
+            addCriterion("Scheduling_Rule_EndTime >", value, "schedulingRuleEndtime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleEndtimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_EndTime >=", value, "schedulingRuleEndtime");
+            addCriterion("Scheduling_Rule_EndTime >=", value, "schedulingRuleEndtime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleEndtimeLessThan(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_EndTime <", value, "schedulingRuleEndtime");
+            addCriterion("Scheduling_Rule_EndTime <", value, "schedulingRuleEndtime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleEndtimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("Scheduling_Rule_EndTime <=", value, "schedulingRuleEndtime");
+            addCriterion("Scheduling_Rule_EndTime <=", value, "schedulingRuleEndtime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleEndtimeIn(List<Date> values) {
-            addCriterionForJDBCDate("Scheduling_Rule_EndTime in", values, "schedulingRuleEndtime");
+            addCriterion("Scheduling_Rule_EndTime in", values, "schedulingRuleEndtime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleEndtimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("Scheduling_Rule_EndTime not in", values, "schedulingRuleEndtime");
+            addCriterion("Scheduling_Rule_EndTime not in", values, "schedulingRuleEndtime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleEndtimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("Scheduling_Rule_EndTime between", value1, value2, "schedulingRuleEndtime");
+            addCriterion("Scheduling_Rule_EndTime between", value1, value2, "schedulingRuleEndtime");
             return (Criteria) this;
         }
 
         public Criteria andSchedulingRuleEndtimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("Scheduling_Rule_EndTime not between", value1, value2, "schedulingRuleEndtime");
+            addCriterion("Scheduling_Rule_EndTime not between", value1, value2, "schedulingRuleEndtime");
             return (Criteria) this;
         }
 

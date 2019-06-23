@@ -10,6 +10,17 @@
       <arg column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
+
+  <!--  添加图片列表对象的ResultMap by @29-y 2019.06.18 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.ExaminationResult" >
+    <id property="examinationResultId" column="Examination_Result_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="findings" column="Findings" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="diagnosticSuggestion" column="Diagnostic_Suggestion" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="submitTime" column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    <collection property="examinationResultImageList" ofType="edu.neu.hoso.model.ExaminationResultImage" resultMap="edu.neu.hoso.model.ExaminationResultImageMapper.BaseResultMap" />
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

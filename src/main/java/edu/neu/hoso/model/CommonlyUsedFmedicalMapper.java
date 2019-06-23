@@ -54,4 +54,31 @@ public interface CommonlyUsedFmedicalMapper {
         "where Commonly_Used_Fmedical_ID = #{commonlyUsedFmedicalId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(CommonlyUsedFmedical record);
+
+    // 获取常用检查 1检查 2 检验 3处置
+    @Select({
+            "select c.*,f.*",
+            "from commonly_used_fmedical c join fmedical_items f on c.Fmedical_Items_ID = f.Fmedical_Items_ID",
+            "where f.Fmedical_Items_Type = '1' and c.Doctor_ID = #{userId,jdbcType=INTEGER}"
+    })
+    @ResultMap("SecondResultMap")
+    List<CommonlyUsedFmedical> listCommonlyUsedExamination1ByUserId(Integer userId);
+    // 获取常用检验
+    @Select({
+            "select c.*,f.*",
+            "from commonly_used_fmedical c join fmedical_items f on c.Fmedical_Items_ID = f.Fmedical_Items_ID",
+            "where f.Fmedical_Items_Type = '2' and c.Doctor_ID = #{userId,jdbcType=INTEGER}"
+    })
+    @ResultMap("SecondResultMap")
+    List<CommonlyUsedFmedical> listCommonlyUsedExamination2ByUserId(Integer userId);
+    // 获取常用处置
+    @Select({
+            "select c.*,f.*",
+            "from commonly_used_fmedical c join fmedical_items f on c.Fmedical_Items_ID = f.Fmedical_Items_ID",
+            "where f.Fmedical_Items_Type = '3' and c.Doctor_ID = #{userId,jdbcType=INTEGER}"
+    })
+    @ResultMap("SecondResultMap")
+    List<CommonlyUsedFmedical> listCommonlyUsedTreatmentByUserId(Integer userId);
+
+
 }

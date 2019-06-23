@@ -10,6 +10,17 @@
       <arg column="Suspect_Mark" jdbcType="CHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
+
+  <!--  添加疾病对象的ResultMap by 29-y 2019.06.16 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.DiagnosisTemplate">
+    <id property="diagnosisTemplateId" column="Diagnosis_Template_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="medicalRecordHomePageTemplateId" column="Medical_Record_Home_Page_Template_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="diseaseId" column="Disease_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="mainDiagnosisMark" column="Main_Diagnosis_Mark" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="suspectMark" column="Suspect_Mark" jdbcType="CHAR" javaType="java.lang.String" />
+    <association property="disease" javaType="edu.neu.hoso.model.Disease" resultMap="edu.neu.hoso.model.DiseaseMapper.BaseResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

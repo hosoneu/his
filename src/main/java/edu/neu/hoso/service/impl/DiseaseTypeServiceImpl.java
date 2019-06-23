@@ -4,6 +4,7 @@ import edu.neu.hoso.example.DiseaseTypeExample;
 import edu.neu.hoso.model.DiseaseType;
 import edu.neu.hoso.model.DiseaseTypeMapper;
 import edu.neu.hoso.service.DiseaseTypeService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @date: 2019-06-12 15:27
  * @version: V1.0
 */
+@Service
 public class DiseaseTypeServiceImpl implements DiseaseTypeService{
     @Resource
     DiseaseTypeMapper diseaseTypeMapper;

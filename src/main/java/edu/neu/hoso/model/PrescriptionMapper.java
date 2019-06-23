@@ -62,4 +62,46 @@ public interface PrescriptionMapper {
         "where Prescription_ID = #{prescriptionId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Prescription record);
+
+    @Select({
+            "select p.*,items.*,d.* " ,
+            "from prescription p join prescription_items items on p.Prescription_ID = items.Prescription_ID join drugs d on items.Drags_ID = d.Drugs_ID " ,
+            "where p.Prescription_ID = #{prescriptionId,jdbcType=INTEGER} "
+    })
+    @ResultMap("SecondResultMap")
+    Prescription selectPrescriptionById(Integer prescriptionId);
+
+    //成药
+    @Select({
+            "select p.*,items.*,d.* " ,
+            "from prescription p join prescription_items items on p.Prescription_ID = items.Prescription_ID join drugs d on items.Drags_ID = d.Drugs_ID " ,
+            "where p.Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER} and p.Prescription_Type = \"1\" "
+    })
+    @ResultMap("SecondResultMap")
+    List<Prescription> listPatentPrescriptionByMedicalRecordId(Integer medicalRecordId);
+
+    @Select({
+            "select p.*,items.*,d.* " ,
+            "from prescription p join prescription_items items on p.Prescription_ID = items.Prescription_ID join drugs d on items.Drags_ID = d.Drugs_ID " ,
+            "where p.Prescription_ID = #{prescriptionId,jdbcType=INTEGER} and p.Prescription_Type = \"1\" "
+    })
+    @ResultMap("SecondResultMap")
+    Prescription selectPatentPrescriptionById(Integer prescriptionId);
+
+    //草药
+    @Select({
+            "select p.*,items.*,d.* " ,
+            "from prescription p join prescription_items items on p.Prescription_ID = items.Prescription_ID join drugs d on items.Drags_ID = d.Drugs_ID " ,
+            "where p.Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER} and p.Prescription_Type = \"2\" "
+    })
+    @ResultMap("SecondResultMap")
+    List<Prescription> listHerbalPrescriptionByMedicalRecordId(Integer medicalRecordId);
+
+    @Select({
+            "select p.*,items.*,d.* " ,
+            "from prescription p join prescription_items items on p.Prescription_ID = items.Prescription_ID join drugs d on items.Drags_ID = d.Drugs_ID " ,
+            "where p.Prescription_ID = #{prescriptionId,jdbcType=INTEGER} and p.Prescription_Type = \"2\" "
+    })
+    @ResultMap("SecondResultMap")
+    Prescription selectHerbalPrescriptionById(Integer prescriptionId);
 }

@@ -27,3 +27,10 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+
+
+.properties
+
+### local ###
+application-dev.yml
+.yml

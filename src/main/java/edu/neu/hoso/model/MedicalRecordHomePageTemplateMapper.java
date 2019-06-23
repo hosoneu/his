@@ -63,4 +63,40 @@ public interface MedicalRecordHomePageTemplateMapper {
         "where Medical_Record_Home_Page_Template_ID = #{medicalRecordHomePageTemplateId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(MedicalRecordHomePageTemplate record);
+
+    @Select({
+            "select m.*,d.*,disease.* " ,
+            "from medical_record_home_page_template m join diagnosis_template d on m.Medical_Record_Home_Page_Template_ID = d.Medical_Record_Home_Page_Template_ID join disease on disease.Disease_ID = d.Disease_ID " ,
+            "where m.Scope=\"1\" and m.Doctor_ID = #{userId,jdbcType=INTEGER} "
+    })
+    @ResultMap("SecondResultMap")
+    List<MedicalRecordHomePageTemplate> listMedicalRecordHomePageTemplateFromUser(Integer userId);
+
+    @Select({
+            "select m.*,d.*,disease.* " ,
+            "from medical_record_home_page_template m join diagnosis_template d on m.Medical_Record_Home_Page_Template_ID = d.Medical_Record_Home_Page_Template_ID join `user` create_doctor on create_doctor.User_ID = m.Doctor_ID join disease on disease.Disease_ID = d.Disease_ID " ,
+            "where m.Scope=\"2\" and EXISTS ( " ,
+            "select * " ,
+            "from `user` doctor " ,
+            "where doctor.Department_ID = create_doctor.Department_ID and doctor.User_ID= #{userId,jdbcType=INTEGER} " ,
+            ")"
+    })
+    @ResultMap("SecondResultMap")
+    List<MedicalRecordHomePageTemplate> listMedicalRecordHomePageTemplateFromDepartment(Integer userId);
+
+    @Select({
+            "select m.*,d.*,disease.* " ,
+            "from medical_record_home_page_template m join diagnosis_template d on m.Medical_Record_Home_Page_Template_ID = d.Medical_Record_Home_Page_Template_ID join disease on disease.Disease_ID = d.Disease_ID " ,
+            "where m.Scope=\"3\" "
+    })
+    @ResultMap("SecondResultMap")
+    List<MedicalRecordHomePageTemplate> listMedicalRecordHomePageTemplateFromHospital();
+
+    @Select({
+            "select m.*,d.*,disease.* " ,
+            "from medical_record_home_page_template m join diagnosis_template d on m.Medical_Record_Home_Page_Template_ID = d.Medical_Record_Home_Page_Template_ID join disease on disease.Disease_ID = d.Disease_ID " ,
+            "where m.Medical_Record_Home_Page_Template_ID = #{userId,jdbcType=INTEGER} "
+    })
+    @ResultMap("SecondResultMap")
+    MedicalRecordHomePageTemplate selectMedicalRecordHomePageTemplateById(Integer medicalRecordHomePageTemplateId);
 }

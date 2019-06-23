@@ -16,6 +16,25 @@
       <arg column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
+
+  <!--  添加非药品对象的ResultMap by @29-y 2019.06.18 -->
+  <!--  检查检验药品条目列表因没有结果映射需要注释掉 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.ExaminationFmedicalItems">
+    <id property="examinationFmedicalItemsId" column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="examinationId" column="Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="fmedicalItemsId" column="Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="registrationStatus" column="Registration_Status" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="purposeRequirements" column="Purpose_Requirements" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="quantity" column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="actualQuantity" column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="examinationResultId" column="Examination_Result_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="expenseItemsId" column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="validStatus" column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" />
+    <association property="fmedicalItems" javaType="edu.neu.hoso.model.FmedicalItems" resultMap="edu.neu.hoso.model.FmedicalItemsMapper.BaseResultMap"/>
+<!--    <collection property="examinationDrugsItemsList" ofType="edu.neu.hoso.model.ExaminationDrugsItems" resultMap="edu.neu.hoso.model.ExaminationDrugsItemsMapper.SecondResultMap"/>-->
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -269,4 +288,51 @@
     </set>
     where Examination_Fmedical_Items_ID = #{examinationFmedicalItemsId,jdbcType=INTEGER}
   </update>
+
+  <update id="updateRegistrationStatus">
+      update examination natural join examination_fmedical_items natural join fmedical_items
+      <set>
+        examination_fmedical_items.Registration_Status = 2
+      </set>
+    where examination.Medical_Record_ID=#{Medical_record_ID} and fmedical_items.Department_ID=#{Department_ID} and examination_fmedical_items.Registration_Status=1
+  </update>
+    
+    <select id="getAllFmedical"  resultMap="ExaminationAndFmedical">
+
+       select *
+from examination JOIN examination_fmedical_items ON examination.Examination_ID=examination_fmedical_items.Examination_ID
+								 JOIN fmedical_items ON examination_fmedical_items.Fmedical_Items_ID=fmedical_items.Fmedical_Items_ID
+								 JOIN examination_drugs_items ON examination_fmedical_items.Examination_Fmedical_Items_ID=Examination_Drugs_Items.Examination_Fmedical_Items_ID
+								 JOIN drugs ON examination_drugs_items.Drugs_ID=drugs.Drugs_ID
+where examination.Medical_Record_ID=#{Medical_record_ID} and fmedical_items.Department_ID=#{Department_ID}
+    </select>
+
+    <resultMap id="ExaminationAndFmedical" type="edu.neu.hoso.model.ExaminationFmedicalItems" >
+        <id column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationFmedicalItemsId"/>
+        <result column="Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationId"/>
+        <result column="Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="fmedicalItemsId"/>
+        <result column="Registration_Status" jdbcType="CHAR" javaType="java.lang.String" property="registrationStatus"/>
+        <result column="Purpose_Requirements" jdbcType="VARCHAR" javaType="java.lang.String" property="purposeRequirements"/>
+        <result column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="quantity"/>
+        <result column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="actualQuantity"/>
+        <result column="Examination_Result_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationResultId"/>
+        <result column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="expenseItemsId"/>
+        <result column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" property="validStatus"/>
+        <association property="fmedicalItems" javaType="edu.neu.hoso.model.FmedicalItems" resultMap="edu.neu.hoso.model.FmedicalItemsMapper.BaseResultMap"/>
+        <collection property="examinationDrugsItemsList" ofType="edu.neu.hoso.model.ExaminationDrugsItems">
+          <id column="Examination_Drugs_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationDrugsItemsId"/>
+          <result column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationFmedicalItemsId"/>
+          <result column="Drugs_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="drugsId"/>
+          <result column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="doctorId"/>
+          <result column="Drugs_Usage" jdbcType="CHAR" javaType="java.lang.String" property="drugsUsage"/>
+          <result column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="quantity"/>
+          <result column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="actualQuantity"/>
+          <result column="Drugs_Dispensing_Status" jdbcType="CHAR" javaType="java.lang.String" property="drugsDispensingStatus"/>
+          <result column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="expenseItemsId"/>
+          <result column="Times" jdbcType="INTEGER" javaType="java.lang.Integer" property="times"/>
+          <result column="Days" jdbcType="INTEGER" javaType="java.lang.Integer" property="days"/>
+          <result column="Dosage" jdbcType="DOUBLE" javaType="java.lang.Double" property="dosage"/>
+          <association property="drugs" javaType="edu.neu.hoso.model.Drugs" resultMap="edu.neu.hoso.model.DrugsMapper.BaseResultMap"/>
+        </collection>
+    </resultMap>
 </mapper>

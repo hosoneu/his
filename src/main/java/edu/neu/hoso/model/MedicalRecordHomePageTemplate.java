@@ -1,5 +1,7 @@
 package edu.neu.hoso.model;
 
+import java.util.List;
+
 public class MedicalRecordHomePageTemplate {
     private Integer medicalRecordHomePageTemplateId;
 
@@ -15,6 +17,9 @@ public class MedicalRecordHomePageTemplate {
 
     private String physicalExamination;
 
+    /* 对应的诊断模板对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.16*/
+    private List<DiagnosisTemplate> diagnosisTemplateList;
+
     public MedicalRecordHomePageTemplate(Integer medicalRecordHomePageTemplateId, Integer doctorId, String name, String scope, String chiefComplaint, String presentHistory, String physicalExamination) {
         this.medicalRecordHomePageTemplateId = medicalRecordHomePageTemplateId;
         this.doctorId = doctorId;
@@ -23,6 +28,25 @@ public class MedicalRecordHomePageTemplate {
         this.chiefComplaint = chiefComplaint;
         this.presentHistory = presentHistory;
         this.physicalExamination = physicalExamination;
+    }
+
+    public MedicalRecordHomePageTemplate(Integer medicalRecordHomePageTemplateId, Integer doctorId, String name, String scope, String chiefComplaint, String presentHistory, String physicalExamination, List<DiagnosisTemplate> diagnosisTemplateList) {
+        this.medicalRecordHomePageTemplateId = medicalRecordHomePageTemplateId;
+        this.doctorId = doctorId;
+        this.name = name;
+        this.scope = scope;
+        this.chiefComplaint = chiefComplaint;
+        this.presentHistory = presentHistory;
+        this.physicalExamination = physicalExamination;
+        this.diagnosisTemplateList = diagnosisTemplateList;
+    }
+
+    public List<DiagnosisTemplate> getDiagnosisTemplateList() {
+        return diagnosisTemplateList;
+    }
+
+    public void setDiagnosisTemplateList(List<DiagnosisTemplate> diagnosisTemplateList) {
+        this.diagnosisTemplateList = diagnosisTemplateList;
     }
 
     public MedicalRecordHomePageTemplate() {
