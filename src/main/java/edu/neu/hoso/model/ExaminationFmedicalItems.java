@@ -30,11 +30,6 @@ public class ExaminationFmedicalItems {
 
     private List<ExaminationDrugsItems> examinationDrugsItemsList;
 
-    public FmedicalItems getFmedicalItems() {
-        return fmedicalItems;
-    /* 对应的检查检验药品项目列表对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
-    private List<ExaminationDrugsItems> examinationDrugsItemsList;
-
     public ExaminationFmedicalItems(Integer examinationFmedicalItemsId, Integer examinationId, Integer fmedicalItemsId, Integer doctorId, String registrationStatus, String purposeRequirements, Integer quantity, Integer actualQuantity, Integer examinationResultId, Integer expenseItemsId, String validStatus) {
         this.examinationFmedicalItemsId = examinationFmedicalItemsId;
         this.examinationId = examinationId;
@@ -65,32 +60,21 @@ public class ExaminationFmedicalItems {
         this.examinationDrugsItemsList = examinationDrugsItemsList;
     }
 
-    public List<ExaminationDrugsItems> getExaminationDrugsItemsList() {
-        return examinationDrugsItemsList;
-    }
-
-    public void setExaminationDrugsItemsList(List<ExaminationDrugsItems> examinationDrugsItemsList) {
-        this.examinationDrugsItemsList = examinationDrugsItemsList;
-    }
-
     public FmedicalItems getFmedicalItems() {
         return fmedicalItems;
     }
 
-    public void setFmedicalItems(FmedicalItems fmedicalItems) {
-        this.fmedicalItems = fmedicalItems;
-    }
-
-    public void setFmedicalItems(FmedicalItems fmedicalItems) {
-        this.fmedicalItems = fmedicalItems;
-    }
-
     public List<ExaminationDrugsItems> getExaminationDrugsItemsList() {
         return examinationDrugsItemsList;
     }
 
     public void setExaminationDrugsItemsList(List<ExaminationDrugsItems> examinationDrugsItemsList) {
         this.examinationDrugsItemsList = examinationDrugsItemsList;
+    }
+
+
+    public void setFmedicalItems(FmedicalItems fmedicalItems) {
+        this.fmedicalItems = fmedicalItems;
     }
 
     public ExaminationFmedicalItems() {
