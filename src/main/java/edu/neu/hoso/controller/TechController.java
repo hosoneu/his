@@ -161,8 +161,8 @@ public class TechController {
      */
     @RequestMapping("/getAllFmedical")
     public ResultDTO getAllFmedical(int Medical_record_ID, int Department_ID){
-        int Medical_record_ID=1111;
-        int Department_ID =133;
+//        int Medical_record_ID=1111;
+//        int Department_ID =133;
         System.out.println("okok");
         ResultDTO resultDTO = new ResultDTO();
         try {
