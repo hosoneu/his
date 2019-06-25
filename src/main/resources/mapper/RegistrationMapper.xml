@@ -399,7 +399,7 @@
   </select>
 
   <!--展示挂号列表 @Mike 2019.6.18-->
-  <select id="getRegistration" parameterType="java.lang.Integer" resultMap="RegistrationResultMap">
+  <select id="getRegistration" resultMap="RegistrationResultMap">
     SELECT
         Patient_Name,
         Patient_Gender,

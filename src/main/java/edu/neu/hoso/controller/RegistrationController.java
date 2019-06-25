@@ -6,10 +6,7 @@ import edu.neu.hoso.model.MedicalRecord;
 import edu.neu.hoso.model.Patient;
 import edu.neu.hoso.model.Registration;
 import edu.neu.hoso.service.RegistrationService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -25,6 +22,7 @@ import java.util.Map;
  * @version: V1.0
 */
 @RestController
+@CrossOrigin
 @RequestMapping("registration")
 public class RegistrationController {
     @Resource
@@ -89,7 +87,7 @@ public class RegistrationController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            registrationService.getRegistration();
+            resultDTO.setData(registrationService.getRegistration());
             resultDTO.setStatus("OK");
             resultDTO.setMsg("展示挂号列表成功！");
         } catch (Exception e) {
