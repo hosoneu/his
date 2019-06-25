@@ -5,6 +5,8 @@ server:
     session:
       timeout: 5m
 spring:
+  profiles:
+    active: dev
   http:
     encoding:
       charset: UTF-8

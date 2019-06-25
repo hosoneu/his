@@ -25,4 +25,5 @@ public interface DepartmentService {
     List<Department> getDepartmentByCategoryId(Integer categoryId);
     List<Department> getDepartmentByType(String type);
     List<Department> getAllDepartment();
+    List<Department> getAllDepartmentWithCategory();
 }
