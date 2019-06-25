@@ -1,5 +1,8 @@
 package edu.neu.hoso.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Department {
     private Integer departmentId;
 
@@ -10,6 +13,10 @@ public class Department {
     private Integer departmentCategoryId;
 
     private String departmentType;
+
+    @Getter
+    @Setter
+    private ConstantItems constantItems;
 
     public Department(Integer departmentId, String departmentCode, String departmentName, Integer departmentCategoryId, String departmentType) {
         this.departmentId = departmentId;
