@@ -30,8 +30,6 @@ public class ExaminationFmedicalItems {
 
     private List<ExaminationDrugsItems> examinationDrugsItemsList;
 
-    public FmedicalItems getFmedicalItems() {
-        return fmedicalItems;
     /* 对应的检查检验药品项目列表对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
     private List<ExaminationDrugsItems> examinationDrugsItemsList;
 
