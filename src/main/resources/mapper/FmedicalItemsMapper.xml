@@ -308,4 +308,43 @@
     from examination NATURAL JOIN examination_fmedical_items NATURAL JOIN fmedical_items
     where examination.Medical_Record_ID=#{Medical_record_ID} and fmedical_items.Department_ID=#{Department_ID} and examination_fmedical_items.Expense_Items_ID=1 and examination_fmedical_items.Examination_Result_ID is null;
   </select>
+
+  <resultMap id="FmedicalItemWithDepartmentExpenseType" type="edu.neu.hoso.model.FmedicalItems">
+    <id column="Fmedical_Items_ID" property="fmedicalItemsId" />
+    <result column="Fmedical_Items_Code" property="fmedicalItemsCode" />
+    <result column="Fmedical_Items_Name" property="fmedicalItemsName" />
+    <result column="Fmedical_Items_Format" property="fmedicalItemsFormat" />
+    <result column="Fmedical_Items_Price" property="fmedicalItemsPrice" />
+    <association javaType="ExpenseType" property="expenseType">
+      <id column="Expense_Type_ID" property="expenseTypeID" />
+      <result column="Expense_Type_Name" property="expenseTypeName" />
+    </association>
+    <association javaType="Department" property="department">
+      <id column="Department_ID" property="departmentId" />
+      <result column="Department_Name" property="departmentName" />
+    </association>
+    <result column="Fmedical_Items_MnemonicCode" property="fmedicalItemsMnemoniccode" />
+    <result column="Fmedical_Items_Type" property="fmedicalItemsType" />
+    <result column="Create_Time" property="createTime" />
+  </resultMap>
+
+  <select id="getAllFmedical" resultMap="FmedicalItemWithDepartmentExpenseType">
+    SELECT
+        Fmedical_Items_ID,
+        Fmedical_Items_Code,
+        Fmedical_Items_Name,
+        Fmedical_Items_Format,
+        Fmedical_Items_Price,
+        fmedical_items.Expense_Type_ID,
+        Expense_Type_Name,
+        fmedical_items.Department_ID,
+        Department_Name,
+        Fmedical_Items_MnemonicCode,
+        Fmedical_Items_Type,
+        Create_Time
+    FROM
+        fmedical_items
+        JOIN department ON fmedical_items.Department_ID = department.Department_ID
+        JOIN expense_type ON fmedical_items.Expense_Type_ID = expense_type.Expense_Type_ID
+  </select>
 </mapper>

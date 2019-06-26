@@ -81,4 +81,7 @@ public interface FmedicalItemsMapper {
 
     //输出该患者在该科室的全部已缴费且未做非药品项目
     List<FmedicalItems> getFmedical(@Param("Medical_record_ID")int Medical_record_ID, @Param("Department_ID")int Department_ID);
+
+    //用于展示所有非药品项目
+    List<FmedicalItems> getAllFmedical();
 }
