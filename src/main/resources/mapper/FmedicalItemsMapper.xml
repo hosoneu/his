@@ -328,7 +328,7 @@
     <result column="Create_Time" property="createTime" />
   </resultMap>
 
-  <select id="getAllFmedical" resultMap="FmedicalItemWithDepartmentExpenseType">
+  <select id="getAllFmedicalForShow" resultMap="FmedicalItemWithDepartmentExpenseType">
     SELECT
         Fmedical_Items_ID,
         Fmedical_Items_Code,

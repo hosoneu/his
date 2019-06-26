@@ -83,5 +83,5 @@ public interface FmedicalItemsMapper {
     List<FmedicalItems> getFmedical(@Param("Medical_record_ID")int Medical_record_ID, @Param("Department_ID")int Department_ID);
 
     //用于展示所有非药品项目
-    List<FmedicalItems> getAllFmedical();
+    List<FmedicalItems> getAllFmedicalForShow();
 }
