@@ -315,6 +315,9 @@
     <result column="Fmedical_Items_Name" property="fmedicalItemsName" />
     <result column="Fmedical_Items_Format" property="fmedicalItemsFormat" />
     <result column="Fmedical_Items_Price" property="fmedicalItemsPrice" />
+    <result column="Fmedical_Items_MnemonicCode" property="fmedicalItemsMnemoniccode" />
+    <result column="Fmedical_Items_Type" property="fmedicalItemsType" />
+    <result column="Create_Time" property="createTime" />
     <association javaType="ExpenseType" property="expenseType">
       <id column="Expense_Type_ID" property="expenseTypeID" />
       <result column="Expense_Type_Name" property="expenseTypeName" />
@@ -323,9 +326,6 @@
       <id column="Department_ID" property="departmentId" />
       <result column="Department_Name" property="departmentName" />
     </association>
-    <result column="Fmedical_Items_MnemonicCode" property="fmedicalItemsMnemoniccode" />
-    <result column="Fmedical_Items_Type" property="fmedicalItemsType" />
-    <result column="Create_Time" property="createTime" />
   </resultMap>
 
   <select id="getAllFmedicalForShow" resultMap="FmedicalItemWithDepartmentExpenseType">
