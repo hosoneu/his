@@ -319,7 +319,7 @@
     <result column="Fmedical_Items_Type" property="fmedicalItemsType" />
     <result column="Create_Time" property="createTime" />
     <association javaType="ExpenseType" property="expenseType">
-      <id column="Expense_Type_ID" property="expenseTypeID" />
+      <id column="Expense_Type_ID" property="expenseTypeId" />
       <result column="Expense_Type_Name" property="expenseTypeName" />
     </association>
     <association javaType="Department" property="department">
