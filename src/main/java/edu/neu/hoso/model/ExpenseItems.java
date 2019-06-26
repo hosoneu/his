@@ -24,6 +24,14 @@ public class ExpenseItems {
     @Setter
     private Invoice invoice;
 
+    @Getter
+    @Setter
+    private Drugs drugs;
+
+    @Getter
+    @Setter
+    private FmedicalItems fmedicalItems;
+
     public ExpenseItems(Integer expenseItemsId, Integer medicalRecordId, Double totalCost, String payStatus, Integer invoiceId, Integer expenseTypeId) {
         this.expenseItemsId = expenseItemsId;
         this.medicalRecordId = medicalRecordId;

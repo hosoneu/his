@@ -315,6 +315,8 @@
     <result column="Fmedical_Items_Name" property="fmedicalItemsName" />
     <result column="Fmedical_Items_Format" property="fmedicalItemsFormat" />
     <result column="Fmedical_Items_Price" property="fmedicalItemsPrice" />
+    <result column="F_Expense_Type_ID" property="expenseTypeId" />
+    <result column="F_Department_ID" property="departmentId" />
     <result column="Fmedical_Items_MnemonicCode" property="fmedicalItemsMnemoniccode" />
     <result column="Fmedical_Items_Type" property="fmedicalItemsType" />
     <result column="Create_Time" property="createTime" />
@@ -335,9 +337,9 @@
         Fmedical_Items_Name,
         Fmedical_Items_Format,
         Fmedical_Items_Price,
-        fmedical_items.Expense_Type_ID,
+        fmedical_items.Expense_Type_ID as F_Expense_Type_ID,
         Expense_Type_Name,
-        fmedical_items.Department_ID,
+        fmedical_items.Department_ID as F_Department_ID,
         Department_Name,
         Fmedical_Items_MnemonicCode,
         Fmedical_Items_Type,
