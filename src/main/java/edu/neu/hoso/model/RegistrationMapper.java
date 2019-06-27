@@ -130,5 +130,7 @@ public interface RegistrationMapper {
     List<Registration> getRegistrationByMedicalRecordId(Integer medicalRecordId);
 
     List<Registration> getRegistration();
+
+    List<Registration> getAllPatientByDepartmentId(int departmentId);
 }
     

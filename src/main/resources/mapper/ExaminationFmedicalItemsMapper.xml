@@ -304,6 +304,7 @@ from examination JOIN examination_fmedical_items ON examination.Examination_ID=e
 								 JOIN fmedical_items ON examination_fmedical_items.Fmedical_Items_ID=fmedical_items.Fmedical_Items_ID
 								 JOIN examination_drugs_items ON examination_fmedical_items.Examination_Fmedical_Items_ID=Examination_Drugs_Items.Examination_Fmedical_Items_ID
 								 JOIN drugs ON examination_drugs_items.Drugs_ID=drugs.Drugs_ID
+-- where examination.Medical_Record_ID=1111 and fmedical_items.Department_ID=133
 where examination.Medical_Record_ID=#{Medical_record_ID} and fmedical_items.Department_ID=#{Department_ID}
     </select>
 
@@ -311,6 +312,7 @@ where examination.Medical_Record_ID=#{Medical_record_ID} and fmedical_items.Depa
         <id column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationFmedicalItemsId"/>
         <result column="Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationId"/>
         <result column="Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="fmedicalItemsId"/>
+        <!--<result column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="doctorId "/>-->
         <result column="Registration_Status" jdbcType="CHAR" javaType="java.lang.String" property="registrationStatus"/>
         <result column="Purpose_Requirements" jdbcType="VARCHAR" javaType="java.lang.String" property="purposeRequirements"/>
         <result column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="quantity"/>

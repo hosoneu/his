@@ -16,7 +16,7 @@ public interface TechService {
     List<FmedicalItems> getAllFmedicalByMedicalID(int Medical_record_ID, int Department_ID);
 
     //更新患者在该科室的登记状态，该科室的1->2
-    void updateRegistrationStatus(int Medical_record_ID, int Department_ID);
+    void updateRegistrationStatus(int examinationFmedicalItemdId);
 
     //输出该患者在该科室的全部项目
     List<ExaminationFmedicalItems> getAllFmedical(int Medical_record_ID, int Department_ID);
@@ -32,5 +32,8 @@ public interface TechService {
 
     //检查检验结果照片录入
     void insertExaminationResultImage(int examinationResultId, List<ExaminationResultImage> examinationResultImage);
+
+    //根据科室号获得所有病人
+    List<Registration> getAllPatientByDepartmentId(int departmentId);
 
 }
