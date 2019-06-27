@@ -210,10 +210,10 @@
 
   <!--患者费用项目结果集 @Mike 2019.6.18-->
   <resultMap id="PatientExpenseItemsResultMap" type="edu.neu.hoso.model.ExpenseItems" >
-      <id column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <result column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <result column="Total_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" property=""/>
-      <result column="Pay_Status" jdbcType="CHAR" javaType="java.lang.String" />
+      <id column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="expenseItemsId"/>
+      <result column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="medicalRecordId"/>
+      <result column="E_Total_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" property="totalCost"/>
+      <result column="Pay_Status" jdbcType="CHAR" javaType="java.lang.String" property="payStatus"/>
       <association property="invoice" javaType="Invoice">
         <id column="Invoice_ID" property="invoiceId" />
         <result column="Invoice_NO" property="invoiceNo" />
@@ -224,6 +224,14 @@
         <id column="Expense_Type_ID" property="expenseTypeId" />
         <result column="Expense_Type_Name" property="expenseTypeName" />
       </association>
+      <association property="drugs" javaType="Drugs">
+        <id column="Drugs_ID" property="drugsId" />
+        <result column="Drugs_Name" property="drugsName" />
+      </association>
+      <association property="fmedicalItems" javaType="FmedicalItems">
+        <id column="Fmedical_Items_ID" property="fmedicalItemsId" />
+        <result column="Fmedical_Items_Name" property="fmedicalItemsName" />
+      </association>
   </resultMap>
 
   <!--查询患者未收费项目 @Mike 2019.6.18-->
@@ -231,7 +239,7 @@
     SELECT
         drugs.Drugs_Name,
         fmedical_items.Fmedical_Items_Name,
-        expense_items.Total_Cost,
+        expense_items.Total_Cost as E_Total_Cost,
         Pay_Status,
         Expense_Type_Name
     FROM
@@ -251,7 +259,7 @@
     SELECT
         drugs.Drugs_Name,
         fmedical_items.Fmedical_Items_Name,
-        expense_items.Total_Cost,
+        expense_items.Total_Cost as E_Total_Cost,
         Pay_Status,
         Expense_Type_Name,
         Invoice_NO
