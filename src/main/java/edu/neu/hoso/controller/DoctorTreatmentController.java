@@ -4,6 +4,7 @@ import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.DoctorTreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ import java.util.List;
  */
 @RequestMapping("doctor/treatment")
 @RestController
+@CrossOrigin
 public class DoctorTreatmentController {
     @Autowired
     DoctorTreatmentService doctorTreatmentService;

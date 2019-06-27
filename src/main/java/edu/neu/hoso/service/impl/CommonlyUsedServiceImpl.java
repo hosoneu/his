@@ -39,6 +39,34 @@ public class CommonlyUsedServiceImpl implements CommonlyUsedService {
     }
 
     /**
+     * @title: listCommonlyUsedPatentDrugsByUserId
+     * @description: 列出用户的常用成药药品
+     * @author:
+     * @date: 2019-06-26 18:24
+     * @param: [userId]
+     * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDrugs>
+     * @throws:
+     */
+    @Override
+    public List<CommonlyUsedDrugs> listCommonlyUsedPatentDrugsByUserId(Integer userId) {
+        return commonlyUsedDrugsMapper.listCommonlyUsedPatentDrugsByUserId(userId);
+    }
+
+    /**
+     * @title: listCommonlyUsedHerbalDrugsByUserId
+     * @description: 列出用户的常用草药药品
+     * @author:
+     * @date: 2019-06-26 18:24
+     * @param: [userId]
+     * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDrugs>
+     * @throws:
+     */
+    @Override
+    public List<CommonlyUsedDrugs> listCommonlyUsedHerbalDrugsByUserId(Integer userId) {
+        return commonlyUsedDrugsMapper.listCommonlyUsedHerbalDrugsByUserId(userId);
+    }
+
+    /**
      * @title: listCommonlyUsedDiagnosisByUserId
      * @description: 列出用户的常用诊断
      * @author: 29-y
@@ -92,5 +120,63 @@ public class CommonlyUsedServiceImpl implements CommonlyUsedService {
     @Override
     public List<CommonlyUsedFmedical> listCommonlyUsedTreatmentByUserId(Integer userId) {
         return commonlyUsedFmedicalMapper.listCommonlyUsedTreatmentByUserId(userId);
+    }
+
+    /**
+     * @title: listCommonlyUsedChineseDiagnosisByUserId
+     * @description: 列出常用中医诊断
+     * @author: 29-y
+     * @date: 2019-06-24 22:35
+     * @param: [userId]
+     * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDiagnosis>
+     * @throws:
+     */
+    @Override
+    public List<CommonlyUsedDiagnosis> listCommonlyUsedChineseDiagnosisByUserId(Integer userId) {
+        return commonlyUsedDiagnosisMapper.listCommonlyUsedChineseDiagnosisByUserId(userId);
+    }
+
+    /**
+     * @title: listCommonlyUsedWesternDiagnosisByUserId
+     * @description: 列出常用西医诊断
+     * @author: 29-y
+     * @date: 2019-06-24 22:36
+     * @param: [userId]
+     * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDiagnosis>
+     * @throws:
+     */
+    @Override
+    public List<CommonlyUsedDiagnosis> listCommonlyUsedWesternDiagnosisByUserId(Integer userId) {
+        return commonlyUsedDiagnosisMapper.listCommonlyUsedWesternDiagnosisByUserId(userId);
+    }
+
+    @Override
+    public Integer insertCommonlyUsedDrugs(CommonlyUsedDrugs commonlyUsedDrugs) {
+        return null;
+    }
+
+    @Override
+    public Integer insertCommonlyUsedDiagnosis(CommonlyUsedDiagnosis commonlyUsedDiagnosis) {
+        return null;
+    }
+
+    @Override
+    public Integer insertCommonlyUsedFmedical(CommonlyUsedFmedical commonlyUsedFmedical) {
+        return null;
+    }
+
+    @Override
+    public void deleteCommonlyUsedDrugs(Integer commonlyUsedDrugsId) {
+
+    }
+
+    @Override
+    public void deleteCommonlyUsedDiagnosis(Integer commonlyUsedDiagnosisId) {
+
+    }
+
+    @Override
+    public void deleteCommonlyUsedFmedical(Integer commonlyUsedFmedicalId) {
+
     }
 }

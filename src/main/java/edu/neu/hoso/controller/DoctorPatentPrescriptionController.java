@@ -6,6 +6,8 @@ import edu.neu.hoso.model.GroupTreatment;
 import edu.neu.hoso.model.Prescription;
 import edu.neu.hoso.service.DoctorPrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,7 @@ import java.util.List;
  */
 @RequestMapping("doctor/prescription/patent")
 @RestController
+@CrossOrigin
 public class DoctorPatentPrescriptionController {
     @Autowired
     DoctorPrescriptionService doctorPrescriptionService;
@@ -92,7 +95,7 @@ public class DoctorPatentPrescriptionController {
 
     //开立成药处方
     @RequestMapping("/insertPrescription")
-    public ResultDTO<Integer> insertPatentPrescription(Prescription prescription){
+    public ResultDTO<Integer> insertPatentPrescription(@RequestBody Prescription prescription){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorPrescriptionService.insertPatentPrescription(prescription));

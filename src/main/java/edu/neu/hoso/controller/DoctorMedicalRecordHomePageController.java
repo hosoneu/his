@@ -4,8 +4,7 @@ import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +18,7 @@ import java.util.List;
 */
 @RestController
 @RequestMapping("doctor/homepage")
+@CrossOrigin
 public class DoctorMedicalRecordHomePageController {
     @Autowired
     MedicalRecordHomePageService medicalRecordHomePageService;
@@ -45,7 +45,7 @@ public class DoctorMedicalRecordHomePageController {
 
     //    录入病历首页的文字部分（除初步诊断、辅助检查的部分 该部分由insertFirstDiagnosis实现）
     @RequestMapping("/insertMedicalRecordHomePage")
-    public ResultDTO<Integer> insertMedicalRecordHomePage(MedicalRecordHomePage medicalRecordHomePage ){
+    public ResultDTO<Integer> insertMedicalRecordHomePage(@RequestBody MedicalRecordHomePage medicalRecordHomePage ){
 //        MedicalRecordHomePage medicalRecordHomePage = new MedicalRecordHomePage();
 //        medicalRecordHomePage.setAllergicHistory("无");
 //        medicalRecordHomePage.setChiefComplaint("头昏 有点发烧");
@@ -67,22 +67,10 @@ public class DoctorMedicalRecordHomePageController {
 
     //    录入初诊结果 点击保存即可插入 在病历首页部分进行提交 然后需要在medical中填充终诊的姓名
     @RequestMapping("/insertFirstDiagnosis")
-    public ResultDTO<Integer> insertFirstDiagnosis(List<Diagnosis> diagnosisList,Integer userId,Integer medicalRecordId){
-//        List<Diagnosis> diagnosisList,Integer userId
-//        Integer userId = 1;
-//        List<Diagnosis> diagnosisList = new ArrayList<Diagnosis>();
-//        Diagnosis diagnosis = new Diagnosis();
-//        diagnosis.setDiseaseId(5);
-//        diagnosis.setMedicalRecordId(3);
-//        diagnosis.setMainDiagnosisMark("0");
-//        diagnosis.setOnsetDate(new Date());
-//        diagnosis.setSuspectMark("1");
-//        diagnosisList.add(diagnosis);
-//        diagnosis.setMainDiagnosisMark("3");//这里疑似标志好像没盖好
-//        diagnosisList.add(diagnosis);
+    public ResultDTO<Integer> insertFirstDiagnosis(@RequestBody List<Diagnosis> diagnosisList){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
-            resultDTO.setData(medicalRecordHomePageService.insertFirstDiagnosis(diagnosisList,userId,medicalRecordId));
+            resultDTO.setData(medicalRecordHomePageService.insertFirstDiagnosis(diagnosisList));
             resultDTO.setStatus("OK");
             resultDTO.setMsg("初诊结果录入成功！");
         } catch (Exception e) {
@@ -128,22 +116,6 @@ public class DoctorMedicalRecordHomePageController {
     //   插入病历首页模板
     @RequestMapping("/insertMedicalRecordHomePageTemplate")
     public ResultDTO<Integer> insertMedicalRecordHomePageTemplate(MedicalRecordHomePageTemplate medicalRecordHomePageTemplate){
-//        MedicalRecordHomePageTemplate medicalRecordHomePageTemplate = new MedicalRecordHomePageTemplate();
-//        medicalRecordHomePageTemplate.setChiefComplaint("sdads");
-//        medicalRecordHomePageTemplate.setDoctorId(1);
-//        medicalRecordHomePageTemplate.setName("测试用");
-//        medicalRecordHomePageTemplate.setPhysicalExamination("ces");
-//        medicalRecordHomePageTemplate.setScope("1");
-//        medicalRecordHomePageTemplate.setPresentHistory("wu");
-//        List<DiagnosisTemplate> diagnosisTemplateList = new ArrayList<DiagnosisTemplate>();
-//        DiagnosisTemplate diagnosisTemplate = new DiagnosisTemplate();
-//        diagnosisTemplate.setDiseaseId(5);
-//        diagnosisTemplate.setMainDiagnosisMark("1");
-//        diagnosisTemplate.setSuspectMark("2");
-//        diagnosisTemplateList.add(diagnosisTemplate);
-//        diagnosisTemplate.setDiseaseId(8);
-//        diagnosisTemplateList.add(diagnosisTemplate);
-//        medicalRecordHomePageTemplate.setDiagnosisTemplateList(diagnosisTemplateList);
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(medicalRecordHomePageService.insertMedicalRecordHomePageTemplate(medicalRecordHomePageTemplate));
@@ -153,6 +125,38 @@ public class DoctorMedicalRecordHomePageController {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
             resultDTO.setMsg("病历首页模板插入失败！");
+        }
+        return resultDTO;
+    }
+
+    //根据ID查询病历首页的内容
+    @RequestMapping("/selectMedicalRecordHomePageByMedicalRecordId")
+    public ResultDTO<MedicalRecordHomePage> selectMedicalRecordHomePageByMedicalRecordId(Integer medicalRecordId){
+        ResultDTO<MedicalRecordHomePage> resultDTO = new ResultDTO<>();
+        try {
+            resultDTO.setData(medicalRecordHomePageService.selectMedicalRecordHomePageByMedicalRecordId(medicalRecordId));
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("病历首页文字部分查询成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("病历首页文字部分查询失败！");
+        }
+        return resultDTO;
+    }
+
+    //列出初诊信息
+        @RequestMapping("/listFirstDiagnosisByMedicalRecordId")
+    public ResultDTO<List<Diagnosis>> listFirstDiagnosisByMedicalRecordId(Integer medicalRecordId){
+        ResultDTO<List<Diagnosis>> resultDTO = new ResultDTO<>();
+        try {
+            resultDTO.setData(medicalRecordHomePageService.listFirstDiagnosisByMedicalRecordId(medicalRecordId));
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("初诊信息查询成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("初诊信息查询失败！");
         }
         return resultDTO;
     }

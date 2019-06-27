@@ -6,6 +6,7 @@ import edu.neu.hoso.model.MedicalRecordMapper;
 import edu.neu.hoso.service.MedicalRecordHomePageService;
 import edu.neu.hoso.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ import java.util.List;
 */
 @RequestMapping("doctor/diagnosis")
 @RestController
+@CrossOrigin
 public class DoctorFinalDiagnosisController {
     // 确诊  录入终诊信息
     @Autowired
@@ -28,10 +30,10 @@ public class DoctorFinalDiagnosisController {
     @Autowired
     MedicalRecordService medicalRecordService;
     @RequestMapping("/insertFinalDiagnosis")
-    public ResultDTO<Integer> insertFinalDiagnosis(List<Diagnosis> diagnosisList, Integer userId,Integer medicalRecordId){
+    public ResultDTO<Integer> insertFinalDiagnosis(List<Diagnosis> diagnosisList){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
-            resultDTO.setData(medicalRecordHomePageService.insertFinalDiagnosis(diagnosisList,userId,medicalRecordId));
+            resultDTO.setData(medicalRecordHomePageService.insertFinalDiagnosis(diagnosisList));
             resultDTO.setStatus("OK");
             resultDTO.setMsg("终诊信息录入成功！");
         } catch (Exception e) {
@@ -58,8 +60,8 @@ public class DoctorFinalDiagnosisController {
         return resultDTO;
     }
     // 诊毕
-    @RequestMapping("/treamentOver")
-    public ResultDTO treamentOver(Integer medicalRecordId){
+    @RequestMapping("/treatmentOver")
+    public ResultDTO treatmentOver(Integer medicalRecordId){
         ResultDTO resultDTO = new ResultDTO<>();
         try {
             medicalRecordService.treamentOver(medicalRecordId);

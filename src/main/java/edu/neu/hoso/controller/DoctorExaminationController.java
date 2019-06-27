@@ -7,6 +7,7 @@ import edu.neu.hoso.model.GroupExamination;
 import edu.neu.hoso.service.DoctorExaminationService;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,11 +24,20 @@ import java.util.List;
 
 @RequestMapping("doctor/examination")
 @RestController
+@CrossOrigin
 public class DoctorExaminationController {
     @Autowired
     DoctorExaminationService doctorExaminationService;
 
-    // 获取当前已开立的检查检验单列表 根据 病历ID 获取当前病历的检查/检验申请表（检查检验申请表*（检查检验非药品表*（非药品条目表*常数项表）））
+    /**
+     * @title: listExaminationByMedicalRecordId
+     * @description: 根据病历ID获取当前已开立的检查检验单列表
+     * @author: 29y
+     * @date: 2019-06-20 18:24
+     * @param: [medicalRecordId, type]
+     * @return: edu.neu.hoso.dto.ResultDTO<java.util.List<edu.neu.hoso.model.Examination>>
+     * @throws:
+     */
     @RequestMapping("/listExaminationByMedicalRecordId")
     public ResultDTO<List<Examination>> listExaminationByMedicalRecordId(Integer medicalRecordId, String type){
         ResultDTO<List<Examination>> resultDTO = new ResultDTO<>();
