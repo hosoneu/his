@@ -373,6 +373,7 @@
         Patient_Gender,
         Patient_IDentity,
         Patient_Age,
+        registration.Medical_Record_ID,
         Registration_Status,
         Registration_Level_Name,
         Department_Name,
@@ -385,13 +386,13 @@
     FROM
         registration
         JOIN medical_record ON registration.Medical_Record_ID = medical_record.Medical_Record_ID
+        JOIN department ON registration.Department_ID = department.Department_ID
         NATURAL JOIN patient
         NATURAL JOIN registration_level
-        NATURAL JOIN department
         NATURAL JOIN calculation_type
-        JOIN `user` ON registration.Doctor_ID = `user`.User_ID
-        JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
-        JOIN expense_items ON registration.Medical_Record_ID = expense_items.Medical_Record_ID
+        LEFT JOIN `user` ON registration.Doctor_ID = `user`.User_ID
+        LEFT JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
+        LEFT JOIN expense_items ON registration.Medical_Record_ID = expense_items.Medical_Record_ID
     WHERE
         registration.Medical_Record_ID = #{medicalRecordId}
         AND Registration_Status = 1
@@ -401,32 +402,33 @@
   <!--展示挂号列表 @Mike 2019.6.18-->
   <select id="getRegistration" resultMap="RegistrationResultMap">
     SELECT
-        Patient_Name,
-        Patient_Gender,
-        Patient_IDentity,
-        Patient_Age,
-        Registration_Status,
-        Registration_Level_Name,
-        Department_Name,
-        Calculation_Type_Name,
-        User_Name as Doctor_Name,
-        Constant_Items_Name as Doctor_Title_Name,
-        Registration_Date,
-        Buy_Medical_Record,
-        Total_Cost
-    FROM
-        registration
-        JOIN medical_record ON registration.Medical_Record_ID = medical_record.Medical_Record_ID
-        NATURAL JOIN patient
-        NATURAL JOIN registration_level
-        NATURAL JOIN department
-        NATURAL JOIN calculation_type
-        JOIN `user` ON registration.Doctor_ID = `user`.User_ID
-        JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
-        JOIN expense_items ON registration.Medical_Record_ID = expense_items.Medical_Record_ID
-    WHERE
-        Registration_Status = 1
-        AND medical_record.Is_Treament_Over = 1
+			Patient_Name,
+			Patient_Gender,
+			Patient_IDentity,
+			Patient_Age,
+			registration.Medical_Record_ID,
+			Registration_Status,
+			Registration_Level_Name,
+			Department_Name,
+			Calculation_Type_Name,
+			User_Name as Doctor_Name,
+			Constant_Items_Name as Doctor_Title_Name,
+			Registration_Date,
+			Buy_Medical_Record,
+			Total_Cost
+	FROM
+			registration
+			JOIN medical_record ON registration.Medical_Record_ID = medical_record.Medical_Record_ID
+			JOIN department ON registration.Department_ID = department.Department_ID
+			NATURAL JOIN patient
+			NATURAL JOIN registration_level
+			NATURAL JOIN calculation_type
+			LEFT JOIN `user` ON registration.Doctor_ID = `user`.User_ID
+			LEFT JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
+			LEFT JOIN expense_items ON registration.Medical_Record_ID = expense_items.Medical_Record_ID
+	WHERE
+			Registration_Status = 1
+			AND medical_record.Is_Treament_Over = 1
   </select>
 
   <select id="getAllPatientByDepartmentId" parameterType="java.lang.Integer" resultMap="DepartmentPatient">
