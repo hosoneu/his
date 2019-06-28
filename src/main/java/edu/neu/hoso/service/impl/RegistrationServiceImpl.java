@@ -1,10 +1,13 @@
 package edu.neu.hoso.service.impl;
 
+import edu.neu.hoso.converter.DateConverter;
+import edu.neu.hoso.example.PatientExample;
 import edu.neu.hoso.example.RegistrationExample;
 import edu.neu.hoso.example.SchedulingInfoExample;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.RegistrationService;
 import edu.neu.hoso.service.SerialNumberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -48,6 +51,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Resource
     SchedulingInfoMapper schedulingInfoMapper;
+
+    @Resource
+    DateConverter dateConverter;
 
     @Override
     public Integer insert(Registration registration) {
@@ -402,6 +408,25 @@ public class RegistrationServiceImpl implements RegistrationService {
          *@throws:
          */
         return expenseItemsMapper.getPatientUnPayExpenseItems(medicalRecordId);
+    }
+
+    @Override
+    public List<Patient> getPatient() {
+        /**
+         *@title: getPatient
+         *@description: 查询所有患者
+         *@author: Mike
+         *@date: 2019-06-28 16:26
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.Patient>
+         *@throws:
+         */
+        PatientExample patientExample = new PatientExample();
+        List<Patient> patientList = patientMapper.selectByExample(patientExample);
+        for (Patient patient: patientList) {
+            patient.sedateConverter.convert(patient.getPatientBirth());
+        }
+        return patientMapper.selectByExample(patientExample);
     }
 
 }

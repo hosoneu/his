@@ -29,4 +29,5 @@ public interface RegistrationService {
     Invoice offsetInvoice(Invoice oldInvoice, Integer userId);
     List<ExpenseItems> getPatientPayExpenseItems(Integer medicalRecordId, Date startDate, Date endDate);
     List<ExpenseItems> getPatientUnPayExpenseItems(Integer medicalRecordId);
+    List<Patient> getPatient();
 }

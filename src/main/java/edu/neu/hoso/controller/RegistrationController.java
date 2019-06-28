@@ -212,4 +212,19 @@ public class RegistrationController {
         }
         return resultDTO;
     }
+
+    @RequestMapping("/getPatient")
+    public ResultDTO getPatient(){
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(registrationService.getPatient());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("查询患者未收费项目成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("查询患者未收费项目失败！");
+        }
+        return resultDTO;
+    }
 }
