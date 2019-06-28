@@ -171,7 +171,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public Registration register(Registration registration, Patient patient, MedicalRecord medicalRecord, ExpenseItems expenseItems) {
+    public Registration register(Registration registration, Patient patient, MedicalRecord medicalRecord, ExpenseItems expenseItems, Integer userId, Integer payModeId) {
         /**
          *@title: register
          *@description: 挂号操作
@@ -183,10 +183,26 @@ public class RegistrationServiceImpl implements RegistrationService {
          */
         //计算挂号费 根据挂号级别以及是否购买病历本（状态中不买为1 减1后为0 买为2 减1后为1元）
         double totalCost = registrationLevelMapper.selectByPrimaryKey(registration.getRegistrationLevelId()).getRegistrationCost() + Double.parseDouble(registration.getBuyMedicalRecord()) - 1;
+        Date date = new Date();
         medicalRecordMapper.insertSelective(medicalRecord);
-        patientMapper.insertSelective(patient);
+        if(getPatientByIdentity(patient.getPatientIdentity()).size() == 0){
+            patientMapper.insertSelective(patient);
+        }
+        Invoice invoice = new Invoice();
+        try {
+            invoice.setInvoiceNo(serialNumberService.generateSerialNumber(2));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        invoice.setIsDayCal("1");
+        invoice.setPayTime(date);
+        invoice.setPayModeId(payModeId);
+        invoice.setUserId(userId);
+        invoice.setTotalCost(totalCost);
+        invoiceMapper.insertSelective(invoice);
         expenseItems.setMedicalRecordId(medicalRecord.getMedicalRecordId());
         expenseItems.setTotalCost(totalCost);
+        expenseItems.setInvoiceId(invoice.getInvoiceId());
         //挂号费类型为1
         expenseItems.setExpenseTypeId(1);
         expenseItemsMapper.insertSelective(expenseItems);
@@ -195,7 +211,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         registration.setPatientId(patient.getPatientId());
         registration.setExpenseTypeId(1);
         registration.setRegistrationTotalCost(totalCost);
-        Date date = new Date();
         registration.setRegistrationDate(date);
         registrationMapper.insertSelective(registration);
         //更新被挂号医生的排班剩额
@@ -204,8 +219,17 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
+    public List<Patient> getPatientByIdentity(String patientIdentity) {
+        PatientExample patientExample = new PatientExample();
+        PatientExample.Criteria criteria = patientExample.createCriteria();
+        criteria.andPatientIdentityEqualTo(patientIdentity);
+        return patientMapper.selectByExample(patientExample);
+    }
+
+    @Override
     public void updateSchedulingRestcount(Registration registration) {
         //排班表 限额-1
+        //按时间上来说一定得是在班医生 不然找不到医生，报错
         SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
         SchedulingInfoExample.Criteria criteria = schedulingInfoExample.createCriteria();
         criteria.andDoctorIdEqualTo(registration.getDoctorId());
@@ -423,9 +447,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public List<Patient> getPatient() {
+    public List<Patient> getAllPatient() {
         /**
-         *@title: getPatient
+         *@title: getAllPatient
          *@description: 查询所有患者
          *@author: Mike
          *@date: 2019-06-28 16:26

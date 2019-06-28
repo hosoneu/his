@@ -6,6 +6,7 @@ import edu.neu.hoso.model.MedicalRecord;
 import edu.neu.hoso.model.Patient;
 import edu.neu.hoso.model.Registration;
 import edu.neu.hoso.service.RegistrationService;
+import edu.neu.hoso.utils.JsonUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -41,7 +42,19 @@ public class RegistrationController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            registrationService.register((Registration) map.get("registration"), (Patient)map.get("patient"), (MedicalRecord)map.get("medicalRecord"), (ExpenseItems)map.get("expenseItems"));
+            Registration registration = JsonUtils.mapToObj((Map<String, Object>)map.get("registration"), Registration.class);
+            Patient patient = JsonUtils.mapToObj((Map<String, Object>)map.get("patient"), Patient.class);
+            MedicalRecord medicalRecord = JsonUtils.mapToObj((Map<String, Object>)map.get("medicalRecord"), MedicalRecord.class);
+            ExpenseItems expenseItems = JsonUtils.mapToObj((Map<String, Object>)map.get("expenseItems"), ExpenseItems.class);
+            Integer userId = JsonUtils.mapToObj((Map<String, Object>)map.get("userId"), Integer.class);
+            Integer payModeId = JsonUtils.mapToObj((Map<String, Object>)map.get("payModeId"), Integer.class);
+            System.out.println(registration);
+            System.out.println(patient);
+            System.out.println(medicalRecord);
+            System.out.println(expenseItems);
+            System.out.println(userId);
+            System.out.println(payModeId);
+            registrationService.register(registration, patient, medicalRecord, expenseItems, userId, payModeId);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("挂号成功！");
         } catch (Exception e) {
@@ -213,11 +226,11 @@ public class RegistrationController {
         return resultDTO;
     }
 
-    @RequestMapping("/getPatient")
-    public ResultDTO getPatient(){
+    @RequestMapping("/getAllPatient")
+    public ResultDTO getAllPatient(){
         ResultDTO resultDTO = new ResultDTO();
         try {
-            resultDTO.setData(registrationService.getPatient());
+            resultDTO.setData(registrationService.getAllPatient());
             resultDTO.setStatus("OK");
             resultDTO.setMsg("查询患者未收费项目成功！");
         } catch (Exception e) {
