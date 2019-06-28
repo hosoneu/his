@@ -352,7 +352,7 @@
       <id column="Doctor_ID" property="userId" />
       <result column="Doctor_Name" property="userName" />
       <association javaType="ConstantItems" property="constantItems">
-        <id column="Doctor_Title_Id" property="constantItemsId" />
+        <id column="Doctor_Title_ID" property="constantItemsId" />
         <result column="Doctor_Title_Name" property="constantItemsName" />
       </association>
     </association>

@@ -4,11 +4,13 @@ import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.User;
 import edu.neu.hoso.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("user")
 public class UserController {
     @Autowired
@@ -101,6 +103,22 @@ public class UserController {
         ResultDTO resultDTO = new ResultDTO();
         try {
             resultDTO.setData(userService.getUserById(id));
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("查询用户成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("查询用户失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getUserByRole")
+    public ResultDTO<User> getUserByRole(Integer roleId){
+
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(userService.getUserByRole(roleId));
             resultDTO.setStatus("OK");
             resultDTO.setMsg("查询用户成功！");
         } catch (Exception e) {

@@ -29,6 +29,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     RegistrationMapper registrationMapper;
 
     @Resource
+    RegistrationLevelMapper registrationLevelMapper;
+
+    @Resource
     MedicalRecordMapper medicalRecordMapper;
 
     @Resource
@@ -178,6 +181,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         expenseItemsMapper.insertSelective(expenseItems);
         registration.setMedicalRecordId(medicalRecord.getMedicalRecordId());
         registration.setExpenseItemsId(expenseItems.getExpenseItemsId());
+        registration.setPatientId(patient.getPatientId());
+        registration.setExpenseTypeId(1);
+        double totalCost = registrationLevelMapper.selectByPrimaryKey(registration.getRegistrationLevelId()).getRegistrationCost() + Double.parseDouble(registration.getBuyMedicalRecord()) - 1;
+        registration.setRegistrationTotalCost(totalCost);
         Date date = new Date();
         registration.setRegistrationDate(date);
         registrationMapper.insertSelective(registration);

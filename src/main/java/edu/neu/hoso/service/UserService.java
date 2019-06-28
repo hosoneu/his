@@ -26,4 +26,5 @@ public interface UserService {
     List<User> getUserByUserGender(String userGender);
     List<User> getAllUser();
     List<User> getUserByDepartmentID(int departmentID);
+    List<User> getUserByRole(Integer roleId);
 }

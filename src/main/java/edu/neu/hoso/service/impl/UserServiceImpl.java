@@ -229,4 +229,18 @@ public class UserServiceImpl implements UserService {
         userExampleCriteria.andDepartmentIdEqualTo(departmentID);
         return userMapper.selectByExample(userExample);
     }
+
+    @Override
+    public List<User> getUserByRole(Integer roleId) {
+        /**
+         *@title: getUserByRole
+         *@description: 查询用户 通过roleId 附带role,department,title
+         *@author: Mike
+         *@date: 2019-06-28 13:37
+         *@param: [roleId]
+         *@return: java.util.List<edu.neu.hoso.model.User>
+         *@throws:
+         */
+        return userMapper.getUserByRole(roleId);
+    }
 }
