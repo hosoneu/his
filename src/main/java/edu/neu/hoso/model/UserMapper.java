@@ -69,4 +69,6 @@ public interface UserMapper {
             "FROM `user`,department " ,
             "WHERE `user`.Department_ID=department.Department_ID AND `user`.User_ID =#{userID};"})
     String FindDepartmentTypeByUserID(int userID);
+
+    List<User> getUserByRole(Integer roleId);
 }

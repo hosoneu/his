@@ -1,10 +1,13 @@
 package edu.neu.hoso.service.impl;
 
+import edu.neu.hoso.converter.DateConverter;
+import edu.neu.hoso.example.PatientExample;
 import edu.neu.hoso.example.RegistrationExample;
 import edu.neu.hoso.example.SchedulingInfoExample;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.RegistrationService;
 import edu.neu.hoso.service.SerialNumberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,6 +32,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     RegistrationMapper registrationMapper;
 
     @Resource
+    RegistrationLevelMapper registrationLevelMapper;
+
+    @Resource
     MedicalRecordMapper medicalRecordMapper;
 
     @Resource
@@ -45,6 +51,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Resource
     SchedulingInfoMapper schedulingInfoMapper;
+
+    @Resource
+    DateConverter dateConverter;
 
     @Override
     public Integer insert(Registration registration) {
@@ -172,19 +181,35 @@ public class RegistrationServiceImpl implements RegistrationService {
          *@return: edu.neu.hoso.model.Registration
          *@throws:
          */
+        //计算挂号费 根据挂号级别以及是否购买病历本（状态中不买为1 减1后为0 买为2 减1后为1元）
+        double totalCost = registrationLevelMapper.selectByPrimaryKey(registration.getRegistrationLevelId()).getRegistrationCost() + Double.parseDouble(registration.getBuyMedicalRecord()) - 1;
         medicalRecordMapper.insertSelective(medicalRecord);
         patientMapper.insertSelective(patient);
         expenseItems.setMedicalRecordId(medicalRecord.getMedicalRecordId());
+        expenseItems.setTotalCost(totalCost);
+        //挂号费类型为1
+        expenseItems.setExpenseTypeId(1);
         expenseItemsMapper.insertSelective(expenseItems);
         registration.setMedicalRecordId(medicalRecord.getMedicalRecordId());
         registration.setExpenseItemsId(expenseItems.getExpenseItemsId());
+        registration.setPatientId(patient.getPatientId());
+        registration.setExpenseTypeId(1);
+        registration.setRegistrationTotalCost(totalCost);
         Date date = new Date();
         registration.setRegistrationDate(date);
         registrationMapper.insertSelective(registration);
+        //更新被挂号医生的排班剩额
+        updateSchedulingRestcount(registration);
+        return registration;
+    }
+
+    @Override
+    public void updateSchedulingRestcount(Registration registration) {
         //排班表 限额-1
         SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
         SchedulingInfoExample.Criteria criteria = schedulingInfoExample.createCriteria();
         criteria.andDoctorIdEqualTo(registration.getDoctorId());
+        Date date = registration.getRegistrationDate();
         //匹配星期
         // Mon Tue Wed Thu Fri Sat Sun
         SimpleDateFormat wf = new SimpleDateFormat("EEE", Locale.ENGLISH);
@@ -211,12 +236,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
         List<SchedulingInfo> schedulingInfos= schedulingInfoMapper.selectByExample(schedulingInfoExample);
         SchedulingInfo schedulingInfo = schedulingInfos.get(0);
-        if (schedulingInfo != null){
+        if (schedulingInfo != null&& schedulingInfo.getSchedulingRestcount() > 0){
             schedulingInfo.setSchedulingRestcount(schedulingInfo.getSchedulingRestcount() - 1);
         }
         schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfo);
-        return registration;
     }
+
 
     @Override
     public void withdraw(Integer expenseItemsId, Integer userId) {
@@ -395,6 +420,21 @@ public class RegistrationServiceImpl implements RegistrationService {
          *@throws:
          */
         return expenseItemsMapper.getPatientUnPayExpenseItems(medicalRecordId);
+    }
+
+    @Override
+    public List<Patient> getPatient() {
+        /**
+         *@title: getPatient
+         *@description: 查询所有患者
+         *@author: Mike
+         *@date: 2019-06-28 16:26
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.Patient>
+         *@throws:
+         */
+        PatientExample patientExample = new PatientExample();
+        return patientMapper.selectByExample(patientExample);
     }
 
 }

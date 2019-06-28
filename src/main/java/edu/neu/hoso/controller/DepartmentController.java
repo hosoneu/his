@@ -4,10 +4,7 @@ import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.Department;
 import edu.neu.hoso.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**   
  * @title: DepartmentController
@@ -50,7 +47,7 @@ public class DepartmentController {
     }
 
     @RequestMapping("/delete")
-    public ResultDTO<Department> delete(Integer departmentId){
+    public ResultDTO<Department> delete(Integer id){
         /**  
          *@title: delete
          *@description: 删除科室  
@@ -60,9 +57,10 @@ public class DepartmentController {
          *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.Department> 
          *@throws:
          */
+        System.out.println("删除科室"+id);
         ResultDTO resultDTO = new ResultDTO();
         try {
-            departmentService.deleteById(departmentId);
+            departmentService.deleteById(id);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("删除成功！");
         } catch (Exception e) {
