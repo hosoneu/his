@@ -5,9 +5,14 @@
     <constructor >
       <idArg column="Day_Cal_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="User_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Day_Cal_StartDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="Day_Cal_EndDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Day_Cal_Date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="YF_Total" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="GH_Total" jdbcType="DOUBLE" javaType="java.lang.Double" />
       <arg column="Day_Cal_Total" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="CL_Total" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="JC_Total" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="CZ_Total" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="QT_Total" jdbcType="DOUBLE" javaType="java.lang.Double" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -69,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    Day_Cal_ID, User_ID, Day_Cal_StartDate, Day_Cal_EndDate, Day_Cal_Total
+    Day_Cal_ID, User_ID, Day_Cal_Date, YF_Total, GH_Total, Day_Cal_Total, CL_Total, JC_Total, 
+    CZ_Total, QT_Total
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.DayCalExample" >
     select
@@ -100,28 +106,58 @@
       <if test="userId != null" >
         User_ID,
       </if>
-      <if test="dayCalStartdate != null" >
-        Day_Cal_StartDate,
+      <if test="dayCalDate != null" >
+        Day_Cal_Date,
       </if>
-      <if test="dayCalEnddate != null" >
-        Day_Cal_EndDate,
+      <if test="yfTotal != null" >
+        YF_Total,
+      </if>
+      <if test="ghTotal != null" >
+        GH_Total,
       </if>
       <if test="dayCalTotal != null" >
         Day_Cal_Total,
+      </if>
+      <if test="clTotal != null" >
+        CL_Total,
+      </if>
+      <if test="jcTotal != null" >
+        JC_Total,
+      </if>
+      <if test="czTotal != null" >
+        CZ_Total,
+      </if>
+      <if test="qtTotal != null" >
+        QT_Total,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="dayCalStartdate != null" >
-        #{dayCalStartdate,jdbcType=TIMESTAMP},
+      <if test="dayCalDate != null" >
+        #{dayCalDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="dayCalEnddate != null" >
-        #{dayCalEnddate,jdbcType=TIMESTAMP},
+      <if test="yfTotal != null" >
+        #{yfTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="ghTotal != null" >
+        #{ghTotal,jdbcType=DOUBLE},
       </if>
       <if test="dayCalTotal != null" >
         #{dayCalTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="clTotal != null" >
+        #{clTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="jcTotal != null" >
+        #{jcTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="czTotal != null" >
+        #{czTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="qtTotal != null" >
+        #{qtTotal,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -140,14 +176,29 @@
       <if test="record.userId != null" >
         User_ID = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.dayCalStartdate != null" >
-        Day_Cal_StartDate = #{record.dayCalStartdate,jdbcType=TIMESTAMP},
+      <if test="record.dayCalDate != null" >
+        Day_Cal_Date = #{record.dayCalDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.dayCalEnddate != null" >
-        Day_Cal_EndDate = #{record.dayCalEnddate,jdbcType=TIMESTAMP},
+      <if test="record.yfTotal != null" >
+        YF_Total = #{record.yfTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ghTotal != null" >
+        GH_Total = #{record.ghTotal,jdbcType=DOUBLE},
       </if>
       <if test="record.dayCalTotal != null" >
         Day_Cal_Total = #{record.dayCalTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.clTotal != null" >
+        CL_Total = #{record.clTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.jcTotal != null" >
+        JC_Total = #{record.jcTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.czTotal != null" >
+        CZ_Total = #{record.czTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.qtTotal != null" >
+        QT_Total = #{record.qtTotal,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -158,9 +209,14 @@
     update day_cal
     set Day_Cal_ID = #{record.dayCalId,jdbcType=INTEGER},
       User_ID = #{record.userId,jdbcType=INTEGER},
-      Day_Cal_StartDate = #{record.dayCalStartdate,jdbcType=TIMESTAMP},
-      Day_Cal_EndDate = #{record.dayCalEnddate,jdbcType=TIMESTAMP},
-      Day_Cal_Total = #{record.dayCalTotal,jdbcType=DOUBLE}
+      Day_Cal_Date = #{record.dayCalDate,jdbcType=TIMESTAMP},
+      YF_Total = #{record.yfTotal,jdbcType=DOUBLE},
+      GH_Total = #{record.ghTotal,jdbcType=DOUBLE},
+      Day_Cal_Total = #{record.dayCalTotal,jdbcType=DOUBLE},
+      CL_Total = #{record.clTotal,jdbcType=DOUBLE},
+      JC_Total = #{record.jcTotal,jdbcType=DOUBLE},
+      CZ_Total = #{record.czTotal,jdbcType=DOUBLE},
+      QT_Total = #{record.qtTotal,jdbcType=DOUBLE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -171,14 +227,29 @@
       <if test="userId != null" >
         User_ID = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="dayCalStartdate != null" >
-        Day_Cal_StartDate = #{dayCalStartdate,jdbcType=TIMESTAMP},
+      <if test="dayCalDate != null" >
+        Day_Cal_Date = #{dayCalDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="dayCalEnddate != null" >
-        Day_Cal_EndDate = #{dayCalEnddate,jdbcType=TIMESTAMP},
+      <if test="yfTotal != null" >
+        YF_Total = #{yfTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="ghTotal != null" >
+        GH_Total = #{ghTotal,jdbcType=DOUBLE},
       </if>
       <if test="dayCalTotal != null" >
         Day_Cal_Total = #{dayCalTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="clTotal != null" >
+        CL_Total = #{clTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="jcTotal != null" >
+        JC_Total = #{jcTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="czTotal != null" >
+        CZ_Total = #{czTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="qtTotal != null" >
+        QT_Total = #{qtTotal,jdbcType=DOUBLE},
       </if>
     </set>
     where Day_Cal_ID = #{dayCalId,jdbcType=INTEGER}
