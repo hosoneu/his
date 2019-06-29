@@ -205,7 +205,7 @@ public class DepartmentServiceImpl implements DepartmentService {
          *@author: Mike
          *@date: 2019-06-11 10:23
          *@param: []
-         *@return: java.util.List<edu.neu.hoso.model.Department>
+         *@return: java.util.List<edu.neu.hoso.model.Department>*
          *@throws:
          */
         DepartmentExample departmentExample = new DepartmentExample();
