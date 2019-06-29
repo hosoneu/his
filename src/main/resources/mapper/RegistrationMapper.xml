@@ -1,42 +1,42 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="edu.neu.hoso.model.RegistrationMapper" >
-  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.Registration" >
-    <constructor >
-      <idArg column="Registration_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Registration_Level_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Patient_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Department_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Calculation_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Registration_Date" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="Buy_Medical_Record" jdbcType="CHAR" javaType="java.lang.String" />
-      <arg column="Registration_Total_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="Expense_Type_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Registration_Status" jdbcType="CHAR" javaType="java.lang.String" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.neu.hoso.model.RegistrationMapper">
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.Registration">
+    <constructor>
+      <idArg column="Registration_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Medical_Record_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Registration_Level_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Patient_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Department_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Calculation_Type_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Doctor_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Registration_Date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="Buy_Medical_Record" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="Registration_Total_Cost" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="Expense_Type_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Expense_Items_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Registration_Status" javaType="java.lang.String" jdbcType="CHAR" />
     </constructor>
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -47,25 +47,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -76,167 +76,167 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     Registration_ID, Medical_Record_ID, Registration_Level_ID, Patient_ID, Department_ID, 
     Calculation_Type_ID, Doctor_ID, Registration_Date, Buy_Medical_Record, Registration_Total_Cost, 
     Expense_Type_ID, Expense_Items_ID, Registration_Status
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.RegistrationExample" >
+  <select id="selectByExample" parameterType="edu.neu.hoso.example.RegistrationExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from registration
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.RegistrationExample" >
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.RegistrationExample">
     delete from registration
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insertSelective" parameterType="edu.neu.hoso.model.Registration" >
-    <selectKey resultType="java.lang.Integer" keyProperty="registrationId" order="AFTER" >
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.Registration">
+    <selectKey keyProperty="registrationId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into registration
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="medicalRecordId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="medicalRecordId != null">
         Medical_Record_ID,
       </if>
-      <if test="registrationLevelId != null" >
+      <if test="registrationLevelId != null">
         Registration_Level_ID,
       </if>
-      <if test="patientId != null" >
+      <if test="patientId != null">
         Patient_ID,
       </if>
-      <if test="departmentId != null" >
+      <if test="departmentId != null">
         Department_ID,
       </if>
-      <if test="calculationTypeId != null" >
+      <if test="calculationTypeId != null">
         Calculation_Type_ID,
       </if>
-      <if test="doctorId != null" >
+      <if test="doctorId != null">
         Doctor_ID,
       </if>
-      <if test="registrationDate != null" >
+      <if test="registrationDate != null">
         Registration_Date,
       </if>
-      <if test="buyMedicalRecord != null" >
+      <if test="buyMedicalRecord != null">
         Buy_Medical_Record,
       </if>
-      <if test="registrationTotalCost != null" >
+      <if test="registrationTotalCost != null">
         Registration_Total_Cost,
       </if>
-      <if test="expenseTypeId != null" >
+      <if test="expenseTypeId != null">
         Expense_Type_ID,
       </if>
-      <if test="expenseItemsId != null" >
+      <if test="expenseItemsId != null">
         Expense_Items_ID,
       </if>
-      <if test="registrationStatus != null" >
+      <if test="registrationStatus != null">
         Registration_Status,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="medicalRecordId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="medicalRecordId != null">
         #{medicalRecordId,jdbcType=INTEGER},
       </if>
-      <if test="registrationLevelId != null" >
+      <if test="registrationLevelId != null">
         #{registrationLevelId,jdbcType=INTEGER},
       </if>
-      <if test="patientId != null" >
+      <if test="patientId != null">
         #{patientId,jdbcType=INTEGER},
       </if>
-      <if test="departmentId != null" >
+      <if test="departmentId != null">
         #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="calculationTypeId != null" >
+      <if test="calculationTypeId != null">
         #{calculationTypeId,jdbcType=INTEGER},
       </if>
-      <if test="doctorId != null" >
+      <if test="doctorId != null">
         #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="registrationDate != null" >
-        #{registrationDate,jdbcType=DATE},
+      <if test="registrationDate != null">
+        #{registrationDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="buyMedicalRecord != null" >
+      <if test="buyMedicalRecord != null">
         #{buyMedicalRecord,jdbcType=CHAR},
       </if>
-      <if test="registrationTotalCost != null" >
+      <if test="registrationTotalCost != null">
         #{registrationTotalCost,jdbcType=DOUBLE},
       </if>
-      <if test="expenseTypeId != null" >
+      <if test="expenseTypeId != null">
         #{expenseTypeId,jdbcType=INTEGER},
       </if>
-      <if test="expenseItemsId != null" >
+      <if test="expenseItemsId != null">
         #{expenseItemsId,jdbcType=INTEGER},
       </if>
-      <if test="registrationStatus != null" >
+      <if test="registrationStatus != null">
         #{registrationStatus,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="edu.neu.hoso.example.RegistrationExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="edu.neu.hoso.example.RegistrationExample" resultType="java.lang.Integer">
     select count(*) from registration
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update registration
-    <set >
-      <if test="record.registrationId != null" >
+    <set>
+      <if test="record.registrationId != null">
         Registration_ID = #{record.registrationId,jdbcType=INTEGER},
       </if>
-      <if test="record.medicalRecordId != null" >
+      <if test="record.medicalRecordId != null">
         Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
       </if>
-      <if test="record.registrationLevelId != null" >
+      <if test="record.registrationLevelId != null">
         Registration_Level_ID = #{record.registrationLevelId,jdbcType=INTEGER},
       </if>
-      <if test="record.patientId != null" >
+      <if test="record.patientId != null">
         Patient_ID = #{record.patientId,jdbcType=INTEGER},
       </if>
-      <if test="record.departmentId != null" >
+      <if test="record.departmentId != null">
         Department_ID = #{record.departmentId,jdbcType=INTEGER},
       </if>
-      <if test="record.calculationTypeId != null" >
+      <if test="record.calculationTypeId != null">
         Calculation_Type_ID = #{record.calculationTypeId,jdbcType=INTEGER},
       </if>
-      <if test="record.doctorId != null" >
+      <if test="record.doctorId != null">
         Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
       </if>
-      <if test="record.registrationDate != null" >
-        Registration_Date = #{record.registrationDate,jdbcType=DATE},
+      <if test="record.registrationDate != null">
+        Registration_Date = #{record.registrationDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.buyMedicalRecord != null" >
+      <if test="record.buyMedicalRecord != null">
         Buy_Medical_Record = #{record.buyMedicalRecord,jdbcType=CHAR},
       </if>
-      <if test="record.registrationTotalCost != null" >
+      <if test="record.registrationTotalCost != null">
         Registration_Total_Cost = #{record.registrationTotalCost,jdbcType=DOUBLE},
       </if>
-      <if test="record.expenseTypeId != null" >
+      <if test="record.expenseTypeId != null">
         Expense_Type_ID = #{record.expenseTypeId,jdbcType=INTEGER},
       </if>
-      <if test="record.expenseItemsId != null" >
+      <if test="record.expenseItemsId != null">
         Expense_Items_ID = #{record.expenseItemsId,jdbcType=INTEGER},
       </if>
-      <if test="record.registrationStatus != null" >
+      <if test="record.registrationStatus != null">
         Registration_Status = #{record.registrationStatus,jdbcType=CHAR},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update registration
     set Registration_ID = #{record.registrationId,jdbcType=INTEGER},
       Medical_Record_ID = #{record.medicalRecordId,jdbcType=INTEGER},
@@ -245,56 +245,212 @@
       Department_ID = #{record.departmentId,jdbcType=INTEGER},
       Calculation_Type_ID = #{record.calculationTypeId,jdbcType=INTEGER},
       Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
-      Registration_Date = #{record.registrationDate,jdbcType=DATE},
+      Registration_Date = #{record.registrationDate,jdbcType=TIMESTAMP},
       Buy_Medical_Record = #{record.buyMedicalRecord,jdbcType=CHAR},
       Registration_Total_Cost = #{record.registrationTotalCost,jdbcType=DOUBLE},
       Expense_Type_ID = #{record.expenseTypeId,jdbcType=INTEGER},
       Expense_Items_ID = #{record.expenseItemsId,jdbcType=INTEGER},
       Registration_Status = #{record.registrationStatus,jdbcType=CHAR}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.Registration" >
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.Registration">
     update registration
-    <set >
-      <if test="medicalRecordId != null" >
+    <set>
+      <if test="medicalRecordId != null">
         Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER},
       </if>
-      <if test="registrationLevelId != null" >
+      <if test="registrationLevelId != null">
         Registration_Level_ID = #{registrationLevelId,jdbcType=INTEGER},
       </if>
-      <if test="patientId != null" >
+      <if test="patientId != null">
         Patient_ID = #{patientId,jdbcType=INTEGER},
       </if>
-      <if test="departmentId != null" >
+      <if test="departmentId != null">
         Department_ID = #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="calculationTypeId != null" >
+      <if test="calculationTypeId != null">
         Calculation_Type_ID = #{calculationTypeId,jdbcType=INTEGER},
       </if>
-      <if test="doctorId != null" >
+      <if test="doctorId != null">
         Doctor_ID = #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="registrationDate != null" >
-        Registration_Date = #{registrationDate,jdbcType=DATE},
+      <if test="registrationDate != null">
+        Registration_Date = #{registrationDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="buyMedicalRecord != null" >
+      <if test="buyMedicalRecord != null">
         Buy_Medical_Record = #{buyMedicalRecord,jdbcType=CHAR},
       </if>
-      <if test="registrationTotalCost != null" >
+      <if test="registrationTotalCost != null">
         Registration_Total_Cost = #{registrationTotalCost,jdbcType=DOUBLE},
       </if>
-      <if test="expenseTypeId != null" >
+      <if test="expenseTypeId != null">
         Expense_Type_ID = #{expenseTypeId,jdbcType=INTEGER},
       </if>
-      <if test="expenseItemsId != null" >
+      <if test="expenseItemsId != null">
         Expense_Items_ID = #{expenseItemsId,jdbcType=INTEGER},
       </if>
-      <if test="registrationStatus != null" >
+      <if test="registrationStatus != null">
         Registration_Status = #{registrationStatus,jdbcType=CHAR},
       </if>
     </set>
     where Registration_ID = #{registrationId,jdbcType=INTEGER}
   </update>
+
+  <!--  添加患者对象的ResultMap by 29-y 2019.06.16 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.Registration">
+    <id column="Registration_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="registrationId" />
+    <result column="Medical_Record_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="medicalRecordId" />
+    <result column="Registration_Level_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="registrationLevelId" />
+    <result column="Patient_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="patientId" />
+    <result column="Department_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="departmentId" />
+    <result column="Calculation_Type_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="calculationTypeId" />
+    <result column="Doctor_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="doctorId" />
+    <result column="Registration_Date" javaType="java.util.Date" jdbcType="TIMESTAMP" property="registrationDate" />
+    <result column="Buy_Medical_Record" javaType="java.lang.String" jdbcType="CHAR" property="buyMedicalRecord" />
+    <result column="Registration_Total_Cost" javaType="java.lang.Double" jdbcType="DOUBLE" property="registrationTotalCost" />
+    <result column="Registration_Total_Cost" javaType="java.lang.Double" jdbcType="DOUBLE" property="registrationTotalCost" />
+    <result column="Expense_Type_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="expenseTypeId" />
+    <result column="Expense_Items_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="expenseItemsId" />
+    <result column="Registration_Status" javaType="java.lang.String" jdbcType="CHAR" property="registrationStatus" />
+    <association javaType="edu.neu.hoso.model.Patient" property="patient" resultMap="edu.neu.hoso.model.PatientMapper.BaseResultMap" />
+  </resultMap>
+
+  <!--挂号结果集 @Mike 2019.6.18-->
+  <resultMap id="RegistrationResultMap" type="edu.neu.hoso.model.Registration">
+    <id column="Registration_ID" property="registrationId" />
+    <result column="Registration_Date" property="registrationDate" />
+    <result column="Buy_Medical_Record" property="buyMedicalRecord" />
+    <result column="Registration_Total_Cost" property="registrationTotalCost" />
+    <result column="Registration_Status" property="registrationStatus" />
+    <association javaType="MedicalRecord" property="medicalRecord">
+      <id column="Medical_Record_ID" property="medicalRecordId" />
+      <result column="Is_Treament_Over" property="isTreamentOver" />
+    </association>
+    <association javaType="RegistrationLevel" property="registrationLevel">
+      <id column="Registration_Level_ID" property="registrationLevelId" />
+      <result column="Registration_Level_Name" property="registrationLevelName" />
+    </association>
+    <association javaType="Patient" property="patient">
+      <id column="Patient_ID" property="patientId" />
+      <result column="Patient_Name" property="patientName" />
+      <result column="Patient_Gender" property="patientGender" />
+      <result column="Patient_Age" property="patientAge" />
+      <result column="Patient_IDentity" property="patientIdentity" />
+    </association>
+    <association javaType="Department" property="department">
+      <id column="Department_ID" property="departmentId" />
+      <result column="Department_Code" property="departmentCode" />
+      <result column="Department_Name" property="departmentName" />
+    </association>
+    <association javaType="CalculationType" property="calculationType">
+      <id column="Calculation_Type_ID" property="calculationTypeId" />
+      <result column="Calculation_Type_Name" property="calculationTypeName" />
+    </association>
+    <association javaType="User" property="doctor">
+      <id column="Doctor_ID" property="userId" />
+      <result column="Doctor_Name" property="userName" />
+      <association javaType="ConstantItems" property="constantItems">
+        <id column="Doctor_Title_Id" property="constantItemsId" />
+        <result column="Doctor_Title_Name" property="constantItemsName" />
+      </association>
+    </association>
+    <association javaType="ExpenseType" property="expenseType">
+      <id column="Expense_Type_ID" property="expenseTypeId" />
+      <result column="Expense_Type_Name" property="expenseTypeName" />
+    </association>
+    <association javaType="ExpenseItems" property="expenseItems">
+      <id column="Expense_Items_ID" property="expenseItemsId" />
+      <result column="Total_Cost" property="totalCost" />
+    </association>
+  </resultMap>
+
+  <!--查询挂号信息 @Mike 2019.6.18-->
+  <select id="getRegistrationByMedicalRecordId" parameterType="java.lang.Integer" resultMap="RegistrationResultMap">
+    SELECT
+        Patient_Name,
+        Patient_Gender,
+        Patient_IDentity,
+        Patient_Age,
+        Registration_Status,
+        Registration_Level_Name,
+        Department_Name,
+        Calculation_Type_Name,
+        User_Name as Doctor_Name,
+        Constant_Items_Name as Doctor_Title_Name,
+        Registration_Date,
+        Buy_Medical_Record,
+        Total_Cost
+    FROM
+        registration
+        JOIN medical_record ON registration.Medical_Record_ID = medical_record.Medical_Record_ID
+        NATURAL JOIN patient
+        NATURAL JOIN registration_level
+        NATURAL JOIN department
+        NATURAL JOIN calculation_type
+        JOIN `user` ON registration.Doctor_ID = `user`.User_ID
+        JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
+        JOIN expense_items ON registration.Medical_Record_ID = expense_items.Medical_Record_ID
+    WHERE
+        registration.Medical_Record_ID = #{medicalRecordId}
+        AND Registration_Status = 1
+        AND medical_record.Is_Treament_Over = 1
+  </select>
+
+  <!--展示挂号列表 @Mike 2019.6.18-->
+  <select id="getRegistration" resultMap="RegistrationResultMap">
+    SELECT
+        Patient_Name,
+        Patient_Gender,
+        Patient_IDentity,
+        Patient_Age,
+        Registration_Status,
+        Registration_Level_Name,
+        Department_Name,
+        Calculation_Type_Name,
+        User_Name as Doctor_Name,
+        Constant_Items_Name as Doctor_Title_Name,
+        Registration_Date,
+        Buy_Medical_Record,
+        Total_Cost
+    FROM
+        registration
+        JOIN medical_record ON registration.Medical_Record_ID = medical_record.Medical_Record_ID
+        NATURAL JOIN patient
+        NATURAL JOIN registration_level
+        NATURAL JOIN department
+        NATURAL JOIN calculation_type
+        JOIN `user` ON registration.Doctor_ID = `user`.User_ID
+        JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
+        JOIN expense_items ON registration.Medical_Record_ID = expense_items.Medical_Record_ID
+    WHERE
+        Registration_Status = 1
+        AND medical_record.Is_Treament_Over = 1
+  </select>
+
+  <select id="getAllPatientByDepartmentId" parameterType="java.lang.Integer" resultMap="DepartmentPatient">
+    select DISTINCT patient.*,registration.*
+from examination_fmedical_items join examination on examination_fmedical_items.Examination_ID=examination.Examination_ID
+join registration on examination.Medical_Record_ID=registration.Medical_Record_ID
+join patient on patient.Patient_ID=registration.Patient_ID
+join fmedical_items on fmedical_items.Fmedical_Items_ID=examination_fmedical_items.Fmedical_Items_ID
+where Examination_Fmedical_Items.Expense_Items_ID is not null and examination_fmedical_items.Examination_Result_ID is null and examination_fmedical_items.valid_status=1 and fmedical_items.Department_ID=#{departmentId}
+  </select>
+  <resultMap id="DepartmentPatient" type="edu.neu.hoso.model.Registration">
+    <id column="Registration_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="registrationId"/>
+    <result column="Medical_Record_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="medicalRecordId"/>
+    <result column="Registration_Level_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="registrationLevelId"/>
+    <result column="Patient_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="patientId"/>
+    <result column="Department_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="departmentId"/>
+    <result column="Calculation_Type_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="calculationTypeId"/>
+    <result column="Doctor_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="doctorId"/>
+    <result column="Registration_Date" javaType="java.util.Date" jdbcType="TIMESTAMP" property="registrationDate"/>
+    <result column="Buy_Medical_Record" javaType="java.lang.String" jdbcType="CHAR" property="buyMedicalRecord"/>
+    <result column="Registration_Total_Cost" javaType="java.lang.Double" jdbcType="DOUBLE" property="registrationTotalCost"/>
+    <result column="Expense_Type_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="expenseTypeId"/>
+    <result column="Expense_Items_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="expenseItemsId"/>
+    <result column="Registration_Status" javaType="java.lang.String" jdbcType="CHAR" property="registrationStatus"/>
+    <association property="patient" javaType="edu.neu.hoso.model.Patient" resultMap="edu.neu.hoso.model.PatientMapper.BaseResultMap"/>
+  </resultMap>
 </mapper>

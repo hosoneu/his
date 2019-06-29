@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 public interface CommonlyUsedDrugsMapper {
     int countByExample(CommonlyUsedDrugsExample example);
@@ -54,4 +55,12 @@ public interface CommonlyUsedDrugsMapper {
         "where Commonly_Used_Drugs = #{commonlyUsedDrugs,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(CommonlyUsedDrugs record);
+
+    @Select({
+        "select d.*,c.* ",
+        "from drugs d join commonly_used_drugs c on d.Drugs_ID=c.Drugs_ID",
+        "where c.Doctor_ID = #{userId , jdbcType=INTEGER}"
+    })
+    @ResultMap("SecondResultMap")
+    List<CommonlyUsedDrugs> listCommonlyUsedDrugsByUserId(Integer userId);
 }

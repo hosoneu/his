@@ -17,6 +17,24 @@
       <arg column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
+
+  <!--  添加药品条目的ResultMap by @29-y 2019.06.18 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.PrescriptionItems">
+    <id property="prescriptionItemsId" column="Prescription_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="prescriptionId" column="Prescription_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="dragsId" column="Drags_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="expenseItemsId" column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="drugsUsage" column="Drugs_Usage" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="dosage" column="Dosage" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    <result property="times" column="Times" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="days" column="Days" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="quantity" column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="drugsAdvice" column="Drugs_Advice" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="drugsDispensingStatus" column="Drugs_Dispensing_Status" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="actualQuantity" column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <association property="drugs" javaType="edu.neu.hoso.model.Drugs" resultMap="edu.neu.hoso.model.DrugsMapper.BaseResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -282,4 +300,10 @@
     </set>
     where Prescription_Items_ID = #{prescriptionItemsId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectDispensingInPrescription" resultMap="BaseResultMap">
+    select Prescription_Items.*
+    from prescription_items join prescription on prescription_items.Prescription_ID=prescription.Prescription_ID
+    where prescription.Medical_Record_ID=#{Medical_record_ID} and prescription_items.Drags_ID=#{DrugsId} and prescription_items.Drugs_Dispensing_Status=1 and prescription_items.Expense_Items_ID is not null
+  </select>
 </mapper>

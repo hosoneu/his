@@ -20,7 +20,7 @@ public interface InvoiceMapper {
         "insert into invoice (Invoice_NO, Total_Cost, ",
         "Is_Day_Cal, Pay_Time, ",
         "User_ID, Pay_Mode_ID)",
-        "values (#{invoiceNo,jdbcType=INTEGER}, #{totalCost,jdbcType=DOUBLE}, ",
+        "values (#{invoiceNo,jdbcType=CHAR}, #{totalCost,jdbcType=DOUBLE}, ",
         "#{isDayCal,jdbcType=CHAR}, #{payTime,jdbcType=TIMESTAMP}, ",
         "#{userId,jdbcType=INTEGER}, #{payModeId,jdbcType=INTEGER})"
     })
@@ -53,7 +53,7 @@ public interface InvoiceMapper {
 
     @Update({
         "update invoice",
-        "set Invoice_NO = #{invoiceNo,jdbcType=INTEGER},",
+        "set Invoice_NO = #{invoiceNo,jdbcType=CHAR},",
           "Total_Cost = #{totalCost,jdbcType=DOUBLE},",
           "Is_Day_Cal = #{isDayCal,jdbcType=CHAR},",
           "Pay_Time = #{payTime,jdbcType=TIMESTAMP},",

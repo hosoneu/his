@@ -1,5 +1,8 @@
 package edu.neu.hoso.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 public class Registration {
@@ -29,6 +32,38 @@ public class Registration {
 
     private String registrationStatus;
 
+    @Getter
+    @Setter
+    private MedicalRecord medicalRecord;
+
+    @Getter
+    @Setter
+    private RegistrationLevel registrationLevel;
+
+    @Getter
+    @Setter
+    private Patient patient;
+
+    @Getter
+    @Setter
+    private Department department;
+
+    @Getter
+    @Setter
+    private CalculationType calculationType;
+
+    @Getter
+    @Setter
+    private User doctor;
+
+    @Getter
+    @Setter
+    private ExpenseType expenseType;
+
+    @Getter
+    @Setter
+    private ExpenseItems expenseItems;
+
     public Registration(Integer registrationId, Integer medicalRecordId, Integer registrationLevelId, Integer patientId, Integer departmentId, Integer calculationTypeId, Integer doctorId, Date registrationDate, String buyMedicalRecord, Double registrationTotalCost, Integer expenseTypeId, Integer expenseItemsId, String registrationStatus) {
         this.registrationId = registrationId;
         this.medicalRecordId = medicalRecordId;
@@ -43,6 +78,23 @@ public class Registration {
         this.expenseTypeId = expenseTypeId;
         this.expenseItemsId = expenseItemsId;
         this.registrationStatus = registrationStatus;
+    }
+
+    public Registration(Integer registrationId, Integer medicalRecordId, Integer registrationLevelId, Integer patientId, Integer departmentId, Integer calculationTypeId, Integer doctorId, Date registrationDate, String buyMedicalRecord, Double registrationTotalCost, Integer expenseTypeId, Integer expenseItemsId, String registrationStatus, Patient patient) {
+        this.registrationId = registrationId;
+        this.medicalRecordId = medicalRecordId;
+        this.registrationLevelId = registrationLevelId;
+        this.patientId = patientId;
+        this.departmentId = departmentId;
+        this.calculationTypeId = calculationTypeId;
+        this.doctorId = doctorId;
+        this.registrationDate = registrationDate;
+        this.buyMedicalRecord = buyMedicalRecord;
+        this.registrationTotalCost = registrationTotalCost;
+        this.expenseTypeId = expenseTypeId;
+        this.expenseItemsId = expenseItemsId;
+        this.registrationStatus = registrationStatus;
+        this.patient = patient;
     }
 
     public Registration() {
@@ -151,5 +203,32 @@ public class Registration {
 
     public void setRegistrationStatus(String registrationStatus) {
         this.registrationStatus = registrationStatus == null ? null : registrationStatus.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Registration{" +
+                "registrationId=" + registrationId +
+                ", medicalRecordId=" + medicalRecordId +
+                ", registrationLevelId=" + registrationLevelId +
+                ", patientId=" + patientId +
+                ", departmentId=" + departmentId +
+                ", calculationTypeId=" + calculationTypeId +
+                ", doctorId=" + doctorId +
+                ", registrationDate=" + registrationDate +
+                ", buyMedicalRecord='" + buyMedicalRecord + '\'' +
+                ", registrationTotalCost=" + registrationTotalCost +
+                ", expenseTypeId=" + expenseTypeId +
+                ", expenseItemsId=" + expenseItemsId +
+                ", registrationStatus='" + registrationStatus + '\'' +
+                ", medicalRecord=" + medicalRecord +
+                ", registrationLevel=" + registrationLevel +
+                ", patient=" + patient +
+                ", department=" + department +
+                ", calculationType=" + calculationType +
+                ", doctor=" + doctor +
+                ", expenseType=" + expenseType +
+                ", expenseItems=" + expenseItems +
+                '}';
     }
 }

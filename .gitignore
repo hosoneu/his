@@ -27,3 +27,11 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+
+
+.properties
+
+### local ###
+application-dev.yml
+db.properties
+generatorConfig.xml

@@ -1,4 +1,4 @@
-﻿package edu.neu.hoso.controller;
+package edu.neu.hoso.controller;
 
 import edu.neu.hoso.example.DepartmentExample;
 import edu.neu.hoso.model.Department;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     //不知为何报错，但运行正常
     @Autowired
-    private DepartmentMapper departmentMapper;
+    DepartmentMapper departmentMapper;
 
     @RequestMapping("/test")
     public String index(){

@@ -4,6 +4,7 @@ import edu.neu.hoso.example.RegistrationLevelExample;
 import edu.neu.hoso.model.RegistrationLevel;
 import edu.neu.hoso.model.RegistrationLevelMapper;
 import edu.neu.hoso.service.RegistrationLevelService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @date: 2019-06-11 14:39
  * @version: V1.0
 */
+@Service
 public class RegistrationLevelServiceImpl implements RegistrationLevelService {
     @Resource
     RegistrationLevelMapper registrationLevelMapper;

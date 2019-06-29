@@ -7,10 +7,27 @@ public class CommonlyUsedDiagnosis {
 
     private Integer diseaseId;
 
+    private Disease disease;
+
     public CommonlyUsedDiagnosis(Integer commonlyUsedDiagnosisId, Integer doctorId, Integer diseaseId) {
         this.commonlyUsedDiagnosisId = commonlyUsedDiagnosisId;
         this.doctorId = doctorId;
         this.diseaseId = diseaseId;
+    }
+
+    public CommonlyUsedDiagnosis(Integer commonlyUsedDiagnosisId, Integer doctorId, Integer diseaseId, Disease disease) {
+        this.commonlyUsedDiagnosisId = commonlyUsedDiagnosisId;
+        this.doctorId = doctorId;
+        this.diseaseId = diseaseId;
+        this.disease = disease;
+    }
+
+    public Disease getDisease() {
+        return disease;
+    }
+
+    public void setDisease(Disease disease) {
+        this.disease = disease;
     }
 
     public CommonlyUsedDiagnosis() {

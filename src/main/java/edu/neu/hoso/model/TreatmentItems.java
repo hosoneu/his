@@ -15,6 +15,9 @@ public class TreatmentItems {
 
     private String validStatus;
 
+    /* 对应的处置非药品对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.17*/
+    private FmedicalItems fmedicalItems;
+
     public TreatmentItems(Integer treatmentItemsId, Integer treatmentId, Integer fmedicalItemsId, Integer quantity, Integer actualQuantity, Integer expenseItemsId, String validStatus) {
         this.treatmentItemsId = treatmentItemsId;
         this.treatmentId = treatmentId;
@@ -23,6 +26,25 @@ public class TreatmentItems {
         this.actualQuantity = actualQuantity;
         this.expenseItemsId = expenseItemsId;
         this.validStatus = validStatus;
+    }
+
+    public TreatmentItems(Integer treatmentItemsId, Integer treatmentId, Integer fmedicalItemsId, Integer quantity, Integer actualQuantity, Integer expenseItemsId, String validStatus, FmedicalItems fmedicalItems) {
+        this.treatmentItemsId = treatmentItemsId;
+        this.treatmentId = treatmentId;
+        this.fmedicalItemsId = fmedicalItemsId;
+        this.quantity = quantity;
+        this.actualQuantity = actualQuantity;
+        this.expenseItemsId = expenseItemsId;
+        this.validStatus = validStatus;
+        this.fmedicalItems = fmedicalItems;
+    }
+
+    public FmedicalItems getFmedicalItems() {
+        return fmedicalItems;
+    }
+
+    public void setFmedicalItems(FmedicalItems fmedicalItems) {
+        this.fmedicalItems = fmedicalItems;
     }
 
     public TreatmentItems() {

@@ -1,6 +1,7 @@
 package edu.neu.hoso.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class MedicalRecord {
     private Integer medicalRecordId;
@@ -17,6 +18,11 @@ public class MedicalRecord {
 
     private Date finalDiagnosisTime;
 
+    private MedicalRecordHomePage medicalRecordHomePage;
+
+    /* 对应的诊断对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.16*/
+    private List<Diagnosis> diagnosisList;
+
     public MedicalRecord(Integer medicalRecordId, Integer doctorId, String isTreamentOver, Integer firstDiagnosisDoctorId, Integer finalDiagnosisDoctorId, Date firstDiagnosisTime, Date finalDiagnosisTime) {
         this.medicalRecordId = medicalRecordId;
         this.doctorId = doctorId;
@@ -25,6 +31,34 @@ public class MedicalRecord {
         this.finalDiagnosisDoctorId = finalDiagnosisDoctorId;
         this.firstDiagnosisTime = firstDiagnosisTime;
         this.finalDiagnosisTime = finalDiagnosisTime;
+    }
+
+    public MedicalRecord(Integer medicalRecordId, Integer doctorId, String isTreamentOver, Integer firstDiagnosisDoctorId, Integer finalDiagnosisDoctorId, Date firstDiagnosisTime, Date finalDiagnosisTime, MedicalRecordHomePage medicalRecordHomePage, List<Diagnosis> diagnosisList) {
+        this.medicalRecordId = medicalRecordId;
+        this.doctorId = doctorId;
+        this.isTreamentOver = isTreamentOver;
+        this.firstDiagnosisDoctorId = firstDiagnosisDoctorId;
+        this.finalDiagnosisDoctorId = finalDiagnosisDoctorId;
+        this.firstDiagnosisTime = firstDiagnosisTime;
+        this.finalDiagnosisTime = finalDiagnosisTime;
+        this.medicalRecordHomePage = medicalRecordHomePage;
+        this.diagnosisList = diagnosisList;
+    }
+
+    public MedicalRecordHomePage getMedicalRecordHomePage() {
+        return medicalRecordHomePage;
+    }
+
+    public void setMedicalRecordHomePage(MedicalRecordHomePage medicalRecordHomePage) {
+        this.medicalRecordHomePage = medicalRecordHomePage;
+    }
+
+    public List<Diagnosis> getDiagnosisList() {
+        return diagnosisList;
+    }
+
+    public void setDiagnosisList(List<Diagnosis> diagnosisList) {
+        this.diagnosisList = diagnosisList;
     }
 
     public MedicalRecord() {

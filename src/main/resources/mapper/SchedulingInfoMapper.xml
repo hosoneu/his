@@ -1,37 +1,37 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="edu.neu.hoso.model.SchedulingInfoMapper" >
-  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.SchedulingInfo" >
-    <constructor >
-      <idArg column="Scheduling_Info_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Scheduling_NoonBreak" jdbcType="CHAR" javaType="java.lang.String" />
-      <arg column="Scheduling_StartTime" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="Scheduling_EndTime" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="Scheduling_Weekday" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="Scheduling_LimitCount" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Scheduling_RestCount" jdbcType="INTEGER" javaType="java.lang.Integer" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.neu.hoso.model.SchedulingInfoMapper">
+  <resultMap id="BaseResultMap" type="edu.neu.hoso.model.SchedulingInfo">
+    <constructor>
+      <idArg column="Scheduling_Info_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Doctor_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Scheduling_NoonBreak" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="Scheduling_StartTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="Scheduling_EndTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="Scheduling_Weekday" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="Scheduling_LimitCount" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Scheduling_RestCount" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -42,25 +42,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -71,156 +71,156 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     Scheduling_Info_ID, Doctor_ID, Scheduling_NoonBreak, Scheduling_StartTime, Scheduling_EndTime, 
     Scheduling_Weekday, Scheduling_LimitCount, Scheduling_RestCount
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.neu.hoso.example.SchedulingInfoExample" >
+  <select id="selectByExample" parameterType="edu.neu.hoso.example.SchedulingInfoExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from scheduling_info
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.SchedulingInfoExample" >
+  <delete id="deleteByExample" parameterType="edu.neu.hoso.example.SchedulingInfoExample">
     delete from scheduling_info
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insertSelective" parameterType="edu.neu.hoso.model.SchedulingInfo" >
-    <selectKey resultType="java.lang.Integer" keyProperty="schedulingInfoId" order="AFTER" >
+  <insert id="insertSelective" parameterType="edu.neu.hoso.model.SchedulingInfo">
+    <selectKey keyProperty="schedulingInfoId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into scheduling_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="doctorId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="doctorId != null">
         Doctor_ID,
       </if>
-      <if test="schedulingNoonbreak != null" >
+      <if test="schedulingNoonbreak != null">
         Scheduling_NoonBreak,
       </if>
-      <if test="schedulingStarttime != null" >
+      <if test="schedulingStarttime != null">
         Scheduling_StartTime,
       </if>
-      <if test="schedulingEndtime != null" >
+      <if test="schedulingEndtime != null">
         Scheduling_EndTime,
       </if>
-      <if test="schedulingWeekday != null" >
+      <if test="schedulingWeekday != null">
         Scheduling_Weekday,
       </if>
-      <if test="schedulingLimitcount != null" >
+      <if test="schedulingLimitcount != null">
         Scheduling_LimitCount,
       </if>
-      <if test="schedulingRestcount != null" >
+      <if test="schedulingRestcount != null">
         Scheduling_RestCount,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="doctorId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="doctorId != null">
         #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="schedulingNoonbreak != null" >
+      <if test="schedulingNoonbreak != null">
         #{schedulingNoonbreak,jdbcType=CHAR},
       </if>
-      <if test="schedulingStarttime != null" >
-        #{schedulingStarttime,jdbcType=DATE},
+      <if test="schedulingStarttime != null">
+        #{schedulingStarttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="schedulingEndtime != null" >
-        #{schedulingEndtime,jdbcType=DATE},
+      <if test="schedulingEndtime != null">
+        #{schedulingEndtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="schedulingWeekday != null" >
+      <if test="schedulingWeekday != null">
         #{schedulingWeekday,jdbcType=VARCHAR},
       </if>
-      <if test="schedulingLimitcount != null" >
+      <if test="schedulingLimitcount != null">
         #{schedulingLimitcount,jdbcType=INTEGER},
       </if>
-      <if test="schedulingRestcount != null" >
+      <if test="schedulingRestcount != null">
         #{schedulingRestcount,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="edu.neu.hoso.example.SchedulingInfoExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="edu.neu.hoso.example.SchedulingInfoExample" resultType="java.lang.Integer">
     select count(*) from scheduling_info
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update scheduling_info
-    <set >
-      <if test="record.schedulingInfoId != null" >
+    <set>
+      <if test="record.schedulingInfoId != null">
         Scheduling_Info_ID = #{record.schedulingInfoId,jdbcType=INTEGER},
       </if>
-      <if test="record.doctorId != null" >
+      <if test="record.doctorId != null">
         Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
       </if>
-      <if test="record.schedulingNoonbreak != null" >
+      <if test="record.schedulingNoonbreak != null">
         Scheduling_NoonBreak = #{record.schedulingNoonbreak,jdbcType=CHAR},
       </if>
-      <if test="record.schedulingStarttime != null" >
-        Scheduling_StartTime = #{record.schedulingStarttime,jdbcType=DATE},
+      <if test="record.schedulingStarttime != null">
+        Scheduling_StartTime = #{record.schedulingStarttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.schedulingEndtime != null" >
-        Scheduling_EndTime = #{record.schedulingEndtime,jdbcType=DATE},
+      <if test="record.schedulingEndtime != null">
+        Scheduling_EndTime = #{record.schedulingEndtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.schedulingWeekday != null" >
+      <if test="record.schedulingWeekday != null">
         Scheduling_Weekday = #{record.schedulingWeekday,jdbcType=VARCHAR},
       </if>
-      <if test="record.schedulingLimitcount != null" >
+      <if test="record.schedulingLimitcount != null">
         Scheduling_LimitCount = #{record.schedulingLimitcount,jdbcType=INTEGER},
       </if>
-      <if test="record.schedulingRestcount != null" >
+      <if test="record.schedulingRestcount != null">
         Scheduling_RestCount = #{record.schedulingRestcount,jdbcType=INTEGER},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update scheduling_info
     set Scheduling_Info_ID = #{record.schedulingInfoId,jdbcType=INTEGER},
       Doctor_ID = #{record.doctorId,jdbcType=INTEGER},
       Scheduling_NoonBreak = #{record.schedulingNoonbreak,jdbcType=CHAR},
-      Scheduling_StartTime = #{record.schedulingStarttime,jdbcType=DATE},
-      Scheduling_EndTime = #{record.schedulingEndtime,jdbcType=DATE},
+      Scheduling_StartTime = #{record.schedulingStarttime,jdbcType=TIMESTAMP},
+      Scheduling_EndTime = #{record.schedulingEndtime,jdbcType=TIMESTAMP},
       Scheduling_Weekday = #{record.schedulingWeekday,jdbcType=VARCHAR},
       Scheduling_LimitCount = #{record.schedulingLimitcount,jdbcType=INTEGER},
       Scheduling_RestCount = #{record.schedulingRestcount,jdbcType=INTEGER}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.SchedulingInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="edu.neu.hoso.model.SchedulingInfo">
     update scheduling_info
-    <set >
-      <if test="doctorId != null" >
+    <set>
+      <if test="doctorId != null">
         Doctor_ID = #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="schedulingNoonbreak != null" >
+      <if test="schedulingNoonbreak != null">
         Scheduling_NoonBreak = #{schedulingNoonbreak,jdbcType=CHAR},
       </if>
-      <if test="schedulingStarttime != null" >
-        Scheduling_StartTime = #{schedulingStarttime,jdbcType=DATE},
+      <if test="schedulingStarttime != null">
+        Scheduling_StartTime = #{schedulingStarttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="schedulingEndtime != null" >
-        Scheduling_EndTime = #{schedulingEndtime,jdbcType=DATE},
+      <if test="schedulingEndtime != null">
+        Scheduling_EndTime = #{schedulingEndtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="schedulingWeekday != null" >
+      <if test="schedulingWeekday != null">
         Scheduling_Weekday = #{schedulingWeekday,jdbcType=VARCHAR},
       </if>
-      <if test="schedulingLimitcount != null" >
+      <if test="schedulingLimitcount != null">
         Scheduling_LimitCount = #{schedulingLimitcount,jdbcType=INTEGER},
       </if>
-      <if test="schedulingRestcount != null" >
+      <if test="schedulingRestcount != null">
         Scheduling_RestCount = #{schedulingRestcount,jdbcType=INTEGER},
       </if>
     </set>

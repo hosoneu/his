@@ -14,6 +14,21 @@
       <arg column="Drugs_Advice" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
+
+  <!--  添加药品条目的ResultMap by @29-y 2019.06.18 -->
+  <resultMap id="SecondResultMap" type="edu.neu.hoso.model.GroupPrescriptionItems" >
+    <id property="groupPrescriptionItemsId" column="Group_Prescription_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="groupPrescriptionId" column="Group_Prescription_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="drugsId" column="Drugs_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="drugsUsage" column="Drugs_Usage" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="dosage" column="Dosage" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    <result property="times" column="Times" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="days" column="Days" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="quantity" column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="drugsAdvice" column="Drugs_Advice" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <association property="drugs" javaType="edu.neu.hoso.model.Drugs" resultMap="edu.neu.hoso.model.DrugsMapper.BaseResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

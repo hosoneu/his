@@ -1,5 +1,8 @@
 package edu.neu.hoso.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class User {
     private Integer userId;
 
@@ -20,6 +23,10 @@ public class User {
     private String userStatus;
 
     private Integer userSchedulingLimitcount;
+
+    @Getter
+    @Setter
+    private ConstantItems constantItems;
 
     public User(Integer userId, String userLoginname, String userPassword, Integer roleId, String userName, Integer departmentId, Integer userTitleId, String userGender, String userStatus, Integer userSchedulingLimitcount) {
         this.userId = userId;

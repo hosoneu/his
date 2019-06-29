@@ -17,6 +17,9 @@ public class Diagnosis {
 
     private String diagnosisMark;
 
+    /* 对应的疾病对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.14*/
+    private Disease disease;
+
     public Diagnosis(Integer diagnosisId, Integer diseaseId, Integer medicalRecordId, String mainDiagnosisMark, String suspectMark, Date onsetDate, String diagnosisMark) {
         this.diagnosisId = diagnosisId;
         this.diseaseId = diseaseId;
@@ -25,6 +28,25 @@ public class Diagnosis {
         this.suspectMark = suspectMark;
         this.onsetDate = onsetDate;
         this.diagnosisMark = diagnosisMark;
+    }
+
+    public Diagnosis(Integer diagnosisId, Integer diseaseId, Integer medicalRecordId, String mainDiagnosisMark, String suspectMark, Date onsetDate, String diagnosisMark, Disease disease) {
+        this.diagnosisId = diagnosisId;
+        this.diseaseId = diseaseId;
+        this.medicalRecordId = medicalRecordId;
+        this.mainDiagnosisMark = mainDiagnosisMark;
+        this.suspectMark = suspectMark;
+        this.onsetDate = onsetDate;
+        this.diagnosisMark = diagnosisMark;
+        this.disease = disease;
+    }
+
+    public Disease getDisease() {
+        return disease;
+    }
+
+    public void setDisease(Disease disease) {
+        this.disease = disease;
     }
 
     public Diagnosis() {

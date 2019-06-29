@@ -57,4 +57,20 @@ public interface TreatmentMapper {
         "where Treatment_ID = #{treatmentId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Treatment record);
+
+    @Select({
+            "select t.*,ti.*,f.* " ,
+            "from treatment t join treatment_items ti on t.Treatment_ID = ti.Treatment_ID join fmedical_items f on f.Fmedical_Items_ID=ti.Fmedical_Items_ID " ,
+            "where t.Treatment_ID =  #{treatmentId,jdbcType=INTEGER} "
+    })
+    @ResultMap("SecondResultMap")
+    Treatment selectTreatmentById(Integer treatmentId);
+
+    @Select({
+            "select t.*,ti.*,f.* " ,
+            "from treatment t join treatment_items ti on t.Treatment_ID = ti.Treatment_ID join fmedical_items f on f.Fmedical_Items_ID=ti.Fmedical_Items_ID " ,
+            "where t.Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER} "
+    })
+    @ResultMap("SecondResultMap")
+    List<Treatment> listTreatmentByMedicalRecordId(Integer medicalRecordId);
 }

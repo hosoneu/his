@@ -86,4 +86,17 @@ public class Patient {
     public void setPatientAddress(String patientAddress) {
         this.patientAddress = patientAddress == null ? null : patientAddress.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "patientId=" + patientId +
+                ", patientName='" + patientName + '\'' +
+                ", patientGender='" + patientGender + '\'' +
+                ", patientBirth=" + patientBirth +
+                ", patientAge=" + patientAge +
+                ", patientIdentity='" + patientIdentity + '\'' +
+                ", patientAddress='" + patientAddress + '\'' +
+                '}';
+    }
 }

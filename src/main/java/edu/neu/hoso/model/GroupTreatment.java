@@ -1,6 +1,7 @@
 package edu.neu.hoso.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class GroupTreatment {
     private Integer groupTreatmentId;
@@ -15,6 +16,9 @@ public class GroupTreatment {
 
     private Date createTime;
 
+    /* 对应的处置条目模板对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.17*/
+    private List<GroupTreatmentItems> groupTreatmentItemsList;
+
     public GroupTreatment(Integer groupTreatmentId, Integer doctorId, String groupTreatmentCode, String groupTreatmentName, String groupTreatmentScope, Date createTime) {
         this.groupTreatmentId = groupTreatmentId;
         this.doctorId = doctorId;
@@ -22,6 +26,24 @@ public class GroupTreatment {
         this.groupTreatmentName = groupTreatmentName;
         this.groupTreatmentScope = groupTreatmentScope;
         this.createTime = createTime;
+    }
+
+    public GroupTreatment(Integer groupTreatmentId, Integer doctorId, String groupTreatmentCode, String groupTreatmentName, String groupTreatmentScope, Date createTime, List<GroupTreatmentItems> groupTreatmentItemsList) {
+        this.groupTreatmentId = groupTreatmentId;
+        this.doctorId = doctorId;
+        this.groupTreatmentCode = groupTreatmentCode;
+        this.groupTreatmentName = groupTreatmentName;
+        this.groupTreatmentScope = groupTreatmentScope;
+        this.createTime = createTime;
+        this.groupTreatmentItemsList = groupTreatmentItemsList;
+    }
+
+    public List<GroupTreatmentItems> getGroupTreatmentItemsList() {
+        return groupTreatmentItemsList;
+    }
+
+    public void setGroupTreatmentItemsList(List<GroupTreatmentItems> groupTreatmentItemsList) {
+        this.groupTreatmentItemsList = groupTreatmentItemsList;
     }
 
     public GroupTreatment() {

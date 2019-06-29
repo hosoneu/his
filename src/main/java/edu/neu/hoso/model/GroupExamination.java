@@ -1,6 +1,7 @@
 package edu.neu.hoso.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class GroupExamination {
     private Integer groupExaminationId;
@@ -15,13 +16,38 @@ public class GroupExamination {
 
     private Date createTime;
 
-    public GroupExamination(Integer groupExaminationId, Integer doctorId, String groupExaminationCode, String groupExaminationName, String groupExaminationScope, Date createTime) {
+    private String groupExaminationType;
+
+    /* 对应的检查检验组套非药品项目列表对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.19*/
+    private List<GroupExaminationFmedicalItems> groupExaminationFmedicalItemsList;
+
+    public GroupExamination(Integer groupExaminationId, Integer doctorId, String groupExaminationCode, String groupExaminationName, String groupExaminationScope, Date createTime, String groupExaminationType) {
         this.groupExaminationId = groupExaminationId;
         this.doctorId = doctorId;
         this.groupExaminationCode = groupExaminationCode;
         this.groupExaminationName = groupExaminationName;
         this.groupExaminationScope = groupExaminationScope;
         this.createTime = createTime;
+        this.groupExaminationType = groupExaminationType;
+    }
+
+    public GroupExamination(Integer groupExaminationId, Integer doctorId, String groupExaminationCode, String groupExaminationName, String groupExaminationScope, Date createTime, String groupExaminationType, List<GroupExaminationFmedicalItems> groupExaminationFmedicalItemsList) {
+        this.groupExaminationId = groupExaminationId;
+        this.doctorId = doctorId;
+        this.groupExaminationCode = groupExaminationCode;
+        this.groupExaminationName = groupExaminationName;
+        this.groupExaminationScope = groupExaminationScope;
+        this.createTime = createTime;
+        this.groupExaminationType = groupExaminationType;
+        this.groupExaminationFmedicalItemsList = groupExaminationFmedicalItemsList;
+    }
+
+    public List<GroupExaminationFmedicalItems> getGroupExaminationFmedicalItemsList() {
+        return groupExaminationFmedicalItemsList;
+    }
+
+    public void setGroupExaminationFmedicalItemsList(List<GroupExaminationFmedicalItems> groupExaminationFmedicalItemsList) {
+        this.groupExaminationFmedicalItemsList = groupExaminationFmedicalItemsList;
     }
 
     public GroupExamination() {
@@ -74,5 +100,13 @@ public class GroupExamination {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getGroupExaminationType() {
+        return groupExaminationType;
+    }
+
+    public void setGroupExaminationType(String groupExaminationType) {
+        this.groupExaminationType = groupExaminationType == null ? null : groupExaminationType.trim();
     }
 }

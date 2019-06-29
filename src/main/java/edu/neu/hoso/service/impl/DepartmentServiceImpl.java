@@ -22,7 +22,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     DepartmentMapper departmentMapper;
 
-
     @Override
     public Integer insert(Department department) {
         /**
@@ -210,5 +209,19 @@ public class DepartmentServiceImpl implements DepartmentService {
          */
         DepartmentExample departmentExample = new DepartmentExample();
         return departmentMapper.selectByExample(departmentExample);
+    }
+
+    @Override
+    public List<Department> getAllDepartmentWithCategory() {
+        /**
+         *@title: getAllDepartmentWithCategory
+         *@description: 查询所有科室 附带Category信息
+         *@author: Mike
+         *@date: 2019-06-25 12:05
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.Department>
+         *@throws:
+         */
+        return departmentMapper.getAllDepartmentWithCategory();
     }
 }

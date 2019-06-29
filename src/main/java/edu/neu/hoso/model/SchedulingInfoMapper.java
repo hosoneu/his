@@ -1,7 +1,8 @@
 package edu.neu.hoso.model;
 
-import edu.neu.hoso.example.SchedulingInfoExample;
 import java.util.List;
+
+import edu.neu.hoso.example.SchedulingInfoExample;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -27,7 +28,7 @@ public interface SchedulingInfoMapper {
         "Scheduling_Weekday, Scheduling_LimitCount, ",
         "Scheduling_RestCount)",
         "values (#{doctorId,jdbcType=INTEGER}, #{schedulingNoonbreak,jdbcType=CHAR}, ",
-        "#{schedulingStarttime,jdbcType=DATE}, #{schedulingEndtime,jdbcType=DATE}, ",
+        "#{schedulingStarttime,jdbcType=TIMESTAMP}, #{schedulingEndtime,jdbcType=TIMESTAMP}, ",
         "#{schedulingWeekday,jdbcType=VARCHAR}, #{schedulingLimitcount,jdbcType=INTEGER}, ",
         "#{schedulingRestcount,jdbcType=INTEGER})"
     })
@@ -58,8 +59,8 @@ public interface SchedulingInfoMapper {
         "update scheduling_info",
         "set Doctor_ID = #{doctorId,jdbcType=INTEGER},",
           "Scheduling_NoonBreak = #{schedulingNoonbreak,jdbcType=CHAR},",
-          "Scheduling_StartTime = #{schedulingStarttime,jdbcType=DATE},",
-          "Scheduling_EndTime = #{schedulingEndtime,jdbcType=DATE},",
+          "Scheduling_StartTime = #{schedulingStarttime,jdbcType=TIMESTAMP},",
+          "Scheduling_EndTime = #{schedulingEndtime,jdbcType=TIMESTAMP},",
           "Scheduling_Weekday = #{schedulingWeekday,jdbcType=VARCHAR},",
           "Scheduling_LimitCount = #{schedulingLimitcount,jdbcType=INTEGER},",
           "Scheduling_RestCount = #{schedulingRestcount,jdbcType=INTEGER}",
