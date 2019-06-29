@@ -461,4 +461,18 @@ public class RegistrationServiceImpl implements RegistrationService {
         return patientMapper.selectByExample(patientExample);
     }
 
+    @Override
+    public List<ExpenseItems> getAllExpenseItems() {
+        /**
+         *@title: getAllExpenseItems
+         *@description: 查询所有费用项目 包含全部信息
+         *@author: Mike
+         *@date: 2019-06-30 2:43
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.ExpenseItems>
+         *@throws:
+         */
+        return expenseItemsMapper.getAllExpenseItems();
+    }
+
 }

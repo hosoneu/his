@@ -32,4 +32,5 @@ public interface RegistrationService {
     List<ExpenseItems> getPatientPayExpenseItems(Integer medicalRecordId, Date startDate, Date endDate);
     List<ExpenseItems> getPatientUnPayExpenseItems(Integer medicalRecordId);
     List<Patient> getAllPatient();
+    List<ExpenseItems> getAllExpenseItems();
 }

@@ -280,4 +280,95 @@
     ORDER BY
         Pay_Time DESC
   </select>
+
+  <!--费用项目最全结果集 @Mike 2019.6.30-->
+  <resultMap id="ExpenseItemsResultMap" type="edu.neu.hoso.model.ExpenseItems" >
+    <id column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="expenseItemsId"/>
+    <result column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="medicalRecordId"/>
+    <result column="Total_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" property="totalCost"/>
+    <result column="Pay_Status" jdbcType="CHAR" javaType="java.lang.String" property="payStatus"/>
+    <association property="invoice" javaType="Invoice">
+      <id column="Invoice_ID" property="invoiceId" />
+      <result column="Invoice_NO" property="invoiceNo" />
+      <result column="Is_Day_Cal" property="isDayCal" />
+      <result column="Pay_Time" property="payTime" />
+    </association>
+    <association property="expenseType" javaType="ExpenseType">
+      <id column="Expense_Type_ID" property="expenseTypeId" />
+      <result column="Expense_Type_Name" property="expenseTypeName" />
+    </association>
+    <association property="drugs" javaType="Drugs">
+      <id column="Drugs_ID" property="drugsId" />
+      <result column="Drugs_Name" property="drugsName" />
+    </association>
+    <association property="prescriptionItems" javaType="PrescriptionItems">
+      <id column="Prescription_Items_ID" property="prescriptionItemsId" />
+      <result column="P_Quantity" property="quantity" />
+      <result column="P_Actual_Quantity" property="actualQuantity" />
+    </association>
+    <association property="fmedicalItems" javaType="FmedicalItems">
+      <id column="Fmedical_Items_ID" property="fmedicalItemsId" />
+      <result column="Fmedical_Items_Name" property="fmedicalItemsName" />
+    </association>
+    <association property="treatmentItems" javaType="TreatmentItems">
+      <id column="Treatment_Items_ID" property="treatmentItemsId" />
+      <result column="T_Quantity" property="quantity" />
+      <result column="T_Actual_Quantity" property="actualQuantity" />
+    </association>
+    <association property="examinationDrugsItems" javaType="ExaminationDrugsItems">
+      <id column="Examination_Drugs_Items_ID" property="examinationDrugsItemsId" />
+      <result column="E_D_Quantity" property="quantity" />
+      <result column="E_D_Actual_Quantity" property="actualQuantity" />
+    </association>
+    <association property="examinationFmedicalItems" javaType="ExaminationFmedicalItems">
+      <id column="Examination_Fmedical_Items_ID" property="examinationFmedicalItemsId" />
+      <result column="E_F_Quantity" property="quantity" />
+      <result column="E_F_Actual_Quantity" property="actualQuantity" />
+    </association>
+  </resultMap>
+
+  <!--查询所有收费项目 @Mike 2019.6.30-->
+  <select id="getAllExpenseItems" resultMap="ExpenseItemsResultMap">
+    SELECT
+        drugs.Drugs_ID,
+        drugs.Drugs_Name,
+        prescription_items.Prescription_Items_ID,
+        prescription_items.Quantity AS P_Quantity,
+        prescription_items.Actual_Quantity AS P_Actual_Quantity,
+        fmedical_items.Fmedical_Items_ID,
+        fmedical_items.Fmedical_Items_Name,
+        treatment_items.Treatment_Items_ID,
+        treatment_items.Quantity AS T_Quantity,
+        treatment_items.Actual_Quantity AS T_Actual_Quantity,
+        examination_fmedical_items.Examination_Fmedical_Items_ID,
+        examination_fmedical_items.Quantity AS E_F_Quantity,
+        examination_fmedical_items.Actual_Quantity AS E_F_Actual_Quantity,
+        examination_drugs_items.Examination_Drugs_Items_ID,
+        examination_drugs_items.Quantity AS E_D_Quantity,
+        examination_drugs_items.Actual_Quantity AS E_D_Actual_Quantity,
+        expense_items.Expense_Items_ID,
+        expense_items.Medical_Record_ID,
+        expense_items.Total_Cost,
+        Pay_Status,
+        invoice.Invoice_ID,
+        invoice.Invoice_NO,
+        expense_type.Expense_Type_ID,
+        expense_type.Expense_Type_Name
+    FROM
+        expense_items
+        NATURAL JOIN expense_type
+        LEFT JOIN ( ( prescription_items JOIN prescription ON prescription_items.Prescription_ID = prescription.Prescription_ID ) JOIN drugs ON prescription_items.Drags_ID = drugs.Drugs_ID ) ON prescription_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        LEFT JOIN ( treatment_items JOIN fmedical_items ON treatment_items.Fmedical_Items_ID = fmedical_items.Fmedical_Items_ID ) ON treatment_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        LEFT JOIN examination_fmedical_items ON examination_fmedical_items.Examination_Fmedical_Items_ID = fmedical_items.Fmedical_Items_ID
+        AND examination_fmedical_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        LEFT JOIN examination_drugs_items ON examination_drugs_items.Drugs_ID = drugs.Drugs_ID
+        AND examination_drugs_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        JOIN invoice ON expense_items.Invoice_ID = invoice.Invoice_ID
+    WHERE
+        prescription.Valid_Status = 1
+        AND treatment_items.Valid_Status = 1
+        AND examination_fmedical_items.Valid_Status = 1
+        AND invoice.Is_Day_Cal = 1
+  </select>
+
 </mapper>
