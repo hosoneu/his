@@ -281,6 +281,7 @@
         Pay_Time DESC
   </select>
 
+
   <!--费用项目最全结果集 @Mike 2019.6.30-->
   <resultMap id="ExpenseItemsResultMap" type="edu.neu.hoso.model.ExpenseItems" >
     <id column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="expenseItemsId"/>
@@ -301,6 +302,10 @@
       <id column="Drugs_ID" property="drugsId" />
       <result column="Drugs_Name" property="drugsName" />
     </association>
+      <association property="exDrugs" javaType="Drugs">
+          <id column="Ex_Drugs_ID" property="drugsId" />
+          <result column="Ex_Drugs_Name" property="drugsName" />
+      </association>
     <association property="prescriptionItems" javaType="PrescriptionItems">
       <id column="Prescription_Items_ID" property="prescriptionItemsId" />
       <result column="P_Quantity" property="quantity" />
@@ -310,6 +315,10 @@
       <id column="Fmedical_Items_ID" property="fmedicalItemsId" />
       <result column="Fmedical_Items_Name" property="fmedicalItemsName" />
     </association>
+      <association property="exFmedicalItems" javaType="FmedicalItems">
+          <id column="Ex_Fmedical_Items_ID" property="fmedicalItemsId" />
+          <result column="Ex_Fmedical_Items_Name" property="fmedicalItemsName" />
+      </association>
     <association property="treatmentItems" javaType="TreatmentItems">
       <id column="Treatment_Items_ID" property="treatmentItemsId" />
       <result column="T_Quantity" property="quantity" />
@@ -332,11 +341,15 @@
     SELECT
         drugs.Drugs_ID,
         drugs.Drugs_Name,
+        ex_drugs.Drugs_ID AS Ex_Drugs_ID,
+        ex_drugs.Drugs_Name AS Ex_Drugs_Name,
         prescription_items.Prescription_Items_ID,
         prescription_items.Quantity AS P_Quantity,
         prescription_items.Actual_Quantity AS P_Actual_Quantity,
         fmedical_items.Fmedical_Items_ID,
         fmedical_items.Fmedical_Items_Name,
+        ex_fmedical_items.Fmedical_Items_ID AS Ex_Fmedical_Items_ID,
+        ex_fmedical_items.Fmedical_Items_Name AS Ex_Fmedical_Items_Name,
         treatment_items.Treatment_Items_ID,
         treatment_items.Quantity AS T_Quantity,
         treatment_items.Actual_Quantity AS T_Actual_Quantity,
@@ -359,16 +372,12 @@
         NATURAL JOIN expense_type
         LEFT JOIN ( ( prescription_items JOIN prescription ON prescription_items.Prescription_ID = prescription.Prescription_ID ) JOIN drugs ON prescription_items.Drags_ID = drugs.Drugs_ID ) ON prescription_items.Expense_Items_ID = expense_items.Expense_Items_ID
         LEFT JOIN ( treatment_items JOIN fmedical_items ON treatment_items.Fmedical_Items_ID = fmedical_items.Fmedical_Items_ID ) ON treatment_items.Expense_Items_ID = expense_items.Expense_Items_ID
-        LEFT JOIN examination_fmedical_items ON examination_fmedical_items.Examination_Fmedical_Items_ID = fmedical_items.Fmedical_Items_ID
-        AND examination_fmedical_items.Expense_Items_ID = expense_items.Expense_Items_ID
-        LEFT JOIN examination_drugs_items ON examination_drugs_items.Drugs_ID = drugs.Drugs_ID
-        AND examination_drugs_items.Expense_Items_ID = expense_items.Expense_Items_ID
-        JOIN invoice ON expense_items.Invoice_ID = invoice.Invoice_ID
+        LEFT JOIN ( examination_fmedical_items JOIN fmedical_items AS ex_fmedical_items ON examination_fmedical_items.Fmedical_Items_ID = ex_fmedical_items.Fmedical_Items_ID ) ON examination_fmedical_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        LEFT JOIN ( ( examination_drugs_items JOIN examination_fmedical_items AS drugs_examination_fmedical_items ON examination_drugs_items.Examination_Fmedical_Items_ID = drugs_examination_fmedical_items.Examination_Fmedical_Items_ID) JOIN drugs AS ex_drugs ON examination_drugs_items.Drugs_ID = ex_drugs.Drugs_ID ) ON examination_drugs_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        LEFT JOIN invoice ON expense_items.Invoice_ID = invoice.Invoice_ID
     WHERE
-        prescription.Valid_Status = 1
-        AND treatment_items.Valid_Status = 1
-        AND examination_fmedical_items.Valid_Status = 1
-        AND invoice.Is_Day_Cal = 1
+        ( prescription.Valid_Status = 1 OR treatment_items.Valid_Status = 1 OR examination_fmedical_items.Valid_Status = 1 OR drugs_examination_fmedical_items.Valid_Status = 1)
+        AND ( invoice.Is_Day_Cal = 1 OR invoice.Is_Day_Cal IS NULL )
   </select>
 
 </mapper>

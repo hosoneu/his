@@ -30,7 +30,15 @@ public class ExpenseItems {
 
     @Getter
     @Setter
+    private Drugs exDrugs;
+
+    @Getter
+    @Setter
     private FmedicalItems fmedicalItems;
+
+    @Getter
+    @Setter
+    private FmedicalItems exFmedicalItems;
 
     @Getter
     @Setter

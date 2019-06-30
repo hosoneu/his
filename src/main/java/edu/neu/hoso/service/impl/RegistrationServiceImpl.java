@@ -339,7 +339,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public void refund(List<Integer> expenseItemsIds, Integer userId) {
+    public void refund(List<ExpenseItems> expenseItemsList, Integer userId) {
         /**
          *@title: refund
          *@description: 退费操作
@@ -353,8 +353,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         //声明发票id数组
         List<Integer> invoiceIdList = new ArrayList<>();
         //遍历前端传来的收费明细id数组
-        for (Integer expenseItemsId : expenseItemsIds) {
-            ExpenseItems expenseItems = expenseItemsMapper.selectByPrimaryKey(expenseItemsId);
+        for (ExpenseItems expenseItems : expenseItemsList) {
+            //判断是否存在部分退费的费用项目
+            //lombok没有插件便无法执行get方法
+//            if (expenseItems.getDrugs() != null){
+//
+//            }
             //将执行退费操作的收费明细的收费状态置为退费
             expenseItems.setPayStatus("3");
             expenseItemsMapper.updateByPrimaryKeySelective(expenseItems);

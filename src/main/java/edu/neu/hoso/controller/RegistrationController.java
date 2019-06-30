@@ -123,7 +123,13 @@ public class RegistrationController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            registrationService.charge((List<Integer>)map.get("expenseItems"), (Integer)map.get("userId"), (Integer)map.get("payModeId"));
+            List<Integer> expenseItemsIdList = JsonUtils.mapToObj((Map<String, Object>)map.get("expenseItemsIdList"), List.class);
+            Integer userId = (Integer)map.get("userId");
+            Integer payModeId = (Integer)map.get("payModeId");
+            System.out.println(expenseItemsIdList);
+            System.out.println(userId);
+            System.out.println(payModeId);
+            registrationService.charge(expenseItemsIdList, userId, payModeId);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("收费成功！");
         } catch (Exception e) {
@@ -146,7 +152,11 @@ public class RegistrationController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            registrationService.refund((List<Integer>)map.get("expenseItems"), (Integer)map.get("userId"));
+            List<ExpenseItems> expenseItemsList = JsonUtils.mapToObj((Map<String, Object>)map.get("expenseItemsList"), List.class);
+            Integer userId = (Integer)map.get("userId");
+            System.out.println(expenseItemsList);
+            System.out.println(userId);
+            registrationService.refund(expenseItemsList, userId);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("退费成功！");
         } catch (Exception e) {
