@@ -117,7 +117,11 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
      * @throws:
      */
     @Override
-    public void insertAssistantExamination(String assistantExamination,Integer medicalRecordHomePageId) {
+    public void insertAssistantExamination(String assistantExamination,Integer medicalRecordId) {
+        MedicalRecordHomePageExample medicalRecordHomePageExample = new MedicalRecordHomePageExample();
+        MedicalRecordHomePageExample.Criteria criteria = medicalRecordHomePageExample.createCriteria();
+        criteria.andMedicalRecordIdEqualTo(medicalRecordId);
+        Integer medicalRecordHomePageId = medicalRecordHomePageMapper.selectByExample(medicalRecordHomePageExample).get(0).getMedicalRecordHomePageId();
         MedicalRecordHomePage medicalRecordHomePage = new MedicalRecordHomePage();
         medicalRecordHomePage.setMedicalRecordHomePageId(medicalRecordHomePageId);
         medicalRecordHomePage.setAssistantExamination(assistantExamination);
@@ -215,6 +219,20 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
     @Override
     public List<Diagnosis> listFirstDiagnosisByMedicalRecordId(Integer medicalRecordId) {
         return diagnosisMapper.listDiagnosisByMedicalRecordId(medicalRecordId,"1");
+    }
+
+    /**
+     * @title: listFinalDiagnosisByMedicalRecordId
+     * @description: 查询终诊信息
+     * @author: 29-y
+     * @date: 2019-06-27 16:33
+     * @param: [medicalRecordId]
+     * @return: java.util.List<edu.neu.hoso.model.Diagnosis>
+     * @throws:
+     */
+    @Override
+    public List<Diagnosis> listFinalDiagnosisByMedicalRecordId(Integer medicalRecordId) {
+        return diagnosisMapper.listDiagnosisByMedicalRecordId(medicalRecordId,"2");
     }
 
 

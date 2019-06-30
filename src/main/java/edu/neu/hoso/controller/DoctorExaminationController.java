@@ -8,6 +8,7 @@ import edu.neu.hoso.service.DoctorExaminationService;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -118,7 +119,7 @@ public class DoctorExaminationController {
 
     // 开立项目 根据 检查检验申请表（List<检查检验非药品条目表（List<检查检验药品条目表>）>）并自动生成收费条目
     @RequestMapping("/insertExamination")
-    public ResultDTO<Integer> insertExamination(Examination examination){
+    public ResultDTO<Integer> insertExamination(@RequestBody Examination examination){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorExaminationService.insertExamination(examination));

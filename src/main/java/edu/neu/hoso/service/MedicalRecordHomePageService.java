@@ -23,7 +23,7 @@ public interface MedicalRecordHomePageService {
     // 录入终诊结果
     Integer insertFinalDiagnosis(List<Diagnosis> diagnosisList);
     // 录入辅助检查结果
-    void insertAssistantExamination(String assistantExamination,Integer medicalRecordHomePageId);
+    void insertAssistantExamination(String assistantExamination,Integer medicalRecordId);
     // 列出病历首页模板（1个人/2科室/3医院）
     List<MedicalRecordHomePageTemplate> listMedicalRecordHomePageTemplate(Integer userId,String scope);
     // 查询病历首页模板 包括诊断信息
@@ -34,4 +34,6 @@ public interface MedicalRecordHomePageService {
     MedicalRecordHomePage selectMedicalRecordHomePageByMedicalRecordId(Integer medicalRecordId);
     //  查询初诊结果
     List<Diagnosis> listFirstDiagnosisByMedicalRecordId(Integer medicalRecordId);
+    //  查询终诊结果
+    List<Diagnosis> listFinalDiagnosisByMedicalRecordId(Integer medicalRecordId);
 }

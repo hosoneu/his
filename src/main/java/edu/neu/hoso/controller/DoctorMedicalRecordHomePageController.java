@@ -46,12 +46,6 @@ public class DoctorMedicalRecordHomePageController {
     //    录入病历首页的文字部分（除初步诊断、辅助检查的部分 该部分由insertFirstDiagnosis实现）
     @RequestMapping("/insertMedicalRecordHomePage")
     public ResultDTO<Integer> insertMedicalRecordHomePage(@RequestBody MedicalRecordHomePage medicalRecordHomePage ){
-//        MedicalRecordHomePage medicalRecordHomePage = new MedicalRecordHomePage();
-//        medicalRecordHomePage.setAllergicHistory("无");
-//        medicalRecordHomePage.setChiefComplaint("头昏 有点发烧");
-//        medicalRecordHomePage.setPastHistory("无");
-//        medicalRecordHomePage.setPresentHistory("头昏脑涨");
-//        medicalRecordHomePage.setPhysicalExamination("眼睛瞳孔无浑浊，四肢发育正常");
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(medicalRecordHomePageService.insertMedicalRecordHomePage(medicalRecordHomePage));
@@ -115,7 +109,7 @@ public class DoctorMedicalRecordHomePageController {
 
     //   插入病历首页模板
     @RequestMapping("/insertMedicalRecordHomePageTemplate")
-    public ResultDTO<Integer> insertMedicalRecordHomePageTemplate(MedicalRecordHomePageTemplate medicalRecordHomePageTemplate){
+    public ResultDTO<Integer> insertMedicalRecordHomePageTemplate(@RequestBody MedicalRecordHomePageTemplate medicalRecordHomePageTemplate){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(medicalRecordHomePageService.insertMedicalRecordHomePageTemplate(medicalRecordHomePageTemplate));
@@ -146,7 +140,7 @@ public class DoctorMedicalRecordHomePageController {
     }
 
     //列出初诊信息
-        @RequestMapping("/listFirstDiagnosisByMedicalRecordId")
+    @RequestMapping("/listFirstDiagnosisByMedicalRecordId")
     public ResultDTO<List<Diagnosis>> listFirstDiagnosisByMedicalRecordId(Integer medicalRecordId){
         ResultDTO<List<Diagnosis>> resultDTO = new ResultDTO<>();
         try {

@@ -221,6 +221,7 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
         examinationMapper.insert(examination);
         Integer examinationId = examination.getExaminationId();
         Integer medicalRecordId = examination.getMedicalRecordId();
+
         List<ExaminationFmedicalItems> examinationFmedicalItemsList = examination.getExaminationFmedicalItemsList();
         //插入检查检验非药品条目以及对应的收费条目
         for(ExaminationFmedicalItems examinationFmedicalItems : examinationFmedicalItemsList){

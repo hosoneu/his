@@ -437,6 +437,7 @@ public class DoctorCommonController {
         }
         return resultDTO;
     }
+
     /**
      * @title: listExamination1
      * @description: 展示所有的检查非药品项目

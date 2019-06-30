@@ -105,7 +105,7 @@ public class DoctorHerbalPrescriptionController {
 
 
     //废除草药处方 在废除之前需要调用是否可废除函数 才能进行该操作
-        @RequestMapping("/cancelPrescription")
+    @RequestMapping("/cancelPrescription")
     public ResultDTO cancelHerbalPrescription(Integer prescriptionId){
         ResultDTO resultDTO = new ResultDTO<>();
         try {

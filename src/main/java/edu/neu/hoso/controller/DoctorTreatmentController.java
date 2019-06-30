@@ -5,6 +5,7 @@ import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.DoctorTreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,21 +62,7 @@ public class DoctorTreatmentController {
 
     // 开立项目（一个处置单一起开立） 根据 处置申请表（List<处置非药品条目表>） 并自动生成收费条目
     @RequestMapping("/insertTreatment")
-    public ResultDTO<Integer> insertTreatment(Treatment treatment){
-//        Treatment treatment = new Treatment();
-//        treatment.setDoctorId(1);
-//        treatment.setSubmitTime(new Date());
-//        treatment.setMedicalRecordId(2);
-//        List<TreatmentItems> treatmentItemsList = new ArrayList<>();
-//        TreatmentItems treatmentItems = new TreatmentItems();
-//        treatmentItems.setQuantity(10);
-//        treatmentItems.setFmedicalItemsId(1);
-//        treatmentItemsList.add(treatmentItems);
-//        TreatmentItems treatmentItems1 = new TreatmentItems();
-//        treatmentItems1.setQuantity(1);
-//        treatmentItems1.setFmedicalItemsId(10);
-//        treatmentItemsList.add(treatmentItems1);
-//        treatment.setTreatmentItemsList(treatmentItemsList);
+    public ResultDTO<Integer> insertTreatment(@RequestBody Treatment treatment){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorTreatmentService.insertTreatment(treatment));
@@ -104,6 +91,22 @@ public class DoctorTreatmentController {
         }
         return resultDTO;
     }
+    // 判断处置条目是否可废除  1可废除 2不可废除 3已废除
+    @RequestMapping("/ifTreatmentItemsCanCancel")
+    public ResultDTO<Integer> ifTreatmentItemsCanCancel(Integer treatmentItemsId){
+        ResultDTO<Integer> resultDTO = new ResultDTO<>();
+        try {
+            resultDTO.setData(doctorTreatmentService.ifTreatmentItemsCanCancel(treatmentItemsId));
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("处置项目作废状态查询成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("处置项目作废状态查询失败！");
+        }
+        return resultDTO;
+    }
+
     // 列出处置组套 （scope 1个人、2科室、3全院）
     @RequestMapping("/listGroupTreatment")
     public ResultDTO<List<GroupTreatment>> listGroupTreatment(Integer userId, String scope){
@@ -121,23 +124,7 @@ public class DoctorTreatmentController {
     }
     // 存为处置组套
     @RequestMapping("/insertGroupTreatment")
-    public ResultDTO<Integer> insertGroupTreatment(GroupTreatment groupTreatment){
-//        GroupTreatment groupTreatment = new GroupTreatment();
-//        groupTreatment.setDoctorId(1);
-//        groupTreatment.setCreateTime(new Date());
-//        groupTreatment.setGroupTreatmentCode("dsad");
-//        groupTreatment.setGroupTreatmentName("测试");
-//        groupTreatment.setGroupTreatmentScope("1");
-//        GroupTreatmentItems groupTreatmentItems = new GroupTreatmentItems();
-//        groupTreatmentItems.setFmedicalItemsId(5);
-//        groupTreatmentItems.setQuantity(4);
-//        GroupTreatmentItems groupTreatmentItems1 = new GroupTreatmentItems();
-//        groupTreatmentItems1.setFmedicalItemsId(14);
-//        groupTreatmentItems1.setQuantity(2);
-//        List<GroupTreatmentItems> groupTreatmentItemsList = new ArrayList<>();
-//        groupTreatmentItemsList.add(groupTreatmentItems);
-//        groupTreatmentItemsList.add(groupTreatmentItems1);
-//        groupTreatment.setGroupTreatmentItemsList(groupTreatmentItemsList);
+    public ResultDTO<Integer> insertGroupTreatment(@RequestBody GroupTreatment groupTreatment){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorTreatmentService.insertGroupTreatment(groupTreatment));
