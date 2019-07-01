@@ -71,4 +71,6 @@ public interface UserMapper {
     String FindDepartmentTypeByUserID(int userID);
 
     List<User> getUserByRole(Integer roleId);
+
+    List<User> getAllUserWithRole();
 }

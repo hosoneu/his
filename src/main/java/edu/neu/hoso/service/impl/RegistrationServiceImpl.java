@@ -327,9 +327,9 @@ public class RegistrationServiceImpl implements RegistrationService {
             ExpenseItems expenseItems = expenseItemsMapper.selectByPrimaryKey(expenseItemsId);
             //将执行收费操作的收费明细的收费状态置为已收费
             expenseItems.setPayStatus("2");
-            expenseItemsMapper.updateByPrimaryKeySelective(expenseItems);
             //为收费明细装填发票id属性
             expenseItems.setInvoiceId(invoice.getInvoiceId());
+            expenseItemsMapper.updateByPrimaryKeySelective(expenseItems);
             //计算总费用
             totalCost += expenseItems.getTotalCost();
         }

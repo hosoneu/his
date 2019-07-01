@@ -1,6 +1,7 @@
 package edu.neu.hoso.controller;
 
 import edu.neu.hoso.dto.ResultDTO;
+import edu.neu.hoso.model.ConstantItems;
 import edu.neu.hoso.model.Department;
 import edu.neu.hoso.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -163,6 +164,21 @@ public class DepartmentController {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
             resultDTO.setMsg("展示科室失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getAllDepartmentCategory")
+    public ResultDTO<ConstantItems> getAllDepartmentCategory(){
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(departmentService.getAllDepartmentCategory());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("查询科室分类成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("查询科室分类失败！");
         }
         return resultDTO;
     }

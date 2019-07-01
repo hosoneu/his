@@ -1,5 +1,8 @@
 package edu.neu.hoso.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Disease {
     private Integer diseaseId;
 
@@ -14,6 +17,10 @@ public class Disease {
     private String diseaseCustomizeName1;
 
     private String diseaseCustomizeName2;
+
+    @Getter
+    @Setter
+    private DiseaseType diseaseType;
 
     public Disease(Integer diseaseId, String diseaseCode, String diseaseName, String diseaseIcd, Integer diseaseTypeId, String diseaseCustomizeName1, String diseaseCustomizeName2) {
         this.diseaseId = diseaseId;

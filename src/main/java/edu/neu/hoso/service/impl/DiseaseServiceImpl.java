@@ -213,4 +213,18 @@ public class DiseaseServiceImpl implements DiseaseService {
         DiseaseExample diseaseExample = new DiseaseExample();
         return diseaseMapper.selectByExample(diseaseExample);
     }
+
+    @Override
+    public List<Disease> getAllDiseaseWithType() {
+        /**
+         *@title: getAllDiseaseWithType
+         *@description: 查询所有疾病 附带diseaseType
+         *@author: Mike
+         *@date: 2019-07-01 18:32
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.Disease>
+         *@throws:
+         */
+        return diseaseMapper.getAllDiseaseWithType();
+    }
 }

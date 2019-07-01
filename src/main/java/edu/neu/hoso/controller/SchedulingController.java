@@ -5,21 +5,19 @@ import edu.neu.hoso.model.SchedulingInfo;
 import edu.neu.hoso.model.SchedulingRule;
 import edu.neu.hoso.service.SchedulingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 @RequestMapping("scheduling")
 public class SchedulingController {
     @Autowired
     SchedulingService schedulingService;
 
     @RequestMapping("/insertInfo")
-    public ResultDTO<SchedulingInfo> insertInfo(@RequestBody SchedulingRule schedulingRule){
+    public ResultDTO<SchedulingInfo> insertInfo(@RequestBody SchedulingInfo schedulingInfo){
         /**
          *@title: insert
          *@description: 插入排班信息
@@ -31,8 +29,10 @@ public class SchedulingController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            schedulingService.insertSelectiveInfo(schedulingRule);
-            resultDTO.setData(schedulingRule);
+            System.out.println(schedulingInfo.getDoctorId());
+            System.out.println(schedulingInfo.getSchedulingNoonbreak());
+            schedulingService.insertSelectiveInfo(schedulingInfo);
+            resultDTO.setData(schedulingInfo);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("插入排班信息成功！");
         } catch (Exception e) {
@@ -140,7 +140,7 @@ public class SchedulingController {
     }
 
     @RequestMapping("/insertRule")
-    public ResultDTO<SchedulingRule> insertRule(@RequestBody SchedulingRule schedulingRule){
+    public ResultDTO<SchedulingRule> insertRule(@RequestBody SchedulingInfo schedulingInfo){
         /**
          *@title: insertRule
          *@description: 插入排班规则
@@ -152,8 +152,8 @@ public class SchedulingController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            schedulingService.insertSelectiveRule(schedulingRule);
-            resultDTO.setData(schedulingRule);
+            schedulingService.insertSelectiveRule(schedulingInfo);
+            resultDTO.setData(schedulingInfo);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("插入排班规则成功！");
         } catch (Exception e) {

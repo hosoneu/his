@@ -1,5 +1,6 @@
 package edu.neu.hoso.service;
 
+import edu.neu.hoso.model.Role;
 import edu.neu.hoso.model.User;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface UserService {
     List<User> getAllUser();
     List<User> getUserByDepartmentID(int departmentID);
     List<User> getUserByRole(Integer roleId);
+    List<User> getAllUserWithRole();
+    List<Role> getAllRole();
 }

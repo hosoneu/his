@@ -123,7 +123,7 @@ public class RegistrationController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            List<Integer> expenseItemsIdList = JsonUtils.mapToObj((Map<String, Object>)map.get("expenseItemsIdList"), List.class);
+            List<Integer> expenseItemsIdList = (List<Integer>) map.get("expenseItemsIdList");
             Integer userId = (Integer)map.get("userId");
             Integer payModeId = (Integer)map.get("payModeId");
             System.out.println(expenseItemsIdList);
@@ -152,7 +152,7 @@ public class RegistrationController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            List<ExpenseItems> expenseItemsList = JsonUtils.mapToObj((Map<String, Object>)map.get("expenseItemsList"), List.class);
+            List<ExpenseItems> expenseItemsList = (List<ExpenseItems>)map.get("expenseItemsList");
             Integer userId = (Integer)map.get("userId");
             System.out.println(expenseItemsList);
             System.out.println(userId);
