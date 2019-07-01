@@ -5,6 +5,7 @@ import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -550,6 +551,119 @@ public class DoctorCommonController {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
             resultDTO.setMsg("西医疾病列表获取失败！");
+        }
+        return resultDTO;
+    }
+
+    // 新增常用药品
+    @RequestMapping("/insertCommonlyUsedDrugs")
+    public ResultDTO<Integer> insertCommonlyUsedDrugs(@RequestBody CommonlyUsedDrugs commonlyUsedDrugs){
+        ResultDTO<Integer> resultDTO = new ResultDTO<>();
+        try {
+            resultDTO.setData(commonlyUsedService.insertCommonlyUsedDrugs(commonlyUsedDrugs));
+            if(resultDTO.getData()==0){//如果已经插入了
+                resultDTO.setStatus("OK");
+                resultDTO.setMsg("该项已经是您的常用项了，请勿重新插入！");
+            }else{
+                resultDTO.setStatus("OK");
+                resultDTO.setMsg("常用药品插入成功！");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("常用药品插入失败！");
+        }
+        return resultDTO;
+    }
+    // 新增常用诊断
+    @RequestMapping("/insertCommonlyUsedDiagnosis")
+    public ResultDTO<Integer> insertCommonlyUsedDiagnosis(@RequestBody CommonlyUsedDiagnosis commonlyUsedDiagnosis){
+        ResultDTO<Integer> resultDTO = new ResultDTO<>();
+        try {
+            resultDTO.setData(commonlyUsedService.insertCommonlyUsedDiagnosis(commonlyUsedDiagnosis));
+            if(resultDTO.getData()==0){//如果已经插入了
+                resultDTO.setStatus("OK");
+                resultDTO.setMsg("该项已经是您的常用项了，请勿重新插入！");
+            }else{
+                resultDTO.setStatus("OK");
+                resultDTO.setMsg("常用诊断插入成功！");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("常用诊断插入失败！");
+        }
+        return resultDTO;
+    }
+    // 新增常用检查\检验\处置 需要在后台判断类型
+    @RequestMapping("/insertCommonlyUsedFmedical")
+    public ResultDTO<Integer> insertCommonlyUsedFmedical(@RequestBody CommonlyUsedFmedical commonlyUsedFmedical){
+        ResultDTO<Integer> resultDTO = new ResultDTO<>();
+        try {
+            resultDTO.setData(commonlyUsedService.insertCommonlyUsedFmedical(commonlyUsedFmedical));
+            if(resultDTO.getData()==0){//如果已经插入了
+                resultDTO.setStatus("OK");
+                resultDTO.setMsg("该项已经是您的常用项了，请勿重新插入！");
+            }else{
+                resultDTO.setStatus("OK");
+                resultDTO.setMsg("常用项目插入成功！");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("常用项目插入失败！");
+        }
+        return resultDTO;
+    }
+
+    // 删除常用药品
+    @RequestMapping("/deleteCommonlyUsedDrugs")
+    public ResultDTO deleteCommonlyUsedDrugs(Integer commonlyUsedDrugsId){
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            commonlyUsedService.deleteCommonlyUsedDrugs(commonlyUsedDrugsId);
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("常用药品删除成功！");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("常用药品删除失败！");
+        }
+        return resultDTO;
+    }
+    // 删除常用诊断
+    @RequestMapping("/deleteCommonlyUsedDiagnosis")
+    public ResultDTO deleteCommonlyUsedDiagnosis(Integer commonlyUsedDiagnosisId){
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            commonlyUsedService.deleteCommonlyUsedDiagnosis(commonlyUsedDiagnosisId);
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("常用诊断删除成功！");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("常用诊断删除失败！");
+        }
+        return resultDTO;
+    }
+    // 删除常用检查\检验\处置 需要在后台判断类型
+    @RequestMapping("/deleteCommonlyUsedFmedical")
+    public ResultDTO deleteCommonlyUsedFmedical(Integer commonlyUsedFmedicalId){
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            commonlyUsedService.deleteCommonlyUsedFmedical(commonlyUsedFmedicalId);
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("常用项目删除成功！");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("常用项目删除失败！");
         }
         return resultDTO;
     }

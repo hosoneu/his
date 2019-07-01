@@ -123,6 +123,22 @@ public class DoctorMedicalRecordHomePageController {
         return resultDTO;
     }
 
+    //   删除病历首页模板
+    @RequestMapping("/deleteMedicalRecordHomePageTemplate")
+        public ResultDTO deleteMedicalRecordHomePageTemplate(Integer medicalRecordHomePageTemplateId){
+        ResultDTO resultDTO = new ResultDTO<>();
+        try {
+            medicalRecordHomePageService.deleteMedicalRecordHomePageTemplate(medicalRecordHomePageTemplateId);
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("病历首页模板删除成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("病历首页模板删除失败！");
+        }
+        return resultDTO;
+    }
+
     //根据ID查询病历首页的内容
     @RequestMapping("/selectMedicalRecordHomePageByMedicalRecordId")
     public ResultDTO<MedicalRecordHomePage> selectMedicalRecordHomePageByMedicalRecordId(Integer medicalRecordId){

@@ -35,6 +35,24 @@
 <!--    <collection property="examinationDrugsItemsList" ofType="edu.neu.hoso.model.ExaminationDrugsItems" resultMap="edu.neu.hoso.model.ExaminationDrugsItemsMapper.SecondResultMap"/>-->
   </resultMap>
 
+  <!--  添加非药品对象的ResultMap by @29-y 2019.06.30 -->
+  <!--  添加执行科室的对象 -->
+  <resultMap id="ThirdResultMap" type="edu.neu.hoso.model.ExaminationFmedicalItems">
+    <id property="examinationFmedicalItemsId" column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="examinationId" column="Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="fmedicalItemsId" column="Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="registrationStatus" column="Registration_Status" jdbcType="CHAR" javaType="java.lang.String" />
+    <result property="purposeRequirements" column="Purpose_Requirements" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <result property="quantity" column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="actualQuantity" column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="examinationResultId" column="Examination_Result_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="expenseItemsId" column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    <result property="validStatus" column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" />
+    <association property="fmedicalItems" javaType="edu.neu.hoso.model.FmedicalItems" resultMap="edu.neu.hoso.model.FmedicalItemsMapper.BaseResultMap"/>
+    <association property="department" javaType="edu.neu.hoso.model.Department" resultMap="edu.neu.hoso.model.DepartmentMapper.BaseResultMap"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

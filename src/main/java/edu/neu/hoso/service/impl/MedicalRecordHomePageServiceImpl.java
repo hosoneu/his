@@ -186,6 +186,11 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
         return medicalRecordHomePageTemplateId;
     }
 
+    @Override
+    public void deleteMedicalRecordHomePageTemplate(Integer medicalRecordHomePageTemplateId) {
+        medicalRecordHomePageTemplateMapper.deleteByPrimaryKey(medicalRecordHomePageTemplateId);
+    }
+
     /**
      * @title: selectMedicalRecordHomePageByMedicalRecordId
      * @description: 根据病历ID得到病历首页的信息

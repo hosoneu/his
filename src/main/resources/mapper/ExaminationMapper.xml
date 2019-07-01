@@ -20,7 +20,7 @@
     <result property="examinationMark" column="Examination_Mark" jdbcType="CHAR" javaType="java.lang.String" />
     <result property="doctorAdvice" column="Doctor_Advice" jdbcType="VARCHAR" javaType="java.lang.String" />
     <result property="submitTime" column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    <collection property="examinationFmedicalItemsList" ofType="edu.neu.hoso.model.ExaminationFmedicalItems" resultMap="edu.neu.hoso.model.ExaminationFmedicalItemsMapper.SecondResultMap"/>
+    <collection property="examinationFmedicalItemsList" ofType="edu.neu.hoso.model.ExaminationFmedicalItems" resultMap="edu.neu.hoso.model.ExaminationFmedicalItemsMapper.ThirdResultMap"/>
   </resultMap>
 
   <sql id="Example_Where_Clause" >

@@ -63,7 +63,7 @@ public class DoctorPatentPrescriptionController {
 
     //插入成药组套
     @RequestMapping("/insertGroupPrescription")
-    public ResultDTO<Integer> insertGroupPatentPrescription(GroupPrescription groupPrescription){
+    public ResultDTO<Integer> insertGroupPatentPrescription(@RequestBody GroupPrescription groupPrescription){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorPrescriptionService.insertGroupPatentPrescription(groupPrescription));

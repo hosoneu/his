@@ -132,6 +132,7 @@ public class DoctorTreatmentServiceImpl implements DoctorTreatmentService {
      */
     @Override
     public Integer insertGroupTreatment(GroupTreatment groupTreatment) {
+        groupTreatment.setCreateTime(new Date());
         groupTreatmentMapper.insert(groupTreatment);
         Integer groupTreatmentId = groupTreatment.getGroupTreatmentId();//获取处置模板的ID
         //插入到处置条目列表中

@@ -85,6 +85,22 @@ public class DoctorExaminationController {
         }
         return resultDTO;
     }
+
+    // 删除检查检验组套
+    @RequestMapping("/deleteGroupExamination")
+    public ResultDTO deleteGroupExamination(Integer groupExaminationId){
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            doctorExaminationService.deleteGroupExamination(groupExaminationId);
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("检查检验组套删除成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("检查检验组套删除失败！");
+        }
+        return resultDTO;
+    }
     // 根据ID查找检查检验组套（ type: 1 检查 2 检验 ）
     @RequestMapping("/selectGroupExaminationById")
     public ResultDTO<GroupExamination> selectGroupExaminationById(Integer groupExaminationId, String type){
@@ -103,7 +119,7 @@ public class DoctorExaminationController {
 
     // 存为检查检验模板 根据 检查检验组套(List<检查检验组套非药品条目表(List<检查检验组套药品条目表>)>）
     @RequestMapping("/insertGroupExamination")
-    public ResultDTO<Integer> insertGroupExamination(GroupExamination groupExamination){
+    public ResultDTO<Integer> insertGroupExamination(@RequestBody GroupExamination groupExamination){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorExaminationService.insertGroupExamination(groupExamination));

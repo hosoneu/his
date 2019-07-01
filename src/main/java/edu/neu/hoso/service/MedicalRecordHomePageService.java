@@ -30,6 +30,9 @@ public interface MedicalRecordHomePageService {
     MedicalRecordHomePageTemplate selectMedicalRecordHomePageTemplateById(Integer medicalRecordHomePageTemplateId);
     // 存为病历首页模板
     Integer insertMedicalRecordHomePageTemplate(MedicalRecordHomePageTemplate medicalRecordHomePageTemplate);
+    //删除病历首页模板
+    void deleteMedicalRecordHomePageTemplate(Integer medicalRecordHomePageTemplateId);
+
     //  查询病历首页内容
     MedicalRecordHomePage selectMedicalRecordHomePageByMedicalRecordId(Integer medicalRecordId);
     //  查询初诊结果

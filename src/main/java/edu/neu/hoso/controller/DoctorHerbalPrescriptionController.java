@@ -55,7 +55,7 @@ public class DoctorHerbalPrescriptionController {
 
     //插入草药组套
     @RequestMapping("/insertGroupPrescription")
-    public ResultDTO<Integer> insertGroupHerbalPrescription(GroupPrescription groupPrescription){
+    public ResultDTO<Integer> insertGroupHerbalPrescription(@RequestBody GroupPrescription groupPrescription){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorPrescriptionService.insertGroupHerbalPrescription(groupPrescription));

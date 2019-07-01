@@ -31,6 +31,9 @@ public class ExaminationFmedicalItems {
     /* 对应的检查检验药品项目列表对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
     private List<ExaminationDrugsItems> examinationDrugsItemsList;
 
+    /* 对应的非药品对象登记科室 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.30*/
+    private Department department;
+
     public ExaminationFmedicalItems(Integer examinationFmedicalItemsId, Integer examinationId, Integer fmedicalItemsId, Integer doctorId, String registrationStatus, String purposeRequirements, Integer quantity, Integer actualQuantity, Integer examinationResultId, Integer expenseItemsId, String validStatus) {
         this.examinationFmedicalItemsId = examinationFmedicalItemsId;
         this.examinationId = examinationId;
@@ -59,6 +62,31 @@ public class ExaminationFmedicalItems {
         this.validStatus = validStatus;
         this.fmedicalItems = fmedicalItems;
         this.examinationDrugsItemsList = examinationDrugsItemsList;
+    }
+
+    public ExaminationFmedicalItems(Integer examinationFmedicalItemsId, Integer examinationId, Integer fmedicalItemsId, Integer doctorId, String registrationStatus, String purposeRequirements, Integer quantity, Integer actualQuantity, Integer examinationResultId, Integer expenseItemsId, String validStatus, FmedicalItems fmedicalItems, List<ExaminationDrugsItems> examinationDrugsItemsList, Department department) {
+        this.examinationFmedicalItemsId = examinationFmedicalItemsId;
+        this.examinationId = examinationId;
+        this.fmedicalItemsId = fmedicalItemsId;
+        this.doctorId = doctorId;
+        this.registrationStatus = registrationStatus;
+        this.purposeRequirements = purposeRequirements;
+        this.quantity = quantity;
+        this.actualQuantity = actualQuantity;
+        this.examinationResultId = examinationResultId;
+        this.expenseItemsId = expenseItemsId;
+        this.validStatus = validStatus;
+        this.fmedicalItems = fmedicalItems;
+        this.examinationDrugsItemsList = examinationDrugsItemsList;
+        this.department = department;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public List<ExaminationDrugsItems> getExaminationDrugsItemsList() {
