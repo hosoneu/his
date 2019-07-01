@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="edu.neu.hoso.model.Invoice" >
     <constructor >
       <idArg column="Invoice_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Invoice_NO" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Invoice_NO" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="Total_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" />
       <arg column="Is_Day_Cal" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="Pay_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -120,7 +120,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="invoiceNo != null" >
-        #{invoiceNo,jdbcType=INTEGER},
+        #{invoiceNo,jdbcType=CHAR},
       </if>
       <if test="totalCost != null" >
         #{totalCost,jdbcType=DOUBLE},
@@ -152,7 +152,7 @@
         Invoice_ID = #{record.invoiceId,jdbcType=INTEGER},
       </if>
       <if test="record.invoiceNo != null" >
-        Invoice_NO = #{record.invoiceNo,jdbcType=INTEGER},
+        Invoice_NO = #{record.invoiceNo,jdbcType=CHAR},
       </if>
       <if test="record.totalCost != null" >
         Total_Cost = #{record.totalCost,jdbcType=DOUBLE},
@@ -177,7 +177,7 @@
   <update id="updateByExample" parameterType="map" >
     update invoice
     set Invoice_ID = #{record.invoiceId,jdbcType=INTEGER},
-      Invoice_NO = #{record.invoiceNo,jdbcType=INTEGER},
+      Invoice_NO = #{record.invoiceNo,jdbcType=CHAR},
       Total_Cost = #{record.totalCost,jdbcType=DOUBLE},
       Is_Day_Cal = #{record.isDayCal,jdbcType=CHAR},
       Pay_Time = #{record.payTime,jdbcType=TIMESTAMP},
@@ -191,7 +191,7 @@
     update invoice
     <set >
       <if test="invoiceNo != null" >
-        Invoice_NO = #{invoiceNo,jdbcType=INTEGER},
+        Invoice_NO = #{invoiceNo,jdbcType=CHAR},
       </if>
       <if test="totalCost != null" >
         Total_Cost = #{totalCost,jdbcType=DOUBLE},

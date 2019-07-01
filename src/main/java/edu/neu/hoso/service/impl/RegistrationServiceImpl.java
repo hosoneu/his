@@ -171,7 +171,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public Registration register(Registration registration, Patient patient, MedicalRecord medicalRecord, ExpenseItems expenseItems) {
+    public Registration register(Registration registration, Patient patient, MedicalRecord medicalRecord, ExpenseItems expenseItems, Integer userId, Integer payModeId) {
         /**
          *@title: register
          *@description: 挂号操作
@@ -183,10 +183,26 @@ public class RegistrationServiceImpl implements RegistrationService {
          */
         //计算挂号费 根据挂号级别以及是否购买病历本（状态中不买为1 减1后为0 买为2 减1后为1元）
         double totalCost = registrationLevelMapper.selectByPrimaryKey(registration.getRegistrationLevelId()).getRegistrationCost() + Double.parseDouble(registration.getBuyMedicalRecord()) - 1;
+        Date date = new Date();
         medicalRecordMapper.insertSelective(medicalRecord);
-        patientMapper.insertSelective(patient);
+        if(getPatientByIdentity(patient.getPatientIdentity()).size() == 0){
+            patientMapper.insertSelective(patient);
+        }
+        Invoice invoice = new Invoice();
+        try {
+            invoice.setInvoiceNo(serialNumberService.generateSerialNumber(2));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        invoice.setIsDayCal("1");
+        invoice.setPayTime(date);
+        invoice.setPayModeId(payModeId);
+        invoice.setUserId(userId);
+        invoice.setTotalCost(totalCost);
+        invoiceMapper.insertSelective(invoice);
         expenseItems.setMedicalRecordId(medicalRecord.getMedicalRecordId());
         expenseItems.setTotalCost(totalCost);
+        expenseItems.setInvoiceId(invoice.getInvoiceId());
         //挂号费类型为1
         expenseItems.setExpenseTypeId(1);
         expenseItemsMapper.insertSelective(expenseItems);
@@ -195,7 +211,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         registration.setPatientId(patient.getPatientId());
         registration.setExpenseTypeId(1);
         registration.setRegistrationTotalCost(totalCost);
-        Date date = new Date();
         registration.setRegistrationDate(date);
         registrationMapper.insertSelective(registration);
         //更新被挂号医生的排班剩额
@@ -204,8 +219,17 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
+    public List<Patient> getPatientByIdentity(String patientIdentity) {
+        PatientExample patientExample = new PatientExample();
+        PatientExample.Criteria criteria = patientExample.createCriteria();
+        criteria.andPatientIdentityEqualTo(patientIdentity);
+        return patientMapper.selectByExample(patientExample);
+    }
+
+    @Override
     public void updateSchedulingRestcount(Registration registration) {
         //排班表 限额-1
+        //按时间上来说一定得是在班医生 不然找不到医生，报错
         SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
         SchedulingInfoExample.Criteria criteria = schedulingInfoExample.createCriteria();
         criteria.andDoctorIdEqualTo(registration.getDoctorId());
@@ -303,9 +327,9 @@ public class RegistrationServiceImpl implements RegistrationService {
             ExpenseItems expenseItems = expenseItemsMapper.selectByPrimaryKey(expenseItemsId);
             //将执行收费操作的收费明细的收费状态置为已收费
             expenseItems.setPayStatus("2");
-            expenseItemsMapper.updateByPrimaryKeySelective(expenseItems);
             //为收费明细装填发票id属性
             expenseItems.setInvoiceId(invoice.getInvoiceId());
+            expenseItemsMapper.updateByPrimaryKeySelective(expenseItems);
             //计算总费用
             totalCost += expenseItems.getTotalCost();
         }
@@ -315,7 +339,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public void refund(List<Integer> expenseItemsIds, Integer userId) {
+    public void refund(List<ExpenseItems> expenseItemsList, Integer userId) {
         /**
          *@title: refund
          *@description: 退费操作
@@ -329,8 +353,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         //声明发票id数组
         List<Integer> invoiceIdList = new ArrayList<>();
         //遍历前端传来的收费明细id数组
-        for (Integer expenseItemsId : expenseItemsIds) {
-            ExpenseItems expenseItems = expenseItemsMapper.selectByPrimaryKey(expenseItemsId);
+        for (ExpenseItems expenseItems : expenseItemsList) {
+            //判断是否存在部分退费的费用项目
+            //lombok没有插件便无法执行get方法
+//            if (expenseItems.getDrugs() != null){
+//
+//            }
             //将执行退费操作的收费明细的收费状态置为退费
             expenseItems.setPayStatus("3");
             expenseItemsMapper.updateByPrimaryKeySelective(expenseItems);
@@ -423,9 +451,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public List<Patient> getPatient() {
+    public List<Patient> getAllPatient() {
         /**
-         *@title: getPatient
+         *@title: getAllPatient
          *@description: 查询所有患者
          *@author: Mike
          *@date: 2019-06-28 16:26
@@ -435,6 +463,20 @@ public class RegistrationServiceImpl implements RegistrationService {
          */
         PatientExample patientExample = new PatientExample();
         return patientMapper.selectByExample(patientExample);
+    }
+
+    @Override
+    public List<ExpenseItems> getAllExpenseItems() {
+        /**
+         *@title: getAllExpenseItems
+         *@description: 查询所有费用项目 包含全部信息
+         *@author: Mike
+         *@date: 2019-06-30 2:43
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.ExpenseItems>
+         *@throws:
+         */
+        return expenseItemsMapper.getAllExpenseItems();
     }
 
 }

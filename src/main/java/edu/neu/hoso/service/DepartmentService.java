@@ -1,5 +1,6 @@
 package edu.neu.hoso.service;
 
+import edu.neu.hoso.model.ConstantItems;
 import edu.neu.hoso.model.Department;
 
 import java.util.List;
@@ -26,4 +27,5 @@ public interface DepartmentService {
     List<Department> getDepartmentByType(String type);
     List<Department> getAllDepartment();
     List<Department> getAllDepartmentWithCategory();
+    List<ConstantItems> getAllDepartmentCategory();
 }

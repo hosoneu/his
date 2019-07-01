@@ -382,7 +382,8 @@
         Constant_Items_Name as Doctor_Title_Name,
         Registration_Date,
         Buy_Medical_Record,
-        Total_Cost
+        Total_Cost,
+        registration.Expense_Items_ID
     FROM
         registration
         JOIN medical_record ON registration.Medical_Record_ID = medical_record.Medical_Record_ID
@@ -415,7 +416,8 @@
 			Constant_Items_Name as Doctor_Title_Name,
 			Registration_Date,
 			Buy_Medical_Record,
-			Total_Cost
+			Total_Cost,
+			registration.Expense_Items_ID
 	FROM
 			registration
 			JOIN medical_record ON registration.Medical_Record_ID = medical_record.Medical_Record_ID
@@ -429,6 +431,8 @@
 	WHERE
 			Registration_Status = 1
 			AND medical_record.Is_Treament_Over = 1
+    GROUP BY
+            Medical_Record_ID
   </select>
 
   <select id="getAllPatientByDepartmentId" parameterType="java.lang.Integer" resultMap="DepartmentPatient">

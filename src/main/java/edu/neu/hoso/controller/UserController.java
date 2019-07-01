@@ -152,4 +152,52 @@ public class UserController {
         }
         return resultDTO;
     }
+
+    @RequestMapping("/getAllUserWithRole")
+    public ResultDTO<User> getAllUserWithRole(){
+        /**
+         *@title: getAllUserWithRole
+         *@description: 查询所有用户 附带role,department
+         *@author: Mike
+         *@date: 2019-06-30 23:36
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.User>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(userService.getAllUserWithRole());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示用户成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示用户失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getAllRole")
+    public ResultDTO<User> getAllRole(){
+        /**
+         *@title: getAllRole
+         *@description: 查询所有角色
+         *@author: Mike
+         *@date: 2019-06-30 23:42
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.User>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(userService.getAllRole());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示用户成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示用户失败！");
+        }
+        return resultDTO;
+    }
 }
