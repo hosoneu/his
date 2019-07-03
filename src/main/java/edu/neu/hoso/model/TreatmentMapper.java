@@ -67,8 +67,8 @@ public interface TreatmentMapper {
     Treatment selectTreatmentById(Integer treatmentId);
 
     @Select({
-            "select t.*,ti.*,f.* " ,
-            "from treatment t join treatment_items ti on t.Treatment_ID = ti.Treatment_ID join fmedical_items f on f.Fmedical_Items_ID=ti.Fmedical_Items_ID " ,
+            "select t.*,ti.*,f.*,d.* " ,
+            "from treatment t join treatment_items ti on t.Treatment_ID = ti.Treatment_ID join fmedical_items f on f.Fmedical_Items_ID=ti.Fmedical_Items_ID join department d on d.Department_ID = f.Department_ID " ,
             "where t.Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER} "
     })
     @ResultMap("SecondResultMap")

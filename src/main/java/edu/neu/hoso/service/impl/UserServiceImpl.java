@@ -213,4 +213,20 @@ public class UserServiceImpl implements UserService {
         UserExample userExample = new UserExample();
         return userMapper.selectByExample(userExample);
     }
+    @Override
+    public List<User> getUserByDepartmentID(int departmentID) {
+        /**
+         *@title: getAllUser
+         *@description: 查询所有用户
+         *@author: Mike
+         *@date: 2019-06-11 12:00
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.User>
+         *@throws:
+         */
+        UserExample userExample = new UserExample();
+        UserExample.Criteria userExampleCriteria=userExample.createCriteria();
+        userExampleCriteria.andDepartmentIdEqualTo(departmentID);
+        return userMapper.selectByExample(userExample);
+    }
 }

@@ -400,7 +400,7 @@
   </select>
 
   <!--展示挂号列表 @Mike 2019.6.18-->
-  <select id="getRegistration" parameterType="java.lang.Integer" resultMap="RegistrationResultMap">
+  <select id="getRegistration" resultMap="RegistrationResultMap">
     SELECT
         Patient_Name,
         Patient_Gender,
@@ -429,4 +429,29 @@
         Registration_Status = 1
         AND medical_record.Is_Treament_Over = 1
   </select>
+
+  <select id="getAllPatientByDepartmentId" parameterType="java.lang.Integer" resultMap="DepartmentPatient">
+    select DISTINCT patient.*,registration.*
+from examination_fmedical_items join examination on examination_fmedical_items.Examination_ID=examination.Examination_ID
+join registration on examination.Medical_Record_ID=registration.Medical_Record_ID
+join patient on patient.Patient_ID=registration.Patient_ID
+join fmedical_items on fmedical_items.Fmedical_Items_ID=examination_fmedical_items.Fmedical_Items_ID
+where Examination_Fmedical_Items.Expense_Items_ID is not null and examination_fmedical_items.Examination_Result_ID is null and examination_fmedical_items.valid_status=1 and fmedical_items.Department_ID=#{departmentId}
+  </select>
+  <resultMap id="DepartmentPatient" type="edu.neu.hoso.model.Registration">
+    <id column="Registration_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="registrationId"/>
+    <result column="Medical_Record_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="medicalRecordId"/>
+    <result column="Registration_Level_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="registrationLevelId"/>
+    <result column="Patient_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="patientId"/>
+    <result column="Department_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="departmentId"/>
+    <result column="Calculation_Type_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="calculationTypeId"/>
+    <result column="Doctor_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="doctorId"/>
+    <result column="Registration_Date" javaType="java.util.Date" jdbcType="TIMESTAMP" property="registrationDate"/>
+    <result column="Buy_Medical_Record" javaType="java.lang.String" jdbcType="CHAR" property="buyMedicalRecord"/>
+    <result column="Registration_Total_Cost" javaType="java.lang.Double" jdbcType="DOUBLE" property="registrationTotalCost"/>
+    <result column="Expense_Type_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="expenseTypeId"/>
+    <result column="Expense_Items_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="expenseItemsId"/>
+    <result column="Registration_Status" javaType="java.lang.String" jdbcType="CHAR" property="registrationStatus"/>
+    <association property="patient" javaType="edu.neu.hoso.model.Patient" resultMap="edu.neu.hoso.model.PatientMapper.BaseResultMap"/>
+  </resultMap>
 </mapper>

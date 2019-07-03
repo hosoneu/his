@@ -58,4 +58,6 @@ public interface DepartmentMapper {
         "where Department_ID = #{departmentId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Department record);
+
+    List<Department> getAllDepartmentWithCategory();
 }

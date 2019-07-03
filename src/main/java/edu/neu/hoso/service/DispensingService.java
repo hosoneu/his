@@ -1,5 +1,8 @@
 package edu.neu.hoso.service;
 
+import edu.neu.hoso.model.ExaminationDrugsItems;
+import edu.neu.hoso.model.PrescriptionItems;
+
 /**
  * @title: DispensingService
  * @package edu.neu.hoso.service
@@ -15,4 +18,10 @@ public interface DispensingService {
 
     //退药
     int returnDurgs(Object object);
+
+//    //退检查检验药
+//    int returExaminationDrugs(ExaminationDrugsItems examinationDrugsItems);
+//
+//    //退处方药
+//    int returPrescriptionDrugs(PrescriptionItems prescriptionItems);
 }

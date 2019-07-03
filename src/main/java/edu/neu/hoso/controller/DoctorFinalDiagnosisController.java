@@ -31,7 +31,7 @@ public class DoctorFinalDiagnosisController {
     @Autowired
     MedicalRecordService medicalRecordService;
 
-    //列出初诊信息
+    //列出终诊诊信息
     @RequestMapping("/listFinalDiagnosisByMedicalRecordId")
     public ResultDTO<List<Diagnosis>> listFinalDiagnosisByMedicalRecordId(Integer medicalRecordId){
         ResultDTO<List<Diagnosis>> resultDTO = new ResultDTO<>();

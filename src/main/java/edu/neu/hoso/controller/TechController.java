@@ -6,7 +6,9 @@ import edu.neu.hoso.service.TechService;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,8 @@ import java.util.List;
  * @date: 2019/6/11 15:50
  * @version: V1.0
  */
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping("tech")
 public class TechController {
 
@@ -36,7 +39,7 @@ public class TechController {
      *@throws:
      */
     @RequestMapping("/getInfoByID")
-    public ResultDTO getInfoByMedicalID(int Medical_record_ID){
+    public ResultDTO<Patient> getInfoByMedicalID(int Medical_record_ID){
         ResultDTO resultDTO = new ResultDTO();
         try {
             Patient patient = techService.getInfoByMedical_record_ID(Medical_record_ID);
@@ -68,7 +71,7 @@ public class TechController {
      *@throws:
      */
     @RequestMapping("/getInfoByName")
-    public ResultDTO getInfoByPatientName(String patient_name){
+    public ResultDTO<List<Patient>> getInfoByPatientName(String patient_name){
         ResultDTO resultDTO = new ResultDTO();
         try {
             List<Patient> patients = techService.getInfoByPatient_Name(patient_name);
@@ -101,7 +104,7 @@ public class TechController {
      *@throws:
      */
     @RequestMapping("/getFmedical")
-    public ResultDTO getFmedical(int Medical_record_ID, int Department_ID){
+    public ResultDTO<List<FmedicalItems>> getFmedical(int Medical_record_ID, int Department_ID){
         ResultDTO resultDTO = new ResultDTO();
         try {
             List<FmedicalItems> fmedicalItems = techService.getAllFmedicalByMedicalID(Medical_record_ID, Department_ID);
@@ -127,21 +130,21 @@ public class TechController {
 
     /**
      *@title: updateRegistrationStatus
-     *@description: 更新患者在该科室的登记状态，该科室的Registration_Status 1->2
+     *@description: 根据检查检验非药品明细id，该科室的Registration_Status 1->2
      *@author: alan
      *@date: 2019/6/12 11:55
-     *@param: [Medical_record_ID, Department_ID]
+     *@param: [examinationFmedicalItemdId]
      *@return: void
      *@throws:
      */
     @RequestMapping("/updateRegistrationStatus")
-    public ResultDTO updateRegistrationStatus(int Medical_record_ID, int Department_ID) {
+    public ResultDTO updateRegistrationStatus(int examinationFmedicalItemdId) {
 
         ResultDTO resultDTO = new ResultDTO();
         try {
+            techService.updateRegistrationStatus(examinationFmedicalItemdId);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("更新成功！");
-            techService.updateRegistrationStatus(Medical_record_ID, Department_ID);
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
@@ -160,9 +163,9 @@ public class TechController {
      *@throws:
      */
     @RequestMapping("/getAllFmedical")
-    public ResultDTO getAllFmedical(){//(int Medical_record_ID, int Department_ID){
-        int Medical_record_ID=1111;
-        int Department_ID =133;
+    public ResultDTO<List<ExaminationFmedicalItems>> getAllFmedical(int Medical_record_ID, int Department_ID){
+//        int Medical_record_ID=1111;
+//        int Department_ID =133;
         System.out.println("okok");
         ResultDTO resultDTO = new ResultDTO();
         try {
@@ -174,7 +177,7 @@ public class TechController {
             else {
                 for (ExaminationFmedicalItems examinationFmedicalItems1:examinationFmedicalItems){
                     System.out.println(examinationFmedicalItems1.getFmedicalItems().toString());
-                    for (ExaminationDrugsItems examinationDrugsItems:examinationFmedicalItems1.getExaminationDrugsItemsList()){
+                    for (ExaminationDrugsItems examinationDrugsItems: examinationFmedicalItems1.getExaminationDrugsItemsList()){
                         System.out.println(examinationDrugsItems.toString());
                         System.out.println(examinationDrugsItems.getDrugs().toString());
                     }
@@ -321,6 +324,41 @@ public class TechController {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
             resultDTO.setMsg("删除失败！");
+        }
+        return resultDTO;
+    }
+
+    /**
+     *@title: getAllPatientByDepartmentId
+     *@description: 根据科室号获取全部病人
+     *@author: alan
+     *@date: 2019/6/24 22:04
+     *@param: [departmentId]
+     *@return: edu.neu.hoso.dto.ResultDTO
+     *@throws:
+     */
+    @RequestMapping("/getAllPatientByDepartmentId")
+    public ResultDTO<List<Registration>> getAllPatientByDepartmentId(Integer departmentId){
+        ResultDTO<List<Registration>> resultDTO = new ResultDTO<>();
+        try{
+            List<Registration> registrations = techService.getAllPatientByDepartmentId(departmentId);
+            if (registrations==null){
+                resultDTO.setStatus("ERROR");
+                resultDTO.setMsg("查询失败！");
+            }
+            else {
+                resultDTO.setStatus("OK");
+                resultDTO.setMsg("查询成功！");
+                for (Registration registration:registrations){
+                    System.out.println(registration.toString());
+//                    System.out.println(registration.getPatient().toString());
+                }
+                resultDTO.setData(registrations);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("查询失败！");
         }
         return resultDTO;
     }

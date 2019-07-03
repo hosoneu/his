@@ -74,6 +74,7 @@ public class DispensingServiceImpl implements DispensingService {
      */
     public int returnDurgs(Object object){
         if (object instanceof ExaminationDrugsItems){
+            System.out.println("ExaminationDrugsItems");
             if (((ExaminationDrugsItems) object).getActualQuantity() >= ((ExaminationDrugsItems) object).getQuantity()){
                 return -1;
             }
@@ -81,6 +82,7 @@ public class DispensingServiceImpl implements DispensingService {
             return i;
         }
         else if (object instanceof PrescriptionItems){
+            System.out.println("ExaminationDrugsItems");
             if (((PrescriptionItems) object).getActualQuantity() < ((PrescriptionItems) object).getQuantity()){
                 return -1;
             }
@@ -88,4 +90,14 @@ public class DispensingServiceImpl implements DispensingService {
         }
         return -1;
     }
+
+//    //退检查检验药
+//    public int returExaminationDrugs(ExaminationDrugsItems examinationDrugsItems){
+//
+//    }
+//
+//    //退处方药
+//    public int returPrescriptionDrugs(PrescriptionItems prescriptionItems){
+//
+//    }
 }

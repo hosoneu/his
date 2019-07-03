@@ -556,19 +556,22 @@ public class DoctorCommonController {
     }
 
     // 新增常用药品
-    @RequestMapping("/insertCommonlyUsedDrugs")
+        @RequestMapping("/insertCommonlyUsedDrugs")
     public ResultDTO<Integer> insertCommonlyUsedDrugs(@RequestBody CommonlyUsedDrugs commonlyUsedDrugs){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(commonlyUsedService.insertCommonlyUsedDrugs(commonlyUsedDrugs));
-            if(resultDTO.getData()==0){//如果已经插入了
-                resultDTO.setStatus("OK");
-                resultDTO.setMsg("该项已经是您的常用项了，请勿重新插入！");
-            }else{
+            if(resultDTO.getData()==null){
                 resultDTO.setStatus("OK");
                 resultDTO.setMsg("常用药品插入成功！");
+            }else {
+                if (resultDTO.getData() == 0) {//如果已经插入了
+                    resultDTO.setStatus("OK");
+                    resultDTO.setMsg("该项已经是您的常用项了，请勿重新插入！");
+                }else{
+                    resultDTO.setMsg("常用药品插入成功！");
+                }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
@@ -582,6 +585,7 @@ public class DoctorCommonController {
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(commonlyUsedService.insertCommonlyUsedDiagnosis(commonlyUsedDiagnosis));
+
             if(resultDTO.getData()==0){//如果已经插入了
                 resultDTO.setStatus("OK");
                 resultDTO.setMsg("该项已经是您的常用项了，请勿重新插入！");

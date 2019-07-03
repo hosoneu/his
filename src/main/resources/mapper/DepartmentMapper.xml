@@ -183,4 +183,32 @@
     </set>
     where Department_ID = #{departmentId,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="DepartmentWithCategoryMap" type="edu.neu.hoso.model.Department">
+    <id column="Department_Id" property="departmentId" />
+    <result column="Department_Code" property="departmentCode" />
+    <result column="Department_Name" property="departmentName" />
+    <result column="Department_Type" property="departmentType" />
+    <association javaType="ConstantItems" property="constantItems">
+      <id column="Constant_Items_Id" property="constantItemsId" />
+      <result column="Constant_Items_Code" property="constantItemsCode" />
+      <result column="Constant_Items_Name" property="constantItemsName" />
+    </association>
+  </resultMap>
+
+  <select id="getAllDepartmentWithCategory" resultMap="DepartmentWithCategoryMap">
+    SELECT
+      Department_ID,
+      Department_Code,
+      Department_Name,
+      Department_Type,
+      Constant_Items_Id,
+      Constant_Items_Code,
+      Constant_Items_Name
+    FROM
+        department
+        JOIN constant_items ON department.Department_Category_ID = constant_items.Constant_Items_ID
+    WHERE
+        Constant_Type_ID = 1
+  </select>
 </mapper>

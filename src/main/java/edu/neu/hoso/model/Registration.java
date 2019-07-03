@@ -204,4 +204,31 @@ public class Registration {
     public void setRegistrationStatus(String registrationStatus) {
         this.registrationStatus = registrationStatus == null ? null : registrationStatus.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Registration{" +
+                "registrationId=" + registrationId +
+                ", medicalRecordId=" + medicalRecordId +
+                ", registrationLevelId=" + registrationLevelId +
+                ", patientId=" + patientId +
+                ", departmentId=" + departmentId +
+                ", calculationTypeId=" + calculationTypeId +
+                ", doctorId=" + doctorId +
+                ", registrationDate=" + registrationDate +
+                ", buyMedicalRecord='" + buyMedicalRecord + '\'' +
+                ", registrationTotalCost=" + registrationTotalCost +
+                ", expenseTypeId=" + expenseTypeId +
+                ", expenseItemsId=" + expenseItemsId +
+                ", registrationStatus='" + registrationStatus + '\'' +
+                ", medicalRecord=" + medicalRecord +
+                ", registrationLevel=" + registrationLevel +
+                ", patient=" + patient +
+                ", department=" + department +
+                ", calculationType=" + calculationType +
+                ", doctor=" + doctor +
+                ", expenseType=" + expenseType +
+                ", expenseItems=" + expenseItems +
+                '}';
+    }
 }

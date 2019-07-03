@@ -2,11 +2,16 @@ package edu.neu.hoso.controller;
 
 import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.Department;
+import edu.neu.hoso.model.User;
 import edu.neu.hoso.service.DepartmentService;
+import edu.neu.hoso.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**   
  * @title: DepartmentController
@@ -17,10 +22,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @version: V1.0   
 */
 @RestController
+@CrossOrigin
 @RequestMapping("department")
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
+    @Autowired
+    UserService userService;
+    @RequestMapping("/findUser")
+    public ResultDTO findUser(int departmentID){
+        System.out.println("进来了");
+        List<User> userList = userService.getUserByDepartmentID(departmentID);
+        System.out.println(userList.size());
+        ResultDTO result = new ResultDTO<>();
+        result.setData(userList);
+        result.setStatus("OK");
+        result.setMsg("请求成功");
+        return result;
+    }
+    @RequestMapping("/findAll")
+    public ResultDTO findAll(){
+        List<Department> departmentList = departmentService.getAllDepartment();
+        System.out.println(departmentList.size());
+        ResultDTO result = new ResultDTO<>();
+        result.setData(departmentList);
+        result.setStatus("OK");
+        result.setMsg("请求成功");
+        return result;
+    }
+
 
     @RequestMapping("/insert")
     public ResultDTO<Department> insert(@RequestBody Department department){
@@ -57,7 +87,7 @@ public class DepartmentController {
          *@param: [departmentId]
          *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.Department> 
          *@throws:
-         */ 
+         */
         ResultDTO resultDTO = new ResultDTO();
         try {
             departmentService.deleteById(departmentId);
@@ -133,6 +163,30 @@ public class DepartmentController {
         ResultDTO resultDTO = new ResultDTO();
         try {
             resultDTO.setData(departmentService.getAllDepartment());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示科室成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示科室失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getAllDepartmentWithCategory")
+    public ResultDTO<Department> getAllDepartmentWithCategory(){
+        /**
+         *@title: getAllDepartmentWithCategory
+         *@description: 查询所有科室 附带Category
+         *@author: Mike
+         *@date: 2019-06-25 12:10
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.Department>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(departmentService.getAllDepartmentWithCategory());
             resultDTO.setStatus("OK");
             resultDTO.setMsg("展示科室成功！");
         } catch (Exception e) {

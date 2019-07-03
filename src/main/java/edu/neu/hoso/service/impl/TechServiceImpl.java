@@ -1,4 +1,4 @@
-package edu.neu.hoso.service.Impl;
+package edu.neu.hoso.service.impl;
 
 import edu.neu.hoso.example.ExaminationDrugsItemsExample;
 import edu.neu.hoso.example.PatientExample;
@@ -116,6 +116,7 @@ public class TechServiceImpl implements TechService {
     public List<FmedicalItems> getAllFmedicalByMedicalID(int Medical_record_ID, int Department_ID){
         List<FmedicalItems> fmedicalItems = fmedicalItemsMapper.getAllFmedicalByMedicalID(Medical_record_ID, Department_ID);
         if (fmedicalItems.size()==0){
+            System.out.println("weikong");
             return null;
         }
         return fmedicalItems;
@@ -130,8 +131,10 @@ public class TechServiceImpl implements TechService {
      *@return: boolean
      *@throws:
      */
-    public void updateRegistrationStatus(int Medical_record_ID, int Department_ID){
-        examinationFmedicalItemsMapper.updateRegistrationStatus(Medical_record_ID, Department_ID);
+    public void updateRegistrationStatus(int examinationFmedicalItemdId){
+        ExaminationFmedicalItems examinationFmedicalItems = examinationFmedicalItemsMapper.selectByPrimaryKey(examinationFmedicalItemdId);
+        examinationFmedicalItems.setRegistrationStatus("2");
+        examinationFmedicalItemsMapper.updateByPrimaryKeySelective(examinationFmedicalItems);
     }
 
     /**
@@ -236,5 +239,10 @@ public class TechServiceImpl implements TechService {
             examinationResultImage.setExaminationResultId(examinationResultId);
             examinationResultImageMapper.insertSelective(examinationResultImage);
         }
+    }
+
+    public List<Registration> getAllPatientByDepartmentId(int departmentId){
+        List<Registration> registrations = registrationMapper.getAllPatientByDepartmentId(departmentId);
+        return (registrations.size()==0?null:registrations);
     }
 }

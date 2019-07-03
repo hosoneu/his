@@ -33,4 +33,5 @@ HELP.md
 
 ### local ###
 application-dev.yml
-.yml
+db.properties
+generatorConfig.xml

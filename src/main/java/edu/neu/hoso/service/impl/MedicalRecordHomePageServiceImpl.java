@@ -63,7 +63,6 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
     @Override
     public Integer insertFirstDiagnosis(List<Diagnosis> diagnosisList) {
         //插入初诊信息 不需要更改排班剩余挂号数
-//        ,Integer userId,Integer medicalRecordId
         Date date = new Date();
         Integer medicalRecordId = diagnosisList.get(0).getMedicalRecordId();
         Integer diagnosisId = -1;//记录最后一个初步诊断的ID 将他它作为结果返回

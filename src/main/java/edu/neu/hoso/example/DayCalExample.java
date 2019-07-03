@@ -225,123 +225,183 @@ public class DayCalExample {
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateIsNull() {
-            addCriterion("Day_Cal_StartDate is null");
+        public Criteria andDayCalDateIsNull() {
+            addCriterion("Day_Cal_Date is null");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateIsNotNull() {
-            addCriterion("Day_Cal_StartDate is not null");
+        public Criteria andDayCalDateIsNotNull() {
+            addCriterion("Day_Cal_Date is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateEqualTo(Date value) {
-            addCriterion("Day_Cal_StartDate =", value, "dayCalStartdate");
+        public Criteria andDayCalDateEqualTo(Date value) {
+            addCriterion("Day_Cal_Date =", value, "dayCalDate");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateNotEqualTo(Date value) {
-            addCriterion("Day_Cal_StartDate <>", value, "dayCalStartdate");
+        public Criteria andDayCalDateNotEqualTo(Date value) {
+            addCriterion("Day_Cal_Date <>", value, "dayCalDate");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateGreaterThan(Date value) {
-            addCriterion("Day_Cal_StartDate >", value, "dayCalStartdate");
+        public Criteria andDayCalDateGreaterThan(Date value) {
+            addCriterion("Day_Cal_Date >", value, "dayCalDate");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateGreaterThanOrEqualTo(Date value) {
-            addCriterion("Day_Cal_StartDate >=", value, "dayCalStartdate");
+        public Criteria andDayCalDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("Day_Cal_Date >=", value, "dayCalDate");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateLessThan(Date value) {
-            addCriterion("Day_Cal_StartDate <", value, "dayCalStartdate");
+        public Criteria andDayCalDateLessThan(Date value) {
+            addCriterion("Day_Cal_Date <", value, "dayCalDate");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateLessThanOrEqualTo(Date value) {
-            addCriterion("Day_Cal_StartDate <=", value, "dayCalStartdate");
+        public Criteria andDayCalDateLessThanOrEqualTo(Date value) {
+            addCriterion("Day_Cal_Date <=", value, "dayCalDate");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateIn(List<Date> values) {
-            addCriterion("Day_Cal_StartDate in", values, "dayCalStartdate");
+        public Criteria andDayCalDateIn(List<Date> values) {
+            addCriterion("Day_Cal_Date in", values, "dayCalDate");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateNotIn(List<Date> values) {
-            addCriterion("Day_Cal_StartDate not in", values, "dayCalStartdate");
+        public Criteria andDayCalDateNotIn(List<Date> values) {
+            addCriterion("Day_Cal_Date not in", values, "dayCalDate");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateBetween(Date value1, Date value2) {
-            addCriterion("Day_Cal_StartDate between", value1, value2, "dayCalStartdate");
+        public Criteria andDayCalDateBetween(Date value1, Date value2) {
+            addCriterion("Day_Cal_Date between", value1, value2, "dayCalDate");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalStartdateNotBetween(Date value1, Date value2) {
-            addCriterion("Day_Cal_StartDate not between", value1, value2, "dayCalStartdate");
+        public Criteria andDayCalDateNotBetween(Date value1, Date value2) {
+            addCriterion("Day_Cal_Date not between", value1, value2, "dayCalDate");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateIsNull() {
-            addCriterion("Day_Cal_EndDate is null");
+        public Criteria andYfTotalIsNull() {
+            addCriterion("YF_Total is null");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateIsNotNull() {
-            addCriterion("Day_Cal_EndDate is not null");
+        public Criteria andYfTotalIsNotNull() {
+            addCriterion("YF_Total is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateEqualTo(Date value) {
-            addCriterion("Day_Cal_EndDate =", value, "dayCalEnddate");
+        public Criteria andYfTotalEqualTo(Double value) {
+            addCriterion("YF_Total =", value, "yfTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateNotEqualTo(Date value) {
-            addCriterion("Day_Cal_EndDate <>", value, "dayCalEnddate");
+        public Criteria andYfTotalNotEqualTo(Double value) {
+            addCriterion("YF_Total <>", value, "yfTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateGreaterThan(Date value) {
-            addCriterion("Day_Cal_EndDate >", value, "dayCalEnddate");
+        public Criteria andYfTotalGreaterThan(Double value) {
+            addCriterion("YF_Total >", value, "yfTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateGreaterThanOrEqualTo(Date value) {
-            addCriterion("Day_Cal_EndDate >=", value, "dayCalEnddate");
+        public Criteria andYfTotalGreaterThanOrEqualTo(Double value) {
+            addCriterion("YF_Total >=", value, "yfTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateLessThan(Date value) {
-            addCriterion("Day_Cal_EndDate <", value, "dayCalEnddate");
+        public Criteria andYfTotalLessThan(Double value) {
+            addCriterion("YF_Total <", value, "yfTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateLessThanOrEqualTo(Date value) {
-            addCriterion("Day_Cal_EndDate <=", value, "dayCalEnddate");
+        public Criteria andYfTotalLessThanOrEqualTo(Double value) {
+            addCriterion("YF_Total <=", value, "yfTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateIn(List<Date> values) {
-            addCriterion("Day_Cal_EndDate in", values, "dayCalEnddate");
+        public Criteria andYfTotalIn(List<Double> values) {
+            addCriterion("YF_Total in", values, "yfTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateNotIn(List<Date> values) {
-            addCriterion("Day_Cal_EndDate not in", values, "dayCalEnddate");
+        public Criteria andYfTotalNotIn(List<Double> values) {
+            addCriterion("YF_Total not in", values, "yfTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateBetween(Date value1, Date value2) {
-            addCriterion("Day_Cal_EndDate between", value1, value2, "dayCalEnddate");
+        public Criteria andYfTotalBetween(Double value1, Double value2) {
+            addCriterion("YF_Total between", value1, value2, "yfTotal");
             return (Criteria) this;
         }
 
-        public Criteria andDayCalEnddateNotBetween(Date value1, Date value2) {
-            addCriterion("Day_Cal_EndDate not between", value1, value2, "dayCalEnddate");
+        public Criteria andYfTotalNotBetween(Double value1, Double value2) {
+            addCriterion("YF_Total not between", value1, value2, "yfTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalIsNull() {
+            addCriterion("GH_Total is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalIsNotNull() {
+            addCriterion("GH_Total is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalEqualTo(Double value) {
+            addCriterion("GH_Total =", value, "ghTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalNotEqualTo(Double value) {
+            addCriterion("GH_Total <>", value, "ghTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalGreaterThan(Double value) {
+            addCriterion("GH_Total >", value, "ghTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalGreaterThanOrEqualTo(Double value) {
+            addCriterion("GH_Total >=", value, "ghTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalLessThan(Double value) {
+            addCriterion("GH_Total <", value, "ghTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalLessThanOrEqualTo(Double value) {
+            addCriterion("GH_Total <=", value, "ghTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalIn(List<Double> values) {
+            addCriterion("GH_Total in", values, "ghTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalNotIn(List<Double> values) {
+            addCriterion("GH_Total not in", values, "ghTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalBetween(Double value1, Double value2) {
+            addCriterion("GH_Total between", value1, value2, "ghTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhTotalNotBetween(Double value1, Double value2) {
+            addCriterion("GH_Total not between", value1, value2, "ghTotal");
             return (Criteria) this;
         }
 
@@ -402,6 +462,246 @@ public class DayCalExample {
 
         public Criteria andDayCalTotalNotBetween(Double value1, Double value2) {
             addCriterion("Day_Cal_Total not between", value1, value2, "dayCalTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalIsNull() {
+            addCriterion("CL_Total is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalIsNotNull() {
+            addCriterion("CL_Total is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalEqualTo(Double value) {
+            addCriterion("CL_Total =", value, "clTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalNotEqualTo(Double value) {
+            addCriterion("CL_Total <>", value, "clTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalGreaterThan(Double value) {
+            addCriterion("CL_Total >", value, "clTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalGreaterThanOrEqualTo(Double value) {
+            addCriterion("CL_Total >=", value, "clTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalLessThan(Double value) {
+            addCriterion("CL_Total <", value, "clTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalLessThanOrEqualTo(Double value) {
+            addCriterion("CL_Total <=", value, "clTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalIn(List<Double> values) {
+            addCriterion("CL_Total in", values, "clTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalNotIn(List<Double> values) {
+            addCriterion("CL_Total not in", values, "clTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalBetween(Double value1, Double value2) {
+            addCriterion("CL_Total between", value1, value2, "clTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andClTotalNotBetween(Double value1, Double value2) {
+            addCriterion("CL_Total not between", value1, value2, "clTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalIsNull() {
+            addCriterion("JC_Total is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalIsNotNull() {
+            addCriterion("JC_Total is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalEqualTo(Double value) {
+            addCriterion("JC_Total =", value, "jcTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalNotEqualTo(Double value) {
+            addCriterion("JC_Total <>", value, "jcTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalGreaterThan(Double value) {
+            addCriterion("JC_Total >", value, "jcTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalGreaterThanOrEqualTo(Double value) {
+            addCriterion("JC_Total >=", value, "jcTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalLessThan(Double value) {
+            addCriterion("JC_Total <", value, "jcTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalLessThanOrEqualTo(Double value) {
+            addCriterion("JC_Total <=", value, "jcTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalIn(List<Double> values) {
+            addCriterion("JC_Total in", values, "jcTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalNotIn(List<Double> values) {
+            addCriterion("JC_Total not in", values, "jcTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalBetween(Double value1, Double value2) {
+            addCriterion("JC_Total between", value1, value2, "jcTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andJcTotalNotBetween(Double value1, Double value2) {
+            addCriterion("JC_Total not between", value1, value2, "jcTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalIsNull() {
+            addCriterion("CZ_Total is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalIsNotNull() {
+            addCriterion("CZ_Total is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalEqualTo(Double value) {
+            addCriterion("CZ_Total =", value, "czTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalNotEqualTo(Double value) {
+            addCriterion("CZ_Total <>", value, "czTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalGreaterThan(Double value) {
+            addCriterion("CZ_Total >", value, "czTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalGreaterThanOrEqualTo(Double value) {
+            addCriterion("CZ_Total >=", value, "czTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalLessThan(Double value) {
+            addCriterion("CZ_Total <", value, "czTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalLessThanOrEqualTo(Double value) {
+            addCriterion("CZ_Total <=", value, "czTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalIn(List<Double> values) {
+            addCriterion("CZ_Total in", values, "czTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalNotIn(List<Double> values) {
+            addCriterion("CZ_Total not in", values, "czTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalBetween(Double value1, Double value2) {
+            addCriterion("CZ_Total between", value1, value2, "czTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andCzTotalNotBetween(Double value1, Double value2) {
+            addCriterion("CZ_Total not between", value1, value2, "czTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalIsNull() {
+            addCriterion("QT_Total is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalIsNotNull() {
+            addCriterion("QT_Total is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalEqualTo(Double value) {
+            addCriterion("QT_Total =", value, "qtTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalNotEqualTo(Double value) {
+            addCriterion("QT_Total <>", value, "qtTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalGreaterThan(Double value) {
+            addCriterion("QT_Total >", value, "qtTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalGreaterThanOrEqualTo(Double value) {
+            addCriterion("QT_Total >=", value, "qtTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalLessThan(Double value) {
+            addCriterion("QT_Total <", value, "qtTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalLessThanOrEqualTo(Double value) {
+            addCriterion("QT_Total <=", value, "qtTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalIn(List<Double> values) {
+            addCriterion("QT_Total in", values, "qtTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalNotIn(List<Double> values) {
+            addCriterion("QT_Total not in", values, "qtTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalBetween(Double value1, Double value2) {
+            addCriterion("QT_Total between", value1, value2, "qtTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andQtTotalNotBetween(Double value1, Double value2) {
+            addCriterion("QT_Total not between", value1, value2, "qtTotal");
             return (Criteria) this;
         }
     }

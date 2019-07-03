@@ -44,7 +44,7 @@ public class CommonlyUsedServiceImpl implements CommonlyUsedService {
     /**
      * @title: listCommonlyUsedPatentDrugsByUserId
      * @description: 列出用户的常用成药药品
-     * @author:
+     * @author: 29-y
      * @date: 2019-06-26 18:24
      * @param: [userId]
      * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDrugs>
@@ -58,7 +58,7 @@ public class CommonlyUsedServiceImpl implements CommonlyUsedService {
     /**
      * @title: listCommonlyUsedHerbalDrugsByUserId
      * @description: 列出用户的常用草药药品
-     * @author:
+     * @author: 29-y
      * @date: 2019-06-26 18:24
      * @param: [userId]
      * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDrugs>
@@ -172,6 +172,8 @@ public class CommonlyUsedServiceImpl implements CommonlyUsedService {
         if(commonlyUsedDrugsList.size()!=0){//已存在
             return 0;
         }else{//不存在则进行插入
+            System.out.println(commonlyUsedDrugs.getDrugsId());
+            System.out.println(commonlyUsedDrugs.getDoctorId());
             commonlyUsedDrugsMapper.insert(commonlyUsedDrugs);
             return commonlyUsedDrugs.getCommonlyUsedDrugs();
         }
