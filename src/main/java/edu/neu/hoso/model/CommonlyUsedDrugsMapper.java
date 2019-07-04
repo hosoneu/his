@@ -106,4 +106,5 @@ public interface CommonlyUsedDrugsMapper {
     })
     @ResultMap("SecondResultMap")
     List<CommonlyUsedDrugs> listCommonlyUsedHerbalDrugsByUserId(Integer userId);
+    List<CommonlyUsedDrugs> getCommonUsedDrugs(@Param("doctorId")int doctorId);
 }

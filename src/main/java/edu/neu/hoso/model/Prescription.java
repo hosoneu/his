@@ -16,6 +16,8 @@ public class Prescription {
 
     private String validStatus;
 
+    private List<PrescriptionItems> prescriptionItems;
+
     /* 对应的处方条目列表 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
     private List<PrescriptionItems> prescriptionItemsList;
 
@@ -96,5 +98,27 @@ public class Prescription {
 
     public void setValidStatus(String validStatus) {
         this.validStatus = validStatus == null ? null : validStatus.trim();
+    }
+
+    public List<PrescriptionItems> getPrescriptionItems() {
+        return prescriptionItems;
+    }
+
+    public void setPrescriptionItems(List<PrescriptionItems> prescriptionItems) {
+        this.prescriptionItems = prescriptionItems;
+    }
+
+    @Override
+    public String toString() {
+        return "Prescription{" +
+                "prescriptionId=" + prescriptionId +
+                ", medicalRecordId=" + medicalRecordId +
+                ", doctorId=" + doctorId +
+                ", submitTime=" + submitTime +
+                ", prescriptionType='" + prescriptionType + '\'' +
+                ", validStatus='" + validStatus + '\'' +
+                ", prescriptionItems=" + prescriptionItems +
+                ", prescriptionItemsList=" + prescriptionItemsList +
+                '}';
     }
 }

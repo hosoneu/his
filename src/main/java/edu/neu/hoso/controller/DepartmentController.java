@@ -19,6 +19,7 @@ import java.util.List;
  * @date: 2019-06-11 17:44
  * @version: V1.0   
 */
+@CrossOrigin
 @RestController
 @CrossOrigin
 @RequestMapping("department")
@@ -86,7 +87,6 @@ public class DepartmentController {
          *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.Department> 
          *@throws:
          */
-        System.out.println("删除科室"+id);
         ResultDTO resultDTO = new ResultDTO();
         try {
             departmentService.deleteById(id);

@@ -59,4 +59,13 @@ public class CommonlyUsedDrugs {
         this.drugsId = drugsId;
     }
 
+    @Override
+    public String toString() {
+        return "CommonlyUsedDrugs{" +
+                "commonlyUsedDrugs=" + commonlyUsedDrugs +
+                ", doctorId=" + doctorId +
+                ", drugsId=" + drugsId +
+                ", drugs=" + drugs +
+                '}';
+    }
 }

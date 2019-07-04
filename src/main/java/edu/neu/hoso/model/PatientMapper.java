@@ -63,4 +63,7 @@ public interface PatientMapper {
         "where Patient_ID = #{patientId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Patient record);
+
+    //根据病历号获得Patient
+    Patient getPatientById(@Param("medicalRecordId")int medicalRecordId);
 }
