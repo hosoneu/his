@@ -359,6 +359,8 @@ public class TechController {
      */
     @RequestMapping("/getAllPatientByDepartmentId")
     public ResultDTO<List<Registration>> getAllPatientByDepartmentId(Integer departmentId){
+        System.out.println(departmentId);
+        System.out.println("得到的科室号");
         ResultDTO<List<Registration>> resultDTO = new ResultDTO<>();
         try{
             List<Registration> registrations = techService.getAllPatientByDepartmentId(departmentId);
