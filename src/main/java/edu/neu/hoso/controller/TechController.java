@@ -422,6 +422,7 @@ public class TechController {
      */
     @RequestMapping("/getCommonUsedDrugs")
     public ResultDTO<List<CommonlyUsedDrugs>> getCommonUsedDrugs(int doctorId){
+        System.out.println("这是doctorId" + doctorId);
         ResultDTO<List<CommonlyUsedDrugs>> resultDTO = new ResultDTO<>();
         try {
             List<CommonlyUsedDrugs> commonlyUsedDrugsList = techService.getCommonUsedDrugs(doctorId);
@@ -429,13 +430,34 @@ public class TechController {
                 System.out.println(commonlyUsedDrugs.toString());
             }
             resultDTO.setStatus("OK");
-            resultDTO.setMsg("插入成功！");
+            resultDTO.setMsg("获得成功！");
             resultDTO.setData(commonlyUsedDrugsList);
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
-            resultDTO.setMsg("插入失败！");
+            resultDTO.setMsg("获得失败！");
         }
         return resultDTO;
     }
+
+    @RequestMapping("/deleteCommonUsedDrugs")
+    public ResultDTO deleteCommonUsedDrugs(@RequestBody List<CommonlyUsedDrugs> commonlyUsedDrugsList){
+        ResultDTO resultDTO = new ResultDTO<>();
+        try {
+            for (CommonlyUsedDrugs commonlyUsedDrugs:commonlyUsedDrugsList){
+                System.out.println(commonlyUsedDrugs.toString());
+                techService.deleteCommonUsedDrugs(commonlyUsedDrugs);
+            }
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("删除成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("删除失败！");
+        }
+        return resultDTO;
+    }
+
+//    @RequestMapping("/getDepartmentById")
+
 }
