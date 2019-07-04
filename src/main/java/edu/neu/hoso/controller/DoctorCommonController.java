@@ -581,6 +581,41 @@ public class DoctorCommonController {
         }
         return resultDTO;
     }
+
+    //新增常用List
+    @RequestMapping("/insertCommonlyUsedDrugsList")
+    public ResultDTO insertCommonlyUsedDrugs(@RequestBody List<CommonlyUsedDrugs> commonlyUsedDrugsList){
+        ResultDTO resultDTO = new ResultDTO<>();
+        System.out.println("开始输出insertCommonlyUsedDrugsList");
+        for (CommonlyUsedDrugs commonlyUsedDrugs:commonlyUsedDrugsList){
+            System.out.println(commonlyUsedDrugs.toString());
+        }
+        try {
+            for (CommonlyUsedDrugs commonlyUsedDrugs:commonlyUsedDrugsList){
+                commonlyUsedService.insertCommonlyUsedDrugs(commonlyUsedDrugs);
+                resultDTO.setStatus("OK");
+                resultDTO.setMsg("常用药品插入成功！");
+            }
+//            if(resultDTO.getData()==null){
+//                resultDTO.setStatus("OK");
+//                resultDTO.setMsg("常用药品插入成功！");
+//            }else {
+//                if (resultDTO.getData() == 0) {//如果已经插入了
+//                    resultDTO.setStatus("OK");
+//                    resultDTO.setMsg("该项已经是您的常用项了，请勿重新插入！");
+//                }else{
+//                    resultDTO.setMsg("常用药品插入成功！");
+//                }
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("常用药品插入失败！");
+        }
+        return resultDTO;
+    }
+
+
     // 新增常用诊断
     @RequestMapping("/insertCommonlyUsedDiagnosis")
     public ResultDTO<Integer> insertCommonlyUsedDiagnosis(@RequestBody CommonlyUsedDiagnosis commonlyUsedDiagnosis){
