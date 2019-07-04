@@ -1,6 +1,9 @@
 package edu.neu.hoso.service.impl;
 
+import edu.neu.hoso.example.ConstantItemsExample;
 import edu.neu.hoso.example.DepartmentExample;
+import edu.neu.hoso.model.ConstantItems;
+import edu.neu.hoso.model.ConstantItemsMapper;
 import edu.neu.hoso.model.Department;
 import edu.neu.hoso.model.DepartmentMapper;
 import edu.neu.hoso.service.DepartmentService;
@@ -21,6 +24,9 @@ import java.util.List;
 public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     DepartmentMapper departmentMapper;
+
+    @Resource
+    ConstantItemsMapper constantItemsMapper;
 
     @Override
     public Integer insert(Department department) {
@@ -223,5 +229,22 @@ public class DepartmentServiceImpl implements DepartmentService {
          *@throws:
          */
         return departmentMapper.getAllDepartmentWithCategory();
+    }
+
+    @Override
+    public List<ConstantItems> getAllDepartmentCategory() {
+        /**
+         *@title: getAllDepartmentCategory
+         *@description: 查询所有科室分类
+         *@author: Mike
+         *@date: 2019-06-30 20:25
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.ConstantItems>
+         *@throws:
+         */
+        ConstantItemsExample constantItemsExample = new ConstantItemsExample();
+        ConstantItemsExample.Criteria criteria = constantItemsExample.createCriteria();
+        criteria.andConstantTypeIdEqualTo(1);
+        return constantItemsMapper.selectByExample(constantItemsExample);
     }
 }

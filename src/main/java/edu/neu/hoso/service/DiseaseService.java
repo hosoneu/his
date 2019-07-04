@@ -25,4 +25,5 @@ public interface DiseaseService {
     List<Disease> getDiseaseByICD(String icd);
     List<Disease> getDiseaseByTypeId(Integer typeId);
     List<Disease> getAllDisease();
+    List<Disease> getAllDiseaseWithType();
 }

@@ -6,6 +6,7 @@ import edu.neu.hoso.model.MedicalRecord;
 import edu.neu.hoso.model.Patient;
 import edu.neu.hoso.model.Registration;
 import edu.neu.hoso.service.RegistrationService;
+import edu.neu.hoso.utils.JsonUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -41,7 +42,19 @@ public class RegistrationController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            registrationService.register((Registration) map.get("registration"), (Patient)map.get("patient"), (MedicalRecord)map.get("medicalRecord"), (ExpenseItems)map.get("expenseItems"));
+            Registration registration = JsonUtils.mapToObj((Map<String, Object>)map.get("registration"), Registration.class);
+            Patient patient = JsonUtils.mapToObj((Map<String, Object>)map.get("patient"), Patient.class);
+            MedicalRecord medicalRecord = JsonUtils.mapToObj((Map<String, Object>)map.get("medicalRecord"), MedicalRecord.class);
+            ExpenseItems expenseItems = JsonUtils.mapToObj((Map<String, Object>)map.get("expenseItems"), ExpenseItems.class);
+            Integer userId = (Integer)map.get("userId");
+            Integer payModeId = (Integer)map.get("payModeId");
+            System.out.println(registration);
+            System.out.println(patient);
+            System.out.println(medicalRecord);
+            System.out.println(expenseItems);
+            System.out.println(userId);
+            System.out.println(payModeId);
+            registrationService.register(registration, patient, medicalRecord, expenseItems, userId, payModeId);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("挂号成功！");
         } catch (Exception e) {
@@ -52,7 +65,7 @@ public class RegistrationController {
         return resultDTO;
     }
     @RequestMapping("/withdraw")
-    public ResultDTO withdraw(@RequestParam Integer expenseItemsId, @RequestParam Integer userId){
+    public ResultDTO withdraw(Integer expenseItemsId, Integer userId){
         /**
          *@title: withdraw
          *@description: 退号操作
@@ -110,7 +123,13 @@ public class RegistrationController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            registrationService.charge((List<Integer>)map.get("expenseItems"), (Integer)map.get("userId"), (Integer)map.get("payModeId"));
+            List<Integer> expenseItemsIdList = (List<Integer>) map.get("expenseItemsIdList");
+            Integer userId = (Integer)map.get("userId");
+            Integer payModeId = (Integer)map.get("payModeId");
+            System.out.println(expenseItemsIdList);
+            System.out.println(userId);
+            System.out.println(payModeId);
+            registrationService.charge(expenseItemsIdList, userId, payModeId);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("收费成功！");
         } catch (Exception e) {
@@ -133,7 +152,11 @@ public class RegistrationController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            registrationService.refund((List<Integer>)map.get("expenseItems"), (Integer)map.get("userId"));
+            List<ExpenseItems> expenseItemsList = (List<ExpenseItems>)map.get("expenseItemsList");
+            Integer userId = (Integer)map.get("userId");
+            System.out.println(expenseItemsList);
+            System.out.println(userId);
+            registrationService.refund(expenseItemsList, userId);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("退费成功！");
         } catch (Exception e) {
@@ -209,6 +232,54 @@ public class RegistrationController {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
             resultDTO.setMsg("查询患者未收费项目失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getAllPatient")
+    public ResultDTO getAllPatient(){
+        /**
+         *@title: getAllPatient
+         *@description: 查询所有患者
+         *@author: Mike
+         *@date: 2019-06-30 2:45
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(registrationService.getAllPatient());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("查询患者未收费项目成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("查询患者未收费项目失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getAllExpenseItems")
+    public ResultDTO getAllExpenseItems(){
+        /**
+         *@title: getAllExpenseItems
+         *@description: 查询所有费用项目 包含全部信息
+         *@author: Mike
+         *@date: 2019-06-30 2:45
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(registrationService.getAllExpenseItems());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("查询全部费用项目成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("查询全部费用项目失败！");
         }
         return resultDTO;
     }

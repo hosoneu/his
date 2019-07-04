@@ -189,6 +189,7 @@
     <result column="Department_Code" property="departmentCode" />
     <result column="Department_Name" property="departmentName" />
     <result column="Department_Type" property="departmentType" />
+    <result column="Department_Category_ID" property="departmentCategoryId" />
     <association javaType="ConstantItems" property="constantItems">
       <id column="Constant_Items_Id" property="constantItemsId" />
       <result column="Constant_Items_Code" property="constantItemsCode" />
@@ -202,6 +203,7 @@
       Department_Code,
       Department_Name,
       Department_Type,
+      Department_Category_ID,
       Constant_Items_Id,
       Constant_Items_Code,
       Constant_Items_Name

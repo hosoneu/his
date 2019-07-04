@@ -4,11 +4,13 @@ import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.Disease;
 import edu.neu.hoso.service.DiseaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("disease")
 public class DiseaseController {
     @Autowired
@@ -125,6 +127,30 @@ public class DiseaseController {
         ResultDTO resultDTO = new ResultDTO();
         try {
             resultDTO.setData(diseaseService.getAllDisease());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示疾病成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示疾病失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getAllDiseaseWithType")
+    public ResultDTO<Disease> getAllDiseaseWithType(){
+        /**
+         *@title: getAllDiseaseWithType
+         *@description: 查询所有疾病 附带diseaseType
+         *@author: Mike
+         *@date: 2019-07-01 18:33
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.Disease>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(diseaseService.getAllDiseaseWithType());
             resultDTO.setStatus("OK");
             resultDTO.setMsg("展示疾病成功！");
         } catch (Exception e) {

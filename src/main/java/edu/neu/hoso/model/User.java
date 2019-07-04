@@ -28,6 +28,14 @@ public class User {
     @Setter
     private ConstantItems constantItems;
 
+    @Getter
+    @Setter
+    private Role role;
+
+    @Getter
+    @Setter
+    private Department department;
+
     public User(Integer userId, String userLoginname, String userPassword, Integer roleId, String userName, Integer departmentId, Integer userTitleId, String userGender, String userStatus, Integer userSchedulingLimitcount) {
         this.userId = userId;
         this.userLoginname = userLoginname;

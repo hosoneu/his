@@ -4,11 +4,10 @@ import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.FmedicalItems;
 import edu.neu.hoso.service.FmedicalItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("fmedicalItems")
 public class FmedicalItemsController {
     @Autowired
@@ -25,6 +24,7 @@ public class FmedicalItemsController {
          *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.FmedicalItems>
          *@throws:
          */
+        System.out.println("插入费用科目"+fmedicalItems);
         ResultDTO resultDTO = new ResultDTO();
         try {
             fmedicalItemsService.insertSelective(fmedicalItems);
@@ -50,6 +50,7 @@ public class FmedicalItemsController {
          *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.FmedicalItems>
          *@throws:
          */
+        System.out.println("删除费用科目"+id);
         ResultDTO resultDTO = new ResultDTO();
         try {
             fmedicalItemsService.deleteById(id);
@@ -74,6 +75,7 @@ public class FmedicalItemsController {
          *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.FmedicalItems>
          *@throws:
          */
+        System.out.println("更新费用科目"+fmedicalItems);
         ResultDTO resultDTO = new ResultDTO();
         try {
             fmedicalItemsService.update(fmedicalItems);
@@ -125,6 +127,30 @@ public class FmedicalItemsController {
         ResultDTO resultDTO = new ResultDTO();
         try {
             resultDTO.setData(fmedicalItemsService.getAllFmedicalItems());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示非药品成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示非药品失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getAllFmedicalItemsForShow")
+    public ResultDTO<FmedicalItems> getAllFmedicalItemsForShow(){
+        /**
+         *@title: getAllFmedicalItemsForShow
+         *@description: 展示所有非药品项目 附带department,expenseType
+         *@author: Mike
+         *@date: 2019-06-26 14:07
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.FmedicalItems>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(fmedicalItemsService.getAllFmedicalItemsForShow());
             resultDTO.setStatus("OK");
             resultDTO.setMsg("展示非药品成功！");
         } catch (Exception e) {

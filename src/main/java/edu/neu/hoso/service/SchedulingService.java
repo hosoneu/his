@@ -14,7 +14,7 @@ import java.util.List;
  * @version: V1.0
 */
 public interface SchedulingService {
-    Integer insertSelectiveInfo(SchedulingRule schedulingRule);
+    Integer insertSelectiveInfo(SchedulingInfo schedulingInfo);
     void deleteInfoById(Integer id);
     void deleteInfoByDoctorId(Integer doctorId);
     void updateInfo(Integer doctorId, String weekday, String noonbreak, SchedulingRule schedulingRule);
@@ -23,7 +23,7 @@ public interface SchedulingService {
     List<SchedulingInfo> getSchedulingInfoByWeekday(String weekday);
     List<SchedulingInfo> getAllSchedulingInfo();
 
-    Integer insertSelectiveRule(SchedulingRule schedulingRule);
+    Integer insertSelectiveRule(SchedulingInfo schedulingInfo);
     void deleteRuleById(Integer id);
     void deleteRuleByDoctorId(Integer doctorId);
     void updateRule(SchedulingRule schedulingRule);

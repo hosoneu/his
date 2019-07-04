@@ -30,7 +30,7 @@ public class SchedulingServiceImpl implements SchedulingService {
 
 
     @Override
-    public Integer insertSelectiveInfo(SchedulingRule schedulingRule) {
+    public Integer insertSelectiveInfo(SchedulingInfo schedulingInfo) {
         /**
          *@title: insertSelectiveInfo
          *@description: 选择性插入排班信息 根据排班规则
@@ -40,14 +40,14 @@ public class SchedulingServiceImpl implements SchedulingService {
          *@return: java.lang.Integer
          *@throws:
          */
-        SchedulingInfo schedulingInfo = new SchedulingInfo();
-        schedulingInfo.setDoctorId(schedulingRule.getDoctorId());
-        schedulingInfo.setSchedulingNoonbreak(schedulingRule.getSchedulingRuleNoonbreak());
-        schedulingInfo.setSchedulingWeekday(schedulingRule.getSchedulingRuleWeekday());
-        schedulingInfo.setSchedulingStarttime(schedulingRule.getSchedulingRuleStarttime());
-        schedulingInfo.setSchedulingEndtime(schedulingRule.getSchedulingRuleEndtime());
-        schedulingInfo.setSchedulingLimitcount(schedulingRule.getSchedulingRuleLimitcount());
-        schedulingInfo.setSchedulingRestcount(schedulingRule.getSchedulingRuleLimitcount());
+//        SchedulingInfo schedulingInfo = new SchedulingInfo();
+//        schedulingInfo.setDoctorId(schedulingRule.getDoctorId());
+//        schedulingInfo.setSchedulingNoonbreak(schedulingRule.getSchedulingRuleNoonbreak());
+//        schedulingInfo.setSchedulingWeekday(schedulingRule.getSchedulingRuleWeekday());
+//        schedulingInfo.setSchedulingStarttime(schedulingRule.getSchedulingRuleStarttime());
+//        schedulingInfo.setSchedulingEndtime(schedulingRule.getSchedulingRuleEndtime());
+//        schedulingInfo.setSchedulingLimitcount(schedulingRule.getSchedulingRuleLimitcount());
+//        schedulingInfo.setSchedulingRestcount(schedulingRule.getSchedulingRuleLimitcount());
         schedulingInfoMapper.insertSelective(schedulingInfo);
         return schedulingInfo.getSchedulingInfoId();
     }
@@ -175,7 +175,7 @@ public class SchedulingServiceImpl implements SchedulingService {
     }
 
     @Override
-    public Integer insertSelectiveRule(SchedulingRule schedulingRule) {
+    public Integer insertSelectiveRule(SchedulingInfo schedulingInfo) {
         /**
          *@title: insertSelectiveRule
          *@description: 选择性插入排班规则
@@ -185,6 +185,13 @@ public class SchedulingServiceImpl implements SchedulingService {
          *@return: java.lang.Integer
          *@throws:
          */
+        SchedulingRule schedulingRule = new SchedulingRule();
+        schedulingRule.setDoctorId(schedulingRule.getDoctorId());
+        schedulingRule.setSchedulingRuleNoonbreak(schedulingInfo.getSchedulingNoonbreak());
+        schedulingRule.setSchedulingRuleWeekday(schedulingInfo.getSchedulingWeekday());
+        schedulingRule.setSchedulingRuleStarttime(schedulingInfo.getSchedulingStarttime());
+        schedulingRule.setSchedulingRuleEndtime(schedulingInfo.getSchedulingEndtime());
+        schedulingRule.setSchedulingRuleLimitcount(schedulingInfo.getSchedulingLimitcount());
         schedulingRuleMapper.insertSelective(schedulingRule);
         return schedulingRule.getSchedulingRuleId();
     }

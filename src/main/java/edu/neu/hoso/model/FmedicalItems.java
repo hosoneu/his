@@ -1,5 +1,8 @@
 package edu.neu.hoso.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +33,15 @@ public class FmedicalItems {
 
     private String reverse3;
 
-    public FmedicalItems(Integer fmedicalItemsId, String fmedicalItemsCode, String fmedicalItemsName, String fmedicalItemsFormat, Double fmedicalItemsPrice, Integer expenseTypeId, Integer departmentId, String fmedicalItemsMnemoniccode, String fmedicalItemsType, Date createTime, String reverse1, String reverse2, String reverse3) {
+    @Getter
+    @Setter
+    private Department department;
+
+    @Getter
+    @Setter
+    private ExpenseType expenseType;
+
+  public FmedicalItems(Integer fmedicalItemsId, String fmedicalItemsCode, String fmedicalItemsName, String fmedicalItemsFormat, Double fmedicalItemsPrice, Integer expenseTypeId, Integer departmentId, String fmedicalItemsMnemoniccode, String fmedicalItemsType, Date createTime, String reverse1, String reverse2, String reverse3) {
         this.fmedicalItemsId = fmedicalItemsId;
         this.fmedicalItemsCode = fmedicalItemsCode;
         this.fmedicalItemsName = fmedicalItemsName;
