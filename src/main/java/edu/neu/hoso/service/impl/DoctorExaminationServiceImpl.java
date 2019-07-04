@@ -1,6 +1,7 @@
 package edu.neu.hoso.service.impl;
 
 import edu.neu.hoso.example.ExaminationDrugsItemsExample;
+import edu.neu.hoso.example.ExaminationResultImageExample;
 import edu.neu.hoso.example.GroupExaminationDrugsItemsExample;
 import edu.neu.hoso.example.GroupExaminationFmedicalItemsExample;
 import edu.neu.hoso.model.*;
@@ -42,7 +43,8 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
     ExpenseItemsMapper expenseItemsMapper;
     @Resource
     DrugsMapper drugsMapper;
-
+    @Resource
+    ExaminationResultImageMapper examinationResultImageMapper;
 
     /**
      * @title: listExaminationByMedicalRecordId
@@ -366,7 +368,12 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
      */
     @Override
     public ExaminationResult selectExaminationResultById(Integer examinationResultId) {
-        return examinationResultMapper.selectExaminationResultById(examinationResultId);
+        ExaminationResult examinationResult = examinationResultMapper.selectByPrimaryKey(examinationResultId);
+        ExaminationResultImageExample examinationResultImageExample = new ExaminationResultImageExample();
+        ExaminationResultImageExample.Criteria criteria = examinationResultImageExample.createCriteria();
+        criteria.andExaminationResultIdEqualTo(examinationResultId);
+        examinationResult.setExaminationResultImageList(examinationResultImageMapper.selectByExample(examinationResultImageExample));
+        return examinationResult;
     }
 
 }

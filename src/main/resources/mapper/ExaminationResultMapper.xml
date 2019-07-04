@@ -18,7 +18,6 @@
     <result property="findings" column="Findings" jdbcType="VARCHAR" javaType="java.lang.String" />
     <result property="diagnosticSuggestion" column="Diagnostic_Suggestion" jdbcType="VARCHAR" javaType="java.lang.String" />
     <result property="submitTime" column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    <collection property="examinationResultImageList" ofType="edu.neu.hoso.model.ExaminationResultImage" resultMap="edu.neu.hoso.model.ExaminationResultImageMapper.BaseResultMap" />
   </resultMap>
 
   <sql id="Example_Where_Clause" >
