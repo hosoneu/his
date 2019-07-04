@@ -40,6 +40,7 @@ public class LoginController {
                 Role role = roleService.findRoleByID(user.getRoleId());
                 System.out.println("role:"+role.getRoleName());
                 System.out.println("department"+department.getDepartmentName());
+                System.out.println(role.getRoleId());
                 LoginResult loginResult = new LoginResult(user,department,role);
                 result.setData(loginResult);
                 result.setStatus("OK");

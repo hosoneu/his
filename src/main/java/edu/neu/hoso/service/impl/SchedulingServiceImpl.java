@@ -303,4 +303,18 @@ public class SchedulingServiceImpl implements SchedulingService {
         SchedulingRuleExample schedulingRuleExample = new SchedulingRuleExample();
         return schedulingRuleMapper.selectByExample(schedulingRuleExample);
     }
+
+    @Override
+    public List<SchedulingInfo> getAllSchedulingInfoWithUserName() {
+        /**
+         *@title: getAllSchedulingInfoWithUserName
+         *@description: 查询所有排班信息 携带userName
+         *@author: Mike
+         *@date: 2019-07-04 23:40
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.SchedulingInfo>
+         *@throws:
+         */
+        return schedulingInfoMapper.getAllSchedulingInfoWithUserName();
+    }
 }

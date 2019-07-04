@@ -213,10 +213,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         registration.setRegistrationTotalCost(totalCost);
         registration.setRegistrationDate(date);
         registrationMapper.insertSelective(registration);
-        if (registration.getDoctorId() != null){
-            //更新被挂号医生的排班剩额
-            updateSchedulingRestcount(registration);
-        }
+//        if (registration.getDoctorId() != null){
+//            //更新被挂号医生的排班剩额
+//            updateSchedulingRestcount(registration);
+//        }
         return registration;
     }
 
