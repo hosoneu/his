@@ -29,6 +29,8 @@ public interface DoctorExaminationService {
 
     // 存为检查检验模板 根据 检查检验组套(List<检查检验组套非药品条目表(List<检查检验组套药品条目表>)>）
     Integer insertGroupExamination(GroupExamination groupExamination);
+    // 删除检查检验模板
+    void deleteGroupExamination(Integer groupExaminationId);
 
     // 开立项目 根据 检查检验申请表（List<检查检验非药品条目表（List<检查检验药品条目表>）>）并自动生成收费条目
     Integer insertExamination(Examination examination);

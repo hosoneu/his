@@ -348,4 +348,10 @@
         LEFT JOIN constant_items AS c ON drugs.Drugs_Type_ID = c.Constant_Items_ID
         LEFT JOIN constant_items ON drugs.Drugs_Dosage_ID = constant_items.Constant_Items_ID
   </select>
+  <!--  by alan-->
+  <select id="getAllDrugs" resultMap="BaseResultMap">
+    select *
+    from drugs
+  </select>
+
 </mapper>

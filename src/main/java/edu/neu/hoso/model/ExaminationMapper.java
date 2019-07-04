@@ -73,8 +73,8 @@ public interface ExaminationMapper {
      * @throws:
      */
     @Select({
-            "select e.*,e_fmedical_items.*,fmedical.* " ,
-            "from examination e join examination_fmedical_items e_fmedical_items on e_fmedical_items.Examination_ID = e.Examination_ID join fmedical_items fmedical on fmedical.Fmedical_Items_ID = e_fmedical_items.Fmedical_Items_ID " ,
+            "select e.*,e_fmedical_items.*,fmedical.*,d.* " ,
+            "from examination e join examination_fmedical_items e_fmedical_items on e_fmedical_items.Examination_ID = e.Examination_ID join fmedical_items fmedical on fmedical.Fmedical_Items_ID = e_fmedical_items.Fmedical_Items_ID join department d on fmedical.Department_ID = d.Department_ID " ,
             "where e.Medical_Record_ID = #{medicalRecordId,jdbcType=INTEGER} and e.Examination_Mark = #{mark,jdbcType=CHAR} "
     })
     @ResultMap("SecondResultMap")
@@ -90,10 +90,15 @@ public interface ExaminationMapper {
      * @throws:
      */
     @Select({
-            "select e.*,e_fmedical_items.*,fmedical.* " ,
-            "from examination e join examination_fmedical_items e_fmedical_items on e_fmedical_items.Examination_ID = e.Examination_ID join fmedical_items fmedical on fmedical.Fmedical_Items_ID = e_fmedical_items.Fmedical_Items_ID " ,
+            "select e.*,e_fmedical_items.*,fmedical.*,d.*  " ,
+            "from examination e join examination_fmedical_items e_fmedical_items on e_fmedical_items.Examination_ID = e.Examination_ID join fmedical_items fmedical on fmedical.Fmedical_Items_ID = e_fmedical_items.Fmedical_Items_ID join department d on fmedical.Department_ID = d.Department_ID" ,
             "where e.Examination_ID = #{examinationId,jdbcType=INTEGER} and e.Examination_Mark = #{mark,jdbcType=CHAR} "
     })
     @ResultMap("SecondResultMap")
     Examination selectExaminationById(Integer examinationId, String mark);
+
+
+    //获得所有药房检查检验的药
+    List<Examination> getAllExaminationMedical();
+
 }

@@ -213,5 +213,4 @@
     WHERE
         Constant_Type_ID = 1
   </select>
-
 </mapper>

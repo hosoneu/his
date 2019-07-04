@@ -18,6 +18,9 @@ public class TreatmentItems {
     /* 对应的处置非药品对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.17*/
     private FmedicalItems fmedicalItems;
 
+    /* 对应的科室对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.07.02*/
+    private Department department;
+
     public TreatmentItems(Integer treatmentItemsId, Integer treatmentId, Integer fmedicalItemsId, Integer quantity, Integer actualQuantity, Integer expenseItemsId, String validStatus) {
         this.treatmentItemsId = treatmentItemsId;
         this.treatmentId = treatmentId;
@@ -37,6 +40,26 @@ public class TreatmentItems {
         this.expenseItemsId = expenseItemsId;
         this.validStatus = validStatus;
         this.fmedicalItems = fmedicalItems;
+    }
+
+    public TreatmentItems(Integer treatmentItemsId, Integer treatmentId, Integer fmedicalItemsId, Integer quantity, Integer actualQuantity, Integer expenseItemsId, String validStatus, FmedicalItems fmedicalItems, Department department) {
+        this.treatmentItemsId = treatmentItemsId;
+        this.treatmentId = treatmentId;
+        this.fmedicalItemsId = fmedicalItemsId;
+        this.quantity = quantity;
+        this.actualQuantity = actualQuantity;
+        this.expenseItemsId = expenseItemsId;
+        this.validStatus = validStatus;
+        this.fmedicalItems = fmedicalItems;
+        this.department = department;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public FmedicalItems getFmedicalItems() {

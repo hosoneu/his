@@ -6,6 +6,8 @@ import edu.neu.hoso.model.MedicalRecordMapper;
 import edu.neu.hoso.service.MedicalRecordHomePageService;
 import edu.neu.hoso.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,17 +23,36 @@ import java.util.List;
 */
 @RequestMapping("doctor/diagnosis")
 @RestController
+@CrossOrigin
 public class DoctorFinalDiagnosisController {
     // 确诊  录入终诊信息
     @Autowired
     MedicalRecordHomePageService medicalRecordHomePageService;
     @Autowired
     MedicalRecordService medicalRecordService;
+
+    //列出终诊诊信息
+    @RequestMapping("/listFinalDiagnosisByMedicalRecordId")
+    public ResultDTO<List<Diagnosis>> listFinalDiagnosisByMedicalRecordId(Integer medicalRecordId){
+        ResultDTO<List<Diagnosis>> resultDTO = new ResultDTO<>();
+        try {
+            resultDTO.setData(medicalRecordHomePageService.listFinalDiagnosisByMedicalRecordId(medicalRecordId));
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("终诊信息查询成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("终诊信息查询失败！");
+        }
+        return resultDTO;
+    }
+
+
     @RequestMapping("/insertFinalDiagnosis")
-    public ResultDTO<Integer> insertFinalDiagnosis(List<Diagnosis> diagnosisList, Integer userId,Integer medicalRecordId){
+    public ResultDTO<Integer> insertFinalDiagnosis(@RequestBody List<Diagnosis> diagnosisList){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
-            resultDTO.setData(medicalRecordHomePageService.insertFinalDiagnosis(diagnosisList,userId,medicalRecordId));
+            resultDTO.setData(medicalRecordHomePageService.insertFinalDiagnosis(diagnosisList));
             resultDTO.setStatus("OK");
             resultDTO.setMsg("终诊信息录入成功！");
         } catch (Exception e) {
@@ -44,10 +65,10 @@ public class DoctorFinalDiagnosisController {
 
     // 确诊  录入辅助检查结果
     @RequestMapping("/insertAssistantExamination")
-    public ResultDTO insertAssistantExamination(String assistantExamination,Integer medicalRecordHomePageId){
+    public ResultDTO insertAssistantExamination(String assistantExamination,Integer medicalRecordId){
         ResultDTO resultDTO = new ResultDTO<>();
         try {
-            medicalRecordHomePageService.insertAssistantExamination(assistantExamination,medicalRecordHomePageId);
+            medicalRecordHomePageService.insertAssistantExamination(assistantExamination,medicalRecordId);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("辅助检查结果录入成功！");
         } catch (Exception e) {
@@ -58,8 +79,8 @@ public class DoctorFinalDiagnosisController {
         return resultDTO;
     }
     // 诊毕
-    @RequestMapping("/treamentOver")
-    public ResultDTO treamentOver(Integer medicalRecordId){
+    @RequestMapping("/treatmentOver")
+    public ResultDTO treatmentOver(Integer medicalRecordId){
         ResultDTO resultDTO = new ResultDTO<>();
         try {
             medicalRecordService.treamentOver(medicalRecordId);

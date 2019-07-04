@@ -28,12 +28,18 @@ public interface TechService {
     void maintainCommonFmedical(List<CommonlyUsedFmedical> commonlyUsedFmedicals);
 
     //检查检验结果录入
-    void insertExaminationResult(ExaminationResult examinationResult);
+    void insertExaminationResult(ExaminationResult examinationResult, int examinationFmedicalItemsId);
 
     //检查检验结果照片录入
-    void insertExaminationResultImage(int examinationResultId, List<ExaminationResultImage> examinationResultImage);
+    void insertExaminationResultImage(int examinationResultId, String imageURL, String imageName);
 
     //根据科室号获得所有病人
     List<Registration> getAllPatientByDepartmentId(int departmentId);
+
+    //获得所有药
+    List<Drugs> getAllDrugs();
+
+    //根据医生id获得其常用项目
+    List<CommonlyUsedDrugs> getCommonUsedDrugs(int doctorId);
 
 }

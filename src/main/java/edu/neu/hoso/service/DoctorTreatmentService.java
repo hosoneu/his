@@ -30,4 +30,6 @@ public interface DoctorTreatmentService {
     List<GroupTreatment> listGroupTreatment(Integer userId, String scope);
     // 查找处置组套的详细信息
     GroupTreatment selectGroupTreatmentById(Integer groupTreatmentId);
+    // 删除处置组套
+    void deleteGroupTreatmentById(Integer groupTreatmentId);
 }

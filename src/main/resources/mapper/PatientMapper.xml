@@ -212,4 +212,10 @@
     </set>
     where Patient_ID = #{patientId,jdbcType=INTEGER}
   </update>
+
+  <select id="getPatientById" resultMap="BaseResultMap">
+    select patient.*
+    from patient join registration on registration.Patient_ID = patient.Patient_ID
+ 	where registration.Medical_Record_ID = #{medicalRecordId}
+  </select>
 </mapper>

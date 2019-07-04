@@ -104,4 +104,7 @@ public interface PrescriptionMapper {
     })
     @ResultMap("SecondResultMap")
     Prescription selectHerbalPrescriptionById(Integer prescriptionId);
+
+//    获得所有药房处方药
+    List<Prescription> getAllPrescriptionMedical();
 }

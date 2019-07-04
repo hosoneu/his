@@ -63,4 +63,21 @@ public interface DiagnosisMapper {
         "where Diagnosis_ID = #{diagnosisId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Diagnosis record);
+
+    /**
+     * @title: listFirstDiagnosisByMedicalRecordId
+     * @description: 列出病历ID对应的初诊信息
+     * @author: 29-y
+     * @date: 2019-06-26 1:11
+     * @param: [medicalRecordId]
+     * @return: java.util.List<edu.neu.hoso.model.Diagnosis>
+     * @throws:
+     */
+    @Select({
+            "select dia.*,dis.* " ,
+            "from diagnosis dia join disease dis on dia.Disease_ID = dis.Disease_ID " ,
+            "where dia.Medical_Record_ID=#{medicalRecordId,jdbcType=INTEGER} and dia.Diagnosis_Mark=#{type,jdbcType=CHAR} "
+    })
+    @ResultMap("SecondResultMap")
+    List<Diagnosis> listDiagnosisByMedicalRecordId(Integer medicalRecordId,String type);
 }

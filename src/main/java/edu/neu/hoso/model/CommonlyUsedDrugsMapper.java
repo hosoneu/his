@@ -56,6 +56,15 @@ public interface CommonlyUsedDrugsMapper {
     })
     int updateByPrimaryKey(CommonlyUsedDrugs record);
 
+    /**
+     * @title: listCommonlyUsedDrugsByUserId
+     * @description: 列出常用药品
+     * @author:
+     * @date: 2019-06-26 18:26
+     * @param: [userId]
+     * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDrugs>
+     * @throws:
+     */
     @Select({
         "select d.*,c.* ",
         "from drugs d join commonly_used_drugs c on d.Drugs_ID=c.Drugs_ID",
@@ -63,4 +72,39 @@ public interface CommonlyUsedDrugsMapper {
     })
     @ResultMap("SecondResultMap")
     List<CommonlyUsedDrugs> listCommonlyUsedDrugsByUserId(Integer userId);
+
+    /**
+     * @title: listCommonlyUsedPatentDrugsByUserId
+     * @description: 列出常用成药药品
+     * @author:
+     * @date: 2019-06-26 18:26
+     * @param: [userId]
+     * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDrugs>
+     * @throws:
+     */
+    @Select({
+            "select d.*,c.* ",
+            "from drugs d join commonly_used_drugs c on d.Drugs_ID=c.Drugs_ID",
+            "where c.Doctor_ID = #{userId , jdbcType=INTEGER} and d.Drugs_Type_ID!=103"
+    })
+    @ResultMap("SecondResultMap")
+    List<CommonlyUsedDrugs> listCommonlyUsedPatentDrugsByUserId(Integer userId);
+
+    /**
+     * @title: listCommonlyUsedHerbalDrugsByUserId
+     * @description: 列出常用草药药品
+     * @author:
+     * @date: 2019-06-26 18:26
+     * @param: [userId]
+     * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDrugs>
+     * @throws:
+     */
+    @Select({
+            "select d.*,c.* ",
+            "from drugs d join commonly_used_drugs c on d.Drugs_ID=c.Drugs_ID",
+            "where c.Doctor_ID = #{userId , jdbcType=INTEGER} and d.Drugs_Type_ID=103"
+    })
+    @ResultMap("SecondResultMap")
+    List<CommonlyUsedDrugs> listCommonlyUsedHerbalDrugsByUserId(Integer userId);
+    List<CommonlyUsedDrugs> getCommonUsedDrugs(@Param("doctorId")int doctorId);
 }

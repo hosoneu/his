@@ -5,6 +5,8 @@ import edu.neu.hoso.model.GroupPrescription;
 import edu.neu.hoso.model.Prescription;
 import edu.neu.hoso.service.DoctorPrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 @RequestMapping("doctor/prescription/herbal")
 @RestController
+@CrossOrigin
 public class DoctorHerbalPrescriptionController {
     @Autowired
     DoctorPrescriptionService doctorPrescriptionService;
@@ -52,7 +55,7 @@ public class DoctorHerbalPrescriptionController {
 
     //插入草药组套
     @RequestMapping("/insertGroupPrescription")
-    public ResultDTO<Integer> insertGroupHerbalPrescription(GroupPrescription groupPrescription){
+    public ResultDTO<Integer> insertGroupHerbalPrescription(@RequestBody GroupPrescription groupPrescription){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorPrescriptionService.insertGroupHerbalPrescription(groupPrescription));
@@ -86,7 +89,7 @@ public class DoctorHerbalPrescriptionController {
 
     //开立草药处方
     @RequestMapping("/insertPrescription")
-    public ResultDTO<Integer> insertHerbalPrescription(Prescription prescription){
+    public ResultDTO<Integer> insertHerbalPrescription(@RequestBody Prescription prescription){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorPrescriptionService.insertHerbalPrescription(prescription));
@@ -102,7 +105,7 @@ public class DoctorHerbalPrescriptionController {
 
 
     //废除草药处方 在废除之前需要调用是否可废除函数 才能进行该操作
-        @RequestMapping("/cancelPrescription")
+    @RequestMapping("/cancelPrescription")
     public ResultDTO cancelHerbalPrescription(Integer prescriptionId){
         ResultDTO resultDTO = new ResultDTO<>();
         try {

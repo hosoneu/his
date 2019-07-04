@@ -7,6 +7,8 @@ import edu.neu.hoso.model.GroupExamination;
 import edu.neu.hoso.service.DoctorExaminationService;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,11 +25,20 @@ import java.util.List;
 
 @RequestMapping("doctor/examination")
 @RestController
+@CrossOrigin
 public class DoctorExaminationController {
     @Autowired
     DoctorExaminationService doctorExaminationService;
 
-    // 获取当前已开立的检查检验单列表 根据 病历ID 获取当前病历的检查/检验申请表（检查检验申请表*（检查检验非药品表*（非药品条目表*常数项表）））
+    /**
+     * @title: listExaminationByMedicalRecordId
+     * @description: 根据病历ID获取当前已开立的检查检验单列表
+     * @author: 29y
+     * @date: 2019-06-20 18:24
+     * @param: [medicalRecordId, type]
+     * @return: edu.neu.hoso.dto.ResultDTO<java.util.List<edu.neu.hoso.model.Examination>>
+     * @throws:
+     */
     @RequestMapping("/listExaminationByMedicalRecordId")
     public ResultDTO<List<Examination>> listExaminationByMedicalRecordId(Integer medicalRecordId, String type){
         ResultDTO<List<Examination>> resultDTO = new ResultDTO<>();
@@ -74,6 +85,22 @@ public class DoctorExaminationController {
         }
         return resultDTO;
     }
+
+    // 删除检查检验组套
+    @RequestMapping("/deleteGroupExamination")
+    public ResultDTO deleteGroupExamination(Integer groupExaminationId){
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            doctorExaminationService.deleteGroupExamination(groupExaminationId);
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("检查检验组套删除成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("检查检验组套删除失败！");
+        }
+        return resultDTO;
+    }
     // 根据ID查找检查检验组套（ type: 1 检查 2 检验 ）
     @RequestMapping("/selectGroupExaminationById")
     public ResultDTO<GroupExamination> selectGroupExaminationById(Integer groupExaminationId, String type){
@@ -92,7 +119,7 @@ public class DoctorExaminationController {
 
     // 存为检查检验模板 根据 检查检验组套(List<检查检验组套非药品条目表(List<检查检验组套药品条目表>)>）
     @RequestMapping("/insertGroupExamination")
-    public ResultDTO<Integer> insertGroupExamination(GroupExamination groupExamination){
+    public ResultDTO<Integer> insertGroupExamination(@RequestBody GroupExamination groupExamination){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorExaminationService.insertGroupExamination(groupExamination));
@@ -108,7 +135,7 @@ public class DoctorExaminationController {
 
     // 开立项目 根据 检查检验申请表（List<检查检验非药品条目表（List<检查检验药品条目表>）>）并自动生成收费条目
     @RequestMapping("/insertExamination")
-    public ResultDTO<Integer> insertExamination(Examination examination){
+    public ResultDTO<Integer> insertExamination(@RequestBody Examination examination){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {
             resultDTO.setData(doctorExaminationService.insertExamination(examination));

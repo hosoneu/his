@@ -1,14 +1,9 @@
 package edu.neu.hoso.model;
 
 import edu.neu.hoso.example.InvoiceExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
 
 public interface InvoiceMapper {
     int countByExample(InvoiceExample example);
@@ -48,6 +43,11 @@ public interface InvoiceMapper {
     int updateByExampleSelective(@Param("record") Invoice record, @Param("example") InvoiceExample example);
 
     int updateByExample(@Param("record") Invoice record, @Param("example") InvoiceExample example);
+
+    @Select({
+            "SELECT invoice.User_ID FROM invoice WHERE invoice.Is_Day_Cal='1'"
+    })
+    List<Integer> FindNotCalUsers();
 
     int updateByPrimaryKeySelective(Invoice record);
 

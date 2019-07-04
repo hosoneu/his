@@ -20,7 +20,7 @@
     <result property="examinationMark" column="Examination_Mark" jdbcType="CHAR" javaType="java.lang.String" />
     <result property="doctorAdvice" column="Doctor_Advice" jdbcType="VARCHAR" javaType="java.lang.String" />
     <result property="submitTime" column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    <collection property="examinationFmedicalItemsList" ofType="edu.neu.hoso.model.ExaminationFmedicalItems" resultMap="edu.neu.hoso.model.ExaminationFmedicalItemsMapper.SecondResultMap"/>
+    <collection property="examinationFmedicalItemsList" ofType="edu.neu.hoso.model.ExaminationFmedicalItems" resultMap="edu.neu.hoso.model.ExaminationFmedicalItemsMapper.ThirdResultMap"/>
   </resultMap>
 
   <sql id="Example_Where_Clause" >
@@ -215,4 +215,36 @@
       from examination NATURAL JOIN examination_fmedical_items natural join examination_drugs_items
       where examination_drugs_items.Expense_Items_ID=#{ExaminationDrugsItemsId}
   </select>
+
+
+  <select id="getAllExaminationMedical" resultMap="ExaminationMedical">
+      select drugs.*,examination.*,examination_drugs_items.*
+      from examination join examination_fmedical_items on examination.Examination_ID = examination_fmedical_items.Examination_ID
+                                     join examination_drugs_items on examination_fmedical_items.Examination_Fmedical_Items_ID = examination_drugs_items.Examination_Fmedical_Items_ID
+                                     join drugs on examination_drugs_items.Drugs_ID = drugs.Drugs_ID
+
+  </select>
+  <resultMap id="ExaminationMedical" type="edu.neu.hoso.model.Examination">
+    <id column="Examination_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationId"/>
+    <result column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="medicalRecordId"/>
+    <result column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="doctorId"/>
+    <result column="Examination_Mark" jdbcType="CHAR" javaType="java.lang.String" property="examinationMark"/>
+    <result column="Doctor_Advice" jdbcType="VARCHAR" javaType="java.lang.String" property="doctorAdvice"/>
+    <result column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" property="submitTime"/>
+    <collection property="examinationDrugsItemsList" ofType="edu.neu.hoso.model.ExaminationDrugsItems">
+      <id column="Examination_Drugs_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationDrugsItemsId"/>
+      <result column="Examination_Fmedical_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="examinationFmedicalItemsId"/>
+      <result column="Drugs_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="drugsId"/>
+      <result column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="doctorId"/>
+      <result column="Drugs_Usage" jdbcType="CHAR" javaType="java.lang.String" property="drugsUsage"/>
+      <result column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="quantity"/>
+      <result column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="actualQuantity"/>
+      <result column="Drugs_Dispensing_Status" jdbcType="CHAR" javaType="java.lang.String" property="drugsDispensingStatus"/>
+      <result column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="expenseItemsId"/>
+      <result column="Times" jdbcType="INTEGER" javaType="java.lang.Integer" property="times"/>
+      <result column="Days" jdbcType="INTEGER" javaType="java.lang.Integer" property="days"/>
+      <result column="Dosage" jdbcType="DOUBLE" javaType="java.lang.Double" property="dosage"/>
+      <association property="drugs" javaType="edu.neu.hoso.model.Drugs" resultMap="edu.neu.hoso.model.DrugsMapper.BaseResultMap"/>
+    </collection>
+  </resultMap>
 </mapper>

@@ -1,6 +1,8 @@
 package edu.neu.hoso.service.impl;
 
 import edu.neu.hoso.example.ExaminationDrugsItemsExample;
+import edu.neu.hoso.example.GroupExaminationDrugsItemsExample;
+import edu.neu.hoso.example.GroupExaminationFmedicalItemsExample;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.DoctorExaminationService;
 import org.springframework.stereotype.Service;
@@ -132,6 +134,7 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
                 //得到每个GroupExamination中的非药品项目条目
                 List<GroupExaminationFmedicalItems> groupExaminationFmedicalItemsList = groupExamination.getGroupExaminationFmedicalItemsList();
                 //对检查检验组套药品列表进行赋值
+                //填充药品条目
                 groupExamination.setGroupExaminationFmedicalItemsList(valueGroupExaminationFmedicalItemsList(groupExaminationFmedicalItemsList));
             }
             return groupExaminationList;
@@ -152,11 +155,12 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
     private List<GroupExaminationFmedicalItems> valueGroupExaminationFmedicalItemsList(List<GroupExaminationFmedicalItems> groupExaminationFmedicalItemsList){
         for(int currentIndex = 0 ; currentIndex < groupExaminationFmedicalItemsList.size() ; currentIndex++) {
             GroupExaminationFmedicalItems groupExaminationFmedicalItems = groupExaminationFmedicalItemsList.get(currentIndex);
-            groupExaminationFmedicalItems.setGroupExaminationDrugsItemsList(groupExaminationDrugsItemsMapper.listGroupExaminationDrugsItemsByGroupExaminationFmedicalItemsId(groupExaminationFmedicalItems.getFmedicalItemsId()));
+            groupExaminationFmedicalItems.setGroupExaminationDrugsItemsList(groupExaminationDrugsItemsMapper.listGroupExaminationDrugsItemsByGroupExaminationFmedicalItemsId(groupExaminationFmedicalItems.getGroupExaminationFmedicalItemsId()));
             groupExaminationFmedicalItemsList.set(currentIndex,groupExaminationFmedicalItems);
         }
         return groupExaminationFmedicalItemsList;
     }
+
 
     /**
      * @title: selectGroupExaminationById
@@ -194,7 +198,7 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
         for(GroupExaminationFmedicalItems groupExaminationFmedicalItems : groupExaminationFmedicalItemsList){
             groupExaminationFmedicalItems.setGroupExaminationId(groupExaminationId);
             groupExaminationFmedicalItemsMapper.insert(groupExaminationFmedicalItems);
-            Integer groupExaminationFmedicalItemsId = groupExaminationFmedicalItems.getFmedicalItemsId();
+            Integer groupExaminationFmedicalItemsId = groupExaminationFmedicalItems.getGroupExaminationFmedicalItemsId();
             //插入非药品条目中的药品条目
             List<GroupExaminationDrugsItems> groupExaminationDrugsItemsList = groupExaminationFmedicalItems.getGroupExaminationDrugsItemsList();
             for(GroupExaminationDrugsItems groupExaminationDrugsItems : groupExaminationDrugsItemsList){
@@ -203,6 +207,11 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
             }
         }
         return groupExaminationId;
+    }
+
+    @Override
+    public void deleteGroupExamination(Integer groupExaminationId) {
+        groupExaminationMapper.deleteByPrimaryKey(groupExaminationId);
     }
 
     /**
@@ -221,6 +230,7 @@ public class DoctorExaminationServiceImpl implements DoctorExaminationService {
         examinationMapper.insert(examination);
         Integer examinationId = examination.getExaminationId();
         Integer medicalRecordId = examination.getMedicalRecordId();
+
         List<ExaminationFmedicalItems> examinationFmedicalItemsList = examination.getExaminationFmedicalItemsList();
         //插入检查检验非药品条目以及对应的收费条目
         for(ExaminationFmedicalItems examinationFmedicalItems : examinationFmedicalItemsList){

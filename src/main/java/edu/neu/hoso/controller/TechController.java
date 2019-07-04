@@ -6,10 +6,10 @@ import edu.neu.hoso.service.TechService;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,7 +130,7 @@ public class TechController {
 
     /**
      *@title: updateRegistrationStatus
-     *@description: 根据检查检验非药品明细id，该科室的Registration_Status 1->2
+     *@description: 根据检查检验非药品明细id，该科室的Registration_Status 1->2，登记
      *@author: alan
      *@date: 2019/6/12 11:55
      *@param: [examinationFmedicalItemdId]
@@ -145,10 +145,12 @@ public class TechController {
             techService.updateRegistrationStatus(examinationFmedicalItemdId);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("更新成功！");
+            System.out.println("成功了");
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
             resultDTO.setMsg("更新失败！");
+            System.out.println("失败了");
         }
         return resultDTO;
     }
@@ -163,7 +165,7 @@ public class TechController {
      *@throws:
      */
     @RequestMapping("/getAllFmedical")
-    public ResultDTO<List<ExaminationFmedicalItems>> getAllFmedical(int Medical_record_ID, int Department_ID){
+    public ResultDTO<List<ExaminationFmedicalItems>> getAllFmedical(Integer Medical_record_ID, Integer Department_ID){
 //        int Medical_record_ID=1111;
 //        int Department_ID =133;
         System.out.println("okok");
@@ -171,11 +173,12 @@ public class TechController {
         try {
             List<ExaminationFmedicalItems> examinationFmedicalItems = techService.getAllFmedical(Medical_record_ID, Department_ID);
             if (examinationFmedicalItems == null){
-                resultDTO.setStatus("ERROR");
-                resultDTO.setMsg("获取失败！");
+                resultDTO.setStatus("OK");
+                resultDTO.setMsg("为空！");
             }
             else {
                 for (ExaminationFmedicalItems examinationFmedicalItems1:examinationFmedicalItems){
+                    System.out.println(examinationFmedicalItems1.toString());
                     System.out.println(examinationFmedicalItems1.getFmedicalItems().toString());
                     for (ExaminationDrugsItems examinationDrugsItems: examinationFmedicalItems1.getExaminationDrugsItemsList()){
                         System.out.println(examinationDrugsItems.toString());
@@ -205,7 +208,9 @@ public class TechController {
      *@throws:
      */
     @RequestMapping("insertExaminationDrugsAndExpense")
-    public ResultDTO insertExaminationDrugsAndExpense(List<ExaminationDrugsItems> examinationDrugsItems, int Medical_record_ID){
+    public ResultDTO insertExaminationDrugsAndExpense(@RequestBody DispensingDrugsDecoratingClass dispensingDrugsDecoratingClass){
+        System.out.println("执行开药");
+        System.out.println(dispensingDrugsDecoratingClass.getMedicalRecordID());
 //        ExaminationDrugsItems ex1 = new ExaminationDrugsItems();
 //        ex1.setDrugsId(5);
 //        ex1.setQuantity(2);
@@ -220,7 +225,16 @@ public class TechController {
 //        int Medical_record_ID = 1111;
         ResultDTO resultDTO = new ResultDTO();
         try {
-            techService.insertExaminationDrugsAndExpense(examinationDrugsItems, Medical_record_ID);
+            List<ExaminationDrugsItems> examinationDrugsItemsList = dispensingDrugsDecoratingClass.getExaminationDrugsItemsList();
+            System.out.println("开始输出");
+            for (ExaminationDrugsItems examinationDrugsItems:examinationDrugsItemsList){
+                System.out.println("输出一次");
+                System.out.println(examinationDrugsItems.toString());
+            }
+            System.out.println("输出完毕");
+            int Medical_record_ID = dispensingDrugsDecoratingClass.getMedicalRecordID();
+
+            techService.insertExaminationDrugsAndExpense(examinationDrugsItemsList, Medical_record_ID);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("插入成功！");
         } catch (Exception e) {
@@ -265,7 +279,7 @@ public class TechController {
 
     /**
      *@title: insertExaminationResult
-     *@description: 检查检验结果录入
+     *@description: 检查检验结果录入,检查检验照片录入，提交
      *@author: alan
      *@date: 2019/6/13 15:49
      *@param: [examinationResult]
@@ -273,15 +287,21 @@ public class TechController {
      *@throws:
      */
     @RequestMapping("/insertExaminationResult")
-    public ResultDTO insertExaminationResult(ExaminationResult examinationResult){
+    public ResultDTO insertExaminationResult(ExaminationResult examinationResult, int examinationFmedicalItemsId, String imageURL, String imageName){
 //        ExaminationResult examinationResult = new ExaminationResult();
 //        examinationResult.setDoctorId(100);
 //        examinationResult.setFindings("goodfinding");
 //        examinationResult.setDiagnosticSuggestion("no diagnostia");
 
+        System.out.println("接到的result" + examinationResult.toString());
+        System.out.println("接收到的" + imageURL);
         ResultDTO resultDTO = new ResultDTO();
         try {
-            techService.insertExaminationResult(examinationResult);
+            techService.insertExaminationResult(examinationResult, examinationFmedicalItemsId);
+            System.out.println("ExaminationResultId是" + examinationResult.getExaminationResultId());
+            if (! imageURL.equals("")) {
+                techService.insertExaminationResultImage(examinationResult.getExaminationResultId(), imageURL, imageName);
+            }
             resultDTO.setStatus("OK");
             resultDTO.setMsg("插入成功！");
         } catch (Exception e) {
@@ -290,7 +310,6 @@ public class TechController {
             resultDTO.setMsg("插入失败！");
         }
         return resultDTO;
-
     }
 
     /**
@@ -302,31 +321,32 @@ public class TechController {
      *@return: void
      *@throws:
      */
-    @RequestMapping("/insertExaminationResultImage")
-    public ResultDTO insertExaminationResultImage(int examinationResultId, List<ExaminationResultImage> examinationResultImages){
-//        List<ExaminationResultImage> examinationResultImages = new ArrayList<ExaminationResultImage>();
-//        ExaminationResultImage examinationResultImage1 = new ExaminationResultImage();
-//        examinationResultImage1.setImageName("img1");
-//        examinationResultImage1.setImageUrl("img1_url");
-//        examinationResultImages.add(examinationResultImage1);
-//        ExaminationResultImage examinationResultImage2 = new ExaminationResultImage();
-//        examinationResultImage2.setImageName("img2");
-//        examinationResultImage2.setImageUrl("img1_ur2");
-//        examinationResultImages.add(examinationResultImage2);
-//        int examinationResultId = 16;
-
-        ResultDTO resultDTO = new ResultDTO();
-        try {
-            techService.insertExaminationResultImage(examinationResultId, examinationResultImages);
-            resultDTO.setStatus("OK");
-            resultDTO.setMsg("删除成功！");
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultDTO.setStatus("ERROR");
-            resultDTO.setMsg("删除失败！");
-        }
-        return resultDTO;
-    }
+//    @RequestMapping("/insertExaminationResultImage")
+//    public ResultDTO insertExaminationResultImage(int examinationResultId, ExaminationResultImage examinationResultImage){
+////        List<ExaminationResultImage> examinationResultImages = new ArrayList<ExaminationResultImage>();
+////        ExaminationResultImage examinationResultImage1 = new ExaminationResultImage();
+////        examinationResultImage1.setImageName("img1");
+////        examinationResultImage1.setImageUrl("img1_url");
+////        examinationResultImages.add(examinationResultImage1);
+////        ExaminationResultImage examinationResultImage2 = new ExaminationResultImage();
+////        examinationResultImage2.setImageName("img2");
+////        examinationResultImage2.setImageUrl("img1_ur2");
+////        examinationResultImages.add(examinationResultImage2);
+////        int examinationResultId = 16;
+//
+//        ResultDTO resultDTO = new ResultDTO();
+//        try {
+//            techService.insertExaminationResultImage(examinationResultId, examinationResultImage);
+//            resultDTO.setStatus("OK");
+//            resultDTO.setMsg("插入成功！");
+//            System.out.println("插入成功");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            resultDTO.setStatus("ERROR");
+//            resultDTO.setMsg("插入失败！");
+//        }
+//        return resultDTO;
+//    }
 
     /**
      *@title: getAllPatientByDepartmentId
@@ -351,7 +371,7 @@ public class TechController {
                 resultDTO.setMsg("查询成功！");
                 for (Registration registration:registrations){
                     System.out.println(registration.toString());
-                    System.out.println(registration.getPatient().toString());
+//                    System.out.println(registration.getPatient().toString());
                 }
                 resultDTO.setData(registrations);
             }
@@ -359,6 +379,62 @@ public class TechController {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
             resultDTO.setMsg("查询失败！");
+        }
+        return resultDTO;
+    }
+
+    /**
+     *@title: getAllDrugs
+     *@description: 获得所有药
+     *@author: alan
+     *@date: 2019/6/28 18:47
+     *@param: []
+     *@return: edu.neu.hoso.dto.ResultDTO<java.util.List<edu.neu.hoso.model.Drugs>>
+     *@throws:
+     */
+    @RequestMapping("/getAllDrugs")
+    public ResultDTO<List<Drugs>> getAllDrugs(){
+        ResultDTO<List<Drugs>> resultDTO = new ResultDTO<List<Drugs>>();
+        try {
+            List<Drugs> drugsList = techService.getAllDrugs();
+            for (Drugs drugs:drugsList){
+                System.out.println(drugs.toString());
+            }
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("插入成功！");
+            resultDTO.setData(drugsList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("插入失败！");
+        }
+        return resultDTO;
+    }
+
+    /**
+     *@title: getCommonUsedDrugs
+     *@description: 根据医生id获得其常用项目
+     *@author: alan
+     *@date: 2019/7/3 18:30
+     *@param: [doctorId]
+     *@return: edu.neu.hoso.dto.ResultDTO<java.util.List<edu.neu.hoso.model.CommonlyUsedDrugs>>
+     *@throws:
+     */
+    @RequestMapping("/getCommonUsedDrugs")
+    public ResultDTO<List<CommonlyUsedDrugs>> getCommonUsedDrugs(int doctorId){
+        ResultDTO<List<CommonlyUsedDrugs>> resultDTO = new ResultDTO<>();
+        try {
+            List<CommonlyUsedDrugs> commonlyUsedDrugsList = techService.getCommonUsedDrugs(doctorId);
+            for (CommonlyUsedDrugs commonlyUsedDrugs:commonlyUsedDrugsList){
+                System.out.println(commonlyUsedDrugs.toString());
+            }
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("插入成功！");
+            resultDTO.setData(commonlyUsedDrugsList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("插入失败！");
         }
         return resultDTO;
     }
