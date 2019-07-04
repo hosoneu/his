@@ -31,4 +31,6 @@ public interface SchedulingService {
     List<SchedulingRule> getSchedulingRuleByDoctorId(Integer doctorId);
     List<SchedulingRule> getSchedulingRuleByWeekday(String weekday);
     List<SchedulingRule> getAllSchedulingRule();
+
+    List<SchedulingInfo> getAllSchedulingInfoWithUserName();
 }

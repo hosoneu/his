@@ -288,6 +288,7 @@
     <result column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="medicalRecordId"/>
     <result column="Total_Cost" jdbcType="DOUBLE" javaType="java.lang.Double" property="totalCost"/>
     <result column="Pay_Status" jdbcType="CHAR" javaType="java.lang.String" property="payStatus"/>
+    <result column="E_Invoice_ID" property="invoiceId" />
     <association property="invoice" javaType="Invoice">
       <id column="Invoice_ID" property="invoiceId" />
       <result column="Invoice_NO" property="invoiceNo" />
@@ -301,11 +302,13 @@
     <association property="drugs" javaType="Drugs">
       <id column="Drugs_ID" property="drugsId" />
       <result column="Drugs_Name" property="drugsName" />
+      <result column="Drugs_Price" property="drugsPrice" />
     </association>
-      <association property="exDrugs" javaType="Drugs">
+    <association property="exDrugs" javaType="Drugs">
           <id column="Ex_Drugs_ID" property="drugsId" />
           <result column="Ex_Drugs_Name" property="drugsName" />
-      </association>
+          <result column="Ex_Drugs_Price" property="drugsPrice" />
+    </association>
     <association property="prescriptionItems" javaType="PrescriptionItems">
       <id column="Prescription_Items_ID" property="prescriptionItemsId" />
       <result column="P_Quantity" property="quantity" />
@@ -341,8 +344,10 @@
     SELECT
         drugs.Drugs_ID,
         drugs.Drugs_Name,
+        drugs.Drugs_Price,
         ex_drugs.Drugs_ID AS Ex_Drugs_ID,
         ex_drugs.Drugs_Name AS Ex_Drugs_Name,
+        ex_drugs.Drugs_Price AS Ex_Drugs_Price,
         prescription_items.Prescription_Items_ID,
         prescription_items.Quantity AS P_Quantity,
         prescription_items.Actual_Quantity AS P_Actual_Quantity,
@@ -362,6 +367,7 @@
         expense_items.Expense_Items_ID,
         expense_items.Medical_Record_ID,
         expense_items.Total_Cost,
+        expense_items.Invoice_ID AS E_Invoice_ID,
         Pay_Status,
         invoice.Invoice_ID,
         invoice.Invoice_NO,

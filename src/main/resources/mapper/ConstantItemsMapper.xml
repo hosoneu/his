@@ -169,4 +169,31 @@
     </set>
     where Constant_Items_ID = #{constantItemsId,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="DrugsConstantItems" type="edu.neu.hoso.model.ConstantItems">
+    <id column="Constant_Items_ID" property="constantItemsId" />
+    <result column="Constant_Items_Name" property="constantItemsName" />
+  </resultMap>
+
+  <select id="getDrugsDosage" resultMap="DrugsConstantItems">
+    SELECT DISTINCT
+        Constant_Items_ID,
+        Constant_Items_Name
+    FROM
+        constant_items
+        JOIN drugs ON constant_items.Constant_Items_ID = drugs.Drugs_Dosage_ID
+    ORDER BY
+        Constant_Items_ID
+  </select>
+
+  <select id="getDrugsType" resultMap="DrugsConstantItems">
+    SELECT DISTINCT
+        Constant_Items_ID,
+        Constant_Items_Name
+    FROM
+        constant_items
+        JOIN drugs ON constant_items.Constant_Items_ID = drugs.Drugs_Type_ID
+    ORDER BY
+        Constant_Items_ID
+  </select>
 </mapper>

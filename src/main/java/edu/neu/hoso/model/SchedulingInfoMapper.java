@@ -67,4 +67,5 @@ public interface SchedulingInfoMapper {
         "where Scheduling_Info_ID = #{schedulingInfoId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(SchedulingInfo record);
+    List<SchedulingInfo> getAllSchedulingInfoWithUserName();
 }
