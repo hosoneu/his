@@ -5,12 +5,9 @@ import edu.neu.hoso.example.PatientExample;
 import edu.neu.hoso.example.RegistrationExample;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.TechService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -58,6 +55,9 @@ public class TechServiceImpl implements TechService {
 
     @Resource
     ExaminationResultImageMapper examinationResultImageMapper;
+
+    @Resource
+    CommonlyUsedDrugsMapper commonlyUsedDrugsMapper;
 
     /**
      *@title: getInfoByMedical_record_ID
@@ -219,10 +219,14 @@ public class TechServiceImpl implements TechService {
      *@return: void
      *@throws:
      */
-    public void insertExaminationResult(ExaminationResult examinationResult){
+    public void insertExaminationResult(ExaminationResult examinationResult, int examinationFmedicalItemsId){
         Timestamp timeStamp = new Timestamp(new Date().getTime());
         examinationResult.setSubmitTime(timeStamp);
         examinationResultMapper.insertSelective(examinationResult);
+        //将结果id插回去
+        ExaminationFmedicalItems examinationFmedicalItems = examinationFmedicalItemsMapper.selectByPrimaryKey(examinationFmedicalItemsId);
+        examinationFmedicalItems.setExaminationResultId(examinationResult.getExaminationResultId());
+        examinationFmedicalItemsMapper.updateByPrimaryKeySelective(examinationFmedicalItems);
     }
 
     /**
@@ -234,15 +238,40 @@ public class TechServiceImpl implements TechService {
      *@return: void
      *@throws:
      */
-    public void insertExaminationResultImage(int examinationResultId, List<ExaminationResultImage> examinationResultImages){
-        for (ExaminationResultImage examinationResultImage : examinationResultImages){
-            examinationResultImage.setExaminationResultId(examinationResultId);
-            examinationResultImageMapper.insertSelective(examinationResultImage);
-        }
+    public void insertExaminationResultImage(int examinationResultId, String imageURL, String imageName){
+        ExaminationResultImage examinationResultImage = new ExaminationResultImage();
+        examinationResultImage.setExaminationResultId(examinationResultId);
+        examinationResultImage.setImageUrl(imageURL);
+        examinationResultImage.setImageName(imageName);
+        examinationResultImageMapper.insertSelective(examinationResultImage);
+//        for (ExaminationResultImage examinationResultImage : examinationResultImages){
+//            examinationResultImage.setExaminationResultId(examinationResultId);
+//            examinationResultImageMapper.insertSelective(examinationResultImage);
+//        }
     }
 
+    /**
+     *@title: getAllPatientByDepartmentId
+     *@description: 获得该科室的所有病人
+     *@author: alan
+     *@date: 2019/6/28 18:42
+     *@param: [departmentId]
+     *@return: java.util.List<edu.neu.hoso.model.Registration>
+     *@throws:
+     */
     public List<Registration> getAllPatientByDepartmentId(int departmentId){
         List<Registration> registrations = registrationMapper.getAllPatientByDepartmentId(departmentId);
         return (registrations.size()==0?null:registrations);
+    }
+
+    public List<Drugs> getAllDrugs(){
+        List<Drugs> drugsList = drugsMapper.getAllDrugs();
+        return drugsList;
+    }
+
+    //根据医生id获得其常用项目
+    public List<CommonlyUsedDrugs> getCommonUsedDrugs(int doctorId){
+        List<CommonlyUsedDrugs> commonlyUsedDrugsList = commonlyUsedDrugsMapper.getCommonUsedDrugs(doctorId);
+        return commonlyUsedDrugsList;
     }
 }

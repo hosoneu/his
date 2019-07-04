@@ -25,6 +25,21 @@ public class DispensingServiceImpl implements DispensingService {
     @Resource
     ExaminationDrugsItemsMapper examinationDrugsItemsMapper;
 
+    @Resource
+    ExaminationMapper examinationMapper;
+
+    @Resource
+    PrescriptionMapper prescriptionMapper;
+
+    @Resource
+    PatientMapper patientMapper;
+
+    @Resource
+    ExaminationFmedicalItemsMapper examinationFmedicalItemsMapper;
+
+    @Resource
+    ExpenseItemsMapper expenseItemsMapper;
+
     /**
      *@title: dispensing
      *@description: 更改发药状态
@@ -72,23 +87,75 @@ public class DispensingServiceImpl implements DispensingService {
      *@return: void
      *@throws:
      */
-    public int returnDurgs(Object object){
-        if (object instanceof ExaminationDrugsItems){
-            System.out.println("ExaminationDrugsItems");
-            if (((ExaminationDrugsItems) object).getActualQuantity() >= ((ExaminationDrugsItems) object).getQuantity()){
-                return -1;
-            }
-            int i = examinationDrugsItemsMapper.updateByPrimaryKeySelective((ExaminationDrugsItems) object);
-            return i;
+    public int returnExaminationDurgs(ExaminationDrugsItems examinationDrugsItems){
+        System.out.println(examinationDrugsItems.toString());
+        System.out.println("ExaminationDrugsItems");
+        if (examinationDrugsItems.getActualQuantity() >= examinationDrugsItems.getQuantity()){
+            return -1;
         }
-        else if (object instanceof PrescriptionItems){
-            System.out.println("ExaminationDrugsItems");
-            if (((PrescriptionItems) object).getActualQuantity() < ((PrescriptionItems) object).getQuantity()){
-                return -1;
-            }
-            return prescriptionItemsMapper.updateByPrimaryKeySelective((PrescriptionItems)object);
+        int i = examinationDrugsItemsMapper.updateByPrimaryKeySelective(examinationDrugsItems);
+        return i;
+    }
+
+    public int returnPrescription(PrescriptionItems prescriptionItems){
+        System.out.println(prescriptionItems.toString());
+        System.out.println("PrescriptionItems");
+        if (prescriptionItems.getActualQuantity() >= prescriptionItems.getQuantity()){
+            return -1;
         }
-        return -1;
+        return prescriptionItemsMapper.updateByPrimaryKeySelective(prescriptionItems);
+    }
+
+//    public int returnDurgs(Object object){
+//
+//        System.out.println(object.toString());
+//        if (object instanceof ExaminationDrugsItems){
+//            System.out.println("ExaminationDrugsItems");
+//            if (((ExaminationDrugsItems) object).getActualQuantity() >= ((ExaminationDrugsItems) object).getQuantity()){
+//                return -1;
+//            }
+//            int i = examinationDrugsItemsMapper.updateByPrimaryKeySelective((ExaminationDrugsItems) object);
+//            return i;
+//        }
+//        else if (object instanceof PrescriptionItems){
+//            System.out.println("ExaminationDrugsItems");
+//            if (((PrescriptionItems) object).getActualQuantity() < ((PrescriptionItems) object).getQuantity()){
+//                return -1;
+//            }
+//            return prescriptionItemsMapper.updateByPrimaryKeySelective((PrescriptionItems)object);
+//        }
+//        return -1;
+//    }
+
+    //获得所有药房检查检验的药
+    public List<Examination> getAllExaminationMedical(){
+        List<Examination> examinationList = examinationMapper.getAllExaminationMedical();
+        return examinationList;
+    }
+
+    //获得所有处方药
+    public List<Prescription> getAllPrescriptionMedical(){
+        List<Prescription> prescriptionList = prescriptionMapper.getAllPrescriptionMedical();
+        return prescriptionList;
+    }
+
+    public Patient getPatientById(int medicalRecordId){
+        Patient patient = patientMapper.getPatientById(medicalRecordId);
+        return patient;
+    }
+
+    //根据非药品id获得该非药品的有效状态
+    public ExaminationFmedicalItems getFmedicalItem(int examinationFmedicalItemsId){
+        ExaminationFmedicalItems examinationFmedicalItems =  examinationFmedicalItemsMapper.selectByPrimaryKey(examinationFmedicalItemsId);
+        return examinationFmedicalItems;
+    }
+
+    //根据收费id获得ExpenseItems
+    public ExpenseItems getExpenseItems(int expenseItemsId){
+        ExpenseItems expenseItems = expenseItemsMapper.selectByPrimaryKey(expenseItemsId);
+        System.out.println("Impl的expenseItemsId");
+        System.out.println(expenseItems.toString());
+        return expenseItems;
     }
 
 //    //退检查检验药

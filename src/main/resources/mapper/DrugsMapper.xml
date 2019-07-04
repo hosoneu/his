@@ -311,4 +311,9 @@
     </set>
     where Drugs_ID = #{drugsId,jdbcType=INTEGER}
   </update>
+  <select id="getAllDrugs" resultMap="BaseResultMap">
+    select *
+    from drugs
+  </select>
+
 </mapper>

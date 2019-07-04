@@ -210,4 +210,33 @@
     </set>
     where Prescription_ID = #{prescriptionId,jdbcType=INTEGER}
   </update>
+
+  <select id="getAllPrescriptionMedical" resultMap="PrescriptionMedical">
+    select prescription.*,drugs.*,prescription_items.*
+    from prescription join prescription_items on prescription.Prescription_ID=prescription_items.Prescription_ID
+					  join drugs on prescription_items.Drags_ID = drugs.Drugs_ID
+  </select>
+  <resultMap id="PrescriptionMedical" type="edu.neu.hoso.model.Prescription">
+    <id column="Prescription_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="prescriptionId"/>
+    <result column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="medicalRecordId"/>
+    <result column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="doctorId"/>
+    <result column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" property="submitTime"/>
+    <result column="Prescription_Type" jdbcType="CHAR" javaType="java.lang.String" property="prescriptionType"/>
+    <result column="Valid_Status" jdbcType="CHAR" javaType="java.lang.String" property="validStatus"/>
+    <collection property="prescriptionItems" ofType="edu.neu.hoso.model.PrescriptionItems">
+      <id column="Prescription_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="prescriptionItemsId"/>
+      <result column="Prescription_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="prescriptionId"/>
+      <result column="Drags_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="dragsId"/>
+      <result column="Expense_Items_ID" jdbcType="INTEGER" javaType="java.lang.Integer" property="expenseItemsId"/>
+      <result column="Drugs_Usage" jdbcType="CHAR" javaType="java.lang.String" property="drugsUsage"/>
+      <result column="Dosage" jdbcType="DOUBLE" javaType="java.lang.Double" property="dosage"/>
+      <result column="Times" jdbcType="INTEGER" javaType="java.lang.Integer" property="times"/>
+      <result column="Days" jdbcType="INTEGER" javaType="java.lang.Integer" property="days"/>
+      <result column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="quantity"/>
+      <result column="Drugs_Advice" jdbcType="VARCHAR" javaType="java.lang.String" property="drugsAdvice"/>
+      <result column="Drugs_Dispensing_Status" jdbcType="CHAR" javaType="java.lang.String" property="drugsDispensingStatus"/>
+      <result column="Actual_Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" property="actualQuantity"/>
+      <association property="drugs" javaType="edu.neu.hoso.model.Drugs" resultMap="edu.neu.hoso.model.DrugsMapper.BaseResultMap"/>
+    </collection>
+  </resultMap>
 </mapper>
