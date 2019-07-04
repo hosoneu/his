@@ -67,6 +67,9 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
         Integer medicalRecordId = diagnosisList.get(0).getMedicalRecordId();
         Integer diagnosisId = -1;//记录最后一个初步诊断的ID 将他它作为结果返回
         for(Diagnosis diagnosis : diagnosisList){
+            if(diagnosis.getOnsetDate()==null){
+                diagnosis.setOnsetDate(date);
+            }
             diagnosisMapper.insert(diagnosis);
             diagnosisId = diagnosis.getDiagnosisId();//用于返回最后一个插入的索引
         }
@@ -94,6 +97,9 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
         Integer diagnosisId = -1;//记录最后一个最终诊断的ID 将他它作为结果返回
         Integer medicalRecordId = diagnosisList.get(0).getMedicalRecordId();
         for(Diagnosis diagnosis : diagnosisList){
+            if(diagnosis.getOnsetDate()==null){
+                diagnosis.setOnsetDate(date);
+            }
             diagnosisMapper.insert(diagnosis);
             diagnosisId = diagnosis.getDiagnosisId();
         }
