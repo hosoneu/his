@@ -1,7 +1,6 @@
 package edu.neu.hoso.service.impl;
 
-import edu.neu.hoso.example.RegistrationExample;
-import edu.neu.hoso.example.SchedulingInfoExample;
+import edu.neu.hoso.example.MedicalRecordHomePageExample;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.MedicalRecordHomePageService;
 import org.springframework.stereotype.Service;
@@ -62,20 +61,18 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
      * @throws:
      */
     @Override
-    public Integer insertFirstDiagnosis(List<Diagnosis> diagnosisList,Integer userId,Integer medicalRecordId) {
+    public Integer insertFirstDiagnosis(List<Diagnosis> diagnosisList) {
         //插入初诊信息 不需要更改排班剩余挂号数
         Date date = new Date();
+        Integer medicalRecordId = diagnosisList.get(0).getMedicalRecordId();
         Integer diagnosisId = -1;//记录最后一个初步诊断的ID 将他它作为结果返回
         for(Diagnosis diagnosis : diagnosisList){
-            diagnosis.setDiagnosisMark("1");//设置初诊标志
-            diagnosis.setMedicalRecordId(medicalRecordId);//设置病历号
-            //todo 需要得到前端的日期 转换成发病日期对应的Date
             diagnosisMapper.insert(diagnosis);
             diagnosisId = diagnosis.getDiagnosisId();//用于返回最后一个插入的索引
         }
+        MedicalRecord medicalRecord = medicalRecordMapper.selectByPrimaryKey(medicalRecordId);
+        Integer userId = medicalRecord.getDoctorId();
         //更新初诊信息
-        MedicalRecord medicalRecord = new MedicalRecord();
-        medicalRecord.setMedicalRecordId(medicalRecordId);//根据病历号的ID更新条目
         medicalRecord.setFirstDiagnosisDoctorId(userId);//设置初诊医生
         medicalRecord.setFirstDiagnosisTime(date);//设置初诊时间
         medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);
@@ -92,20 +89,19 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
      * @throws:
      */
     @Override
-    public Integer insertFinalDiagnosis(List<Diagnosis> diagnosisList,Integer userId,Integer medicalRecordId) {
+    public Integer insertFinalDiagnosis(List<Diagnosis> diagnosisList) {
+        Date date = new Date();
         Integer diagnosisId = -1;//记录最后一个最终诊断的ID 将他它作为结果返回
+        Integer medicalRecordId = diagnosisList.get(0).getMedicalRecordId();
         for(Diagnosis diagnosis : diagnosisList){
-            diagnosis.setDiagnosisMark("2");//设置终诊标志
-            diagnosis.setMedicalRecordId(medicalRecordId);//设置病历号
-            //todo 需要得到前端的日期 转换成发病日期对应的Date
             diagnosisMapper.insert(diagnosis);
             diagnosisId = diagnosis.getDiagnosisId();
         }
         //更新病历号中的终诊信息
-        MedicalRecord medicalRecord = new MedicalRecord();
-        medicalRecord.setMedicalRecordId(medicalRecordId);//根据病历号的ID更新条目
+        MedicalRecord medicalRecord = medicalRecordMapper.selectByPrimaryKey(medicalRecordId);
+        Integer userId = medicalRecord.getDoctorId();
         medicalRecord.setFinalDiagnosisDoctorId(userId);//设置终诊医生
-        medicalRecord.setFinalDiagnosisTime(new Date());//设置终诊时间
+        medicalRecord.setFinalDiagnosisTime(date);//设置终诊时间
         medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);
         return diagnosisId;
     }
@@ -120,7 +116,11 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
      * @throws:
      */
     @Override
-    public void insertAssistantExamination(String assistantExamination,Integer medicalRecordHomePageId) {
+    public void insertAssistantExamination(String assistantExamination,Integer medicalRecordId) {
+        MedicalRecordHomePageExample medicalRecordHomePageExample = new MedicalRecordHomePageExample();
+        MedicalRecordHomePageExample.Criteria criteria = medicalRecordHomePageExample.createCriteria();
+        criteria.andMedicalRecordIdEqualTo(medicalRecordId);
+        Integer medicalRecordHomePageId = medicalRecordHomePageMapper.selectByExample(medicalRecordHomePageExample).get(0).getMedicalRecordHomePageId();
         MedicalRecordHomePage medicalRecordHomePage = new MedicalRecordHomePage();
         medicalRecordHomePage.setMedicalRecordHomePageId(medicalRecordHomePageId);
         medicalRecordHomePage.setAssistantExamination(assistantExamination);
@@ -183,6 +183,60 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
             diagnosisTemplateMapper.insert(diagnosisTemplate);
         }
         return medicalRecordHomePageTemplateId;
+    }
+
+    @Override
+    public void deleteMedicalRecordHomePageTemplate(Integer medicalRecordHomePageTemplateId) {
+        medicalRecordHomePageTemplateMapper.deleteByPrimaryKey(medicalRecordHomePageTemplateId);
+    }
+
+    /**
+     * @title: selectMedicalRecordHomePageByMedicalRecordId
+     * @description: 根据病历ID得到病历首页的信息
+     * @author: 29-y
+     * @date: 2019-06-25 23:16
+     * @param: [medicalRecordId]
+     * @return: edu.neu.hoso.model.MedicalRecordHomePage
+     * @throws:
+     */
+    @Override
+    public MedicalRecordHomePage selectMedicalRecordHomePageByMedicalRecordId(Integer medicalRecordId) {
+        MedicalRecordHomePageExample medicalRecordHomePageExample = new MedicalRecordHomePageExample();
+        MedicalRecordHomePageExample.Criteria criteria = medicalRecordHomePageExample.createCriteria();
+        criteria.andMedicalRecordIdEqualTo(medicalRecordId);
+        List<MedicalRecordHomePage> medicalRecordHomePageList = medicalRecordHomePageMapper.selectByExample(medicalRecordHomePageExample);
+        if(medicalRecordHomePageList!=null&&medicalRecordHomePageList.size()!=0){
+            return medicalRecordHomePageList.get(0);
+        }else
+            return null;
+    }
+
+    /**
+     * @title: listFirstDiagnosisByMedicalRecordId
+     * @description: 列出所有的初诊信息
+     * @author: 29-y
+     * @date: 2019-06-26 1:16
+     * @param: [medicalRecordId]
+     * @return: java.util.List<edu.neu.hoso.model.Diagnosis>
+     * @throws:
+     */
+    @Override
+    public List<Diagnosis> listFirstDiagnosisByMedicalRecordId(Integer medicalRecordId) {
+        return diagnosisMapper.listDiagnosisByMedicalRecordId(medicalRecordId,"1");
+    }
+
+    /**
+     * @title: listFinalDiagnosisByMedicalRecordId
+     * @description: 查询终诊信息
+     * @author: 29-y
+     * @date: 2019-06-27 16:33
+     * @param: [medicalRecordId]
+     * @return: java.util.List<edu.neu.hoso.model.Diagnosis>
+     * @throws:
+     */
+    @Override
+    public List<Diagnosis> listFinalDiagnosisByMedicalRecordId(Integer medicalRecordId) {
+        return diagnosisMapper.listDiagnosisByMedicalRecordId(medicalRecordId,"2");
     }
 
 

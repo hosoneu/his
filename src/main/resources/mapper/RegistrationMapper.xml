@@ -315,6 +315,7 @@
     <result column="Expense_Items_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="expenseItemsId" />
     <result column="Registration_Status" javaType="java.lang.String" jdbcType="CHAR" property="registrationStatus" />
     <association javaType="edu.neu.hoso.model.Patient" property="patient" resultMap="edu.neu.hoso.model.PatientMapper.BaseResultMap" />
+    <association javaType="edu.neu.hoso.model.MedicalRecord" property="medicalRecord" resultMap="edu.neu.hoso.model.MedicalRecordMapper.BaseResultMap"/>
   </resultMap>
 
   <!--挂号结果集 @Mike 2019.6.18-->

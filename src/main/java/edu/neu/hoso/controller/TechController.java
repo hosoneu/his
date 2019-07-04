@@ -371,7 +371,7 @@ public class TechController {
                 resultDTO.setMsg("查询成功！");
                 for (Registration registration:registrations){
                     System.out.println(registration.toString());
-                    System.out.println(registration.getPatient().toString());
+//                    System.out.println(registration.getPatient().toString());
                 }
                 resultDTO.setData(registrations);
             }

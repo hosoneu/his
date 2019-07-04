@@ -16,7 +16,7 @@
     <result property="medicalRecordId" column="Medical_Record_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
     <result property="doctorId" column="Doctor_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
     <result property="submitTime" column="Submit_Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    <collection property="treatmentItemsList" ofType="edu.neu.hoso.model.TreatmentItems" resultMap="edu.neu.hoso.model.TreatmentItemsMapper.SecondResultMap"/>
+    <collection property="treatmentItemsList" ofType="edu.neu.hoso.model.TreatmentItems" resultMap="edu.neu.hoso.model.TreatmentItemsMapper.ThirdResultMap"/>
   </resultMap>
 
   <sql id="Example_Where_Clause" >

@@ -55,6 +55,15 @@ public interface CommonlyUsedDiagnosisMapper {
     })
     int updateByPrimaryKey(CommonlyUsedDiagnosis record);
 
+    /**
+     * @title: listCommonlyUsedDiagnosisByUserId
+     * @description: 列出常用诊断
+     * @author: 29-y
+     * @date: 2019-06-24 22:28
+     * @param: [userId]
+     * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDiagnosis>
+     * @throws:
+     */
     @Select({
             "select c.*,d.*",
             "from commonly_used_diagnosis c join disease d on c.Disease_ID = d.Disease_ID",
@@ -62,4 +71,38 @@ public interface CommonlyUsedDiagnosisMapper {
     })
     @ResultMap("SecondResultMap")
     List<CommonlyUsedDiagnosis> listCommonlyUsedDiagnosisByUserId(Integer userId);
+
+    /**
+     * @title: listCommonlyUsedChineseDiagnosisByUserId
+     * @description: 列出常用中医诊断
+     * @author: 29-y
+     * @date: 2019-06-24 22:28
+     * @param: [userId]
+     * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDiagnosis>
+     * @throws:
+     */
+    @Select({
+            "select c.*,d.*",
+            "from commonly_used_diagnosis c join disease d on c.Disease_ID = d.Disease_ID",
+            "where c.Doctor_ID = #{userId,jdbcType=INTEGER} and d.Disease_Type_ID=472"
+    })
+    @ResultMap("SecondResultMap")
+    List<CommonlyUsedDiagnosis> listCommonlyUsedChineseDiagnosisByUserId(Integer userId);
+
+    /**
+     * @title: listCommonlyUsedWesternDiagnosisByUserId
+     * @description: 列出常用西医诊断
+     * @author: 29-y
+     * @date: 2019-06-24 22:28
+     * @param: [userId]
+     * @return: java.util.List<edu.neu.hoso.model.CommonlyUsedDiagnosis>
+     * @throws:
+     */
+    @Select({
+            "select c.*,d.*",
+            "from commonly_used_diagnosis c join disease d on c.Disease_ID = d.Disease_ID",
+            "where c.Doctor_ID = #{userId,jdbcType=INTEGER} and d.Disease_Type_ID!=472"
+    })
+    @ResultMap("SecondResultMap")
+    List<CommonlyUsedDiagnosis> listCommonlyUsedWesternDiagnosisByUserId(Integer userId);
 }

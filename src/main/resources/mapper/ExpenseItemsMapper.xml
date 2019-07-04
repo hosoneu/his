@@ -379,5 +379,48 @@
         ( prescription.Valid_Status = 1 OR treatment_items.Valid_Status = 1 OR examination_fmedical_items.Valid_Status = 1 OR drugs_examination_fmedical_items.Valid_Status = 1)
         AND ( invoice.Is_Day_Cal = 1 OR invoice.Is_Day_Cal IS NULL )
   </select>
+    <!--    添加病历号参数，实现对患者所有费用的查询-->
+    <select id="getPatientExpenseItems" resultMap="ExpenseItemsResultMap"  parameterType="java.lang.Integer">
+    SELECT
+        drugs.Drugs_ID,
+        drugs.Drugs_Name,
+        ex_drugs.Drugs_ID AS Ex_Drugs_ID,
+        ex_drugs.Drugs_Name AS Ex_Drugs_Name,
+        prescription_items.Prescription_Items_ID,
+        prescription_items.Quantity AS P_Quantity,
+        prescription_items.Actual_Quantity AS P_Actual_Quantity,
+        fmedical_items.Fmedical_Items_ID,
+        fmedical_items.Fmedical_Items_Name,
+        ex_fmedical_items.Fmedical_Items_ID AS Ex_Fmedical_Items_ID,
+        ex_fmedical_items.Fmedical_Items_Name AS Ex_Fmedical_Items_Name,
+        treatment_items.Treatment_Items_ID,
+        treatment_items.Quantity AS T_Quantity,
+        treatment_items.Actual_Quantity AS T_Actual_Quantity,
+        examination_fmedical_items.Examination_Fmedical_Items_ID,
+        examination_fmedical_items.Quantity AS E_F_Quantity,
+        examination_fmedical_items.Actual_Quantity AS E_F_Actual_Quantity,
+        examination_drugs_items.Examination_Drugs_Items_ID,
+        examination_drugs_items.Quantity AS E_D_Quantity,
+        examination_drugs_items.Actual_Quantity AS E_D_Actual_Quantity,
+        expense_items.Expense_Items_ID,
+        expense_items.Medical_Record_ID,
+        expense_items.Total_Cost,
+        Pay_Status,
+        invoice.Invoice_ID,
+        invoice.Invoice_NO,
+        expense_type.Expense_Type_ID,
+        expense_type.Expense_Type_Name
+    FROM
+        expense_items
+        NATURAL JOIN expense_type
+        LEFT JOIN ( ( prescription_items JOIN prescription ON prescription_items.Prescription_ID = prescription.Prescription_ID ) JOIN drugs ON prescription_items.Drags_ID = drugs.Drugs_ID ) ON prescription_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        LEFT JOIN ( treatment_items JOIN fmedical_items ON treatment_items.Fmedical_Items_ID = fmedical_items.Fmedical_Items_ID ) ON treatment_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        LEFT JOIN ( examination_fmedical_items JOIN fmedical_items AS ex_fmedical_items ON examination_fmedical_items.Fmedical_Items_ID = ex_fmedical_items.Fmedical_Items_ID ) ON examination_fmedical_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        LEFT JOIN ( ( examination_drugs_items JOIN examination_fmedical_items AS drugs_examination_fmedical_items ON examination_drugs_items.Examination_Fmedical_Items_ID = drugs_examination_fmedical_items.Examination_Fmedical_Items_ID) JOIN drugs AS ex_drugs ON examination_drugs_items.Drugs_ID = ex_drugs.Drugs_ID ) ON examination_drugs_items.Expense_Items_ID = expense_items.Expense_Items_ID
+        LEFT JOIN invoice ON expense_items.Invoice_ID = invoice.Invoice_ID
+    WHERE
+        ( prescription.Valid_Status = 1 OR treatment_items.Valid_Status = 1 OR examination_fmedical_items.Valid_Status = 1 OR drugs_examination_fmedical_items.Valid_Status = 1)
+        AND ( invoice.Is_Day_Cal = 1 OR invoice.Is_Day_Cal IS NULL ) AND expense_items.Medical_Record_ID = #{medicalRecordId}
+  </select>
 
 </mapper>

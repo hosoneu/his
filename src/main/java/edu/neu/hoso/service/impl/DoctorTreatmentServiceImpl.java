@@ -121,6 +121,11 @@ public class DoctorTreatmentServiceImpl implements DoctorTreatmentService {
         return groupTreatmentMapper.selectGroupTreatmentById(groupTreatmentId);
     }
 
+    @Override
+    public void deleteGroupTreatmentById(Integer groupTreatmentId) {
+        groupTreatmentMapper.deleteByPrimaryKey(groupTreatmentId);
+    }
+
     /**
      * @title: insertGroupTreatment
      * @description: 插入处置组套
@@ -132,6 +137,7 @@ public class DoctorTreatmentServiceImpl implements DoctorTreatmentService {
      */
     @Override
     public Integer insertGroupTreatment(GroupTreatment groupTreatment) {
+        groupTreatment.setCreateTime(new Date());
         groupTreatmentMapper.insert(groupTreatment);
         Integer groupTreatmentId = groupTreatment.getGroupTreatmentId();//获取处置模板的ID
         //插入到处置条目列表中

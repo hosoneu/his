@@ -1,5 +1,6 @@
 package edu.neu.hoso.service;
 
+import edu.neu.hoso.model.ExpenseItems;
 import edu.neu.hoso.model.MedicalRecord;
 import edu.neu.hoso.model.Registration;
 
@@ -18,4 +19,6 @@ public interface MedicalRecordService {
     List<MedicalRecord> listMedicalRecordHistoryByPatientId(Integer patientId);
     // 诊毕
     void treamentOver(Integer medicalRecordId);
+    // 查询患者费用
+    List<ExpenseItems> getPatientExpenseItems(Integer medicalRecordId);
 }
