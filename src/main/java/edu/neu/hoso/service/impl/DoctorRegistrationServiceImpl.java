@@ -109,7 +109,7 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
         //下面需要考虑是否更改挂号表中的挂号医生ID和剩余挂号数
         if(registrationDoctorId==null){//如果只挂到科室 未挂到医生
             //减少当前医生的剩余挂号数
-            subtractSchedulingRestcount(userId);
+//            subtractSchedulingRestcount(userId);
             //填充当前挂号的医生
             registration.setDoctorId(userId);
             registrationMapper.updateByPrimaryKeySelective(registration);
@@ -117,9 +117,9 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
             //当该病历未初诊
             if(medicalRecord.getFirstDiagnosisDoctorId()==null){
                 //减少当前医生的剩余挂号数
-                subtractSchedulingRestcount(userId);
+//                subtractSchedulingRestcount(userId);
                 //增加原挂号医生的剩余挂号数
-                addSchedulingRestcount(registrationDoctorId,registrationId);
+//                addSchedulingRestcount(registrationDoctorId,registrationId);
                 //填充当前挂号的医生
                 registration.setDoctorId(userId);
                 registrationMapper.updateByPrimaryKeySelective(registration);
@@ -140,21 +140,21 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
      * @return: void
      * @throws:
      */
-    private void addSchedulingRestcount(Integer userId,Integer registrationId){
-        //得到挂号时的午别
-        Date date = registrationMapper.selectByPrimaryKey(registrationId).getRegistrationDate();
-        SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
-        SchedulingInfoExample.Criteria criteria = schedulingInfoExample.createCriteria();
-        //找到医生在该午别的挂号数
-        criteria.andDoctorIdEqualTo(userId);
-        criteria.andSchedulingEndtimeGreaterThanOrEqualTo(date);
-        criteria.andSchedulingStarttimeLessThanOrEqualTo(date);
-        //找到对应的排班信息
-        SchedulingInfo schedulingInfo = schedulingInfoMapper.selectByExample(schedulingInfoExample).get(0);
-        schedulingInfo.setSchedulingRestcount(schedulingInfo.getSchedulingRestcount()+1);
-        //更新排班信息
-        schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfo);
-    }
+//    private void addSchedulingRestcount(Integer userId,Integer registrationId){
+//        //得到挂号时的午别
+//        Date date = registrationMapper.selectByPrimaryKey(registrationId).getRegistrationDate();
+//        SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
+//        SchedulingInfoExample.Criteria criteria = schedulingInfoExample.createCriteria();
+//        //找到医生在该午别的挂号数
+//        criteria.andDoctorIdEqualTo(userId);
+//        criteria.andSchedulingEndtimeGreaterThanOrEqualTo(date);
+//        criteria.andSchedulingStarttimeLessThanOrEqualTo(date);
+//        //找到对应的排班信息
+//        SchedulingInfo schedulingInfo = schedulingInfoMapper.selectByExample(schedulingInfoExample).get(0);
+//        schedulingInfo.setSchedulingRestcount(schedulingInfo.getSchedulingRestcount()+1);
+//        //更新排班信息
+//        schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfo);
+//    }
 
     /**
      * @title: subtractSchedulingRestcount
@@ -166,19 +166,19 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
      * @throws:
      */
     //减少剩余挂号数
-    private void subtractSchedulingRestcount(Integer userId){
-        SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
-        SchedulingInfoExample.Criteria criteria = schedulingInfoExample.createCriteria();
-        criteria.andDoctorIdEqualTo(userId);
-        Date date = new Date();
-        //找到医生在该午别的排班限额
-        criteria.andSchedulingEndtimeGreaterThanOrEqualTo(date);
-        criteria.andSchedulingStarttimeLessThanOrEqualTo(date);
-        //找到对应的排班信息
-        SchedulingInfo schedulingInfo = schedulingInfoMapper.selectByExample(schedulingInfoExample).get(0);
-        schedulingInfo.setSchedulingRestcount(schedulingInfo.getSchedulingRestcount()-1);
-        //更新排班信息
-        schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfo);
-    }
+//    private void subtractSchedulingRestcount(Integer userId){
+//        SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
+//        SchedulingInfoExample.Criteria criteria = schedulingInfoExample.createCriteria();
+//        criteria.andDoctorIdEqualTo(userId);
+//        Date date = new Date();
+//        //找到医生在该午别的排班限额
+//        criteria.andSchedulingEndtimeGreaterThanOrEqualTo(date);
+//        criteria.andSchedulingStarttimeLessThanOrEqualTo(date);
+//        //找到对应的排班信息
+//        SchedulingInfo schedulingInfo = schedulingInfoMapper.selectByExample(schedulingInfoExample).get(0);
+//        schedulingInfo.setSchedulingRestcount(schedulingInfo.getSchedulingRestcount()-1);
+//        //更新排班信息
+//        schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfo);
+//    }
 
 }
