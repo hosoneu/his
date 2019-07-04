@@ -88,7 +88,7 @@ public interface RegistrationMapper {
      */
     @Select({
             "select r.*,p.*,m.* " ,
-            "from registration r join patient p on p.Patient_ID = r.Patient_ID join medical_record m on m.Medical_Record_ID=r.Registration_ID " ,
+            "from registration r join patient p on p.Patient_ID = r.Patient_ID join medical_record m on m.Medical_Record_ID=r.Medical_Record_ID " ,
             "WHERE TO_DAYS(r.Registration_Date) = TO_DAYS(NOW()) " ,
             "and r.Registration_Status = \"1\" " ,
             "and ( m.Doctor_ID = #{userId,jdbcType=INTEGER} " ,

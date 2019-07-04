@@ -1,22 +1,46 @@
 server:
-  port: 8081
+  port: 8080
   servlet:
     context-path: /hoso
     session:
       timeout: 5m
 spring:
-  profiles:
-    active: dev
   http:
     encoding:
       charset: UTF-8
       force: true
       enabled: true
+  #  datasource:
+  #    url: jdbc:mysql://120.79.88.98:3306/hosoneu?characterEncoding=utf-8&serverTimezone=GMT%2B8
+  #    username: root
+  #    password: 123456
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #  操作自己本地数据库进行测试
+#  datasource:
+#    #    url: jdbc:mysql://120.79.88.98:3306/hosoneu?characterEncoding=utf-8&serverTimezone=GMT%2B8
+#    #    29-y的url：@author 29-y 本地数据库地址 @time 2019.06.10
+#    #    url: jdbc:mysql://localhost:3306/hoso_local_dev?characterEncoding=utf-8&serverTimezone=GMT%2B8
+#
+#    url: jdbc:mysql://localhost:3306/hoso?characterEncoding=utf-8&serverTimezone=GMT%2B8
+#    username: root
+#    password: qq980829
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   datasource:
-     url: jdbc:mysql://localhost:3306/hosoneu?characterEncoding=utf-8&serverTimezone=GMT%2B8
+<<<<<<< HEAD
+    url: jdbc:mysql://120.79.88.98:3309/hosoneu?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: m1test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+=======
+#     url: jdbc:mysql://localhost:3306/hosoneu?characterEncoding=utf-8&serverTimezone=GMT%2B8
+#     username: root
+#     password: 123456
+     url: jdbc:mysql://120.79.88.98:3309/hosoneu?characterEncoding=utf-8&serverTimezone=GMT%2B8
      username: root
-     password: 123456
+     password: m1test
      driver-class-name: com.mysql.cj.jdbc.Driver
+>>>>>>> 22c54a073e375282c254acf435525e3f2b1b77b6
   redis:
     host: 120.79.88.98
     password: 123456

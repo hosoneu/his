@@ -38,12 +38,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!--      Page Helper-->
-<!--        <dependency>-->
-<!--            <groupId>com.github.pagehelper</groupId>-->
-<!--            <artifactId>pagehelper</artifactId>-->
-<!--            <version>5.1.8</version>-->
-<!--        </dependency>-->
         <!--热部署-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

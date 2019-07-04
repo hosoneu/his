@@ -42,4 +42,7 @@ public interface TechService {
     //根据医生id获得其常用项目
     List<CommonlyUsedDrugs> getCommonUsedDrugs(int doctorId);
 
+    //删除常用项
+    void deleteCommonUsedDrugs(CommonlyUsedDrugs commonlyUsedDrugsList);
+
 }
