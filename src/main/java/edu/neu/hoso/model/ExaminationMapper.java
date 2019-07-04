@@ -96,4 +96,9 @@ public interface ExaminationMapper {
     })
     @ResultMap("SecondResultMap")
     Examination selectExaminationById(Integer examinationId, String mark);
+
+
+    //获得所有药房检查检验的药
+    List<Examination> getAllExaminationMedical();
+
 }

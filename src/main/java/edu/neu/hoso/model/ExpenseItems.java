@@ -84,4 +84,18 @@ public class ExpenseItems {
     public void setExpenseTypeId(Integer expenseTypeId) {
         this.expenseTypeId = expenseTypeId;
     }
+
+    @Override
+    public String toString() {
+        return "ExpenseItems{" +
+                "expenseItemsId=" + expenseItemsId +
+                ", medicalRecordId=" + medicalRecordId +
+                ", totalCost=" + totalCost +
+                ", payStatus='" + payStatus + '\'' +
+                ", invoiceId=" + invoiceId +
+                ", expenseTypeId=" + expenseTypeId +
+                ", expenseType=" + expenseType +
+                ", invoice=" + invoice +
+                '}';
+    }
 }

@@ -19,6 +19,9 @@ public class Examination {
     /* 对应的检查检验非药品项目列表对象 重载了构造方法 新建了getter和setter 同时修改Mapper @29-y 2019.06.18*/
     private List<ExaminationFmedicalItems> examinationFmedicalItemsList;
 
+    //我也不想加这个属性的
+    private List<ExaminationDrugsItems> examinationDrugsItemsList;
+
     public Examination(Integer examinationId, Integer medicalRecordId, Integer doctorId, String examinationMark, String doctorAdvice, Date submitTime) {
         this.examinationId = examinationId;
         this.medicalRecordId = medicalRecordId;
@@ -48,6 +51,14 @@ public class Examination {
 
     public Examination() {
         super();
+    }
+
+    public List<ExaminationDrugsItems> getExaminationDrugsItemsList() {
+        return examinationDrugsItemsList;
+    }
+
+    public void setExaminationDrugsItemsList(List<ExaminationDrugsItems> examinationDrugsItemsList) {
+        this.examinationDrugsItemsList = examinationDrugsItemsList;
     }
 
     public Integer getExaminationId() {
@@ -96,5 +107,19 @@ public class Examination {
 
     public void setSubmitTime(Date submitTime) {
         this.submitTime = submitTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Examination{" +
+                "examinationId=" + examinationId +
+                ", medicalRecordId=" + medicalRecordId +
+                ", doctorId=" + doctorId +
+                ", examinationMark='" + examinationMark + '\'' +
+                ", doctorAdvice='" + doctorAdvice + '\'' +
+                ", submitTime=" + submitTime +
+                ", examinationFmedicalItemsList=" + examinationFmedicalItemsList +
+                ", examinationDrugsItemsList=" + examinationDrugsItemsList +
+                '}';
     }
 }

@@ -85,4 +85,16 @@ public class ExaminationResult {
     public void setSubmitTime(Date submitTime) {
         this.submitTime = submitTime;
     }
+
+    @Override
+    public String toString() {
+        return "ExaminationResult{" +
+                "examinationResultId=" + examinationResultId +
+                ", doctorId=" + doctorId +
+                ", findings='" + findings + '\'' +
+                ", diagnosticSuggestion='" + diagnosticSuggestion + '\'' +
+                ", submitTime=" + submitTime +
+                ", examinationResultImageList=" + examinationResultImageList +
+                '}';
+    }
 }

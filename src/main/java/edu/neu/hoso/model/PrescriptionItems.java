@@ -166,4 +166,25 @@ public class PrescriptionItems {
     public void setActualQuantity(Integer actualQuantity) {
         this.actualQuantity = actualQuantity;
     }
+
+
+
+    @Override
+    public String toString() {
+        return "PrescriptionItems{" +
+                "prescriptionItemsId=" + prescriptionItemsId +
+                ", prescriptionId=" + prescriptionId +
+                ", dragsId=" + dragsId +
+                ", expenseItemsId=" + expenseItemsId +
+                ", drugsUsage='" + drugsUsage + '\'' +
+                ", dosage=" + dosage +
+                ", times=" + times +
+                ", days=" + days +
+                ", quantity=" + quantity +
+                ", drugsAdvice='" + drugsAdvice + '\'' +
+                ", drugsDispensingStatus='" + drugsDispensingStatus + '\'' +
+                ", actualQuantity=" + actualQuantity +
+                ", drugs=" + drugs +
+                '}';
+    }
 }
