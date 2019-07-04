@@ -311,4 +311,41 @@
     </set>
     where Drugs_ID = #{drugsId,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="DrugsWithTypeAndDosage" type="edu.neu.hoso.model.Drugs">
+    <id column="Drugs_ID" property="drugsId" />
+    <result column="Drugs_Code" property="drugsCode" />
+    <result column="Drugs_Name" property="drugsName" />
+    <result column="Drugs_Format" property="drugsFormat" />
+    <result column="Drugs_Price" property="drugsPrice" />
+    <result column="Drugs_Manufacturer" property="drugsManufacturer" />
+    <result column="Drugs_Dosage_ID" property="drugsDosageId" />
+    <result column="Drugs_Type_ID" property="drugsTypeId" />
+    <association javaType="ConstantItems" property="drugsDosage">
+      <id column="Constant_Items_ID" property="constantItemsID" />
+      <result column="Dosage_Name" property="constantItemsName" />
+    </association>
+    <association javaType="ConstantItems" property="drugsType">
+      <id column="Constant_Items_ID" property="constantItemsID" />
+      <result column="Type_Name" property="constantItemsName" />
+    </association>
+  </resultMap>
+
+  <select id="getAllDrugsWithTypeAndDosage" resultMap="DrugsWithTypeAndDosage">
+    SELECT
+        Drugs_ID,
+        Drugs_Code,
+        Drugs_Name,
+        Drugs_Format,
+        Drugs_Price,
+        Drugs_Manufacturer,
+        Drugs_Dosage_ID,
+        Drugs_Type_ID,
+        constant_items.Constant_Items_Name AS Dosage_Name,
+        c.Constant_Items_Name AS Type_Name
+    FROM
+        drugs
+        LEFT JOIN constant_items AS c ON drugs.Drugs_Type_ID = c.Constant_Items_ID
+        LEFT JOIN constant_items ON drugs.Drugs_Dosage_ID = constant_items.Constant_Items_ID
+  </select>
 </mapper>

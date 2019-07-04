@@ -79,4 +79,6 @@ public interface DrugsMapper {
         "where Drugs_ID = #{drugsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Drugs record);
+
+    List<Drugs> getAllDrugsWithTypeAndDosage();
 }

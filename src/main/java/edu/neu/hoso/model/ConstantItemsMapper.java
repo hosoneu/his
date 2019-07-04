@@ -57,4 +57,8 @@ public interface ConstantItemsMapper {
         "where Constant_Items_ID = #{constantItemsId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(ConstantItems record);
+
+    List<ConstantItems> getDrugsDosage();
+
+    List<ConstantItems> getDrugsType();
 }

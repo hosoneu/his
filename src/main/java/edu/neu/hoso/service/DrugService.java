@@ -1,5 +1,6 @@
 package edu.neu.hoso.service;
 
+import edu.neu.hoso.model.ConstantItems;
 import edu.neu.hoso.model.Drugs;
 
 import java.util.List;
@@ -24,4 +25,9 @@ public interface DrugService {
     List<Drugs> getDrugsByDrugsManufacturer(String drugsManufacturer);
     List<Drugs> getDrugsByMnemoniccode(String mnemoniccode);
     List<Drugs> getAllDrugs();
+    List<Drugs> getAllDrugsWithTypeAndDosage();
+    List<ConstantItems> getDrugsDosage();
+    List<ConstantItems> getDrugsType();
+
+
 }

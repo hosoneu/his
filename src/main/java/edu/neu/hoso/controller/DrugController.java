@@ -4,11 +4,13 @@ import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.Drugs;
 import edu.neu.hoso.service.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("drug")
 public class DrugController {
     @Autowired
@@ -125,6 +127,78 @@ public class DrugController {
         ResultDTO resultDTO = new ResultDTO();
         try {
             resultDTO.setData(drugService.getAllDrugs());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示药品成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示药品失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getAllDrugsWithTypeAndDosage")
+    public ResultDTO<Drugs> getAllDrugsWithTypeAndDosage(){
+        /**
+         *@title: getAllDrugsWithTypeAndDosage
+         *@description: 查询所有药品 附带drugsType,drugsDosage
+         *@author: Mike
+         *@date: 2019-07-01 21:38
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.Drugs>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(drugService.getAllDrugsWithTypeAndDosage());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示药品成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示药品失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getDrugsDosage")
+    public ResultDTO<Drugs> getDrugsDosage(){
+        /**
+         *@title: getDrugsDosage
+         *@description: 查询药品剂型常数
+         *@author: Mike
+         *@date: 2019-07-01 21:51
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.Drugs>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(drugService.getDrugsDosage());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示药品成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示药品失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getDrugsType")
+    public ResultDTO<Drugs> getDrugsType(){
+        /**
+         *@title: getDrugsType
+         *@description: 查询药品类型常数
+         *@author: Mike
+         *@date: 2019-07-01 21:51
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.Drugs>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(drugService.getDrugsType());
             resultDTO.setStatus("OK");
             resultDTO.setMsg("展示药品成功！");
         } catch (Exception e) {

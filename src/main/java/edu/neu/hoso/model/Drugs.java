@@ -1,5 +1,8 @@
 package edu.neu.hoso.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 public class Drugs {
@@ -30,6 +33,14 @@ public class Drugs {
     private String reverse2;
 
     private String reverse3;
+
+    @Getter
+    @Setter
+    private ConstantItems drugsDosage;
+
+    @Getter
+    @Setter
+    private ConstantItems drugsType;
 
     public Drugs(Integer drugsId, String drugsCode, String drugsName, String drugsFormat, String drugsUnit, String drugsManufacturer, Integer drugsDosageId, Integer drugsTypeId, Double drugsPrice, String drugsMnemoniccode, Date createTime, String reverse1, String reverse2, String reverse3) {
         this.drugsId = drugsId;

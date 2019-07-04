@@ -1,10 +1,7 @@
 package edu.neu.hoso.controller;
 
 import edu.neu.hoso.dto.ResultDTO;
-import edu.neu.hoso.model.ExpenseItems;
-import edu.neu.hoso.model.MedicalRecord;
-import edu.neu.hoso.model.Patient;
-import edu.neu.hoso.model.Registration;
+import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.RegistrationService;
 import edu.neu.hoso.utils.JsonUtils;
 import org.springframework.web.bind.annotation.*;
@@ -140,7 +137,7 @@ public class RegistrationController {
         return resultDTO;
     }
     @RequestMapping("/refund")
-    public ResultDTO refund(@RequestBody Map<String ,Object> map){
+    public ResultDTO refund(@RequestBody ExpenseItemsListWithUserId expenseItemsListWithUserId){
         /**
          *@title: refund
          *@description: 退费操作
@@ -152,9 +149,12 @@ public class RegistrationController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            List<ExpenseItems> expenseItemsList = (List<ExpenseItems>)map.get("expenseItemsList");
-            Integer userId = (Integer)map.get("userId");
-            System.out.println(expenseItemsList);
+//            List<ExpenseItems> expenseItemsList = JsonUtils.mapToObj((Map<String, Object>)map.get("expenseItemsList"), List.class);
+//            List<ExpenseItems> expenseItemsList = (List)map.get("expenseItemsList");
+//            Integer userId = (Integer)map.get("userId");
+            List<ExpenseItems> expenseItemsList = expenseItemsListWithUserId.getExpenseItemsList();
+            Integer userId = expenseItemsListWithUserId.getUserId();
+            System.out.println(expenseItemsList.get(0).getInvoiceId());
             System.out.println(userId);
             registrationService.refund(expenseItemsList, userId);
             resultDTO.setStatus("OK");
