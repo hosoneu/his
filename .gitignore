@@ -35,3 +35,4 @@ HELP.md
 application-dev.yml
 db.properties
 generatorConfig.xml
+.yml
