@@ -80,6 +80,9 @@ public class PersonalWorkloadServiceImpl implements PersonalWorkloadService {
      逻辑描述 ：从病历号列表通过医生ID为该病例的初诊或者确诊医生来判断该医生的经手的所有病历号的总个数
      */
     public int FindPatitentsByDoctorID(List<Integer> medicalRecordID, Integer doctorID){
+        if(medicalRecordID.size()==0){
+            return 0;
+        }else{
         MedicalRecordExample medicalRecordExample = new MedicalRecordExample();
         MedicalRecordExample.Criteria medicalRecordExampleCriteria= medicalRecordExample.createCriteria();
         medicalRecordExampleCriteria.andMedicalRecordIdIn(medicalRecordID);
@@ -88,7 +91,7 @@ public class PersonalWorkloadServiceImpl implements PersonalWorkloadService {
         medicalRecordExampleCriteria2.andFinalDiagnosisDoctorIdEqualTo(doctorID);
         medicalRecordExampleCriteria2.andMedicalRecordIdIn(medicalRecordID);
         medicalRecordExample.or(medicalRecordExampleCriteria2);
-        return medicalRecordMapper.countByExample(medicalRecordExample);
+        return medicalRecordMapper.countByExample(medicalRecordExample);}
     }
     /**
      方法类型：子方法

@@ -9,6 +9,7 @@ import edu.neu.hoso.model.WorkloadItem;
 import edu.neu.hoso.service.DepartmentService;
 import edu.neu.hoso.service.PersonalWorkloadService;
 import edu.neu.hoso.service.UserService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("workload")
 public class WorkloadController {
@@ -84,7 +86,7 @@ public class WorkloadController {
             workloadItem =workloadsConverter.convert(personalWorkloadService.FindWorkloadByDateAndTechdepartmentID(startdate, enddate, departmentID));
             workloadItem.setItemID(departmentID);
             workloadItem.setItemname(departmentService.getDepartmentById(departmentID).getDepartmentName());
-            workloadItem.setPaitents(personalWorkloadService.FindPatientsByDateAnddepartmentID(startdate,enddate,departmentID));
+            workloadItem.setPaitents(personalWorkloadService.FindPaitentsByDateAndTechdepartmentID(startdate,enddate,departmentID));
             resultDTO.setStatus("OK");
             resultDTO.setMsg("医技科室工作查询成功");
             resultDTO.setData(workloadItem);

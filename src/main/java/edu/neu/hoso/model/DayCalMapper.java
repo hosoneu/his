@@ -1,14 +1,9 @@
 package edu.neu.hoso.model;
 
 import edu.neu.hoso.example.DayCalExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
 
 public interface DayCalMapper {
     int countByExample(DayCalExample example);
@@ -22,10 +17,16 @@ public interface DayCalMapper {
     int deleteByPrimaryKey(Integer dayCalId);
 
     @Insert({
-        "insert into day_cal (User_ID, Day_Cal_StartDate, ",
-        "Day_Cal_EndDate, Day_Cal_Total)",
-        "values (#{userId,jdbcType=INTEGER}, #{dayCalStartdate,jdbcType=TIMESTAMP}, ",
-        "#{dayCalEnddate,jdbcType=TIMESTAMP}, #{dayCalTotal,jdbcType=DOUBLE})"
+        "insert into day_cal (User_ID, Day_Cal_Date, ",
+        "YF_Total, GH_Total, ",
+        "Day_Cal_Total, CL_Total, ",
+        "JC_Total, CZ_Total, ",
+        "QT_Total)",
+        "values (#{userId,jdbcType=INTEGER}, #{dayCalDate,jdbcType=TIMESTAMP}, ",
+        "#{yfTotal,jdbcType=DOUBLE}, #{ghTotal,jdbcType=DOUBLE}, ",
+        "#{dayCalTotal,jdbcType=DOUBLE}, #{clTotal,jdbcType=DOUBLE}, ",
+        "#{jcTotal,jdbcType=DOUBLE}, #{czTotal,jdbcType=DOUBLE}, ",
+        "#{qtTotal,jdbcType=DOUBLE})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="dayCalId", before=false, resultType=Integer.class)
     int insert(DayCal record);
@@ -36,7 +37,8 @@ public interface DayCalMapper {
 
     @Select({
         "select",
-        "Day_Cal_ID, User_ID, Day_Cal_StartDate, Day_Cal_EndDate, Day_Cal_Total",
+        "Day_Cal_ID, User_ID, Day_Cal_Date, YF_Total, GH_Total, Day_Cal_Total, CL_Total, ",
+        "JC_Total, CZ_Total, QT_Total",
         "from day_cal",
         "where Day_Cal_ID = #{dayCalId,jdbcType=INTEGER}"
     })
@@ -52,10 +54,17 @@ public interface DayCalMapper {
     @Update({
         "update day_cal",
         "set User_ID = #{userId,jdbcType=INTEGER},",
-          "Day_Cal_StartDate = #{dayCalStartdate,jdbcType=TIMESTAMP},",
-          "Day_Cal_EndDate = #{dayCalEnddate,jdbcType=TIMESTAMP},",
-          "Day_Cal_Total = #{dayCalTotal,jdbcType=DOUBLE}",
+          "Day_Cal_Date = #{dayCalDate,jdbcType=TIMESTAMP},",
+          "YF_Total = #{yfTotal,jdbcType=DOUBLE},",
+          "GH_Total = #{ghTotal,jdbcType=DOUBLE},",
+          "Day_Cal_Total = #{dayCalTotal,jdbcType=DOUBLE},",
+          "CL_Total = #{clTotal,jdbcType=DOUBLE},",
+          "JC_Total = #{jcTotal,jdbcType=DOUBLE},",
+          "CZ_Total = #{czTotal,jdbcType=DOUBLE},",
+          "QT_Total = #{qtTotal,jdbcType=DOUBLE}",
         "where Day_Cal_ID = #{dayCalId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(DayCal record);
+    @Select({"SELECT DISTINCT User_ID FROM day_cal"})
+    List<Integer> FindHistoryDalUserID();
 }

@@ -97,10 +97,6 @@ public class Registration {
         this.patient = patient;
     }
 
-    public Patient getPatient() {
-        return patient;
-    }
-
     public Registration() {
         super();
     }

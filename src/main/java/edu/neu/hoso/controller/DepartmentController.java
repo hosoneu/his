@@ -3,9 +3,13 @@ package edu.neu.hoso.controller;
 import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.ConstantItems;
 import edu.neu.hoso.model.Department;
+import edu.neu.hoso.model.User;
 import edu.neu.hoso.service.DepartmentService;
+import edu.neu.hoso.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**   
  * @title: DepartmentController
@@ -15,12 +19,37 @@ import org.springframework.web.bind.annotation.*;
  * @date: 2019-06-11 17:44
  * @version: V1.0   
 */
+@CrossOrigin
 @RestController
 @CrossOrigin
 @RequestMapping("department")
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
+    @Autowired
+    UserService userService;
+    @RequestMapping("/findUser")
+    public ResultDTO findUser(int departmentID){
+        System.out.println("进来了");
+        List<User> userList = userService.getUserByDepartmentID(departmentID);
+        System.out.println(userList.size());
+        ResultDTO result = new ResultDTO<>();
+        result.setData(userList);
+        result.setStatus("OK");
+        result.setMsg("请求成功");
+        return result;
+    }
+    @RequestMapping("/findAll")
+    public ResultDTO findAll(){
+        List<Department> departmentList = departmentService.getAllDepartment();
+        System.out.println(departmentList.size());
+        ResultDTO result = new ResultDTO<>();
+        result.setData(departmentList);
+        result.setStatus("OK");
+        result.setMsg("请求成功");
+        return result;
+    }
+
 
     @RequestMapping("/insert")
     public ResultDTO<Department> insert(@RequestBody Department department){
@@ -58,7 +87,6 @@ public class DepartmentController {
          *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.Department> 
          *@throws:
          */
-        System.out.println("删除科室"+id);
         ResultDTO resultDTO = new ResultDTO();
         try {
             departmentService.deleteById(id);
