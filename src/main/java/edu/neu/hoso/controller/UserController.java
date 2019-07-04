@@ -4,11 +4,13 @@ import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.User;
 import edu.neu.hoso.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("user")
 public class UserController {
     @Autowired
@@ -111,6 +113,22 @@ public class UserController {
         return resultDTO;
     }
 
+    @RequestMapping("/getUserByRole")
+    public ResultDTO<User> getUserByRole(Integer roleId){
+
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(userService.getUserByRole(roleId));
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("查询用户成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("查询用户失败！");
+        }
+        return resultDTO;
+    }
+
     @RequestMapping("/getAllUser")
     public ResultDTO<User> getAllUser(){
         /**
@@ -125,6 +143,54 @@ public class UserController {
         ResultDTO resultDTO = new ResultDTO();
         try {
             resultDTO.setData(userService.getAllUser());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示用户成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示用户失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getAllUserWithRole")
+    public ResultDTO<User> getAllUserWithRole(){
+        /**
+         *@title: getAllUserWithRole
+         *@description: 查询所有用户 附带role,department
+         *@author: Mike
+         *@date: 2019-06-30 23:36
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.User>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(userService.getAllUserWithRole());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示用户成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示用户失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getAllRole")
+    public ResultDTO<User> getAllRole(){
+        /**
+         *@title: getAllRole
+         *@description: 查询所有角色
+         *@author: Mike
+         *@date: 2019-06-30 23:42
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.User>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(userService.getAllRole());
             resultDTO.setStatus("OK");
             resultDTO.setMsg("展示用户成功！");
         } catch (Exception e) {

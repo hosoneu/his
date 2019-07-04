@@ -63,4 +63,6 @@ public interface DiseaseMapper {
         "where Disease_ID = #{diseaseId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Disease record);
+
+    List<Disease> getAllDiseaseWithType();
 }

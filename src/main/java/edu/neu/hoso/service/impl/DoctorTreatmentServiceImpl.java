@@ -121,6 +121,11 @@ public class DoctorTreatmentServiceImpl implements DoctorTreatmentService {
         return groupTreatmentMapper.selectGroupTreatmentById(groupTreatmentId);
     }
 
+    @Override
+    public void deleteGroupTreatmentById(Integer groupTreatmentId) {
+        groupTreatmentMapper.deleteByPrimaryKey(groupTreatmentId);
+    }
+
     /**
      * @title: insertGroupTreatment
      * @description: 插入处置组套

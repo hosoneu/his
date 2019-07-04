@@ -210,4 +210,18 @@ public class FmedicalItemsServiceImpl implements FmedicalItemsService {
         FmedicalItemsExample fmedicalItemsExample = new FmedicalItemsExample();
         return fmedicalItemsMapper.selectByExample(fmedicalItemsExample);
     }
+
+    @Override
+    public List<FmedicalItems> getAllFmedicalItemsForShow() {
+        /**
+         *@title: getAllFmedicalItemsForShow
+         *@description: 展示所有非药品项目 附带department,expenseType
+         *@author: Mike
+         *@date: 2019-06-26 14:06
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.FmedicalItems>
+         *@throws:
+         */
+        return fmedicalItemsMapper.getAllFmedicalForShow();
+    }
 }

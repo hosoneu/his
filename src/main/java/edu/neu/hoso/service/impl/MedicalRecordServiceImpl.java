@@ -1,5 +1,7 @@
 package edu.neu.hoso.service.impl;
 
+import edu.neu.hoso.model.ExpenseItems;
+import edu.neu.hoso.model.ExpenseItemsMapper;
 import edu.neu.hoso.model.MedicalRecord;
 import edu.neu.hoso.model.MedicalRecordMapper;
 import edu.neu.hoso.service.MedicalRecordService;
@@ -20,6 +22,8 @@ import java.util.List;
 public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Resource
     MedicalRecordMapper medicalRecordMapper;
+    @Resource
+    ExpenseItemsMapper expenseItemsMapper;
 
     /**
      * @title: listMedicalRecordHistoryByPatientId
@@ -50,5 +54,10 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
         medicalRecord.setMedicalRecordId(medicalRecordId);
         medicalRecord.setIsTreamentOver("2");
         medicalRecordMapper.updateByPrimaryKeySelective(medicalRecord);
+    }
+
+    @Override
+    public List<ExpenseItems> getPatientExpenseItems(Integer medicalRecordId) {
+        return expenseItemsMapper.getPatientExpenseItems(medicalRecordId);
     }
 }

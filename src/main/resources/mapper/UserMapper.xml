@@ -254,4 +254,72 @@
     </set>
     where User_ID = #{userId,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="UserWithRoleMap" type="edu.neu.hoso.model.User">
+    <id column="User_ID" property="userId" />
+    <result column="User_Loginname" property="userLoginname" />
+    <result column="User_Password" property="userPassword" />
+    <result column="User_Name" property="userName" />
+    <result column="User_Gender" property="userGender" />
+    <result column="User_Status" property="userStatus" />
+    <result column="User_Scheduling_LimitCount" property="userSchedulingLimitcount" />
+    <result column="User_Title_ID" property="userTitleId" />
+    <result column="U_Role_ID" property="roleId" />
+    <result column="U_Department_ID" property="departmentId" />
+    <association javaType="Role" property="role">
+      <id column="Role_ID" property="roleId" />
+      <result column="Function_Id" property="functionId" />
+      <result column="Role_Name" property="roleName" />
+    </association>
+    <association javaType="ConstantItems" property="constantItems">
+      <id column="Constant_Items_ID" property="constantItemsId" />
+      <result column="Constant_Items_Name" property="constantItemsName" />
+    </association>
+    <association javaType="Department" property="department">
+      <id column="Department_ID" property="departmentId" />
+      <result column="Department_Name" property="departmentName" />
+    </association>
+  </resultMap>
+
+  <select id="getUserByRole" resultMap="UserWithRoleMap">
+    SELECT
+        User_ID,
+        User_Name,
+        User_loginName,
+        User_Gender,
+        User_Scheduling_LimitCount,
+        `user`.Role_ID,
+        Role_Name,
+        department.Department_ID,
+        Department_Name,
+        constant_items.Constant_Items_ID,
+        Constant_Items_Name
+    FROM
+        `user`
+        JOIN role ON `user`.Role_ID = role.Role_ID
+        LEFT JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
+        LEFT JOIN department ON `user`.Department_ID = department.Department_ID
+    WHERE
+        `user`.Role_ID = #{roleId}
+  </select>
+
+  <select id="getAllUserWithRole" resultMap="UserWithRoleMap">
+    SELECT
+        User_ID,
+        User_Name,
+        User_loginName,
+        User_Gender,
+        User_password,
+        User_Scheduling_LimitCount,
+        `user`.Role_ID AS U_Role_ID,
+        Role_Name,
+        `user`.Department_ID AS U_Department_ID,
+        Department_Name,
+        User_Title_ID
+    FROM
+        `user`
+        JOIN role ON `user`.Role_ID = role.Role_ID
+        LEFT JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
+        LEFT JOIN department ON `user`.Department_ID = department.Department_ID
+  </select>
 </mapper>

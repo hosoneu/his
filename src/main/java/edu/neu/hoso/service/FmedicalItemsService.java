@@ -25,4 +25,5 @@ public interface FmedicalItemsService {
     List<FmedicalItems> getFmedicalItemsByDepartmentId(Integer departmentId);
     List<FmedicalItems> getFmedicalItemsByMnemoniccode(String mnemoniccode);
     List<FmedicalItems> getAllFmedicalItems();
+    List<FmedicalItems> getAllFmedicalItemsForShow();
 }

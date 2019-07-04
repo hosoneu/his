@@ -66,4 +66,8 @@ public interface ExpenseItemsMapper {
     List<ExpenseItems> getPatientUnPayExpenseItems(Integer medicalRecordId);
 
     List<ExpenseItems> getPatientPayExpenseItems(@Param("medicalRecordId")Integer medicalRecordId, @Param("startDate")Date startDate, @Param("endDate")Date endDate);
+
+    List<ExpenseItems> getAllExpenseItems();
+
+    List<ExpenseItems> getPatientExpenseItems(@Param("medicalRecordId")Integer medicalRecordId);
 }

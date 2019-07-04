@@ -212,4 +212,29 @@
     </set>
     where Disease_ID = #{diseaseId,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="DiseaseWithType" type="edu.neu.hoso.model.Disease">
+    <id column="Disease_ID" property="diseaseId" />
+    <result column="Disease_Code" property="diseaseCode" />
+    <result column="Disease_Name" property="diseaseName" />
+    <result column="Disease_ICD" property="diseaseIcd" />
+    <result column="D_Disease_Type_ID" property="diseaseTypeId" />
+    <association javaType="DiseaseType" property="diseaseType">
+      <id column="Disease_Type_ID" property="diseaseTypeId" />
+      <result column="Disease_Type_Name" property="diseaseTypeName" />
+    </association>
+  </resultMap>
+
+  <select id="getAllDiseaseWithType" resultMap="DiseaseWithType">
+    SELECT
+        Disease_ID,
+        Disease_Code,
+        Disease_Name,
+        Disease_ICD,
+        disease.Disease_Type_ID AS D_Disease_Type_ID,
+        Disease_Type_Name
+    FROM
+        disease
+        JOIN disease_type ON disease.Disease_Type_ID = disease_type.Disease_Type_ID
+  </select>
 </mapper>

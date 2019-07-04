@@ -24,6 +24,38 @@ public class ExpenseItems {
     @Setter
     private Invoice invoice;
 
+    @Getter
+    @Setter
+    private Drugs drugs;
+
+    @Getter
+    @Setter
+    private Drugs exDrugs;
+
+    @Getter
+    @Setter
+    private FmedicalItems fmedicalItems;
+
+    @Getter
+    @Setter
+    private FmedicalItems exFmedicalItems;
+
+    @Getter
+    @Setter
+    private PrescriptionItems prescriptionItems;
+
+    @Getter
+    @Setter
+    private TreatmentItems treatmentItems;
+
+    @Getter
+    @Setter
+    private ExaminationDrugsItems examinationDrugsItems;
+
+    @Getter
+    @Setter
+    private ExaminationFmedicalItems examinationFmedicalItems;
+
     public ExpenseItems(Integer expenseItemsId, Integer medicalRecordId, Double totalCost, String payStatus, Integer invoiceId, Integer expenseTypeId) {
         this.expenseItemsId = expenseItemsId;
         this.medicalRecordId = medicalRecordId;

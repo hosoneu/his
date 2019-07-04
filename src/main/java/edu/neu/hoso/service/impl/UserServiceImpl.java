@@ -1,6 +1,9 @@
 package edu.neu.hoso.service.impl;
 
+import edu.neu.hoso.example.RoleExample;
 import edu.neu.hoso.example.UserExample;
+import edu.neu.hoso.model.Role;
+import edu.neu.hoso.model.RoleMapper;
 import edu.neu.hoso.model.User;
 import edu.neu.hoso.model.UserMapper;
 import edu.neu.hoso.service.UserService;
@@ -22,6 +25,8 @@ public class UserServiceImpl implements UserService {
     @Resource
     UserMapper userMapper;
 
+    @Resource
+    RoleMapper roleMapper;
 
     @Override
     public Integer insert(User user) {
@@ -228,5 +233,48 @@ public class UserServiceImpl implements UserService {
         UserExample.Criteria userExampleCriteria=userExample.createCriteria();
         userExampleCriteria.andDepartmentIdEqualTo(departmentID);
         return userMapper.selectByExample(userExample);
+    }
+
+    @Override
+    public List<User> getUserByRole(Integer roleId) {
+        /**
+         *@title: getUserByRole
+         *@description: 查询用户 通过roleId 附带role,department,title
+         *@author: Mike
+         *@date: 2019-06-28 13:37
+         *@param: [roleId]
+         *@return: java.util.List<edu.neu.hoso.model.User>
+         *@throws:
+         */
+        return userMapper.getUserByRole(roleId);
+    }
+
+    @Override
+    public List<User> getAllUserWithRole() {
+        /**
+         *@title: getAllUserWithRole
+         *@description: 查询所有用户 附带role,department
+         *@author: Mike
+         *@date: 2019-06-30 23:35
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.User>
+         *@throws:
+         */
+        return userMapper.getAllUserWithRole();
+    }
+
+    @Override
+    public List<Role> getAllRole() {
+        /**
+         *@title: getAllRole
+         *@description: 查询所有角色
+         *@author: Mike
+         *@date: 2019-06-30 23:41
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.Role>
+         *@throws:
+         */
+        RoleExample roleExample = new RoleExample();
+        return roleMapper.selectByExample(roleExample);
     }
 }

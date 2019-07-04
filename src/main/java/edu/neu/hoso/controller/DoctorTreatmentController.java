@@ -153,4 +153,20 @@ public class DoctorTreatmentController {
         }
         return resultDTO;
     }
+
+    //根据处置组套ID删除处置组套
+    @RequestMapping("/deleteGroupTreatmentById")
+    public ResultDTO deleteGroupTreatmentById(Integer groupTreatmentId){
+        ResultDTO<GroupTreatment> resultDTO = new ResultDTO<>();
+        try {
+            doctorTreatmentService.deleteGroupTreatmentById(groupTreatmentId);
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("处置组套删除成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("处置组套删除失败！");
+        }
+        return resultDTO;
+    }
 }

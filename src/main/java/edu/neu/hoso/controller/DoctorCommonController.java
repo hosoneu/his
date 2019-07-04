@@ -34,6 +34,8 @@ public class DoctorCommonController {
     CommonlyUsedService commonlyUsedService;
     @Autowired
     InfoListService infoListService;
+    @Autowired
+    MedicalRecordService medicalRecordService;
 
     /**
      * @title: selectDoctorByUserID
@@ -668,6 +670,22 @@ public class DoctorCommonController {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
             resultDTO.setMsg("常用项目删除失败！");
+        }
+        return resultDTO;
+    }
+
+    @RequestMapping("/getPatientExpenseItems")
+    public ResultDTO<List<ExpenseItems>> getPatientExpenseItems(Integer medicalRecordId){
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(medicalRecordService.getPatientExpenseItems(medicalRecordId));
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("患者费用明细查询成功！");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("患者费用明细查询失败！");
         }
         return resultDTO;
     }

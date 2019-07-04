@@ -22,11 +22,15 @@ public interface RegistrationService {
     List<Registration> getAllRegistration();
     List<Registration> getRegistrationByMedicalRecordId(Integer medicalRecordId);
     List<Registration> getRegistration();
-    Registration register(Registration registration, Patient patient, MedicalRecord medicalRecord, ExpenseItems expenseItems);
+    Registration register(Registration registration, Patient patient, MedicalRecord medicalRecord, ExpenseItems expenseItems, Integer userId, Integer payModeId);
+    List<Patient> getPatientByIdentity(String patientIdentity);
+    void updateSchedulingRestcount(Registration registration);
     void withdraw(Integer expenseItemsId, Integer userId);
     void charge(List<Integer> expenseItemsIds, Integer userId, Integer payModeId);
-    void refund(List<Integer> expenseItemsIds, Integer userId);
+    void refund(List<ExpenseItems> expenseItemsIds, Integer userId);
     Invoice offsetInvoice(Invoice oldInvoice, Integer userId);
     List<ExpenseItems> getPatientPayExpenseItems(Integer medicalRecordId, Date startDate, Date endDate);
     List<ExpenseItems> getPatientUnPayExpenseItems(Integer medicalRecordId);
+    List<Patient> getAllPatient();
+    List<ExpenseItems> getAllExpenseItems();
 }
