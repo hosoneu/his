@@ -6,9 +6,11 @@ import edu.neu.hoso.model.Department;
 import edu.neu.hoso.model.User;
 import edu.neu.hoso.service.DepartmentService;
 import edu.neu.hoso.service.UserService;
+import edu.neu.hoso.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**   
@@ -27,6 +29,9 @@ public class DepartmentController {
     DepartmentService departmentService;
     @Autowired
     UserService userService;
+
+    @Resource
+    private RedisUtils redisUtils;
     @RequestMapping("/findUser")
     public ResultDTO findUser(int departmentID){
         System.out.println("进来了");
@@ -148,7 +153,7 @@ public class DepartmentController {
     }
 
     @RequestMapping("/getAllDepartment")
-    public ResultDTO<Department> getAllDepartment(){
+    public ResultDTO<List<Department>> getAllDepartment(){
         /**
          *@title: getAllDepartment
          *@description: 展示所有科室
@@ -160,7 +165,10 @@ public class DepartmentController {
          */
         ResultDTO resultDTO = new ResultDTO();
         try {
-            resultDTO.setData(departmentService.getAllDepartment());
+            List<Department> diseaseList = departmentService.getAllDepartment();
+            String key = "AllDepartment";
+            redisUtils.set(key, diseaseList);
+            resultDTO.setData(diseaseList);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("展示科室成功！");
         } catch (Exception e) {

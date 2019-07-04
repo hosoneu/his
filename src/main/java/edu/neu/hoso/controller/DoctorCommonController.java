@@ -3,12 +3,14 @@ package edu.neu.hoso.controller;
 import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.*;
+import edu.neu.hoso.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -36,6 +38,9 @@ public class DoctorCommonController {
     InfoListService infoListService;
     @Autowired
     MedicalRecordService medicalRecordService;
+
+    @Resource
+    private RedisUtils redisUtils;
 
     /**
      * @title: selectDoctorByUserID
@@ -523,7 +528,10 @@ public class DoctorCommonController {
     public ResultDTO<List<Disease>> listChineseDisease(){
         ResultDTO<List<Disease>> resultDTO = new ResultDTO<>();
         try {
-            resultDTO.setData(infoListService.listChineseDisease());
+            List<Disease> diseaseList = infoListService.listChineseDisease();
+            String key = "ChineseDisease";
+            redisUtils.set(key, diseaseList);
+            resultDTO.setData(diseaseList);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("中医疾病列表获取成功！");
         } catch (Exception e) {
@@ -546,7 +554,10 @@ public class DoctorCommonController {
     public ResultDTO<List<Disease>> listWesternDisease(){
         ResultDTO<List<Disease>> resultDTO = new ResultDTO<>();
         try {
-            resultDTO.setData(infoListService.listWesternDisease());
+            List<Disease> diseaseList = infoListService.listWesternDisease();
+            String key = "WesternDisease";
+            redisUtils.set(key, diseaseList);
+            resultDTO.setData(diseaseList);
             resultDTO.setStatus("OK");
             resultDTO.setMsg("西医疾病列表获取成功！");
         } catch (Exception e) {
@@ -558,7 +569,7 @@ public class DoctorCommonController {
     }
 
     // 新增常用药品
-        @RequestMapping("/insertCommonlyUsedDrugs")
+    @RequestMapping("/insertCommonlyUsedDrugs")
     public ResultDTO<Integer> insertCommonlyUsedDrugs(@RequestBody CommonlyUsedDrugs commonlyUsedDrugs){
         ResultDTO<Integer> resultDTO = new ResultDTO<>();
         try {

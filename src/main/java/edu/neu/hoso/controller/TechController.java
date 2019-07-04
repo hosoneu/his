@@ -415,24 +415,22 @@ public class TechController {
     public ResultDTO<List<Drugs>> getAllDrugs(){
         ResultDTO<List<Drugs>> resultDTO = new ResultDTO<List<Drugs>>();
         try {
-            if (redisUtils.get("allDrugs") == null) {
-                List<Drugs> drugsList = techService.getAllDrugs();
-                for (Drugs drugs : drugsList) {
-                    System.out.println(drugs.toString());
-                }
-                resultDTO.setStatus("OK");
-                resultDTO.setMsg("获得成功！");
-
-                //将allDrugs加入redis中
-                String key = "allDrugs";
-                redisUtils.set(key, drugsList);
-                List<Drugs> redisDrugsList = (List<Drugs>) redisUtils.get(key);
-                System.out.println("这是redis得到的alldrugsList");
-                for (Drugs drugs : redisDrugsList) {
-                    System.out.println(drugs.toString());
-                }
-                resultDTO.setData(drugsList);
+            List<Drugs> drugsList = techService.getAllDrugs();
+            for (Drugs drugs : drugsList) {
+                System.out.println(drugs.toString());
             }
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("获得成功！");
+
+            //将allDrugs加入redis中
+            String key = "allDrugs";
+            redisUtils.set(key, drugsList);
+//            List<Drugs> redisDrugsList = (List<Drugs>) redisUtils.get(key);
+//            System.out.println("这是redis得到的alldrugsList");
+//            for (Drugs drugs : redisDrugsList) {
+//                System.out.println(drugs.toString());
+//            }
+            resultDTO.setData(drugsList);
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
