@@ -184,6 +184,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         //计算挂号费 根据挂号级别以及是否购买病历本（状态中不买为1 减1后为0 买为2 减1后为1元）
         double totalCost = registrationLevelMapper.selectByPrimaryKey(registration.getRegistrationLevelId()).getRegistrationCost() + Double.parseDouble(registration.getBuyMedicalRecord()) - 1;
         Date date = new Date();
+        medicalRecord.setDoctorId(registration.getDoctorId());
         medicalRecordMapper.insertSelective(medicalRecord);
         if(getPatientByIdentity(patient.getPatientIdentity()).size() == 0){
             patientMapper.insertSelective(patient);

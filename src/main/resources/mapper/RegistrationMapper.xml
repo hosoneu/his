@@ -428,7 +428,7 @@
 			NATURAL JOIN calculation_type
 			LEFT JOIN `user` ON registration.Doctor_ID = `user`.User_ID
 			LEFT JOIN constant_items ON `user`.User_Title_ID = constant_items.Constant_Items_ID
-			LEFT JOIN expense_items ON registration.Medical_Record_ID = expense_items.Medical_Record_ID
+			LEFT JOIN expense_items ON registration.Medical_Record_ID = expense_items.Medical_Record_ID AND expense_items.Expense_Type_ID = 1
 	WHERE
 			Registration_Status = 1
 			AND medical_record.Is_Treament_Over = 1

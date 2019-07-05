@@ -48,6 +48,7 @@ public class SchedulingServiceImpl implements SchedulingService {
 //        schedulingInfo.setSchedulingEndtime(schedulingRule.getSchedulingRuleEndtime());
 //        schedulingInfo.setSchedulingLimitcount(schedulingRule.getSchedulingRuleLimitcount());
 //        schedulingInfo.setSchedulingRestcount(schedulingRule.getSchedulingRuleLimitcount());
+        schedulingInfo.setSchedulingRestcount(schedulingInfo.getSchedulingLimitcount());
         schedulingInfoMapper.insertSelective(schedulingInfo);
         return schedulingInfo.getSchedulingInfoId();
     }
