@@ -440,7 +440,7 @@ from examination_fmedical_items join examination on examination_fmedical_items.E
 join registration on examination.Medical_Record_ID=registration.Medical_Record_ID
 join patient on patient.Patient_ID=registration.Patient_ID
 join fmedical_items on fmedical_items.Fmedical_Items_ID=examination_fmedical_items.Fmedical_Items_ID
-where Examination_Fmedical_Items.Expense_Items_ID is not null and examination_fmedical_items.Examination_Result_ID is null and examination_fmedical_items.valid_status=1 and fmedical_items.Department_ID=#{departmentId} and examination_fmedical_items.Registration_Status = 1
+where examination_fmedical_items.Expense_Items_ID is not null and examination_fmedical_items.Examination_Result_ID is null and examination_fmedical_items.valid_status=1 and fmedical_items.Department_ID=#{departmentId} and examination_fmedical_items.Registration_Status = 1
   </select>
   <resultMap id="DepartmentPatient" type="edu.neu.hoso.model.Registration">
     <id column="Registration_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="registrationId"/>

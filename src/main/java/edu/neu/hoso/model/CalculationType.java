@@ -29,4 +29,5 @@ public class CalculationType {
     public void setCalculationTypeName(String calculationTypeName) {
         this.calculationTypeName = calculationTypeName == null ? null : calculationTypeName.trim();
     }
+
 }

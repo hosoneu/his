@@ -141,4 +141,7 @@
     </set>
     where Calculation_Type_ID = #{calculationTypeId,jdbcType=INTEGER}
   </update>
+  <select id="get" resultType="java.sql.Time">
+    select now();
+  </select>
 </mapper>

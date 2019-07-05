@@ -20,7 +20,7 @@ public class RedisController {
     @RequestMapping("/redis")
     public void t1() {
 //        Role role = (Role) redisTemplate.opsForValue().get("role_1");
-        String key = "mike";
+        String key = "alan";
         redisUtils.set(key, "handsome");
         String result = (String)redisUtils.get(key);
         System.out.println(result);

@@ -54,6 +54,7 @@ public class DispensingController {
                     resultDTO.setMsg("更改成功！");
                 }
                 else {
+                    System.out.println("fail");
                     results.add(status);
                     System.out.println(status);
                     resultDTO.setStatus("ERROR");
