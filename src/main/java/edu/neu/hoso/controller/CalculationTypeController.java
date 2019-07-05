@@ -2,12 +2,15 @@ package edu.neu.hoso.controller;
 
 import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.CalculationType;
+import edu.neu.hoso.model.CalculationTypeMapper;
 import edu.neu.hoso.service.CalculationTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @title: CalculationTypeController
@@ -24,6 +27,8 @@ public class CalculationTypeController {
     @Autowired
     CalculationTypeService calculationTypeService;
 
+    @Resource
+    CalculationTypeMapper calculationTypeMapper;
     @RequestMapping("/insert")
     public ResultDTO<CalculationType> insert(@RequestBody CalculationType calculationType){
         /**
@@ -145,4 +150,27 @@ public class CalculationTypeController {
         return resultDTO;
     }
 
+    /**
+     *@title: get
+     *@description: TODO
+     *@author: zhangjunzhi
+     *@date: 2019/7/4 10:02
+     *@param: []
+     *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.CalculationType>
+     *@throws:
+     */
+    @RequestMapping("/get")
+    public ResultDTO<CalculationType> get(){
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(calculationTypeMapper.get());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示结算类别成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示结算类别失败！");
+        }
+        return resultDTO;
+    }
 }
