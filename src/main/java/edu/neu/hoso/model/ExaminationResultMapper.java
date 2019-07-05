@@ -59,12 +59,4 @@ public interface ExaminationResultMapper {
     })
     int updateByPrimaryKey(ExaminationResult record);
 
-
-    @Select({
-            "select result.*,img.* " ,
-            "from examination_result result,examination_result_image img " ,
-            "where result.Examination_Result_ID = img.Examination_Result_ID and result.Examination_Result_ID = #{examinationResultId,jdbcType=INTEGER} "
-    })
-    @ResultMap("SecondResultMap")
-    ExaminationResult selectExaminationResultById(Integer examinationResultId);
 }
