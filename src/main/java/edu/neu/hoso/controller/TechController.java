@@ -3,12 +3,15 @@ package edu.neu.hoso.controller;
 import edu.neu.hoso.dto.ResultDTO;
 import edu.neu.hoso.model.*;
 import edu.neu.hoso.service.TechService;
+import edu.neu.hoso.utils.RedisUtils;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,11 @@ public class TechController {
 
     @Autowired
     TechService techService;
+
+    @Resource
+    private RedisTemplate redisTemplate;
+    @Resource
+    private RedisUtils redisUtils;
 
     /**
      *@title: getInfoByMedicalID
@@ -408,16 +416,25 @@ public class TechController {
         ResultDTO<List<Drugs>> resultDTO = new ResultDTO<List<Drugs>>();
         try {
             List<Drugs> drugsList = techService.getAllDrugs();
-            for (Drugs drugs:drugsList){
+            for (Drugs drugs : drugsList) {
                 System.out.println(drugs.toString());
             }
             resultDTO.setStatus("OK");
-            resultDTO.setMsg("插入成功！");
+            resultDTO.setMsg("获得成功！");
+
+            //将allDrugs加入redis中
+            String key = "allDrugs";
+            redisUtils.set(key, drugsList);
+//            List<Drugs> redisDrugsList = (List<Drugs>) redisUtils.get(key);
+//            System.out.println("这是redis得到的alldrugsList");
+//            for (Drugs drugs : redisDrugsList) {
+//                System.out.println(drugs.toString());
+//            }
             resultDTO.setData(drugsList);
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
-            resultDTO.setMsg("插入失败！");
+            resultDTO.setMsg("获得失败！");
         }
         return resultDTO;
     }

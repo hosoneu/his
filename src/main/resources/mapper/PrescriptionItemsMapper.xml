@@ -302,7 +302,7 @@
   </update>
 
   <select id="selectDispensingInPrescription" resultMap="BaseResultMap">
-    select Prescription_Items.*
+    select prescription_items.*
     from prescription_items join prescription on prescription_items.Prescription_ID=prescription.Prescription_ID
     where prescription.Medical_Record_ID=#{Medical_record_ID} and prescription_items.Drags_ID=#{DrugsId} and prescription_items.Drugs_Dispensing_Status=1 and prescription_items.Expense_Items_ID is not null
   </select>
