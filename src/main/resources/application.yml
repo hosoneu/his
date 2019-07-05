@@ -21,16 +21,15 @@ spring:
 #    #    29-y的url：@author 29-y 本地数据库地址 @time 2019.06.10
 #    #    url: jdbc:mysql://localhost:3306/hoso_local_dev?characterEncoding=utf-8&serverTimezone=GMT%2B8
 #
-#    url: jdbc:mysql://localhost:3306/hoso?characterEncoding=utf-8&serverTimezone=GMT%2B8
+#    url: jdbc:mysql://localhost:3306/hosoneu?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
 #    username: root
-#    password: qq980829
+#    password: 123456
 #    driver-class-name: com.mysql.cj.jdbc.Driver
   datasource:
-    url: jdbc:mysql://120.79.88.98:3309/hosoneu?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://120.79.88.98:3309/hosoneu?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: m1test
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   redis:
     host: 120.79.88.98
     password: 123456
