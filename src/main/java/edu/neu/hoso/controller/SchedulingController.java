@@ -259,4 +259,28 @@ public class SchedulingController {
         }
         return resultDTO;
     }
+
+    @RequestMapping("/getAllSchedulingInfoWithUserName")
+    public ResultDTO<SchedulingRule> getAllSchedulingInfoWithUserName(){
+        /**
+         *@title: getAllSchedulingInfoWithUserName
+         *@description: 查询所有排班信息 携带userName
+         *@author: Mike
+         *@date: 2019-07-04 23:41
+         *@param: []
+         *@return: edu.neu.hoso.dto.ResultDTO<edu.neu.hoso.model.SchedulingRule>
+         *@throws:
+         */
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            resultDTO.setData(schedulingService.getAllSchedulingInfoWithUserName());
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("展示排班规则成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("展示排班规则失败！");
+        }
+        return resultDTO;
+    }
 }

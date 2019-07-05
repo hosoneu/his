@@ -36,10 +36,11 @@ public class LoginController {
         }
         for (User user:users){
             if(user.getUserPassword().equals(password)){
-                Department department=departmentService.getDepartmentById(user.getUserId());
+                Department department=departmentService.getDepartmentById(user.getDepartmentId());
                 Role role = roleService.findRoleByID(user.getRoleId());
                 System.out.println("role:"+role.getRoleName());
                 System.out.println("department"+department.getDepartmentName());
+                System.out.println(role.getRoleId());
                 LoginResult loginResult = new LoginResult(user,department,role);
                 result.setData(loginResult);
                 result.setStatus("OK");

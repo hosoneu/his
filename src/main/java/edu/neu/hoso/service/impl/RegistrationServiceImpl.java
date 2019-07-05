@@ -213,8 +213,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         registration.setRegistrationTotalCost(totalCost);
         registration.setRegistrationDate(date);
         registrationMapper.insertSelective(registration);
-        //更新被挂号医生的排班剩额
-        updateSchedulingRestcount(registration);
+//        if (registration.getDoctorId() != null){
+//            //更新被挂号医生的排班剩额
+//            updateSchedulingRestcount(registration);
+//        }
         return registration;
     }
 
@@ -352,13 +354,31 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         //声明发票id数组
         List<Integer> invoiceIdList = new ArrayList<>();
+        //需要保留的部分药品费用项目
+        List<ExpenseItems> expenseItemsListForSave = new ArrayList();
         //遍历前端传来的收费明细id数组
         for (ExpenseItems expenseItems : expenseItemsList) {
             //判断是否存在部分退费的费用项目
             //lombok没有插件便无法执行get方法
-//            if (expenseItems.getDrugs() != null){
-//
-//            }
+            if (expenseItems.getDrugs() != null){
+                if (expenseItems.getPrescriptionItems().getActualQuantity() != 0){
+                    //存在部分退药情况
+                    //正常退药应将实际数量改为0
+                    //部分退药 找到发票 生成新发票附带部分药品
+                    //更新费用项目总费用 为退药后实际数量对应费用
+                    //退药处只能退药一次 相应的 退费也只有一次
+                    expenseItems.setTotalCost(expenseItems.getPrescriptionItems().getActualQuantity() * expenseItems.getDrugs().getDrugsPrice());
+                    expenseItemsListForSave.add(expenseItems);
+                }
+            }
+            else if(expenseItems.getExDrugs() != null){
+                if (expenseItems.getExaminationDrugsItems().getActualQuantity() != 0){
+                    //存在部分退药情况
+                    expenseItems.setTotalCost(expenseItems.getExaminationDrugsItems().getActualQuantity() * expenseItems.getExDrugs().getDrugsPrice());
+                    expenseItemsListForSave.add(expenseItems);
+                }
+
+            }
             //将执行退费操作的收费明细的收费状态置为退费
             expenseItems.setPayStatus("3");
             expenseItemsMapper.updateByPrimaryKeySelective(expenseItems);
@@ -376,14 +396,24 @@ public class RegistrationServiceImpl implements RegistrationService {
         //生成与发票数组中发票号相同的发票 冲正
         for (Invoice oldInvoice : invoices) {
             offsetInvoice(oldInvoice, userId);
+            //旧发票号对应未退费项目
             List<ExpenseItems> expenseItems = expenseItemsMapper.getUnWithdrawExpenseItems(oldInvoice.getInvoiceNo());
+            //取到退部分的项目
+            for (ExpenseItems partExpenseItems : expenseItemsListForSave) {
+                if (oldInvoice.getInvoiceId() == partExpenseItems.getInvoiceId()){
+                    //将已部分退费药品状态置为5——部分退费 不可再次退费
+                    partExpenseItems.setPayStatus("5");
+                    //将部分退药项目 加入到新发票中 （按更新后的totalCost算钱）
+                    expenseItems.add(partExpenseItems);
+                }
+            }
             if (!expenseItems.isEmpty()){
                 double totalCost = 0;
                 //插入新发票
                 Invoice newInvoice = new Invoice();
                 //发票号生成
                 try {
-                    serialNumberService.generateSerialNumber(2);
+                    newInvoice.setInvoiceNo(serialNumberService.generateSerialNumber(2));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -395,8 +425,10 @@ public class RegistrationServiceImpl implements RegistrationService {
                     totalCost += expenseItem.getTotalCost();
                     //为收费项目设置新发票号
                     expenseItem.setInvoiceId(newInvoice.getInvoiceId());
+                    expenseItemsMapper.updateByPrimaryKeySelective(expenseItem);
                 }
                 newInvoice.setTotalCost(totalCost);
+                invoiceMapper.updateByPrimaryKeySelective(newInvoice);
             }
         }
     }

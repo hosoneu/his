@@ -1,5 +1,7 @@
 package edu.neu.hoso.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -20,6 +22,10 @@ public class SchedulingInfo {
     private Integer schedulingLimitcount;
 
     private Integer schedulingRestcount;
+
+    @Getter
+    @Setter
+    private User user;
 
     public SchedulingInfo(Integer schedulingInfoId, Integer doctorId, String schedulingNoonbreak, Date schedulingStarttime, Date schedulingEndtime, String schedulingWeekday, Integer schedulingLimitcount, Integer schedulingRestcount) {
         this.schedulingInfoId = schedulingInfoId;

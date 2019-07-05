@@ -226,4 +226,28 @@
     </set>
     where Scheduling_Info_ID = #{schedulingInfoId,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="SchedulingInfoWithUserNameMap" type="edu.neu.hoso.model.SchedulingInfo">
+    <id column="Scheduling_Info_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="schedulingInfoId"/>
+    <result column="Doctor_ID" javaType="java.lang.Integer" jdbcType="INTEGER" property="doctorId"/>
+    <result column="Scheduling_NoonBreak" javaType="java.lang.String" jdbcType="CHAR" property="schedulingNoonbreak"/>
+    <result column="Scheduling_StartTime" javaType="java.util.Date" jdbcType="TIMESTAMP" property="schedulingStarttime"/>
+    <result column="Scheduling_EndTime" javaType="java.util.Date" jdbcType="TIMESTAMP" property="schedulingEndtime"/>
+    <result column="Scheduling_Weekday" javaType="java.lang.String" jdbcType="VARCHAR" property="schedulingWeekday"/>
+    <result column="Scheduling_LimitCount" javaType="java.lang.Integer" jdbcType="INTEGER" property="schedulingLimitcount"/>
+    <result column="Scheduling_RestCount" javaType="java.lang.Integer" jdbcType="INTEGER" property="schedulingRestcount"/>
+    <association javaType="User" property="user">
+      <id column="User_ID" property="userId" />
+      <result column="User_Name" property="userName" />
+    </association>
+  </resultMap>
+
+  <select id="getAllSchedulingInfoWithUserName" resultMap="SchedulingInfoWithUserNameMap">
+    SELECT
+        scheduling_info.*,
+        User_Name
+    FROM
+        scheduling_info
+        JOIN `user` ON scheduling_info.Doctor_ID = `user`.User_ID
+  </select>
 </mapper>

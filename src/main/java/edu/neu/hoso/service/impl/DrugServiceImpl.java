@@ -1,6 +1,8 @@
 package edu.neu.hoso.service.impl;
 
 import edu.neu.hoso.example.DrugsExample;
+import edu.neu.hoso.model.ConstantItems;
+import edu.neu.hoso.model.ConstantItemsMapper;
 import edu.neu.hoso.model.Drugs;
 import edu.neu.hoso.model.DrugsMapper;
 import edu.neu.hoso.service.DrugService;
@@ -21,6 +23,9 @@ import java.util.List;
 public class DrugServiceImpl implements DrugService {
     @Resource
     DrugsMapper drugsMapper;
+
+    @Resource
+    ConstantItemsMapper constantItemsMapper;
 
     @Override
     public Integer insertSelective(Drugs drugs) {
@@ -195,5 +200,47 @@ public class DrugServiceImpl implements DrugService {
          */
         DrugsExample drugsExample = new DrugsExample();
         return drugsMapper.selectByExample(drugsExample);
+    }
+
+    @Override
+    public List<Drugs> getAllDrugsWithTypeAndDosage() {
+        /**
+         *@title: getAllDrugsWithTypeAndDosage
+         *@description: 查询所有药品 附带drugsType,drugsDosage
+         *@author: Mike
+         *@date: 2019-07-01 21:37
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.Drugs>
+         *@throws:
+         */
+        return drugsMapper.getAllDrugsWithTypeAndDosage();
+    }
+
+    @Override
+    public List<ConstantItems> getDrugsDosage() {
+        /**
+         *@title: getDrugsDosage
+         *@description: 查询药品剂型常数
+         *@author: Mike
+         *@date: 2019-07-01 21:53
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.ConstantItems>
+         *@throws:
+         */
+        return constantItemsMapper.getDrugsDosage();
+    }
+
+    @Override
+    public List<ConstantItems> getDrugsType() {
+        /**
+         *@title: getDrugsType
+         *@description: 查询药品类型常数
+         *@author: Mike
+         *@date: 2019-07-01 21:53
+         *@param: []
+         *@return: java.util.List<edu.neu.hoso.model.ConstantItems>
+         *@throws:
+         */
+        return constantItemsMapper.getDrugsType();
     }
 }

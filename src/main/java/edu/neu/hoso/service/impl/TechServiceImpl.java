@@ -274,4 +274,9 @@ public class TechServiceImpl implements TechService {
         List<CommonlyUsedDrugs> commonlyUsedDrugsList = commonlyUsedDrugsMapper.getCommonUsedDrugs(doctorId);
         return commonlyUsedDrugsList;
     }
+
+    //删除常用项
+    public void deleteCommonUsedDrugs(CommonlyUsedDrugs commonlyUsedDrugsList){
+        int i = commonlyUsedDrugsMapper.deleteByPrimaryKey(commonlyUsedDrugsList.getCommonlyUsedDrugs());
+    }
 }

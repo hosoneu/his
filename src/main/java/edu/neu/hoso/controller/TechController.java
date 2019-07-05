@@ -105,6 +105,7 @@ public class TechController {
      */
     @RequestMapping("/getFmedical")
     public ResultDTO<List<FmedicalItems>> getFmedical(int Medical_record_ID, int Department_ID){
+        System.out.println("病历号" + Medical_record_ID  + "科室号" + Department_ID );
         ResultDTO resultDTO = new ResultDTO();
         try {
             List<FmedicalItems> fmedicalItems = techService.getAllFmedicalByMedicalID(Medical_record_ID, Department_ID);
@@ -166,6 +167,7 @@ public class TechController {
      */
     @RequestMapping("/getAllFmedical")
     public ResultDTO<List<ExaminationFmedicalItems>> getAllFmedical(Integer Medical_record_ID, Integer Department_ID){
+        System.out.println("病历号" + Medical_record_ID  + "科室号" + Department_ID );
 //        int Medical_record_ID=1111;
 //        int Department_ID =133;
         System.out.println("okok");
@@ -173,17 +175,24 @@ public class TechController {
         try {
             List<ExaminationFmedicalItems> examinationFmedicalItems = techService.getAllFmedical(Medical_record_ID, Department_ID);
             if (examinationFmedicalItems == null){
-                resultDTO.setStatus("OK");
+                resultDTO.setStatus("ERROR");
                 resultDTO.setMsg("为空！");
             }
             else {
                 for (ExaminationFmedicalItems examinationFmedicalItems1:examinationFmedicalItems){
+                    for (int i=0;i<examinationFmedicalItems1.getExaminationDrugsItemsList().size();i++){
+                        if (examinationFmedicalItems1.getExaminationDrugsItemsList().get(i).getExaminationDrugsItemsId()==null){
+                            examinationFmedicalItems1.getExaminationDrugsItemsList().remove(i);
+                        }
+                    }
+                }
+                for (ExaminationFmedicalItems examinationFmedicalItems1:examinationFmedicalItems){
                     System.out.println(examinationFmedicalItems1.toString());
                     System.out.println(examinationFmedicalItems1.getFmedicalItems().toString());
-                    for (ExaminationDrugsItems examinationDrugsItems: examinationFmedicalItems1.getExaminationDrugsItemsList()){
-                        System.out.println(examinationDrugsItems.toString());
-                        System.out.println(examinationDrugsItems.getDrugs().toString());
-                    }
+//                    for (ExaminationDrugsItems examinationDrugsItems: examinationFmedicalItems1.getExaminationDrugsItemsList()){
+//                        System.out.println(examinationDrugsItems.toString());
+//                        System.out.println(examinationDrugsItems.getDrugs().toString());
+//                    }
                 }
                 resultDTO.setStatus("OK");
                 resultDTO.setMsg("获取成功！");
@@ -359,6 +368,8 @@ public class TechController {
      */
     @RequestMapping("/getAllPatientByDepartmentId")
     public ResultDTO<List<Registration>> getAllPatientByDepartmentId(Integer departmentId){
+        System.out.println(departmentId);
+        System.out.println("得到的科室号");
         ResultDTO<List<Registration>> resultDTO = new ResultDTO<>();
         try{
             List<Registration> registrations = techService.getAllPatientByDepartmentId(departmentId);
@@ -422,6 +433,7 @@ public class TechController {
      */
     @RequestMapping("/getCommonUsedDrugs")
     public ResultDTO<List<CommonlyUsedDrugs>> getCommonUsedDrugs(int doctorId){
+        System.out.println("这是doctorId" + doctorId);
         ResultDTO<List<CommonlyUsedDrugs>> resultDTO = new ResultDTO<>();
         try {
             List<CommonlyUsedDrugs> commonlyUsedDrugsList = techService.getCommonUsedDrugs(doctorId);
@@ -429,13 +441,34 @@ public class TechController {
                 System.out.println(commonlyUsedDrugs.toString());
             }
             resultDTO.setStatus("OK");
-            resultDTO.setMsg("插入成功！");
+            resultDTO.setMsg("获得成功！");
             resultDTO.setData(commonlyUsedDrugsList);
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setStatus("ERROR");
-            resultDTO.setMsg("插入失败！");
+            resultDTO.setMsg("获得失败！");
         }
         return resultDTO;
     }
+
+    @RequestMapping("/deleteCommonUsedDrugs")
+    public ResultDTO deleteCommonUsedDrugs(@RequestBody List<CommonlyUsedDrugs> commonlyUsedDrugsList){
+        ResultDTO resultDTO = new ResultDTO<>();
+        try {
+            for (CommonlyUsedDrugs commonlyUsedDrugs:commonlyUsedDrugsList){
+                System.out.println(commonlyUsedDrugs.toString());
+                techService.deleteCommonUsedDrugs(commonlyUsedDrugs);
+            }
+            resultDTO.setStatus("OK");
+            resultDTO.setMsg("删除成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultDTO.setStatus("ERROR");
+            resultDTO.setMsg("删除失败！");
+        }
+        return resultDTO;
+    }
+
+//    @RequestMapping("/getDepartmentById")
+
 }

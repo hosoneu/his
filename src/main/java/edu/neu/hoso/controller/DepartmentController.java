@@ -19,8 +19,8 @@ import java.util.List;
  * @date: 2019-06-11 17:44
  * @version: V1.0   
 */
-@CrossOrigin
 @RestController
+@CrossOrigin
 @RequestMapping("department")
 public class DepartmentController {
     @Autowired

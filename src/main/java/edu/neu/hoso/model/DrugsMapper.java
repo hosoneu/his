@@ -80,5 +80,7 @@ public interface DrugsMapper {
     })
     int updateByPrimaryKey(Drugs record);
 
+    List<Drugs> getAllDrugsWithTypeAndDosage();
+    //by-alan
     List<Drugs> getAllDrugs();
 }

@@ -432,8 +432,6 @@
 	WHERE
 			Registration_Status = 1
 			AND medical_record.Is_Treament_Over = 1
-    GROUP BY
-            Medical_Record_ID
   </select>
 
   <select id="getAllPatientByDepartmentId" parameterType="java.lang.Integer" resultMap="DepartmentPatient">
